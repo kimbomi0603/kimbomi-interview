@@ -107,6 +107,12 @@ nav button.on{background:#fff;color:var(--blue)}
 .empty{text-align:center;color:var(--gray);padding:30px;font-size:13px}
 mark{background:#ffe88a;padding:0 1px}
 .hint{font-size:12px;color:var(--gray);background:#fff;border-radius:9px;padding:9px 13px;margin-bottom:12px;border-left:3px solid var(--blue2)}
+.outline{background:#fff;border:1.5px solid #cfdcec;border-radius:12px;padding:13px 16px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.outline .ot{font-size:13.5px;font-weight:800;color:var(--blue);margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid #e4ebf3}
+.olist{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+.oitem{font-size:13.5px;color:#24344a;cursor:pointer;padding:4px 7px;border-radius:7px;line-height:1.4}
+.oitem:hover{background:#eef3f9;color:var(--blue);font-weight:700}
+@media(max-width:700px){.olist{grid-template-columns:1fr}}
 @media(max-width:860px){.layout{flex-direction:column-reverse}.kwpanel{width:100%;position:static;max-height:none}}
 </style></head>
 <body>
@@ -285,15 +291,41 @@ function viewLive(){
   html+=cards.map(d=>cardHTML(d,false)).join('');
   m.innerHTML=html;bindCards();bindTags();
 }
+const OUTLINE=[
+ [701,'1. 발표 이후와 달라진 점'],[702,'1-1. 이재명 대통령 X 팔로우'],[703,'2. 젊은데 출마 이유'],
+ [704,'3. 세대교체 주장, 멋진 이별'],[705,'4. 청년최고위원 좌초'],[706,'5. 청년 외면 이유, 2030 표심 공략'],
+ [707,'6. 1인1표, 알메달렌'],[708,'7. 박지현 소환, 비정상의 극치'],[709,'8. 기탁금 문제'],
+ [710,'9. 노년층 지지도 받아야 하는데'],[711,'10. 여론조사 받아보고 기분이'],[712,'11. 뉴스공장 출연 후기'],
+ [713,'11-1. 친명·친청 공격 심경'],[714,'12. 당대표 된다면, 386과 어떻게 (홍대선언)'],
+ [715,'13. 2030 소통 잘할 것 같은 정치인?'],[716,'14. 롤모델'],[717,'15. 앞으로의 행보']
+];
+const OUTLINE2=[
+ [901,'심1. 가장 많이 받은 질문'],[902,'심2. 정청래 비판 후폭풍'],[912,'심3. 지지 철회·진영논리'],
+ [903,'심4. 진정한 세대교체'],[904,'심5. 검증된 대안인가'],[905,'심6. 지역 유지 프레임'],
+ [906,'심7. 이진련 사진·계파'],[907,'심8. 송영길·박지현 절차'],[908,'심9. 룰이 공정의 기준인가'],
+ [909,'심10. 지방의회 성과·리더십'],[910,'심11. 미래형 민주당 3키워드'],[911,'심12. 분열 걱정'],
+ [913,'심13. 홍대선언 예고'],[914,'심14. 클로징 — 계란은 생명']
+];
+function jumpTo(no){
+  const c=document.querySelector('.card[data-no="'+no+'"]');
+  if(c){c.classList.add('open');c.scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function outlineBox(title,items){
+  return '<div class="outline"><div class="ot">'+title+'</div><div class="olist">'+
+    items.map(([no,t])=>'<span class="oitem" data-jump="'+no+'">📄 '+esc(t)+'</span>').join('')+'</div></div>';
+}
 function viewNewsba(){
   const m=document.getElementById('main');
   const fin=DATA.filter(d=>d.media==='뉴스바사삭').filter(textHit);
   const prep=DATA.filter(d=>d.media==='바삭한인터뷰').filter(textHit);
   let html='<div class="hero"><h2>🔥 MBC 뉴스바사삭 — 오늘의 핵심 인터뷰</h2>'+
     '<p><b>7.22(화) 13:00</b> — ① <b>방송 질문지 확정 답변</b>(1번~11번: 바사삭 홍보 부탁·X팔로우·홍대선언·계란은 생명)을 먼저 보고, ② 이어지는 <b>심층·돌발 대비</b>(진영논리·지지철회·검증·룰·홍대선언 예고·클로징)까지 확인하세요.</p></div>';
-  html+='<div class="sec-h">✅ ① 방송 질문지 확정 답변 (1번~11번)</div>'+prep.map(d=>cardHTML(d,false)).join('');
+  html+=outlineBox('📑 개요 보기 — 클릭하면 해당 답변으로 바로 이동',OUTLINE);
+  html+=outlineBox('🔥 심층·돌발 대비 바로가기',OUTLINE2);
+  html+='<div class="sec-h">✅ ① 방송 질문지 확정 답변 (1번~15번)</div>'+prep.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">🔥 ② 심층·돌발 대비 (최신 원워딩)</div>'+fin.map(d=>cardHTML(d,false)).join('');
   m.innerHTML=html;bindCards();bindTags();
+  m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
 }
 function viewGreet(){
   const m=document.getElementById('main');
