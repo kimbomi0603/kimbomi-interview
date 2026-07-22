@@ -245,7 +245,7 @@ function viewKw(){
   const total=vs.length+ds.length+iss.length+rf.length+ar.length;
   if(!total){m.innerHTML=html+'<div class="empty">해당 키워드로 찾은 내용이 없습니다.</div>';return}
   if(vs.length){html+='<div class="sec-h">🎤 정견연설 속 목소리</div>'+vs.map(voiceHTML).join('')}
-  if(ds.length){html+='<div class="sec-h">💡 예상 질문 & 답변 스크립트 <span class="count">'+ds.length+'건</span></div>'+ds.map(d=>cardHTML(d,ds.length<=3)).join('')}
+  if(ds.length){html+='<div class="sec-h">💡 예상 질문 & 답변 스크립트 <span class="count">'+ds.length+'건 — 전부 펼침</span></div>'+ds.map(d=>cardHTML(d,true)).join('')}
   if(iss.length){html+='<div class="sec-h">⚡ 이슈 대응 카드 <span class="count">'+iss.length+'건</span></div>'+iss.map(issueHTML).join('')}
   if(rf.length){html+='<div class="sec-h">📌 관련 글·성명·공약 <span class="count">'+rf.length+'건</span></div>'+rf.map(refHTML).join('')}
   if(ar.length){html+='<div class="sec-h">📰 관련 기사 <span class="count">'+ar.length+'건</span></div>'+ar.map(artHTML).join('')}
