@@ -113,6 +113,12 @@ mark{background:#ffe88a;padding:0 1px}
 .oitem{font-size:13.5px;color:#24344a;cursor:pointer;padding:4px 7px;border-radius:7px;line-height:1.4}
 .oitem:hover{background:#eef3f9;color:var(--blue);font-weight:700}
 @media(max-width:700px){.olist{grid-template-columns:1fr}}
+.mustbox{background:#fffbe8;border:2px solid #e8c34d;border-radius:12px;padding:14px 17px;margin-bottom:13px;box-shadow:0 2px 8px rgba(200,160,0,.12)}
+.mustbox .ot{font-size:14px;font-weight:800;color:#8a6300;margin-bottom:10px;padding-bottom:7px;border-bottom:1.5px dashed #e0c465}
+.mgroup{cursor:pointer;padding:8px 10px;border-radius:9px;margin-bottom:7px;transition:.1s}
+.mgroup:hover{background:#fff3c2}
+.mq{font-size:13px;font-weight:800;color:#1F4E79;margin-bottom:3px}
+.mline{font-size:14.5px;font-weight:700;color:#3a2c00;line-height:1.55;padding:2px 0 2px 6px}
 @media(max-width:860px){.layout{flex-direction:column-reverse}.kwpanel{width:100%;position:static;max-height:none}}
 </style></head>
 <body>
@@ -322,10 +328,21 @@ function viewNewsba(){
     '<p><b>7.22(화) 13:00</b> — ① <b>방송 질문지 확정 답변</b>(1번~11번: 바사삭 홍보 부탁·X팔로우·홍대선언·계란은 생명)을 먼저 보고, ② 이어지는 <b>심층·돌발 대비</b>(진영논리·지지철회·검증·룰·홍대선언 예고·클로징)까지 확인하세요.</p></div>';
   html+=outlineBox('📑 개요 보기 — 클릭하면 해당 답변으로 바로 이동',OUTLINE);
   html+=outlineBox('🔥 심층·돌발 대비 바로가기',OUTLINE2);
+  // ⭐ 꼭 해야 할 말 총정리 (모든 ★ 필수 멘트 수집)
+  const titleOf=no=>{const f=OUTLINE.concat(OUTLINE2).find(x=>x[0]===no);return f?f[1]:('#'+no)};
+  let mustHtml='';
+  prep.concat(fin).forEach(d=>{
+    const ms=(d.script||[]).filter(p=>p.startsWith('★'));
+    if(!ms.length)return;
+    mustHtml+='<div class="mgroup" data-jump="'+d.no+'"><div class="mq">'+esc(titleOf(d.no))+'</div>'+
+      ms.map(p=>'<div class="mline">⭐ '+esc(p.slice(1).trim())+'</div>').join('')+'</div>';
+  });
+  html+='<div class="mustbox"><div class="ot">⭐ 꼭 해야 할 말 총정리 — 방송 직전 최종 점검용 (클릭 시 해당 답변으로 이동)</div>'+mustHtml+'</div>';
   html+='<div class="sec-h">✅ ① 방송 질문지 확정 답변 (1번~15번)</div>'+prep.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">🔥 ② 심층·돌발 대비 (최신 원워딩)</div>'+fin.map(d=>cardHTML(d,false)).join('');
   m.innerHTML=html;bindCards();bindTags();
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
+  m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
 }
 function viewGreet(){
   const m=document.getElementById('main');
