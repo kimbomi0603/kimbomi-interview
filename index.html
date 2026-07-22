@@ -288,9 +288,9 @@ function viewNewsba(){
   const fin=DATA.filter(d=>d.media==='뉴스바사삭').filter(textHit);
   const prep=DATA.filter(d=>d.media==='바삭한인터뷰').filter(textHit);
   let html='<div class="hero"><h2>🔥 MBC 뉴스바사삭 — 오늘의 핵심 인터뷰</h2>'+
-    '<p><b>7.22(화) 13:00 · 최종 답변 11문항</b> — 김보미 최신 원워딩(노무현 2%·김대중 현해탄·국회의원 왕·아무말 대잔치·룰 최소 기준·모병제 공약·소인배 정치) 기반. 아래 최종안을 먼저 보고, 이어지는 <b>추가 예상 질문 17건</b>(X팔로우·기탁금·노년층·여론조사·뉴스공장 후기·롤모델·미래상)까지 대비하세요.</p></div>';
-  html+='<div class="sec-h">✅ 최종 답변 (오늘 원고)</div>'+fin.map(d=>cardHTML(d,false)).join('');
-  html+='<div class="sec-h">➕ 추가 예상 질문 (기존 준비분)</div>'+prep.map(d=>cardHTML(d,false)).join('');
+    '<p><b>7.22(화) 13:00</b> — ① <b>방송 질문지 확정 답변</b>(1번~11번: 바사삭 홍보 부탁·X팔로우·홍대선언·계란은 생명)을 먼저 보고, ② 이어지는 <b>심층·돌발 대비</b>(진영논리·지지철회·검증·룰·홍대선언 예고·클로징)까지 확인하세요.</p></div>';
+  html+='<div class="sec-h">✅ ① 방송 질문지 확정 답변 (1번~11번)</div>'+prep.map(d=>cardHTML(d,false)).join('');
+  html+='<div class="sec-h">🔥 ② 심층·돌발 대비 (최신 원워딩)</div>'+fin.map(d=>cardHTML(d,false)).join('');
   m.innerHTML=html;bindCards();bindTags();
 }
 function viewGreet(){
