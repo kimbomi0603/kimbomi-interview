@@ -72,7 +72,8 @@ nav button.on{background:#fff;color:var(--blue)}
 .lbl{font-weight:800;font-size:13.5px;margin:14px 0 6px;letter-spacing:-.2px}
 .lbl.g{color:var(--green)}.lbl.b{color:var(--blue)}.lbl.r{color:var(--red)}
 .script p{margin:10px 0;font-size:17px;line-height:1.72;color:#111a26}
-.script p.must{background:#fff3bf;border-left:5px solid #e8a800;padding:10px 14px;border-radius:0 10px 10px 0;font-weight:800;color:#3a2c00;box-shadow:0 1px 3px rgba(200,150,0,.15)}
+.script p.must{background:linear-gradient(90deg,#ffe98f,#fff3bf);border-left:6px solid #e08c00;padding:11px 14px;border-radius:0 10px 10px 0;font-weight:800;color:#3a2c00;box-shadow:0 2px 6px rgba(200,150,0,.28)}
+.script p.must::before{content:"⭐ 꼭 할 말  ";font-size:11.5px;color:#a86f00;letter-spacing:.5px;display:block;margin-bottom:2px}
 .script p.must:before{content:"⭐ 필수 멘트  ";font-size:11.5px;color:#b07d00;display:block;margin-bottom:3px;letter-spacing:.3px}
 .quote{background:#f4f7fb;border-left:4px solid var(--blue);padding:11px 14px;margin:8px 0;font-size:16px;line-height:1.65;color:#16324e;font-weight:600}
 .quote b{color:var(--blue);font-size:12px;display:block;margin-top:5px;font-weight:700}
@@ -692,15 +693,7 @@ function viewToday(){
       chwiMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(short(d.q))+'</span>').join('')+'</div></div>'+
     '<div class="outline"><div class="ot">📰 ② 이데일리 10:00 — 질문 바로가기</div><div class="olist">'+
       edaMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(short(d.q))+'</span>').join('')+'</div></div></div>';
-  let mustHtml='';
-  chwiMain.forEach(d=>{
-    const ms=(d.script||[]).filter(p=>p.startsWith('★'));
-    if(!ms.length)return;
-    mustHtml+='<div class="mgroup" data-jump="'+d.no+'"><div class="mq">'+esc(short(d.q))+'</div>'+
-      ms.map(p=>'<div class="mline">⭐ '+esc(p.slice(1).trim())+'</div>').join('')+'</div>';
-  });
-  html+='<div class="mustbox"><div class="ot">⭐ 취재편의점 — 꼭 해야 할 말 총정리 (클릭 시 해당 답변으로 이동)</div>'+mustHtml+'</div>';
-  html+='<div class="sec-h">🔴 ① 취재편의점 최종 참고질문지 — 질문 11 + 예상 추가 8</div>'+chwiMain.map(d=>cardHTML(d,false)).join('');
+  html+='<div class="sec-h">🔴 ① 취재편의점 최종 참고질문지 — 질문 11 + 예상 추가 8 · 노란 음영이 꼭 해야 할 말</div>'+chwiMain.map(d=>cardHTML(d,true)).join('');
   if(chwiInt.length)html+='<div class="sec-h">🔒 취재편의점 내부 참고 (문서 미수록)</div>'+chwiInt.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">📰 ② 이데일리 답변지 — 10문항 + 5무 대조표</div>'+edaMain.map(d=>cardHTML(d,false)).join('');
   if(edaInt.length)html+='<div class="sec-h">🔒 이데일리 내부 팩트시트</div>'+edaInt.map(d=>cardHTML(d,false)).join('');
