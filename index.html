@@ -182,6 +182,16 @@ function persistEdits(){try{localStorage.setItem(LSKEY,JSON.stringify(DATA))}cat
 const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const hl=(s)=>{s=esc(s);if(!q)return s;try{return s.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>')}catch(e){return s}};
 
+const QLBL={
+2351:'Q1 TV토론 총평·수박겉핥기',2352:'Q2 득표율 비공개',2353:'Q3 가장 높은 벽(5일·1천만)',2354:'Q4 운동장 입장불가',
+2355:'Q5 86세대 반응·호통',2356:'Q6 기대·후회',2357:'Q7 민주당에 남는 이유',2358:'Q8 청년 성장·지방 기반',
+2359:'Q9 청년을 떠난 민주당',2360:'Q10 2030 무관심 결과',2361:'Q11 다음 행보·전국의 김보미',2362:'추1 개헌·연임(조정식)',
+2363:'추2 지지 후보',2364:'추3 불법당원·한병도 응답',2365:'추4 충북 투표중단',2366:'추5 6개월 규정 예외',
+2367:'추6 청년최고위원제 무산',2368:'추7 탈당·신당설',2371:'추8 전당대회 전망(5무)',
+2300:'Q1 전당대회 전망·충북',2301:'Q2 예비경선 소회',2302:'Q3 세 개의 벽(돈·정보·족보)',2303:'Q4 민주주의 부재',
+2304:'Q5 신천지·당원명부',2305:'Q6 파격 발언 반응',2306:'Q7 민주당 정체성',2307:'Q8 2030 본선 전무',
+2308:'Q9 2030 이탈 해법',2309:'Q10 앞으로의 계획',2310:'부록 5무 재현 대조표'};
+const qlabel=d=>QLBL[d.no]||d.q.slice(0,15);
 // ---------- NAV ----------
 const NAV=[['today','⭐ 오늘 7.30 — 취재편의점(09:30)·이데일리(10:00)'],['hani','🎙️ 한겨레뷰리핑(7.27)'],['kbc','🎥 KBC광주방송(7.24)'],['sbs','📺 SBS뉴스브리핑(7.23)'],['ytn','🎙️ YTN뉴스명당(7.23 아침)'],['newsba','🔥 뉴스바사삭(7.22)'],['live','🔴 무등의아침(7.22)'],['written','📰 JTBC·서면 인터뷰'],['kw','🔑 키워드별 발언'],['greet','👋 첫인사·마무리'],['pledge11','📜 공약 총정리'],['timeline','📅 날짜별 타임라인'],['speech','🎤 연설·성명'],['about','📋 프로필']];
 function renderNav(){const n=document.getElementById('nav');n.innerHTML='';NAV.forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=view===k?'on':'';b.onclick=()=>{view=k;if(k!=='kw')activeKw=null;render()};n.appendChild(b)})}
@@ -200,9 +210,9 @@ function renderKwPanel(){
   const qshort=t=>{t=t.replace(/^\[?(예상 추가|Q)\s?/,'').replace(/^\d+[.\]·\s]*/,'');return t.length>26?t.slice(0,26)+'…':t};
   const qj=document.createElement('div');qj.className='qjbox';
   let qjh='<div class="gt" style="color:#b02020">🔴 ① 취재편의점 09:30 생중계 — 질문 바로가기</div>';
-  DATA.filter(d=>d.media==='취재편의점'&&(d.no<=2368||d.no===2371)).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qshort(d.q))+'</div>'});
+  DATA.filter(d=>d.media==='취재편의점'&&(d.no<=2368||d.no===2371)).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
   qjh+='<div class="gt" style="margin-top:10px">📰 ② 이데일리 10:00 — 질문 바로가기</div>';
-  DATA.filter(d=>d.media==='이데일리'&&d.no<=2310).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qshort(d.q))+'</div>'});
+  DATA.filter(d=>d.media==='이데일리'&&d.no<=2310).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
   qj.innerHTML=qjh;box.appendChild(qj);
   qj.querySelectorAll('.qj').forEach(el=>el.onclick=()=>jumpToday(+el.dataset.qno));
   const all=document.createElement('div');all.className='chips';all.style.marginBottom='10px';
@@ -690,9 +700,9 @@ function viewToday(){
     ['TV토론','수박겉핥기','정청래','개헌','연임','지지후보','충북투표중단','신천지','당원명부','한병도','청년최고위원제','6개월규정','결과비공개','기탁금1천만원','탈당','전국의김보미'].map(k=>{const kk=k.split(' ')[0];return '<span class="pill" data-k="'+kk+'">#'+kk+' '+kwCount(kk)+'</span>'}).join('')+'</div>';
   html+='<div class="todaycols">'+
     '<div class="outline"><div class="ot">🔴 ① 취재편의점 09:30 생중계 — 질문 바로가기</div><div class="olist">'+
-      chwiMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(short(d.q))+'</span>').join('')+'</div></div>'+
+      chwiMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+'</div></div>'+
     '<div class="outline"><div class="ot">📰 ② 이데일리 10:00 — 질문 바로가기</div><div class="olist">'+
-      edaMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(short(d.q))+'</span>').join('')+'</div></div></div>';
+      edaMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+'</div></div></div>';
   html+='<div class="sec-h">🔴 ① 취재편의점 최종 참고질문지 — 질문 11 + 예상 추가 8 · 노란 음영이 꼭 해야 할 말</div>'+chwiMain.map(d=>cardHTML(d,true)).join('');
   if(chwiInt.length)html+='<div class="sec-h">🔒 취재편의점 내부 참고 (문서 미수록)</div>'+chwiInt.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">📰 ② 이데일리 답변지 — 10문항 + 5무 대조표</div>'+edaMain.map(d=>cardHTML(d,false)).join('');
