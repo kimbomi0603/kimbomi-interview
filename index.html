@@ -150,7 +150,7 @@ mark{background:#ffe88a;padding:0 1px}
  <div class="htop">
    <h1>🥚 김보미 인터뷰 대비 — 발언 총망라</h1>
    <span class="slog">뽑고 싶은 민주당, 뽑고 싶은 김보미</span>
-   <span class="live"><span class="dot"></span>오늘 7.30(목) 09:30 취재편의점 생중계 · 10:00 이데일리</span>
+   <span class="live"><span class="dot"></span>오늘 7.31(금) 오전 7:00 — TV조선 뉴스퍼레이드 생방송</span>
  </div>
  <div class="toolbar">
    <span class="tbtn" id="btn-export" title="편집 내용을 담은 index.html 파일을 내려받아 라이브 사이트에 교체 업로드하세요">💾 편집본 내보내기(index.html)</span>
@@ -209,12 +209,14 @@ function renderKwPanel(){
   // ⭐ 오늘 질문 바로가기 (대전환 선언 아래 고정)
   const qshort=t=>{t=t.replace(/^\[?(예상 추가|Q)\s?/,'').replace(/^\d+[.\]·\s]*/,'');return t.length>26?t.slice(0,26)+'…':t};
   const qj=document.createElement('div');qj.className='qjbox';
-  let qjh='<div class="gt" style="color:#b02020">🔴 ① 취재편의점 09:30 생중계 — 질문 바로가기</div>';
-  DATA.filter(d=>d.media==='취재편의점'&&(d.no<=2368||d.no===2371||d.no===2372)).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
-  qjh+='<div class="gt" style="margin-top:10px">📰 ② 이데일리 10:00 — 질문 바로가기</div>';
-  DATA.filter(d=>d.media==='이데일리'&&d.no<=2310).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
-  qjh+='<div class="gt" style="margin-top:10px;color:#7a2fa0">📺 ③ TV조선 뉴스퍼레이드(오전 7시) — 질문 바로가기</div>';
+  let qjh='<div class="gt" style="color:#7a2fa0">📺 오늘 — TV조선 07:00 질문 바로가기</div>';
   DATA.filter(d=>d.media==='TV조선'&&d.no<=2389).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
+  qjh+='<div class="gt" style="margin-top:10px;color:#b02020">🚨 돌발 대비 — 방송 질문에 없는 주제</div>';
+  [2363,2355,2365,2366,2367,2368,2372,2351,2304,2303,2310].forEach(no=>{const d=DATA.find(x=>x.no===no);if(d)qjh+='<div class="qj" data-qno="'+no+'">⚡ '+esc(qlabel(d))+'</div>';});
+  qjh+='<div class="gt" style="margin-top:10px">🔴 취재편의점(7.30) 바로가기</div>';
+  DATA.filter(d=>d.media==='취재편의점'&&(d.no<=2368||d.no===2371)).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
+  qjh+='<div class="gt" style="margin-top:10px">📰 이데일리(7.30) 바로가기</div>';
+  DATA.filter(d=>d.media==='이데일리'&&d.no<=2310).forEach(d=>{qjh+='<div class="qj" data-qno="'+d.no+'">📄 '+esc(qlabel(d))+'</div>'});
   qj.innerHTML=qjh;box.appendChild(qj);
   qj.querySelectorAll('.qj').forEach(el=>el.onclick=()=>jumpToday(+el.dataset.qno));
   const all=document.createElement('div');all.className='chips';all.style.marginBottom='10px';
@@ -697,21 +699,21 @@ function viewToday(){
   const tvcMain=tvc.filter(d=>d.no<=2389), tvcInt=tvc.filter(d=>d.no===2390);
   const edaMain=eda.filter(d=>d.no<=2310), edaInt=eda.filter(d=>d.no===2311);
   const short=t=>{t=t.replace(/^\[?(예상 추가|Q)\s?/,'').replace(/^\d+[.\]·\s]*/,'');return t.length>34?t.slice(0,34)+'…':t};
-  let html='<div class="hero"><h2>⭐ 오늘 7.30(목) — 두 인터뷰 연속</h2>'+
-    '<p><b>09:30 장윤선의 취재편의점 생중계(30분)</b> → <b>10:00 이데일리 하지나 차장</b>. 질문을 클릭하면 답변으로 바로 이동합니다. 노란 상자가 꼭 할 말입니다.</p>'+
+  let html='<div class="hero"><h2>📺 오늘 7.31(금) 오전 7:00 — TV조선 뉴스퍼레이드 생방송</h2>'+
+    '<p><b>8문항 + 인사·마무리, 방송 확정본.</b> 질문을 클릭하면 답변으로 바로 이동합니다. 노란 상자가 꼭 할 말입니다.</p>'+
     '<p><button class="mtoggle" id="mtoggle">⭐ 핵심 멘트만 보기</button> <span style="font-size:13px;color:#33425a;font-weight:600">— 누르면 모든 답변이 ⭐ 문장만 남습니다. 방송 직전 최종 점검용.</span></p></div>';
   html+='<div class="issuebar"><div class="ot">🔥 어제·오늘 이슈 키워드 — 어제 TV토론 → 개헌·연임 → 충북·당원명부 순. 클릭하면 관련 발언 전체가 열립니다</div>'+
     ['TV토론','수박겉핥기','정청래','개헌','연임','지지후보','충북투표중단','신천지','당원명부','한병도','미래대응기금','보완수사권','청년최고위원제','6개월규정','결과비공개','기탁금1천만원','탈당','전국의김보미'].map(k=>{const kk=k.split(' ')[0];return '<span class="pill" data-k="'+kk+'">#'+kk+' '+kwCount(kk)+'</span>'}).join('')+'</div>';
   html+='<div class="todaycols">'+
-    '<div class="outline"><div class="ot">🔴 ① 취재편의점 09:30 생중계 — 질문 바로가기</div><div class="olist">'+
-      chwiMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+'</div></div>'+
-    '<div class="outline"><div class="ot">📰 ② 이데일리 10:00 — 질문 바로가기</div><div class="olist">'+
-      edaMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+'</div></div></div>';
-  html+='<div class="sec-h">🔴 ① 취재편의점 최종 참고질문지 — 질문 11 + 예상 추가 8 · 노란 음영이 꼭 해야 할 말</div>'+chwiMain.map(d=>cardHTML(d,true)).join('');
-  if(chwiInt.length)html+='<div class="sec-h">🔒 취재편의점 내부 참고 (문서 미수록)</div>'+chwiInt.map(d=>cardHTML(d,false)).join('');
-  html+='<div class="sec-h">📺 ③ TV조선 뉴스퍼레이드(오전 7시) — 8문항 + 인사·마무리</div>'+tvcMain.map(d=>cardHTML(d,false)).join('');
+    '<div class="outline"><div class="ot">📺 ① 오늘 TV조선 07:00 — 질문 바로가기</div><div class="olist">'+
+      tvcMain.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+'</div></div>'+
+    '<div class="outline"><div class="ot" style="color:#b02020">🚨 돌발 대비 — 방송 질문에 없는 주제</div><div class="olist">'+
+      [2363,2355,2365,2366,2367,2368,2372,2351,2304,2303,2310].map(no=>{const d=DATA.find(x=>x.no===no);return d?'<span class="oitem" data-jump="'+d.no+'">⚡ '+esc(qlabel(d))+'</span>':''}).join('')+'</div></div></div>';
+  html+='<div class="sec-h">📺 ① 오늘 — TV조선 뉴스퍼레이드 방송 확정본 (노란 음영이 꼭 할 말)</div>'+tvcMain.map(d=>cardHTML(d,true)).join('');
   if(tvcInt.length)html+='<div class="sec-h">🔒 TV조선 내부 메모</div>'+tvcInt.map(d=>cardHTML(d,false)).join('');
-  html+='<div class="sec-h">📰 ② 이데일리 답변지 — 10문항 + 5무 대조표</div>'+edaMain.map(d=>cardHTML(d,false)).join('');
+  html+='<div class="sec-h">🔴 ② 취재편의점(7.30) 참고질문지</div>'+chwiMain.map(d=>cardHTML(d,false)).join('');
+  if(chwiInt.length)html+='<div class="sec-h">🔒 취재편의점 내부 참고 (문서 미수록)</div>'+chwiInt.map(d=>cardHTML(d,false)).join('');
+  html+='<div class="sec-h">📰 ③ 이데일리(7.30) 답변지</div>'+edaMain.map(d=>cardHTML(d,false)).join('');
   if(edaInt.length)html+='<div class="sec-h">🔒 이데일리 내부 팩트시트</div>'+edaInt.map(d=>cardHTML(d,false)).join('');
   m.innerHTML=html;bindCards();bindTags();
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
