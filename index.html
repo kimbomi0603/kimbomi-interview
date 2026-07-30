@@ -176,7 +176,7 @@ const P=JSON.parse(document.getElementById('__payload').textContent);
 const {DATA,ARTICLES,REFS,ISSUES,MEDIAS,VOICE,SLOGANS,PLEDGES,PLEDGES11,SPEECH_PLEDGES,PROFILE,KWGROUPS,TIMELINE,CNT}=P;
 let view='today', activeKw=null, q='', showAllKw=false;
 // ---- 편집 저장/복원 (localStorage) ----
-const LSKEY='kbm_edits_v3';
+const LSKEY='kbm_edits_v4';
 (function(){try{const s=localStorage.getItem(LSKEY);if(s){const ed=JSON.parse(s);ed.forEach(sd=>{const i=DATA.findIndex(d=>d.no===sd.no);if(i>-1)DATA[i]=sd});}}catch(e){}})();
 function persistEdits(){try{localStorage.setItem(LSKEY,JSON.stringify(DATA))}catch(e){}}
 const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
