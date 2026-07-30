@@ -699,10 +699,8 @@ function viewToday(){
   const tvcMain=tvc.filter(d=>d.no<=2389), tvcInt=tvc.filter(d=>d.no===2390);
   const edaMain=eda.filter(d=>d.no<=2310), edaInt=eda.filter(d=>d.no===2311);
   const short=t=>{t=t.replace(/^\[?(예상 추가|Q)\s?/,'').replace(/^\d+[.\]·\s]*/,'');return t.length>34?t.slice(0,34)+'…':t};
-  let html='<div class="hero"><h2>📺 오늘 7.31(금) 오전 7:00 — TV조선 뉴스퍼레이드 생방송</h2>'+
-    '<p><b>8문항 + 인사·마무리, 방송 확정본.</b> 질문을 클릭하면 답변으로 바로 이동합니다. 노란 상자가 꼭 할 말입니다.</p>'+
-    '<p><button class="mtoggle" id="mtoggle">⭐ 핵심 멘트만 보기</button> <span style="font-size:13px;color:#33425a;font-weight:600">— 누르면 모든 답변이 ⭐ 문장만 남습니다. 방송 직전 최종 점검용.</span></p></div>';
-  html+='<div class="issuebar"><div class="ot">🔥 어제·오늘 이슈 키워드 — 어제 TV토론 → 개헌·연임 → 충북·당원명부 순. 클릭하면 관련 발언 전체가 열립니다</div>'+
+  let html='';
+  html+='<div class="issuebar"><div class="ot">🔥 이슈 키워드 <button class="mtoggle" id="mtoggle" style="float:right;padding:2px 10px;font-size:12px">⭐ 핵심만</button></div>'+
     ['TV토론','수박겉핥기','정청래','개헌','연임','지지후보','충북투표중단','신천지','당원명부','한병도','미래대응기금','보완수사권','청년최고위원제','6개월규정','결과비공개','기탁금1천만원','탈당','전국의김보미'].map(k=>{const kk=k.split(' ')[0];return '<span class="pill" data-k="'+kk+'">#'+kk+' '+kwCount(kk)+'</span>'}).join('')+'</div>';
   html+='<div class="todaycols">'+
     '<div class="outline"><div class="ot">📺 ① 오늘 TV조선 07:00 — 질문 바로가기</div><div class="olist">'+
