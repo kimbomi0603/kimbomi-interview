@@ -40,7 +40,7 @@ nav button.on{background:#fff;color:var(--blue)}
 .chip.hot{background:#fff3f3;border-color:#e6b8b8;color:#b02020}
 .chip.hot:hover{background:#c00000;color:#fff;border-color:#c00000}
 .morekw{font-size:12px;color:var(--blue2);cursor:pointer;margin-top:7px;display:inline-block;font-weight:700}
-.card{background:#fff;border-radius:12px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden}
+.card{background:#fff;border-radius:12px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;content-visibility:auto;contain-intrinsic-size:auto 260px}
 .qhead{padding:12px 15px;cursor:pointer;display:flex;gap:9px;align-items:flex-start;background:#eef3f9}
 .qhead:hover{background:#e3ecf6}
 .mtag{font-size:10px;font-weight:700;background:var(--blue);color:#fff;border-radius:7px;padding:2px 7px;white-space:nowrap;margin-top:2px}
@@ -143,7 +143,7 @@ mark{background:#ffe88a;padding:0 1px}
 .issuebar{background:#fff;border:1.5px solid #e6b8b8;border-radius:12px;padding:11px 15px;margin-bottom:12px}
 .issuebar .ot{font-size:13px;font-weight:800;color:#b02020;margin-bottom:7px}
 .mline{font-size:16.5px;font-weight:800;color:#2a1f00;line-height:1.62;padding:4px 0 4px 8px;border-left:3px solid #e8c34d;margin:3px 0}
-@media(max-width:860px){.layout{flex-direction:column-reverse}.kwpanel{width:100%;position:static;max-height:none}}
+@media(max-width:860px){.layout{flex-direction:column}.kwpanel{width:100%;position:static;max-height:none;overflow-y:visible}}
 </style></head>
 <body>
 <header>
@@ -372,7 +372,8 @@ const OUTLINE2=[
 function jumpToday(no){view='today';activeKw=null;render();setTimeout(()=>jumpTo(no),60);}
 function jumpTo(no){
   const c=document.querySelector('.card[data-no="'+no+'"]');
-  if(c){c.classList.add('open');c.scrollIntoView({behavior:'smooth',block:'start'});}
+  if(c){const oi=c.closest('#oldints');if(oi&&oi.style.display==='none'){oi.style.display='';const b=document.getElementById('oldints-btn');if(b)b.textContent='📚 이전 인터뷰 아카이브 접기';}
+    c.classList.add('open');c.scrollIntoView({behavior:'smooth',block:'start'});}
 }
 function outlineBox(title,items){
   return '<div class="outline"><div class="ot">'+title+'</div><div class="olist">'+
@@ -399,6 +400,8 @@ function viewNewsba(){
   html+='<div class="sec-h">✅ ① 방송 질문지 확정 답변 (1번~15번)</div>'+prep.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">🔥 ② 심층·돌발 대비 (최신 원워딩)</div>'+fin.map(d=>cardHTML(d,false)).join('');
   m.innerHTML=html;bindCards();bindTags();
+  const obtn=document.getElementById('oldints-btn');
+  if(obtn)obtn.onclick=()=>{const oi=document.getElementById('oldints');const show=oi.style.display==='none';oi.style.display=show?'':'none';obtn.textContent=show?'📚 이전 인터뷰 아카이브 접기':'📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)';};
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
 }
@@ -435,6 +438,8 @@ function viewYtn(){
   const clos=DATA.filter(d=>d.media==='인사말'&&[810,811].includes(d.no));
   html+='<div class="sec-h">🏁 마무리 멘트 — 방송 끝날 때 (확정본 + 진영논리 경고)</div>'+clos.map(d=>cardHTML(d,true)).join('');
   m.innerHTML=html;bindCards();bindTags();
+  const obtn=document.getElementById('oldints-btn');
+  if(obtn)obtn.onclick=()=>{const oi=document.getElementById('oldints');const show=oi.style.display==='none';oi.style.display=show?'':'none';obtn.textContent=show?'📚 이전 인터뷰 아카이브 접기':'📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)';};
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
 }
@@ -522,6 +527,8 @@ function viewHani(){
   html+='<div class="sec-h">✅ 질문지 전체 답변 (인터뷰 14 + 패널 전 코너) — 전부 열려 있음</div>'+cards.filter(d=>d.no!==2198&&d.no!==2199).map(d=>cardHTML(d,true)).join('');
   if(hcl){html+='<div class="sec-h">🏁 마무리 인사 — 방송 끝날 때</div>'+cardHTML(hcl,true);}
   m.innerHTML=html;bindCards();bindTags();
+  const obtn=document.getElementById('oldints-btn');
+  if(obtn)obtn.onclick=()=>{const oi=document.getElementById('oldints');const show=oi.style.display==='none';oi.style.display=show?'':'none';obtn.textContent=show?'📚 이전 인터뷰 아카이브 접기':'📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)';};
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   const ob=document.getElementById('obOpen'), oc=document.getElementById('obClose');
@@ -552,6 +559,8 @@ function viewKbc(){
   const sg=DATA.filter(d=>d.media==='세계일보(서면)');
   if(sg.length){html+='<div class="sec-h">📝 추가 대비질문 — 세계일보 질문지 10문항 (겹치는 주제, 같은 워딩으로 답하면 됨)</div>'+sg.map(d=>cardHTML(d,true)).join('');}
   m.innerHTML=html;bindCards();bindTags();
+  const obtn=document.getElementById('oldints-btn');
+  if(obtn)obtn.onclick=()=>{const oi=document.getElementById('oldints');const show=oi.style.display==='none';oi.style.display=show?'':'none';obtn.textContent=show?'📚 이전 인터뷰 아카이브 접기':'📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)';};
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   const ob=document.getElementById('obOpen'), oc=document.getElementById('obClose');
@@ -586,6 +595,8 @@ function viewSbs(){
   const sclos=DATA.filter(d=>d.media==='인사말'&&[810,811].includes(d.no));
   html+='<div class="sec-h">🏁 마무리 멘트 — 방송 끝날 때 (확정본 + 진영논리 경고)</div>'+sclos.map(d=>cardHTML(d,true)).join('');
   m.innerHTML=html;bindCards();bindTags();
+  const obtn=document.getElementById('oldints-btn');
+  if(obtn)obtn.onclick=()=>{const oi=document.getElementById('oldints');const show=oi.style.display==='none';oi.style.display=show?'':'none';obtn.textContent=show?'📚 이전 인터뷰 아카이브 접기':'📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)';};
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
 }
@@ -717,6 +728,8 @@ function viewToday(){
       [2363,2355,2365,2366,2368,2372,2351,2304,2303,2310].map(no=>{const d=DATA.find(x=>x.no===no);return d?'<span class="oitem" data-jump="'+d.no+'">⚡ '+esc(qlabel(d))+'</span>':''}).join('')+'</div></div></div>';
   html+='<div class="sec-h">📢 ① 8.10 광주 기자회견 질의응답 대비 — 공천혁신특위 환영·호남 공천혁명 촉구(13문항 + 지역현안·공통대응 3문항)</div>'+gjQA.map(d=>cardHTML(d,true)).join('');
   html+='<div class="sec-h" style="color:#0b6e4f">🤝 박선원 최고위원 후보 지지 멘트 — 클릭해서 열기</div>'+gjPark.map(d=>cardHTML(d,false)).join('');
+  html+='<div style="text-align:center;margin:18px 0"><button id="oldints-btn" class="mtoggle" style="padding:9px 20px;font-size:13.5px">📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)</button></div>';
+  html+='<div id="oldints" style="display:none">';
   html+='<div class="sec-h">📰 ② 머니투데이 서면 인터뷰 최종본 — 전당대회가 청년들에게 남긴 것</div>'+mtc.map(d=>cardHTML(d,true)).join('');
   html+='<div class="sec-h">📺 ③ TV조선 뉴스퍼레이드(7.31) 확정본</div>'+tvcMain.map(d=>cardHTML(d,true)).join('');
   if(tvcInt.length)html+='<div class="sec-h">🔒 TV조선 내부 메모</div>'+tvcInt.map(d=>cardHTML(d,false)).join('');
@@ -724,7 +737,10 @@ function viewToday(){
   if(chwiInt.length)html+='<div class="sec-h">🔒 취재편의점 내부 참고 (문서 미수록)</div>'+chwiInt.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">📰 ⑤ 이데일리(7.30) 답변지</div>'+edaMain.map(d=>cardHTML(d,false)).join('');
   if(edaInt.length)html+='<div class="sec-h">🔒 이데일리 내부 팩트시트</div>'+edaInt.map(d=>cardHTML(d,false)).join('');
+  html+='</div>';
   m.innerHTML=html;bindCards();bindTags();
+  const obtn=document.getElementById('oldints-btn');
+  if(obtn)obtn.onclick=()=>{const oi=document.getElementById('oldints');const show=oi.style.display==='none';oi.style.display=show?'':'none';obtn.textContent=show?'📚 이전 인터뷰 아카이브 접기':'📚 이전 인터뷰 아카이브 열기 (머니투데이, TV조선, 취재편의점, 이데일리)';};
   m.querySelectorAll('.oitem').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   m.querySelectorAll('.mgroup').forEach(el=>el.onclick=()=>jumpTo(el.dataset.jump));
   const tg=document.getElementById('mtoggle');
