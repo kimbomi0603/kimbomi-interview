@@ -702,6 +702,7 @@ function viewToday(){
   const tvc=DATA.filter(d=>d.media==='TV조선').filter(textHit);
   const mtc=DATA.filter(d=>d.media==='머니투데이').filter(textHit);
   const gjc=DATA.filter(d=>d.media==='광주기자회견').filter(textHit);
+  const gjQA=gjc.filter(d=>d.no<=2516), gjPark=gjc.filter(d=>d.no===2517);
   const tvcMain=tvc.filter(d=>d.no<=2391), tvcInt=tvc.filter(d=>d.no===2392);
   const edaMain=eda.filter(d=>d.no<=2310), edaInt=eda.filter(d=>d.no===2311);
   const short=t=>{t=t.replace(/^\[?(예상 추가|Q)\s?/,'').replace(/^\d+[.\]·\s]*/,'');return t.length>34?t.slice(0,34)+'…':t};
@@ -710,10 +711,12 @@ function viewToday(){
     ['TV토론','수박겉핥기','정청래','개헌','연임','지지후보','충북투표중단','신천지','당원명부','한병도','미래대응기금','보완수사권','청년최고위원제','6개월규정','결과비공개','기탁금1천만원','탈당','전국의김보미'].map(k=>{const kk=k.split(' ')[0];return '<span class="pill" data-k="'+kk+'">#'+kk+' '+kwCount(kk)+'</span>'}).join('')+'</div>';
   html+='<div class="todaycols">'+
     '<div class="outline"><div class="ot">📢 ① 오늘 — 8.10 기자회견 질의응답 바로가기</div><div class="olist">'+
-      gjc.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+'</div></div>'+
+      gjQA.map(d=>'<span class="oitem" data-jump="'+d.no+'">📄 '+esc(qlabel(d))+'</span>').join('')+
+      '<span class="oitem" data-jump="2517" style="color:#0b6e4f;font-weight:800">🤝 박선원 최고위원 후보 지지 멘트 (클릭)</span>'+'</div></div>'+
     '<div class="outline"><div class="ot" style="color:#b02020">🚨 돌발 대비 — 방송 질문에 없는 주제</div><div class="olist">'+
       [2363,2355,2365,2366,2368,2372,2351,2304,2303,2310].map(no=>{const d=DATA.find(x=>x.no===no);return d?'<span class="oitem" data-jump="'+d.no+'">⚡ '+esc(qlabel(d))+'</span>':''}).join('')+'</div></div></div>';
-  html+='<div class="sec-h">📢 ① 8.10 광주 기자회견 질의응답 대비 — 공천혁신특위 환영·호남 공천혁명 촉구(13문항 + 지역현안·공통대응 3문항 + 박선원 지지 멘트)</div>'+gjc.map(d=>cardHTML(d,true)).join('');
+  html+='<div class="sec-h">📢 ① 8.10 광주 기자회견 질의응답 대비 — 공천혁신특위 환영·호남 공천혁명 촉구(13문항 + 지역현안·공통대응 3문항)</div>'+gjQA.map(d=>cardHTML(d,true)).join('');
+  html+='<div class="sec-h" style="color:#0b6e4f">🤝 박선원 최고위원 후보 지지 멘트 — 클릭해서 열기</div>'+gjPark.map(d=>cardHTML(d,false)).join('');
   html+='<div class="sec-h">📰 ② 머니투데이 서면 인터뷰 최종본 — 전당대회가 청년들에게 남긴 것</div>'+mtc.map(d=>cardHTML(d,true)).join('');
   html+='<div class="sec-h">📺 ③ TV조선 뉴스퍼레이드(7.31) 확정본</div>'+tvcMain.map(d=>cardHTML(d,true)).join('');
   if(tvcInt.length)html+='<div class="sec-h">🔒 TV조선 내부 메모</div>'+tvcInt.map(d=>cardHTML(d,false)).join('');
