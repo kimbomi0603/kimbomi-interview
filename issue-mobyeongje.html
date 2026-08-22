@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>선택적 모병제 진단</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F2F3F1;--surface:#FFFFFF;--surface2:#E9EBE6;--ink:#171D24;--ink2:#3E4852;--muted:#6B7580;--line:#CDD2CB;
+  --accent:#4F5F32;--accent-soft:#E4E9D6;--steel:#2F4E6E;--steel-soft:#DCE5EE;
+  --pro:#2E6B4B;--pro-soft:#DCEBE1;--con:#9A3F33;--con-soft:#F1DDD8;--warn:#9A6B1C;--warn-soft:#F3E7CF;
+  --quote-bg:#F7F8F5;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#12161B;--surface:#1A2027;--surface2:#222A33;--ink:#E8EAE4;--ink2:#C3C9C0;--muted:#8E97A0;--line:#343D47;
+    --accent:#A5B673;--accent-soft:#2A3321;--steel:#8FB0D0;--steel-soft:#1F2E3C;
+    --pro:#7FC29B;--pro-soft:#1C3328;--con:#E08A7C;--con-soft:#3B2420;--warn:#E0B86A;--warn-soft:#3A2F18;
+    --quote-bg:#161C22;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12161B;--surface:#1A2027;--surface2:#222A33;--ink:#E8EAE4;--ink2:#C3C9C0;--muted:#8E97A0;--line:#343D47;
+  --accent:#A5B673;--accent-soft:#2A3321;--steel:#8FB0D0;--steel-soft:#1F2E3C;
+  --pro:#7FC29B;--pro-soft:#1C3328;--con:#E08A7C;--con-soft:#3B2420;--warn:#E0B86A;--warn-soft:#3A2F18;
+  --quote-bg:#161C22;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:400;line-height:1.75;font-size:16px;word-break:keep-all}
+a{color:var(--steel);text-decoration:none;border-bottom:1px solid transparent}
+a:hover,a:focus-visible{border-bottom-color:var(--steel);outline:none}
+.serif{font-family:"Noto Serif KR","Nanum Myeongjo",Georgia,serif}
+.mono{font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+/* masthead */
+.mast{border-bottom:1px solid var(--line);background:var(--surface)}
+.mast .wrap{padding-top:40px;padding-bottom:36px}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.eyebrow b{color:var(--accent);font-weight:700}
+h1{font-family:"Noto Serif KR",Georgia,serif;font-weight:900;font-size:clamp(30px,4.2vw,48px);line-height:1.2;margin:12px 0 10px;text-wrap:balance;letter-spacing:-.01em}
+.sub{font-size:17px;color:var(--ink2);max-width:780px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:18px 28px;margin-top:22px;font-size:13px;color:var(--muted)}
+.meta span b{color:var(--ink2);font-weight:500}
+/* layout */
+.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;padding-top:40px;padding-bottom:80px}
+nav.toc{position:sticky;top:24px;align-self:start;font-size:13px;line-height:1.5}
+nav.toc .t{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:500}
+nav.toc a{display:block;padding:5px 0 5px 12px;border-left:2px solid var(--line);color:var(--ink2)}
+nav.toc a:hover{border-left-color:var(--accent);color:var(--ink)}
+nav.toc a.sub{padding-left:22px;font-size:12px;color:var(--muted)}
+main{min-width:0}
+section{margin-bottom:64px}
+h2{font-family:"Noto Serif KR",Georgia,serif;font-weight:700;font-size:28px;line-height:1.3;margin:0 0 6px;text-wrap:balance;letter-spacing:-.01em}
+.lead{font-size:17px;color:var(--ink2);margin:0 0 24px;max-width:760px}
+h3{font-size:18px;font-weight:700;margin:34px 0 12px;letter-spacing:-.005em}
+h4{font-size:15px;font-weight:700;margin:22px 0 8px;color:var(--ink2)}
+p{margin:0 0 14px;max-width:760px}
+p.wide{max-width:none}
+.sec-no{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.1em;margin-bottom:6px}
+/* key box */
+.key{background:var(--accent-soft);border-left:4px solid var(--accent);padding:18px 22px;margin:0 0 28px;border-radius:0 6px 6px 0}
+.key .t{font-weight:700;margin-bottom:6px;font-size:14px;letter-spacing:.04em;color:var(--accent)}
+.key p{margin:0 0 6px;max-width:none}
+.key p:last-child{margin:0}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:20px 0 28px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.tile .n{font-family:"IBM Plex Mono",monospace;font-size:28px;font-weight:500;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+.tile .n small{font-size:14px;color:var(--muted);font-weight:400;margin-left:2px}
+.tile .l{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.4}
+.tile .d{font-size:11px;color:var(--steel);margin-top:4px}
+.tile.pro .n{color:var(--pro)}.tile.con .n{color:var(--con)}.tile.warn .n{color:var(--warn)}
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface);margin:16px 0 24px}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:640px}
+th,td{padding:10px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);line-height:1.55}
+th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--surface2);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+td .src{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+/* quotes */
+.q{background:var(--quote-bg);border:1px solid var(--line);border-radius:8px;padding:18px 20px 16px;margin:0 0 12px}
+.q .who{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px;margin-bottom:8px}
+.q .name{font-weight:700;font-size:14px}
+.q .role{font-size:12.5px;color:var(--muted)}
+.q .date{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--muted);margin-left:auto}
+.q .txt{font-family:"Noto Serif KR",Georgia,serif;font-size:15.5px;line-height:1.8;color:var(--ink);margin:0}
+.q .txt::before{content:"“";color:var(--accent);font-weight:700;margin-right:2px}
+.q .txt::after{content:"”";color:var(--accent);font-weight:700;margin-left:2px}
+.q .ctx{font-size:12.5px;color:var(--ink2);margin-top:8px}
+.q .ctx a{font-size:12px}
+.q.pro{border-left:4px solid var(--pro)}.q.con{border-left:4px solid var(--con)}.q.neu{border-left:4px solid var(--steel)}.q.gov{border-left:4px solid var(--accent)}
+.qgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:12px;margin-bottom:8px}
+.qgrid .q{margin:0}
+/* pills */
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;padding:2px 8px;border-radius:3px;vertical-align:middle}
+.pill.pro{background:var(--pro-soft);color:var(--pro)}.pill.con{background:var(--con-soft);color:var(--con)}.pill.neu{background:var(--steel-soft);color:var(--steel)}.pill.gov{background:var(--accent-soft);color:var(--accent)}.pill.warn{background:var(--warn-soft);color:var(--warn)}
+/* timeline */
+.tl{border-left:2px solid var(--line);margin:16px 0 24px 8px;padding-left:24px}
+.tl .ev{position:relative;padding-bottom:20px}
+.tl .ev::before{content:"";position:absolute;left:-31px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--accent)}
+.tl .ev.hot::before{background:var(--accent)}
+.tl .d{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent);letter-spacing:.04em}
+.tl .h{font-weight:700;margin:2px 0 4px}
+.tl p{font-size:14.5px;color:var(--ink2);margin:0;max-width:720px}
+/* two col */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin:16px 0 24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px 20px}
+.card h4{margin:0 0 8px;font-size:15px;color:var(--ink)}
+.card ul{margin:0;padding-left:18px;font-size:14px;color:var(--ink2)}
+.card li{margin-bottom:6px}
+.card.pro{border-top:4px solid var(--pro)}.card.con{border-top:4px solid var(--con)}
+/* country cards */
+.cc{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:16px 0 24px}
+.cc .card .flag{font-size:12px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.cc .card .name{font-family:"Noto Serif KR",Georgia,serif;font-size:19px;font-weight:700;margin:2px 0 8px}
+.cc .card .verdict{font-size:12.5px;font-weight:700;margin-bottom:8px}
+.cc .card p{font-size:14px;color:var(--ink2);margin:0 0 8px}
+.cc .card p:last-child{margin:0}
+.why{background:var(--con-soft);border-left:3px solid var(--con);padding:10px 12px;border-radius:0 4px 4px 0;margin:8px 0 10px}
+.why .t{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--con);margin-bottom:4px}
+.why p{font-size:13.5px;color:var(--ink);margin:0 !important}
+.why ol{margin:0;padding-left:18px;font-size:13.5px;color:var(--ink)}
+.why li{margin-bottom:3px}
+/* bars (simple horizontal bars via CSS) */
+.bars{margin:12px 0 24px;max-width:760px}
+.bar{display:grid;grid-template-columns:150px 1fr 110px;gap:12px;align-items:center;font-size:13.5px;margin-bottom:8px}
+.bar .lab{color:var(--ink2)}
+.bar .trk{height:18px;background:var(--surface2);border-radius:3px;overflow:hidden;display:flex}
+.bar .f1{background:var(--pro);height:100%}.bar .f2{background:var(--con);height:100%}
+.bar .v{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted);white-space:nowrap;text-align:right}
+.legend{font-size:12px;color:var(--muted);margin-bottom:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin:0 4px 0 10px;vertical-align:-1px}
+/* diag */
+.diag{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:16px 0}
+.diag .card .s{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;color:var(--muted)}
+.diag .card .h{font-weight:700;font-size:16px;margin:4px 0 8px}
+.diag .card p{font-size:14px;color:var(--ink2);margin:0}
+.grade{display:inline-block;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:13px;padding:2px 8px;border-radius:3px;margin-left:6px}
+.g-a{background:var(--pro-soft);color:var(--pro)}.g-b{background:var(--warn-soft);color:var(--warn)}.g-c{background:var(--con-soft);color:var(--con)}
+/* column strategy */
+.strat ol{padding-left:20px;max-width:760px}
+.strat li{margin-bottom:12px;color:var(--ink2)}
+.strat li b{color:var(--ink)}
+.note{font-size:13px;color:var(--muted);border-top:1px dashed var(--line);padding-top:10px;margin-top:24px;max-width:760px}
+.caveat{background:var(--warn-soft);border-left:4px solid var(--warn);padding:14px 18px;border-radius:0 6px 6px 0;font-size:14px;margin:16px 0 24px;max-width:760px}
+.caveat b{color:var(--warn)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface);margin:10px 0;padding:0 18px}
+summary{cursor:pointer;padding:12px 0;font-weight:700;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:8px}
+summary::before{content:"+";font-family:"IBM Plex Mono",monospace;color:var(--accent);width:14px}
+details[open] summary::before{content:"−"}
+details .body{padding:0 0 14px;font-size:14px;color:var(--ink2)}
+details .body p{max-width:none}
+.sources{font-size:13px;color:var(--ink2);columns:2;column-gap:32px}
+.sources li{break-inside:avoid;margin-bottom:4px}
+footer{border-top:1px solid var(--line);padding:24px 0 48px;font-size:12.5px;color:var(--muted)}
+@media (max-width:900px){.layout{grid-template-columns:1fr;gap:0}nav.toc{position:static;margin-bottom:32px;columns:2}.sources{columns:1}.bar{grid-template-columns:110px 1fr 90px}}
+@media (prefers-reduced-motion:no-preference){details .body{animation:fade .25s ease}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body>
+
+
+<header class="mast">
+  <div class="wrap">
+    <div class="eyebrow"><b>국방일보 칼럼 기고 준비</b> · 정책 분석보고서 · 대외비 아님</div>
+    <h1>선택적·단계적 모병제 도입 분석 및 진단</h1>
+    <p class="sub">이재명 정부가 2027년 시행을 예고한 '선택적 모병제'를 둘러싼 발언·찬반·여론·해외사례·병역자원 데이터를 총망라하고, 2030 당사자의 시각에서 제도를 진단한다. 배종호 국방홍보원장 면담(국방일보 기고 2편·국방TV 출연 연계) 후속 자료.</p>
+    <div class="meta">
+      <span>작성일 <b>2026. 8. 20.</b></span>
+      <span>작성 목적 <b>국방일보 칼럼 ① '선택적 모병제 도입 방안' 기초자료</b></span>
+      <span>자료 기준 <b>2026. 8. 20. 보도분 · 2차 검증 반영 (v3)</b></span>
+      <span>출처 표기 <b>본문 각 항목 · 말미 출처 목록</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+<nav class="toc" aria-label="목차">
+  <div class="t">목차</div>
+  <a href="#s0">요약 · 핵심 진단</a>
+  <a href="#s1">1. 제도 개요와 현재 정부안</a>
+  <a href="#s2">2. 이재명 대통령 발언 연혁</a>
+  <a href="#s3">3. 정부·국방부 입장</a>
+  <a href="#s4">4. 정치권 찬반 지형</a>
+  <a href="#s5">5. 전문가·시민사회·언론</a>
+  <a href="#s6">6. 여론조사 종합</a>
+  <a href="#s7">7. 당사자 20대의 목소리</a>
+  <a href="#s8">8. 병역자원·예산 데이터</a>
+  <a href="#s9">9. 해외 사례</a>
+  <a href="#s10">10. 비용 추계</a>
+  <a href="#s11">11. 쟁점별 찬반 논거</a>
+  <a href="#s12">12. 종합 진단</a>
+  <a href="#s12b">12-2. 대안 설계·권고안</a>
+  <a href="#s13">13. 칼럼 기고 전략</a>
+  <a href="#s14">연구 방법 · 확인 결과 · 출처</a>
+</nav>
+
+<main>
+
+<!-- ============ 요약 ============ -->
+<section id="s0">
+  <div class="sec-no">EXECUTIVE SUMMARY</div>
+  <h2>요약 · 핵심 진단</h2>
+  <p class="lead">'선택적 모병제'는 이름과 달리 징병제 폐지가 아니다. 국민개병제를 유지한 채 병역의무자가 <b>징집병(18개월)</b>과 <b>기술집약형 부사관(3~4년, 우대 보수)</b> 중 하나를 고르게 하는 '징모혼합제'다. 정부는 연내 계획을 발표하고 2027년 시행을 공식화했으며, 국방부는 전면 모병제 전환과 복무기간 단축은 검토하지 않는다고 못 박았다.</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="n">45<small>만</small></div><div class="l">상비병력 (2025.7) · 2019년 56만 대비 −11만</div><div class="d">국방부 자료, 헤럴드경제 2025.8</div></div>
+    <div class="tile con"><div class="n">14.2<small>만</small></div><div class="l">2040년 20세 남성 인구 추계 (2020년 33만)</div><div class="d">통계청 추계, 한국일보 2023.6</div></div>
+    <div class="tile con"><div class="n">42<small>%</small></div><div class="l">육군 부사관 충원율 (2024) · 2020년 95%</div><div class="d">황희 의원실, 2025 국감</div></div>
+    <div class="tile"><div class="n">205<small>만원</small></div><div class="l">병장 월 보수 (봉급 150만 + 내일준비지원금 55만), 2026년 동결</div><div class="d">2026 국방예산안</div></div>
+    <div class="tile warn"><div class="n">47.4<small>%</small></div><div class="l">선택적 모병제 찬성 (전체) · 반대 41.9%</div><div class="d">개혁연구원 2026.8.18</div></div>
+    <div class="tile con"><div class="n">55.3<small>%</small></div><div class="l">18~29세 반대 · '매우 반대' 41.1%</div><div class="d">같은 조사</div></div>
+  </div>
+
+  <div class="key">
+    <div class="t">여섯 줄 진단</div>
+    <p><b>① 방향은 불가피하다.</b> 2040년 20세 남성 14만 명, 부사관 충원율 42%라는 숫자 앞에서 '인력 중심 군'은 유지 자체가 불가능하다. 찬반을 떠나 구조 전환은 시간 문제다.</p>
+    <p><b>② 그러나 '모병'이라는 간판이 기대와 현실의 격차를 만들었다.</b> 2025년 공약 단계의 '10개월 복무' 보도와 2026년 7월 국방부의 '18개월 유지' 확인 사이에서 입영 대기 청년들은 "뭐가 바뀌느냐", "선택적 징병제 아니냐"고 냉소한다.</p>
+    <p><b>③ 정책 타깃인 2030이 가장 반대한다.</b> 전 세대 중 18~29세 반대 55.3%, '매우 반대' 41.1%로 최고. 남녀 차이가 거의 없다(남 40.8% · 여 41.9%). 2025년 5월 조사에서도 18~29세 남성 찬성이 최저(54%)였다.</p>
+    <p><b>④ 해외는 '모병→징병 회귀'가 대세다.</b> 대만(2024), 스웨덴(2017), 리투아니아(2015), 라트비아(2023), 크로아티아(2026), 독일·프랑스(2026 조건부 징병)까지. 모병제 성패는 '보수 수준'과 '인구 규모'가 갈랐다.</p>
+    <p><b>⑤ 성패의 열쇠는 세 가지.</b> 처우(하사 초봉 300만 원이 최저임금 대비 충분한가), 형평(가난한 청년만 장기복무하는가), 그리고 '이미 다녀온 세대'와 현역의 박탈감을 어떻게 보상하는가. 칼럼은 여기서 출발해야 한다.</p>
+    <p><b>⑥ 대안은 '정부안 폐기'가 아니라 '정부안 보강'이다.</b> 다섯 모델을 비교하면 정부안은 군에는 합리적이나 청년 몫이 비어 있다. 보수 법정 하한(최저임금 1.5배), 경쟁 선발, 징집병 몫 동시 발표, 한국형 G.I. Bill, 지표 연동 로드맵 — 이 다섯 장치를 이식한 3단계(2027→2035) 경로를 12-2장에서 제시한다.</p>
+  </div>
+  <p class="note">2차 조사(8.20)로 1차 보고서의 미확인 12개 항목을 추적해 9개를 확정·정정했다. 주요 정정: 국방 인건비 공식 수치는 18.8조(30.7%)이며 기존 '22.8조·37%'는 칼럼 인용치였음, 리얼미터 조사는 2019년 11월 CBS 의뢰, '2027년 병장 165만 원'은 오기, 국정과제에는 '병력 모집방식 다양화'로만 포괄 반영. 상세는 부록 참조.</p>
+</section>
+
+<!-- ============ 1 ============ -->
+<section id="s1">
+  <div class="sec-no">SECTION 01</div>
+  <h2>제도 개요와 현재 정부안</h2>
+  <p class="lead">병역제도의 유형부터 정리한다. '선택적 모병제'는 정치권에서 만들어진 조어(造語)로, 국제 비교 문헌의 어떤 범주와도 정확히 일치하지 않는다. 논의의 혼선 대부분이 이 용어에서 비롯되므로, 본 보고서가 사용하는 용어를 먼저 확정한다.</p>
+
+  <div class="key">
+    <div class="t">본 보고서의 용어 정의</div>
+    <p><b>① 정부안(선택적 모병제)</b> — 국민개병제를 유지한 채 <u>병역의무자 개인이</u> 징집병(18개월)과 기술집약형 부사관(3~4년) 중 복무 형태를 고르는 방식. '개인 선택형 징모혼합'으로 부를 수 있다. 본문에서 '정부안' 또는 '모델 A'로 표기한다.</p>
+    <p><b>② 국가선발형(선발형 징병)</b> — 해당 연령 전원에게 법적 의무를 두되 <u>국가가</u> 설문·적성·체력으로 필요 인원만 선발하는 방식. 스웨덴·노르웨이 용례이며 영어권에서는 selective conscription으로 불린다. 한국어 '선택적'과 발음이 겹치지만 <b>선택의 주체가 정반대</b>다.</p>
+    <p><b>③ 징모혼합제</b> — 징집병과 지원병(장기)을 병렬 운용하는 제도 일반. ①과 대만식 모델을 포괄하는 상위 범주로 사용한다.</p>
+    <p style="font-size:13.5px;color:var(--muted);margin-top:8px">※ 국내 학계에서 '징모혼합제'는 확립된 용어이나(국회입법조사처 유럽 사례 비교 등), 정부안을 그 하위 유형으로 분류하는 것은 본 보고서의 정리이며 공인된 분류가 아니다. 미국의 Selective Service System은 등록·추첨 기반 징병 체계로 ②와 다르다.</p>
+  </div>
+
+  <h3>병역제도 유형 비교</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>유형</th><th>정의</th><th>대표국</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td><b>보편 징병제</b></td><td>해당 연령 남성(또는 전원) 의무복무</td><td>한국, 이스라엘, 싱가포르, 핀란드</td><td>한국 현역판정률 86.7%(2025). 복무 육군·해병 18, 해군 20, 공군 21개월</td></tr>
+      <tr><td><b>선택적(선발) 징병제</b></td><td>법적 의무는 전원이나 설문·적성 기반으로 소수만 선발</td><td>스웨덴(코호트의 7%), 노르웨이(13~16%), 덴마크, 리투아니아(추첨)</td><td>'징병의 형식 + 모병의 실질'. 대부분 젠더중립</td></tr>
+      <tr><td><b>징모혼합제</b></td><td>징집병과 지원병(장기)을 병렬 운용</td><td>대만(2024~), 라트비아, <b>한국 정부안</b></td><td>대만: 의무병 2.3% vs 지원병 76.9%(2025.11)</td></tr>
+      <tr><td><b>자원복무 + 조건부 징병</b></td><td>징병 법적 틀은 '중지', 자원복무 운영, 조건 충족 시 의회 의결로 징집 발동</td><td>독일(2026), 프랑스(2026), 네덜란드, 벨기에</td><td>독일 'Bedarfswehrpflicht(수요징병)'</td></tr>
+      <tr><td><b>전면 모병제(AVF)</b></td><td>자원자만 복무, 등록제 병행 가능</td><td>미국, 영국, 일본, 캐나다</td><td>미국 2022~23 미달, 일본 2023 충원 51%</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>정부안의 골격 (2026.8.20 기준, 연내 확정 예정)</h3>
+  <div class="two">
+    <div class="card"><h4>유지되는 것</h4><ul>
+      <li>국민개병제(징병제) 유지 — 국방부 "전면 모병제 전환은 검토하지 않는다"(2026.7.9)</li>
+      <li>징집병 복무 18개월 유지 — 국방부 "10개월 단축안은 검토한 바 없다"(2026.4.22)</li>
+      <li>2040년대 상비병력 50만 유지 목표 = 현역 35만 + 군무원·아웃소싱 15만(안규백, 2026.4.7)</li>
+    </ul></div>
+    <div class="card"><h4>새로 도입되는 것</h4><ul>
+      <li>'기술집약형 부사관' 신설: 무인체계·사이버·AI 분야, 우대 보수, 전역 후 취업 연계. <b>복무기간은 3~4년으로 협의 중</b>(2026.8.20 장관 국방위 답변) — 6~7월 국방부 설명의 '4~5년'에서 조정된 최신 기준</li>
+      <li>첫해 약 3,000명 선발 예정, 의무복무 3년 또는 4년 협의 중(안규백, 국회 국방위 2026.8.20)</li>
+      <li>2040년까지 간부 비율 40% → 63%, 병 60% → 37%</li>
+      <li>GOP 경계병력 2.2만 → 6천 명(AI 과학화 경계), 육·해·공 통합사관학교 구상</li>
+      <li>초급간부 처우: 하사 초봉 2027년 300만 원, 2029년 초급간부 연봉 4천만 원대, 장기복무 선발률 20% → 2028년 희망자 전원</li>
+    </ul></div>
+  </div>
+
+  <div class="caveat"><b>설계 미확정 주의.</b> 2026년 4월 일부 보도(이데일리)는 '단기 10개월·장기 36개월, 전문부사관 5만 명'으로 전했으나, 6~7월 국방부 공식 설명은 '18개월 유지 + 4~5년 부사관'이며 8월 20일 장관 답변은 '3천 명·3~4년'이다. 칼럼에서 수치를 인용할 때는 '국방부 연내 발표안' 기준으로 재확인이 필요하다.</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="s2">
+  <div class="sec-no">SECTION 02</div>
+  <h2>이재명 대통령 발언 연혁 (2017 → 2026)</h2>
+  <p class="lead">이 대통령의 모병제 구상은 9년에 걸쳐 일관되게 '선택'이라는 단어를 유지했으나, 복무기간·규모·명칭의 세부는 단계마다 달라졌다. 이 변화 자체가 현재 청년층 혼선의 뿌리다.</p>
+
+  <div class="tl">
+    <div class="ev"><div class="d">2017. 01. 03</div><div class="h">성남시장 · 국회 토론회 — "선택제 모병제" 첫 제안</div><p>의무복무 약 10개월로 단축, 전문 전투요원 약 10만 명 모병, 현역 63만→50만 감축. 소요 약 3조 원은 감축 절감분으로 충당 가능 주장. (뉴스토마토)</p></div>
+    <div class="ev"><div class="d">2021. 12. 24</div><div class="h">20대 대선 국방공약 — 징집병 30만→15만, 전투부사관 5만·군무원 5만</div><p>"약 10만 개 청년 일자리 창출." 병사 월급 2027년까지 200만 원 이상, 소요 예산 약 4.4조 원은 기존 예산 재배분. (경향신문)</p></div>
+    <div class="ev"><div class="d">2025. 04. 17</div><div class="h">21대 대선 · 국방과학연구소 방문</div><p>"징병제와 모병제의 장점을 섞은 선택적 모병제로 운영하는 게 맞다." "수십만 청년을 병영에 가둬 단순반복 훈련을 시키기보다 복합 무기체계 운용·개발 전문가로 특화." 같은 날 채널A, 캠프의 '징집 10개월·모병 36개월' 이원 구조 검토 보도. (아이뉴스24·머니투데이·채널A)</p></div>
+    <div class="ev"><div class="d">2025. 05</div><div class="h">공약집 — "국민개병제 유지하면서 '징집병'과 '기술집약형 전투부사관' 중 선택"</div><p>한국리서치·한국일보 조사에서 16개 공약 중 공동 1위(찬성 71%)이나 18~29세 남성은 54%로 최저. (서울신문·한국일보)</p></div>
+    <div class="ev"><div class="d">2026. 03. 28</div><div class="h">취임 후 첫 전군주요지휘관회의</div><p>"국제정세가 급변하며 안보환경이 근본적으로 바뀌고 있다." 자주국방 강조, 선택적 모병제 논의 재점화. (서울경제)</p></div>
+    <div class="ev hot"><div class="d">2026. 06. 24</div><div class="h">해병대 연평부대 방문 — "징집병 최소화"</div><p>"징집병을 최소화하고 모병을 통해서 직장으로 군을 선택할 수 있게 바꿔나가겠다." "(군 복무가) 약간 억울한 생각이 들 수 있다… 특별한 희생을 치르는 사람들에게는 특별한 보상을 통해서 형평을 이뤄야 된다." "다 모병으로 바꾸는 건 아니고 예산 허용 범위 내에서… 충분한 보수를 지급받는 장기의 직업군인을 선택하던지 아니면 단기 징병에 응하는 선택." 국방비 GDP 3.5% 구상 재확인. (경향·프레시안·서울신문)</p></div>
+    <div class="ev hot"><div class="d">2026. 06. 25</div><div class="h">수석보좌관회의</div><p>"전문 군사 중심의 선택적 모병제를 통해 새로운 군대로 탈바꿈해야 한다." 같은 날 국방부가 '기술집약형 부사관' 공식화. (한국일보)</p></div>
+    <div class="ev hot"><div class="d">2026. 08. 13</div><div class="h">제43차 수석보좌관회의 — 도입 공식 지시</div><p>"지속적인 저출생 때문에 현재 같은 인력 중심, 보병 중심의 비효율적인 군 구조를 유지하는 것은 가능하지도 않고 바람직하지도 않다." "선택적 모병제를 도입해 우리 군을 첨단 장비와 기술 중심의 스마트 정예 강군으로 탈바꿈시키는 국방 개혁을 추진해야 한다." "군 생활이 인생의 낭비나 손해라는 생각이 들지 않게 하는 것이 정부의 큰 책임." 강유정 수석대변인: "내년부터 제도를 시행하면서 초기 운영 성과를 고려해 수정·보완", 구체 계획은 국방부가 연내 발표. 배경: 대통령 지지율 49%(취임 후 최저), 20대 이하 31%·30대 40%. (파이낸셜뉴스·아시아경제·세계일보·서울신문·YTN)</p></div>
+  </div>
+
+  <div class="key">
+    <div class="t">발언 변화에서 읽히는 것</div>
+    <p>2017·2021·2025년 초까지는 '복무기간 단축(10개월)'이 선택적 모병제의 핵심 유인이었다. 그러나 2026년 정부안에서는 단축이 빠지고 '부사관 처우·기술 교육'이 유인으로 대체됐다. 청년층이 기대했던 것(짧아지는 내 복무)과 정부가 내놓은 것(길게 복무할 사람에 대한 보상)이 어긋난 지점이 바로 여기다. 칼럼에서 이 괴리를 정면으로 다루면 당사자 공감도가 높아진다.</p>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="s3">
+  <div class="sec-no">SECTION 03</div>
+  <h2>정부·국방부 입장</h2>
+  <p class="lead">안규백 국방부 장관과 국방부 대변인실의 공식 발언. 일관된 메시지는 "징병제 유지, 선택권 확대, 전면 모병제 아님"이다.</p>
+
+  <div class="q gov"><div class="who"><span class="name">안규백</span><span class="role">국방부 장관 · 출입기자단 간담회</span><span class="date">2026.04.07~08</span></div><p class="txt">선택적 모병제를 도입해 기술집약형 전문부사관을 구상하고 있다. 일반 모병제가 아니라 징집제를 근본으로 두고 기술 인력을 구분하는 방식이다.</p><div class="ctx">AI 과학화 경계로 GOP 2.2만→6천 명, 육해공 통합사관학교('2+2'), 2040년대 현역 35만+군무원·아웃소싱 15만. (뉴시스·BBS)</div></div>
+  <div class="q gov"><div class="who"><span class="name">국방부</span><span class="role">입장 자료 (온라인 '10개월 단축설' 대응)</span><span class="date">2026.04.22</span></div><p class="txt">선택적 모병제를 전제로 병 의무복무기간을 10개월로 단축하는 방안은 검토한 바 없다.</p><div class="ctx">(중앙일보)</div></div>
+  <div class="q gov"><div class="who"><span class="name">정빛나</span><span class="role">국방부 대변인</span><span class="date">2026.06.25</span></div><p class="txt">국민개병제를 유지한 가운데 현역병과 부사관으로 복무 방식의 선택 권한을 확대한다. 첨단과학기술 중심의 군 구조 개편에 발맞춰 해당 직위를 점진적으로 확대하겠다.</p><div class="ctx">기술집약형 부사관 4~5년, 우대 보수·전역 후 취업 연계. 2040년 간부 63%·병 37%. (파이낸셜뉴스·이데일리)</div></div>
+  <div class="q gov"><div class="who"><span class="name">국방부</span><span class="role">경향신문 취재 답변</span><span class="date">2026.07.09</span></div><p class="txt">전면 모병제 전환은 검토하고 있지 않다. 징집병 18개월 단축 계획도 없다.</p><div class="ctx">단축 시 부사관 지원 유인 약화·전력 유지 문제 때문이라고 설명. 참고: 작년 부사관 임관 1,470명 vs 전역 4,917명. (경향신문)</div></div>
+  <div class="q gov"><div class="who"><span class="name">안규백</span><span class="role">국방부 장관 · 국회 국방위원회</span><span class="date">2026.08.20</span></div><p class="txt">약 3천여 명 정도의 기술집약형 부사관을 선발한다. (의무복무를) 3년으로 할지, 4년으로 할지 협의하는 단계다.</p><div class="ctx">내년 시행 예정. (한겨레)</div></div>
+
+  <h3>병행 추진 중인 간부 처우 개선 (육군 부사관 제도 개편, 2026.6.19)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>항목</th><th>현행</th><th>개편</th></tr></thead>
+    <tbody>
+      <tr><td>장기복무 선발률</td><td class="num">약 20%</td><td class="num">2026년 50% → 2028년 희망자 전원(100%)</td></tr>
+      <tr><td>하사 초봉(수당 포함)</td><td class="num">약 280만 원</td><td class="num">2027년 300만 원 → 2029년 연봉 4천만 원대</td></tr>
+      <tr><td>중사 진급 최저복무</td><td class="num">6년</td><td class="num">4년</td></tr>
+      <tr><td>단기복무장려금</td><td class="num">900만 원</td><td class="num">2,600만 원(2027)</td></tr>
+      <tr><td>당직근무비</td><td class="num">평일 2만 / 휴일 4만</td><td class="num">평일 3만 / 휴일 6만(이후 10만 보도)</td></tr>
+    </tbody>
+  </table></div>
+  <h3>추진 체계 확인 결과 (2차 조사, 8.20)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>항목</th><th>확인 결과</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td><b>123대 국정과제 반영 여부</b></td><td>'선택적 모병제'·'기술집약형 부사관' 문구는 <b>없음</b>. 과제 111번 「강력한 국방개혁으로 전투임무에 집중하는 군체계 확립」의 주요내용에 "대병과 체제 개편, 간부 장기복무 선발률 향상, <b>병력 모집방식 다양화</b> 등을 통해 전문성·숙련도를 갖춘 군 인력 확보"로 포괄 표현. 과제 112번은 초급간부 급여 현실화·전월세 자금 지원. 병 복무기간 언급 없음.</td><td><a href="https://www.korea.kr/govVision/">korea.kr 국정과제</a> · <a href="https://www.mnd.go.kr/mnd/499/subview.do">국방부 국정과제 상세</a> (2025.8.13 발표)</td></tr>
+      <tr><td><b>안규백 인사청문회(2025.7.15)</b></td><td>모병제·복무기간에 관한 정책 발언은 <b>확인되지 않음</b>. 청문회는 후보자 본인의 방위병 복무기간(22개월) 논란에 집중됐고 야당 보이콧으로 파행. 서면답변 보도도 "정치인 가족일수록 병역의무 더 충실해야"(세 아들 복무) 수준. 국정감사(2025.10.13) 업무보고에서도 모병제 언급 없이 "병사 급여·복지 대폭 향상, 전역 후 삶 지원체계"만 보고.</td><td><a href="https://www.khan.co.kr/article/202507160002001">경향 2025.7.16</a> · <a href="https://v.daum.net/v/y1MKdqHEIb?f=p">문화일보 2025.7.14</a></td></tr>
+      <tr><td><b>전담 조직(TF·추진단)</b></td><td>'선택적 모병제 TF' 명칭의 조직은 <b>보도상 존재하지 않음</b>. 6.25 국방부 브리핑, 8.13 청와대 브리핑 모두 전담 조직 언급 없음. 국방부 정책실 주관으로 '국방개혁 청사진'에 포함해 추진 중인 것으로 보임.</td><td>헤럴드경제·뉴스1 2026.6.25</td></tr>
+      <tr><td><b>공청회</b></td><td>4월 보도의 "이달 중 공청회" 대신 <b>2026.6.9 '2040년을 향한 국방개혁 세미나'</b>(전쟁기념관, 약 200명, 장관 주관)에서 선택적 모병제 검토·계급구조 조정·총병력 약 50만·드론 30배 확충 발표. "7월까지 청사진 확정" 계획 → 8.13 대통령 지시 → 연내 발표로 일정 조정.</td><td><a href="https://mnd.go.kr/bbs/mnd/13000005/DPIM_115160/artclView.do">국방부 공지</a> · <a href="https://newsseoul.co.kr/news/view/1065607817663486">뉴스서울 2026.6.9</a></td></tr>
+      <tr><td><b>관련 법안 발의</b></td><td>22대 국회에서 선택적 모병제·기술부사관 관련 병역법·군인사법 개정안 발의는 <b>확인되지 않음</b>(의안정보시스템 직접 조회는 접속 차단). 단기부사관 의무복무 4년을 규정한 군인사법상 3년 기술부사관 신설 시 개정 필요.</td><td>의안정보시스템 검색 결과 없음</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">7월 예비군 사망 사건으로 장관 탄핵 청원이 30만 명을 넘긴 점(시사저널 7.12)은 개혁 추진 동력과 연결되는 변수다. 국정과제에 명시적 문구가 없다는 사실은 "대선 공약 → 국정과제 포괄 표현 → 2026년 6월 이후 구체화"라는 경로를 보여주며, 야당의 '느닷없이' 비판과 여당의 '공약 이행' 주장이 모두 부분적으로 사실임을 뜻한다.</p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="s4">
+  <div class="sec-no">SECTION 04</div>
+  <h2>정치권 찬반 지형 — 누가 무엇을 말했나</h2>
+  <p class="lead">여당은 '생존 전략', 제1야당은 '지지율용 포퓰리즘', 개혁신당은 '당사자 빠진 설계'. 2025년 대선 당시 후보별 입장까지 함께 정리한다.</p>
+
+  <h3><span class="pill pro">찬성</span> 더불어민주당</h3>
+  <div class="q pro"><div class="who"><span class="name">김병주</span><span class="role">민주당 의원 · 예비역 육군대장 · 기자회견(백군기 국방안보특위 공동위원장 동석)</span><span class="date">2026.06.30</span></div><p class="txt">선택적 모병제는 포퓰리즘이 아니라 생존 전략이다. 인구 절벽이라는 정해진 미래, AI·드론이 지배하는 첨단 전장 환경에서 대한민국 군대가 살아남기 위한 병역제도 현대화의 유일한 돌파구다. 첨단 무기체계와 무인전력은 18개월 복무 징집병만으로 운용하기 어렵다. 국민개병제 폐지가 아니라 군 인력의 효율적 재구조화다.</p><div class="ctx">(굿모닝경제·헤럴드경제) 백군기: "현대화 장비 운용 위해 최소 5년 직업군인 확대 필요."</div></div>
+  <div class="q pro"><div class="who"><span class="name">부승찬</span><span class="role">민주당 의원</span><span class="date">2025.04</span></div><p class="txt">30~36개월 자원복무 시 진급·학점 인센티브를 주는 '자율선택형 병역' 모델을 제안한다.</p><div class="ctx">(머니투데이) 민주당 2025.4 FGI 결과: "부유층은 군대를 피할 것이라는 잠재적 불신이 예상보다 컸다."(경향 단독 2025.4.13)</div></div>
+  <p>김민석(8.17 전당대회에서 당대표 선출)·정청래·박지원의 선택적 모병제 관련 직접 발언은 2차 추적 검색에서도 확인되지 않았다. 여당 지도부가 이 사안에 침묵하고 김병주·백군기 등 군 출신 의원이 전면에 선 것은 '안보 전문성' 프레임으로 포퓰리즘 공격을 방어하려는 역할 분담으로 읽힌다. 김두관은 2012년 대선 경선 당시 "모병제 도입·병력 감축"을 공약한 전력이 있다(프레시안 2012).</p>
+
+  <h3><span class="pill con">반대</span> 국민의힘</h3>
+  <div class="qgrid">
+    <div class="q con"><div class="who"><span class="name">장동혁</span><span class="role">국민의힘 대표</span><span class="date">2026.06.25</span></div><p class="txt">느닷없이 모병제를 꺼내 들었다. 청년 지지율이 폭락하자 마음이 조급한 모양이다. 안보는 약화되고 청년의 분노만 더 키울 뿐이다.</p><div class="ctx">안규백 장관 탄핵 청원 16만 명 언급하며 "즉각 경질해야." (매일신문·시사저널)</div></div>
+    <div class="q con"><div class="who"><span class="name">최보윤</span><span class="role">국민의힘 수석대변인 · 논평</span><span class="date">2026.06.25</span></div><p class="txt">선택적 모병제는 인구절벽 상황 속에서 병력 공백을 심화시켜 국방의 근간을 흔들 수 있는 사안이다. 국가 방위 태세에 치명적인 허점만 남길 뿐이다.</p><div class="ctx">시사저널·시사위크 2026.6.25 보도</div></div>
+    <div class="q con"><div class="who"><span class="name">유승민</span><span class="role">전 의원</span><span class="date">2026.06.25</span></div><p class="txt">지지율이 떨어지고 레임덕이 온다고 병역 문제까지 포퓰리즘에 동원한다. 병사를 용병과 징집병으로 나누는 것은 안보 우려 시기에 말이 안 된다. 가난한 저스펙 청년들이 직업군인으로 내몰린다면 경제적 형편을 기준으로 모병과 징병을 가를 뿐이다 — 공정하지도 형평에 맞지도 않는다. 형평을 중시하는 젊은층은 여성징병제가 차라리 공정하다고 여길 수도 있다.</p><div class="ctx">(한국일보·헤럴드경제·문화일보)</div></div>
+    <div class="q con"><div class="who"><span class="name">한동훈</span><span class="role">국민의힘 대선 경선 토론</span><span class="date">2025.04.25</span></div><p class="txt">모병제를 섣불리 도입했을 경우에는 없는 집에서만 군대 간다, 이런 문제가 생길 수가 있다.</p><div class="ctx">북한 상비병력 128만(우리의 약 2.8배) 등을 이유로 징병제 유지 주장. 뉴스타파 팩트체크: '없는 집' 주장은 판단 유보, '모병제→징병제 복귀 국가 다수' 주장은 사실(라트비아·스웨덴·대만).</div></div>
+  </div>
+  <p>김문수(2025 대선 후보)는 선택적 모병제에 반대하며 남녀 불문 군 가산점제를 제안했다(파이낸셜뉴스 2025.4.24 후보 공약 비교). 한기호 의원은 "지금도 부사관 선택해서 갈 수 있는데", "돈으로 청춘을 못 산다"는 취지로 반박했다(BBC코리아 7.10).</p>
+
+  <h3><span class="pill neu">조건부·비판</span> 개혁신당</h3>
+  <div class="q neu"><div class="who"><span class="name">이준석</span><span class="role">개혁신당 대표 · 자당 개혁연구원 여론조사 발표</span><span class="date">2026.08.19~20</span></div><p class="txt">제도의 대상이 될 2030은 남녀 가리지 않고 매우 반대가 41%에 달했다. 당사자가 빠진 설계라는 신호로, 병역제도 개편은 제도를 짊어질 세대의 동의에서 출발해야 한다.</p><div class="ctx">2025 대선 당시 "여성도 일반 병으로 복무 허용" 공약. (헤럴드경제·아시아경제·여성신문)</div></div>
+
+  <h3>2025 대선 후보별 병역 공약 비교</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>후보</th><th>입장</th><th>핵심 내용</th></tr></thead>
+    <tbody>
+      <tr><td><b>이재명</b> (민주)</td><td><span class="pill pro">선택적 모병제</span></td><td>징병 유지 + 징집병/기술집약형 전투부사관 선택. 캠프 검토안 징집 10개월·모병 36개월</td></tr>
+      <tr><td><b>김문수</b> (국힘)</td><td><span class="pill con">반대</span></td><td>징병제 유지, 남녀 불문 군 가산점제</td></tr>
+      <tr><td><b>한동훈</b> (국힘 경선)</td><td><span class="pill con">반대</span></td><td>"없는 집에서만 군대 간다", 북한 병력 3배 근거 징병 유지</td></tr>
+      <tr><td><b>홍준표·김동연</b></td><td><span class="pill pro">전면 모병제</span></td><td>2035년까지 남녀 전면 모병제</td></tr>
+      <tr><td><b>안철수</b></td><td><span class="pill neu">부분 모병</span></td><td>병사 절반 감축·전문부사관 2배</td></tr>
+      <tr><td><b>이준석</b> (개혁)</td><td><span class="pill neu">여성 복무 개방</span></td><td>여성도 일반 병 복무 허용</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">조국혁신당(조국·서왕진)·진보당의 공식 논평, 군인권센터(임태훈)의 성명은 2차 추적에서도 검색되지 않았다(군인권센터 사이트는 접속 차단). 진보 진영 시민단체 중 공식 입장을 낸 곳은 참여연대 평화군축센터(6.25)가 유일하다. 이는 선택적 모병제가 전통적 '진보 vs 보수' 축이 아니라 '세대·처우' 축에서 논쟁되고 있음을 보여준다.</p>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="s5">
+  <div class="sec-no">SECTION 05</div>
+  <h2>전문가·시민사회·언론</h2>
+  <p class="lead">찬반은 정파보다 '형평'과 '실효성'을 축으로 갈린다. 찬성 측도 "처우가 먼저"라는 조건을 단다.</p>
+  <div class="qgrid">
+    <div class="q con"><div class="who"><span class="name">이진우</span><span class="role">포스텍 명예교수 · 경향신문 칼럼</span><span class="date">2026.07.07</span></div><p class="txt">모병과 징병을 가르는 기준은 사실 개인의 자유가 아니라 경제적 형편이다.</p><div class="ctx">이 칼럼은 디시 공군갤러리에 그대로 전재될 만큼 청년층에 확산됐다.</div></div>
+    <div class="q pro"><div class="who"><span class="name">김갑년</span><span class="role">전 고려대 교수 · 경향신문 기고</span><span class="date">2026.07.15</span></div><p class="txt">모병제는 정의의 포기가 아니다. 병역을 남녀 모두에 열린 직업으로 재구성해야 한다.</p></div>
+    <div class="q pro"><div class="who"><span class="name">정한범</span><span class="role">국방대 교수</span><span class="date">2026.07.09</span></div><p class="txt">직업훈련 기회를 제공하는 것이지 빈곤층을 강제하는 것이 아니다. 개병제를 유지하므로 계층화를 막을 수 있다.</p><div class="ctx">(경향신문 영문판)</div></div>
+    <div class="q neu"><div class="who"><span class="name">김종대</span><span class="role">전 의원 · 군사전문가</span><span class="date">2026.07.09</span></div><p class="txt">대만이 모병제로 전환할 수 있었던 조건은 대졸 초임 대비 2배 급여였다. 복지·처우도 중요하지만 대도시 근무를 선호하는 요즘 청년들의 고립감을 해소하고 직업인으로서 어떤 예우를 해줄지 고민해야 한다.</p></div>
+    <div class="q neu"><div class="who"><span class="name">서복경</span><span class="role">정치학자</span><span class="date">2026.07.09</span></div><p class="txt">IT 분야로 편중되면 관련 전공을 하지 않은 고졸 청년은 기회를 얻기 어려울 것이다.</p><div class="ctx">기회 불평등(전공자 유리) 논점. (경향 영문판)</div></div>
+    <div class="q neu"><div class="who"><span class="name">박진수</span><span class="role">덕성여대 교수</span><span class="date">2025.10.22</span></div><p class="txt">병력이 모자라면 여성으로 채우면 된다는 단선적 사고에서 벗어나야 한다. 50만 유지 근거가 불명확하다. 무급 청년 노동을 기대하는 국가주의적 사고에서 탈피해야 한다.</p><div class="ctx">(한국일보)</div></div>
+    <div class="q neu"><div class="who"><span class="name">최기일·윤형호·최병욱</span><span class="role">상지대·건양대·상명대 교수</span><span class="date">2025.08.24</span></div><p class="txt">모병 유인책(처우)이 선행돼야 한다. 무인기술에는 한계가 있어 일반 전투병력과의 융합이 필요하며, 점진적으로 확대해야 한다.</p><div class="ctx">(서강학보) 최병욱: 모병으로 30만 유지 시 20세 남성 10명 중 1명이 12년 이상 복무해야(KIDA 인용).</div></div>
+    <div class="q neu"><div class="who"><span class="name">참여연대 평화군축센터</span><span class="role">논평</span><span class="date">2026.06.25</span></div><p class="txt">병역제도 개편이 단순한 충원 방식 변경에 그쳐서는 안 되며 군 구조 전반에 대한 개혁으로 이어져야 한다.</p><div class="ctx">적정 병력 규모 재검토, 북한 점령·안정화 전제 작전개념 재평가, '빈자의 군대' 방지, 병력 감축 목표·징집병 규모·복무기간 포함 종합안 요구. (한국NGO신문)</div></div>
+  </div>
+  <h3>주요 사설·칼럼·기고 (링크 클릭 시 원문)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>매체 · 필자</th><th>날짜</th><th>입장</th><th>요지</th><th>원문</th></tr></thead>
+    <tbody>
+      <tr><td><b>경향신문 사설</b><br><span style="font-size:12px;color:var(--muted)">"선택적 모병제, 검토할 만하다"</span></td><td class="num">2026.06.26</td><td><span class="pill pro">조건부 찬성</span></td><td>인구절벽과 첨단전 환경에서 병역구조 전환은 불가피하며, 2028년 4월 총선까지 전국 단위 선거가 없어 정치적 계산 없이 숙의할 수 있는 드문 시기라고 평가. 다만 계층 편중 방지와 재원 대책을 전제로 달았다.</td><td><a href="https://www.khan.co.kr/article/202606261813011/">열기</a></td></tr>
+      <tr><td><b>한국일보 사설</b><br><span style="font-size:12px;color:var(--muted)">"선택적 모병제, 사회적 숙의부터"</span></td><td class="num">2026.06.26</td><td><span class="pill warn">신중</span></td><td>취지는 공감하나 기술부사관의 계급·보수·직업 연계가 불명확하고, 10개월 복무설은 유럽 징병국(1년 이상)보다 훈련이 부족하며, 수조 원 예산과 북한 상비병력 규모를 고려하면 발표보다 공론화가 먼저라고 주문.</td><td><a href="https://www.hankookilbo.com/news/article/A2026062516130003505">열기</a></td></tr>
+      <tr><td><b>구본영 · 파이낸셜뉴스</b><br><span style="font-size:12px;color:var(--muted)">칼럼</span></td><td class="num">2026.06.29</td><td><span class="pill con">비판</span></td><td>청년 지지율 급락 국면의 발표를 '생색내기'로 규정. "병사 월급 인상과 선택적 모병제 등 생색내기로 2030의 분노를 달랠 수 있다고 생각한다면 오산" — 청년이 원하는 것은 공정한 기회 구조라는 논지.</td><td><a href="http://www.fnnews.com/news/202606291833086366">열기</a></td></tr>
+      <tr><td><b>이진우 · 경향신문</b><br><span style="font-size:12px;color:var(--muted)">포스텍 명예교수 칼럼</span></td><td class="num">2026.07.07</td><td><span class="pill con">비판</span></td><td>"모병과 징병을 가르는 기준은 개인의 자유가 아니라 경제적 형편." 선택의 외피를 쓴 계층 분리라는 철학적 비판. 청년 커뮤니티에 전재되며 '빈자의 군대' 프레임의 대표 텍스트가 됐다.</td><td><a href="https://www.khan.co.kr/article/202607071956005">열기</a></td></tr>
+      <tr><td><b>이두걸 · 서울신문</b><br><span style="font-size:12px;color:var(--muted)">기자의 시각</span></td><td class="num">2026.07.09</td><td><span class="pill neu">보완 제안</span></td><td>미국 G.I. Bill처럼 전역자에게 교육비·주택자금을 지원하는 '한국형 G.I. Bill'과 공공부문 군 가산점을 제안. 앞으로 복무할 사람만이 아니라 이미 복무한 세대에 대한 보상이 있어야 세대 내 형평이 선다는 논지.</td><td><a href="https://www.seoul.co.kr/news/editOpinion/column/journalist-viewpoint/2026/07/09/20260709027004">열기</a></td></tr>
+      <tr><td><b>김갑년 · 경향신문</b><br><span style="font-size:12px;color:var(--muted)">전 고려대 교수 기고</span></td><td class="num">2026.07.15</td><td><span class="pill pro">찬성</span></td><td>"모병제는 정의의 포기가 아니다." 병역을 남녀 모두에게 열린 직업으로 재구성하면 오히려 성별·계층 형평이 개선된다는 반론. 이진우 칼럼에 대한 사실상의 답글.</td><td><a href="https://www.khan.co.kr/article/202607151953015/">열기</a></td></tr>
+      <tr><td><b>강선미 · 여성신문</b><br><span style="font-size:12px;color:var(--muted)">칼럼</span></td><td class="num">2026.06.25</td><td><span class="pill neu">보완 제안</span></td><td>병역제도 개편이 남성 중심 설계로 흐르지 않도록 '젠더 감사(gender audit)'를 거쳐야 한다고 주문. 여성 복무 확대·여성징병 논의를 회피하지 말 것을 요구.</td><td><a href="https://www.womennews.co.kr/news/articleView.html?idxno=279191">열기</a></td></tr>
+      <tr><td><b>BBC코리아</b><br><span style="font-size:12px;color:var(--muted)">심층 분석</span></td><td class="num">2026.07.10</td><td><span class="pill neu">분석</span></td><td>부사관 충원율 42%, 임관 1,470 vs 전역 4,917 등 데이터로 '모병이 가능한가'를 검증. 여성징병·통합사관학교 논쟁, 한기호("지금도 부사관 갈 수 있다") vs 김병주("돈만이 아니라 기술을 가르친다") 대립을 정리.</td><td><a href="https://v.daum.net/v/yUpUoLTsXy">열기</a></td></tr>
+      <tr><td><b>김세진 · 펜앤마이크</b><br><span style="font-size:12px;color:var(--muted)">칼럼</span></td><td class="num">2026 <span style="color:var(--muted)">(정확한 일자 미확인)</span></td><td><span class="pill con">비판</span></td><td>장기 모병 인력에 월 300만 원을 보장하면 연 4조 원 이상 추가 예산이 필요하며, 재원 대책 없는 발표는 무책임하다는 논지.</td><td><a href="https://www.pennmike.com/news/articleView.html?idxno=118447">열기</a></td></tr>
+      <tr><td><b>서강학보 · 황예지</b><br><span style="font-size:12px;color:var(--muted)">"선택적 모병제, 병력난 속 해답 될까"</span></td><td class="num">2025.08.24</td><td><span class="pill neu">분석</span></td><td>대학언론의 기획 기사. 전역자 인터뷰("알바만 해도 250만 원")와 최기일·윤형호·최병욱 교수 인터뷰로 "처우 선행 없는 모병은 공허하다"는 결론. 병장 봉급 105% 인상 vs 하사 12.9% 인상 대비가 핵심 데이터.</td><td><a href="https://sgunews.sogang.ac.kr/front/cmsboardview.do?siteId=sgunews&bbsConfigFK=3614&pkid=926124">열기</a></td></tr>
+      <tr><td><b>뉴스투데이 · 이상호</b><br><span style="font-size:12px;color:var(--muted)">"젊은 남성들, 이제 모두 군대로 모인다"</span></td><td class="num">2026.08.12</td><td><span class="pill con">비판</span></td><td>병무청의 입영면제연령 43세 상향·예체능 면제 축소 방침이 '스마트 강군·선택적 모병제'라는 국정기조와 충돌한다는 청년단체 칼럼을 인용. "현대전은 징집률로 이기는 전쟁이 아니다."</td><td><a href="https://www.news2day.co.kr/article/20260812500180">열기</a></td></tr>
+      <tr><td><b>코리아헤럴드</b><br><span style="font-size:12px;color:var(--muted)">"Military duty persists as axis of gender conflict"</span></td><td class="num">2026.04.27</td><td><span class="pill neu">분석</span></td><td>병역이 여전히 한국 젠더 갈등의 축임을 30대 남성 인터뷰와 국민통합위 조사(2030 남성 71% 군 가산점 부활 찬성)로 보여준 영문 기획.</td><td><a href="https://www.koreaherald.com/article/10726406">열기</a></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="s6">
+  <div class="sec-no">SECTION 06</div>
+  <h2>여론조사 종합 (2016 → 2026)</h2>
+  <p class="lead">10년 사이 모병제 찬성은 35%(2016 갤럽)에서 45~47%대(2026)로 올랐다. 다만 문항이 기관·시기별로 '전면 모병제'와 '선택적 모병제'로 갈리므로 단순 시계열 비교에는 한계가 있다. 문항 차이를 감안해도 2026년 들어 '정책 대상인 2030'과 '나머지 세대'의 간극은 조사마다 일관되게 나타난다.</p>
+
+  <h3>세대별 선택적 모병제 찬반 — 개혁연구원 (2026.8.18, n=1,006, ARS, ±3.2%p)</h3>
+  <div class="legend"><i style="background:var(--pro)"></i>찬성 <i style="background:var(--con)"></i>반대</div>
+  <div class="bars">
+    <div class="bar"><div class="lab">18~29세</div><div class="trk"><div class="f1" style="width:35.8%"></div><div class="f2" style="width:55.3%"></div></div><div class="v">35.8 / 55.3</div></div>
+    <div class="bar"><div class="lab">30대</div><div class="trk"><div class="f1" style="width:36.7%"></div><div class="f2" style="width:57.2%"></div></div><div class="v">36.7 / 57.2</div></div>
+    <div class="bar"><div class="lab">40대</div><div class="trk"><div class="f1" style="width:51.9%"></div><div class="f2" style="width:40%"></div></div><div class="v">51.9 / ≈40</div></div>
+    <div class="bar"><div class="lab">50대</div><div class="trk"><div class="f1" style="width:57.4%"></div><div class="f2" style="width:35%"></div></div><div class="v">57.4 / ≈35</div></div>
+    <div class="bar"><div class="lab">60대</div><div class="trk"><div class="f1" style="width:52.9%"></div><div class="f2" style="width:38%"></div></div><div class="v">52.9 / ≈38</div></div>
+    <div class="bar"><div class="lab"><b>전체</b></div><div class="trk"><div class="f1" style="width:47.4%"></div><div class="f2" style="width:41.9%"></div></div><div class="v"><b>47.4 / 41.9</b></div></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted)">40대 이상 반대 수치는 보도에서 명시되지 않아 근사치(≈)로 표시. '매우 반대': 18~29세 41.1%, 30대 41.2%, 40대 25.4%, 50대 20.3%. 2030 남성 '매우 반대' 40.8% vs 2030 여성 41.9%. <b>표본 1,006명 확정</b>(6개 매체 일치, 경기일보의 1,600명은 오기 — n=1,006의 95% 신뢰수준 오차는 ±3.1%p로 보도된 ±3.2%p와 부합하나, 1,600명이면 ±2.5%p여야 한다). 무선 RDD 100% ARS, 응답률 2.30%. 사회현안조사라 선관위 등록 대상이 아니어서 1차 원자료는 공개되지 않았다. 정당 싱크탱크 자체조사·ARS라는 한계는 칼럼 인용 시 명시해야 한다.</p>
+
+  <h3>NBS 전국지표조사 제183호 원자료 (2026.6.29~7.1, n=1,000, 전화면접 CATI, 응답률 20.0%, ±3.1%p)</h3>
+  <p>엠브레인퍼블릭·케이스탯·코리아리서치·한국리서치 공동. 문항: "병사 봉급을 인상하고 자원자로만 군대를 구성하는 모병제 도입"에 대한 찬반. 개혁연구원 조사(ARS)보다 방법론상 신뢰도가 높은 전화면접 조사로, <b>20대 반대 과반이 조사 기관·방식이 달라도 같은 방향으로 나타난다</b>는 점이 중요하다. 다만 문항이 '자원자로만 구성하는 <u>전면</u> 모병제'여서 정부안(선택적 모병제)과 대상이 다르므로, 두 조사는 '동일 결과의 재현'이 아니라 '서로 다른 문항에서 확인된 같은 방향'으로 읽어야 한다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>구분</th><th>찬성</th><th>반대</th><th>모름</th></tr></thead>
+    <tbody>
+      <tr><td><b>전체</b> (1,000)</td><td class="num">45</td><td class="num">44</td><td class="num">11</td></tr>
+      <tr><td>남성 (495)</td><td class="num">46</td><td class="num"><b>50</b></td><td class="num">4</td></tr>
+      <tr><td>여성 (505)</td><td class="num">43</td><td class="num">39</td><td class="num">18</td></tr>
+      <tr><td><b>18~29세</b> (145)</td><td class="num">36</td><td class="num"><b>52</b></td><td class="num">12</td></tr>
+      <tr><td><b>30대</b> (153)</td><td class="num">39</td><td class="num"><b>52</b></td><td class="num">9</td></tr>
+      <tr><td>40대</td><td class="num">53</td><td class="num">38</td><td class="num">9</td></tr>
+      <tr><td>50대</td><td class="num">53</td><td class="num">38</td><td class="num">9</td></tr>
+      <tr><td>60대</td><td class="num">45</td><td class="num">43</td><td class="num">12</td></tr>
+      <tr><td>70세 이상</td><td class="num">40</td><td class="num">44</td><td class="num">17</td></tr>
+      <tr><td>진보 / 중도 / 보수</td><td class="num">67 / 48 / 24</td><td class="num">26 / 43 / 69</td><td class="num">—</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:13px;color:var(--muted)">출처: nbsurvey.kr 제183차 결과 통계표 [표 6]. 성별×연령 교차표는 원 보고서에 수록되지 않았다. 동일 문항은 99·125·158차(2025.6)에도 조사돼 시계열 비교가 가능하다. 복무기간 문항: "적정" 60%(20대 75%), "늘려야" 29%(남성 40%·여성 19%), "줄여야" 6%.</p>
+  <p>두 조사를 겹쳐 읽으면 구조가 보인다. NBS에서 이념 축(진보 67% 찬성 vs 보수 24%)과 세대 축(2030 반대 52%)이 <b>서로 다른 방향</b>을 가리킨다. 2030은 상대적으로 진보 성향이 강한 집단인데도 반대가 과반이므로, 이념만으로는 2030의 반대를 설명할 수 없다는 것까지는 말할 수 있다.</p>
+  <div class="caveat"><b>추론의 한계.</b> 여기서 "20대 진보층조차 반대한다"고 단정하면 <b>생태학적 오류</b>(집단 수준 분포에서 개인 수준 관계를 추론하는 오류)가 된다. NBS 원 통계표에는 이념×연령, 성별×연령 교차표가 없어 검증이 불가능하다. 정확한 진술은 "2030의 반대는 이념 변수만으로 설명되지 않으며, 세대 고유 요인이 작동하고 있을 가능성이 크다"까지다. 칼럼에서 이 대목을 쓸 때는 단정형을 피해야 한다. 검증하려면 국방위 의원실을 통해 조사기관에 교차표를 요청하는 방법이 있다.</div>
+
+  <div class="tbl"><table>
+    <thead><tr><th>시기</th><th>기관</th><th>결과</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2016</td><td>한국갤럽</td><td>모병제 35% vs 징병제 48%</td></tr>
+      <tr><td class="num">2021.05</td><td>한국갤럽 (n=1,003)</td><td>모병제 전환 43% vs 징병제 유지 42%. 40·50대 찬성 54%, 18~29세 47%, 60대+ 유지 51%. 여성징병: 남성만 47% vs 남녀 모두 46%</td></tr>
+      <tr><td class="num">2019.11.08</td><td>리얼미터 (CBS 의뢰, n=501, ARS+전화면접, ±4.4%p)</td><td>'월급 300만 원 모병제' 반대 52.5% vs 찬성 33.3%. 남성 찬성 38.2%·반대 55.4%. 30·40대·진보층 찬성 우위, 20대·50대·60대+ 반대 우위. 민주연구원 '모병제 전환' 보고서 논란 직후 조사. <span style="color:var(--muted)">(기존 '2021~22년' 표기는 오류 — 정정)</span></td></tr>
+      <tr><td class="num">2025.05</td><td>한국리서치·한국일보 (n=3,000)</td><td>선택적 모병제 찬성 <b>71%</b>(16개 공약 중 공동 1위). 단 18~29세 남성 <b>54%</b>로 최저 — "겨냥한 집단에서 오히려 덜 먹힌다"</td></tr>
+      <tr><td class="num">2025</td><td>국민통합위</td><td>2030 남성 71% "군 가산점 부활 필요"</td></tr>
+      <tr><td class="num">2026.06.29~07.01</td><td>NBS 전국지표조사 (n=1,000, 전화면접)</td><td>모병제 도입 찬성 45% vs 반대 44%. <b>20대·30대 반대 각 52%</b>, 40·50대 찬성 53%. 남성 반대 50% vs 여성 39%. 복무기간 "적정" 60%(20대 75%), "늘려야" 29%, "줄여야" 6%</td></tr>
+      <tr><td class="num">2026.08.18</td><td>개혁연구원 (개혁신당)</td><td>찬성 47.4% vs 반대 41.9%. 충원에 "도움 안 됨" 49.9% > "도움" 42.7%. 향후 방향: 병행 41.5%, 현행 유지 35.4%, 전면 모병 10.6% — <b>20대는 '현행 징병제 유지' 48.3%로 1위</b>. <b>여성징병 찬성 59.6%</b>(남 64.8%, 여 54.5%, 2030 남성 71.7%)</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>청년층 대통령 지지율 (정책 배경)</h3>
+  <div class="tiles">
+    <div class="tile con"><div class="n">31<small>%</small></div><div class="l">20대 이하 긍정 — 한국갤럽 2026.8</div></div>
+    <div class="tile con"><div class="n">27.9<small>%</small></div><div class="l">20대 긍정 — 리얼미터 8.3~7</div></div>
+    <div class="tile con"><div class="n">−18.8<small>%p</small></div><div class="l">20대 전주 대비 급락 — 미디어토마토 8.3~4 (33.9%)</div></div>
+    <div class="tile"><div class="n">49<small>%</small></div><div class="l">전체 긍정, 취임 후 최저 — 갤럽 8월</div></div>
+  </div>
+  <p>여권 관계자는 8.13 지시에 대해 "관통하는 키워드는 결국 청년… 청년층 이탈을 의식한 종합 메시지"(데일리안)라고 설명했고, 야당은 이를 '포퓰리즘'으로 공격했다. 정책의 정당성과 별개로 발표 타이밍이 '지지율 대응'으로 읽히는 구조다.</p>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="s7">
+  <div class="sec-no">SECTION 07</div>
+  <h2>당사자 20대의 목소리</h2>
+  <p class="lead">기성 언론의 20대 심층 인터뷰는 드물다. 그 공백 자체가 "당사자가 빠진 설계"라는 비판의 근거가 된다. 아래는 확인 가능한 언론 인용, 대학언론, 포털 댓글 빅데이터, 입영 대기자·현역 밀집 커뮤니티(디시 공군·육군·해군·ROTC·부사관 갤러리)에서 수집한 직접 발언이다.</p>
+
+  <div class="caveat"><b>자료 성격.</b> 커뮤니티 게시글은 표본 대표성이 없고 익명이다. 다만 '입영을 앞둔 18~22세 남성'이 실시간으로 제도를 어떻게 해석하는지 보여주는 유일한 1차 자료이므로, 칼럼에서는 "온라인 커뮤니티에서는 ~라는 반응이 많다" 수준으로 인용하고 개별 게시글을 직접 인용하는 것은 피하는 편이 안전하다.</div>
+
+  <h3>언론·대학언론에 실린 당사자 발언</h3>
+  <div class="qgrid">
+    <div class="q con"><div class="who"><span class="name">청년 A씨 (26세, 2022년 전역)</span><span class="role">서강학보 「선택적 모병제, 병력난 속 해답 될까」</span><span class="date">2025.08.24</span></div><p class="txt">최저임금으로 사회에서 자유롭게 알바만 해도 250만 원까지는 번다.</p><div class="ctx">같은 기사: 3년간 병장 봉급 105% 인상 vs 하사 1호봉 12.9% 인상 — 장기복무 유인 부족 지적. <a href="https://sgunews.sogang.ac.kr/front/cmsboardview.do?siteId=sgunews&bbsConfigFK=3614&pkid=926124">기사 원문 →</a></div></div>
+    <div class="q con"><div class="who"><span class="name">30대 남성 (익명)</span><span class="role">코리아헤럴드 「Military duty persists as axis of gender conflict」</span><span class="date">2026.04.27</span></div><p class="txt">인생의 거의 2년을 잃은 기분이다. 여자 친구들이 커리어를 쌓는 동안 나는 군복을 입고 있었다. 그 시간이 사회에서 인정받지 못한다면 대체 무엇을 위한 것이었나.</p><div class="ctx">원문: "I feel like I lost nearly two years of my life… If that time isn't recognized in society, what was it for?" <a href="https://www.koreaherald.com/article/10726406">기사 원문 →</a></div></div>
+    <div class="q con"><div class="who"><span class="name">익명 청년단체 간부</span><span class="role">뉴스투데이 이상호 기자 인용 칼럼</span><span class="date">2026.08.12</span></div><p class="txt">이재명 대통령은 대선에서 스마트 강군과 선택적 모병제를 공약했다. 정예화와 기술군으로 방향을 잡았는데도 병무청은 반대편으로 뛰고 있다. 현대전은 징집률로 이기는 전쟁이 아니다.</p><div class="ctx">병무청의 입영면제연령 43세 상향·예체능 면제 축소 방침에 대한 반발. 단체명 미확인. <a href="https://www.news2day.co.kr/article/20260812500180">기사 원문 →</a></div></div>
+    <div class="q neu"><div class="who"><span class="name">김형남</span><span class="role">정치싱크탱크 발리드 공동대표 · 이데일리</span><span class="date">2026.06.25</span></div><p class="txt">나와 상관없는 얘기만 하는데 투표장에 나갈까요?</p><div class="ctx">병역 논의가 "왜 여성은 군대를 가지 않느냐" 수준에 머물러 2030이 투표 이유를 잃었다는 취지. <a href="https://www.edaily.co.kr/news/newspath.asp?newsid=05221766645485328">기사 원문 →</a></div></div>
+  </div>
+
+  <h3>포털 댓글 빅데이터 — 빅터뉴스 (8.13~20, 기사 327건 · 댓글 11,462개)</h3>
+  <p>네이버 감성 1위 '쏠쏠정보' 31.2%, 다음 1위 '화나요' 22.8%. 공감 상위 댓글은 다음과 같다. <a href="https://www.bigtanews.co.kr/article/view/big202608200017">분석 기사 원문 →</a></p>
+  <div class="two">
+    <div class="card con"><h4>네이버 · 연합뉴스 8.13 기사 (댓글 912개) 공감순</h4><ul>
+      <li>"모병제 반대"</li>
+      <li>"모병제와 장교 부사관 모집과 뭐가 다르지? 아무리 봐도 똑같은데"</li>
+      <li>"선택적 모병제 진짜 이제는 군까지 갈라치기 하려는 거냐"</li>
+      <li>"모병제가 강군이냐?"</li>
+    </ul></div>
+    <div class="card con"><h4>다음 · 서울경제 8.13 기사 추천순</h4><ul>
+      <li>"군대도 안 가본 사람이 뭘 안다고?" (163)</li>
+      <li>"미쳐 돌아가는구나" (114)</li>
+      <li>"기사도 처 읽지도 않고 댓글 다네, 하사관들 처우개선이잖아" (85)</li>
+      <li>"모병하기 전에 현재 있는 군인들한테 제대로 된 대우를 해줘라" (66)</li>
+    </ul></div>
+  </div>
+
+  <h3>입영 대기자·현역 커뮤니티의 논점 (디시 공군·육군·해군·ROTC·부사관 갤러리, 2025.4~2026.8)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>논점</th><th>대표 발언 (원문 표기)</th><th>해석</th></tr></thead>
+    <tbody>
+      <tr><td><b>"18개월 그대로면 뭐가 바뀌냐"</b></td><td>"단기징집병은 18개월 유지하고, 장기 4~5년 병사를 모병한다고 여당 의원들이 말했음. 니들 군생활 바뀌는 거 아예 없는데 뭔 희망회로를 굴리는 거임"(공군갤 8.13, 추천 34) / "지금처럼 18개월 or 부사관으로 5년 복무 중에 선택하는 거라 선택적 모병제라고 말장난 하는 거 아님?" / "선택적 징병제라고 해야지 선택적 모병제는 전혀 모병이 아님, 언론플레이지"(8.20)</td><td>명칭에 대한 냉소. 가장 많은 추천</td></tr>
+      <tr><td><b>'10개월 vs 18개월' 진위 공방</b></td><td>"김병주 의원 인터뷰 할 때마다 18개월이라고 말했음" vs "이재명은 10개월이라 말했는데 누가 더 권력이 쎈데" / "문재인 때 예정 없다고 말하다가 2개월 후에 기습적으로 복무단축했잖아"</td><td>공약 단계 보도와 정부안의 괴리가 불신으로</td></tr>
+      <tr><td><b>입영 연기('존버') 현상</b></td><td>"내년 초 입대할 생각인데 일단 미루는 게 맞음?" / "08인데 원래 내년에 입대하려다가 2~3년 기다려볼까 고민 중" / "내년 8월쯤에 박아놓고 대기타는 건? 한 달 전까지 입대 취소 가능하니까"</td><td>제도 불확실성이 실제 입영 행태에 영향</td></tr>
+      <tr><td><b>현역·최근 전역자 박탈감</b></td><td>"최근에 입대한 현역들을 개호구로 보는구나" / "올해 말이나 내년 초에 전역하는 사람들이 제일 불쌍하네" / "상식적으로 현역의 복무단축이 없는 선택적 모병제를 하겠냐고"</td><td>'먼저 다녀온 세대' 보상 문제</td></tr>
+      <tr><td><b>처우·안전 선행 요구</b></td><td>"5년 모병을 택하는 사람들이 충분히 나오느냐가 문제지.. 지금도 부사관 모자른데.. 누가 지원함?" / "다치면 느그 아들을 해결해주지 않으면 의미 없음… 완치될 때까지 지원하라"(해군갤 8.17) / "내년까지 월급 동결임?"(7.29)</td><td>유인 부족·상해 보장 불신</td></tr>
+      <tr><td><b>형평('가난한 사람만')</b></td><td>"모병제 해봐라 결국 못사는 집 자식들만 군대 가고 부잣집 자제들은 다 안 간다"(루리웹, 추천 11) vs "돈 없어서 군입대하는 거보다 돈 많아 군대 빼는 게 더 많다고"(부사관갤)</td><td>찬반 양쪽 모두 '형평' 프레임</td></tr>
+      <tr><td><b>초급간부(ROTC) 시각</b></td><td>"초급간부 처우개선안대로면 소위 하사 연봉 4천까지 올린다는데 그 정도면 지금보다 장교 경쟁력이 있을 거라 생각함" / "직업군인 개선 안 해주면 무조건 10개월 함 사람들은" / "28개월 ROTC도 안 하는데 병사 36개월은 뭔"</td><td>장교·부사관 간 상대적 매력도 재편 우려</td></tr>
+      <tr><td><b>여성징병 대안론</b></td><td>"현상유지라도 하던가 여성도 징집대상에 포함시키던가 해야지"(실베 6.25) / "여성징병이 현실성 없고 간부 정예화하는 게 돌파구일지도"(ROTC갤)</td><td>2030 남성 여성징병 찬성 71.7%와 일치</td></tr>
+      <tr><td><b>'군 생활 낭비' 발언 반응</b></td><td>"군생활 낭비라고 생각하는 것 또한 유구한 전통… 처우개선하겠다는 맥락에서 나온 표현인데 그 단어 하나에 집착"(ROTC갤 8.13)</td><td>대통령 8.13 발언 중 일부는 긍정 수용</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="key">
+    <div class="t">20대 담론의 구조 — 칼럼이 짚어야 할 것</div>
+    <p>첫째, 20대의 관심은 '형평'이라는 추상보다 <b>"내 복무기간이 줄어드느냐"</b>는 구체다. 정부안이 그 질문에 '아니오'라고 답하는 순간 제도는 '나와 무관한 부사관 모집'으로 재분류됐다.</p>
+    <p>둘째, '매우 반대' 41%에 남녀 차이가 없다는 것은 이 반대가 젠더 갈등이 아니라 <b>세대 전체의 제도 불신</b>이라는 뜻이다. 20대 여성도 "가난한 사람만 장기복무"·"지지율용"이라는 프레임에 동의하고 있다.</p>
+    <p>셋째, 2030 남성의 여성징병 찬성 71.7%와 '현행 징병제 유지' 48.3%는 모순이 아니다. <b>"바꿀 거면 모두에게 공정하게, 아니면 차라리 그대로"</b>라는 하나의 요구다.</p>
+    <p>넷째, 현역·최근 전역자의 "호구" 정서는 어떤 제도 변화에도 따라붙는 비용이다. 이두걸(서울신문)이 제안한 '한국형 G.I. Bill'처럼 <b>이미 복무한 세대에 대한 소급 보상 설계</b>가 없으면 제도는 세대 내 갈등을 낳는다.</p>
+  </div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="s8">
+  <div class="sec-no">SECTION 08</div>
+  <h2>병역자원·예산 데이터</h2>
+  <p class="lead">논쟁의 출발점은 숫자다. 인구는 줄고, 간부는 안 들어오고, 병 봉급은 올랐지만 간부 봉급은 상대적으로 정체됐다.</p>
+
+  <h3>상비병력과 20세 남성 인구</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>연도</th><th>상비병력</th><th>20세 남성 인구</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td class="num">2012</td><td class="num">63.9만</td><td class="num">—</td><td>국방백서 (육군 50.6만)</td></tr>
+      <tr><td class="num">2019</td><td class="num">56만</td><td class="num">—</td><td>현역판정률 69.8%</td></tr>
+      <tr><td class="num">2020</td><td class="num">—</td><td class="num">33.0만</td><td></td></tr>
+      <tr><td class="num">2022</td><td class="num">50만</td><td class="num">—</td><td>국방개혁 2.0 목표 달성</td></tr>
+      <tr><td class="num">2023</td><td class="num">47.7만</td><td class="num">25.5만</td><td>TFR 0.72 (역대 최저)</td></tr>
+      <tr><td class="num">2025</td><td class="num">45만 (7월)</td><td class="num">22.5~23만</td><td>현역판정률 86.7%. 출생아 254,500명(+6.8%), TFR 0.80</td></tr>
+      <tr><td class="num">2030</td><td class="num">—</td><td class="num">24.4만</td><td>일시 반등</td></tr>
+      <tr><td class="num">2035</td><td class="num">—</td><td class="num">22.8만</td><td></td></tr>
+      <tr><td class="num">2038</td><td class="num">39.6만 (KIDA 전망)</td><td class="num">—</td><td>간부 20만 &gt; 병 19.6만 역전</td></tr>
+      <tr><td class="num">2040</td><td class="num">35.5~36.3만 (전망)</td><td class="num">14.2만</td><td>정부 목표: 현역 35만 + 군무원·아웃소싱 15만</td></tr>
+      <tr><td class="num">2042</td><td class="num">—</td><td class="num">12만</td><td></td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:13px;color:var(--muted)">출처: 국방부 자료(추미애 의원실), 헤럴드경제 2025.8; 통계청 장래인구추계(한국일보 2023.6, 세계일보 2024.7); KIDA(서울경제); 통계청 2025년 출생·사망통계 잠정(아시아경제 2026.2.25). 사단급 이상 부대 2006년 59개 → 42개. 육군 병 2019년 30만 → 현재 20만.</p>
+
+  <h3>간부 충원과 이탈</h3>
+  <div class="tiles">
+    <div class="tile con"><div class="n">42<small>%</small></div><div class="l">육군 부사관 충원율 2024 (8,100명 중 3,400명) · 2020년 95%</div></div>
+    <div class="tile con"><div class="n">55<small>%</small></div><div class="l">해군 부사관 충원율 · 2020년 90%</div><div class="d">세계일보 2024.7</div></div>
+    <div class="tile con"><div class="n">1,470 <small>vs</small> 4,917</div><div class="l">2025년 부사관 임관 vs 전역</div><div class="d">경향신문 2026.7.9</div></div>
+    <div class="tile con"><div class="n">1.6~2.1<small>:1</small></div><div class="l">ROTC 경쟁률 2023~25 (2015년 4.8:1) · 108개 학군단 중 절반 정원 미달</div><div class="d">아시아투데이 2026.7.27</div></div>
+    <div class="tile con"><div class="n">2,480<small>명</small></div><div class="l">육군 부사관 연간 희망전역 2024 (2020년 1,147)</div><div class="d">뉴시안 2025 국감</div></div>
+    <div class="tile"><div class="n">87.5<small>%</small></div><div class="l">병 충원율 2023 (해군 70.5%, 해병 76.8%)</div><div class="d">세계일보 2024.7</div></div>
+  </div>
+
+  <h3>보수와 예산</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>항목</th><th>수치</th><th>출처</th></tr></thead>
+    <tbody>
+      <tr><td>병장 월 보수 추이</td><td class="num">2022년 81만 → 2023년 100만 → 2024년 125만 → 2025년 150만 + 지원금 55만 = 205만 → 2026년 동결</td><td>국방중기계획, 2026 예산안</td></tr>
+      <tr><td>이병 봉급</td><td class="num">75만 원 (2025·26)</td><td>2026 예산안</td></tr>
+      <tr><td>하사 1호봉</td><td class="num">기본급 약 193만, 수당 포함 240~280만 → 2027년 300만</td><td>경향 2023.12, 머니투데이 2026.6</td></tr>
+      <tr><td>2026년 최저임금 환산 월급</td><td class="num">약 250만 원대 (청년 A씨 발언 기준)</td><td>서강학보</td></tr>
+      <tr><td>국방예산</td><td class="num">2024년 59.4조 → 2025년 61.6조(+3.6%) → 2026년 65.9조(+7.5%; 전력운영 45.9조, 방위력개선 20.0조)</td><td>국회 확정, 한국일보 2025.12</td></tr>
+      <tr><td>인건비·급여정책 (국방부 공식)</td><td class="num">2025년 18조 8,134억(국방비의 30.7%) → 2026년 19조 2,347억(29.2%, +2.2%). 병력운영비는 25.4조 → 26.3조. 연금기금 전출금 4.0조 → 4.5조 별도</td><td>국방부 2026 예산 확정 보도자료 2025.12.3 <span style="color:var(--muted)">(기존 '22.8조·37%'는 칼럼 인용치로, 연금·급식 등을 합산한 수치 — 공식 항목으로 정정)</span></td></tr>
+      <tr><td>병 인건비 (봉급+내일준비지원금)</td><td class="num">2024년 4조 2,846억 → 2025년 5조 1,013억(+19.1%). 2026년은 동결로 유사 수준</td><td>기재부 2025 예산안 2024.8.27 (서울신문·한국경제)</td></tr>
+      <tr><td>국방비 GDP 비중 목표</td><td class="num">3.5% (이 대통령 2026.6.24)</td><td>경향</td></tr>
+      <tr><td>예비군</td><td class="num">약 275만 명</td><td>중앙일보 위드뉴스(car.withnews.kr) 2025 <span style="color:var(--muted)">— 국방부 공식 통계 재확인 필요</span></td></tr>
+      <tr><td>2027년 병장 165만 원 인상설</td><td class="num">공식 계획 아님. '165만 원'은 2024년 수치(125만+40만). 국방중기계획(2023~27, 2024~28) 모두 2025년 205만 원이 최종 목표이며 2026년 이후 병 봉급 로드맵은 없음</td><td>국방중기계획(뉴스핌 2023.12.12), 한국경제 2023.8.29 <span style="color:var(--muted)">(단일 블로그 매체 오기 확인 — 삭제)</span></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>보충역·대체복무 인원 (병무청 2024 병무통계연보 및 2025~26 발표)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>구분</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th></tr></thead>
+    <tbody>
+      <tr><td>상근예비역 입영 (계획/실입영)</td><td class="num">5,277 / 5,737</td><td class="num">6,015 / 5,907</td><td class="num"><b>2,047 / 2,324</b></td><td class="num">미공개</td><td class="num">미공개</td></tr>
+      <tr><td>사회복무요원 소집 (계획/실소집)</td><td class="num">30,212 / 30,512</td><td class="num">29,581 / 29,991</td><td class="num">28,521 / 27,199</td><td class="num">실소집 <b>24,129</b> (−11.3%)</td><td class="num">미공개</td></tr>
+      <tr><td>전문연구요원 배정</td><td class="num">—</td><td class="num">—</td><td class="num">2,300 (편입 1,350)</td><td class="num">2,300</td><td class="num">2,300</td></tr>
+      <tr><td>산업기능요원 배정</td><td class="num">—</td><td class="num">—</td><td class="num">3,200 (편입 2,236)</td><td class="num">3,200</td><td class="num">3,200</td></tr>
+      <tr><td>승선근무예비역 배정</td><td class="num">—</td><td class="num">—</td><td class="num">1,000 (편입 855)</td><td class="num">1,000</td><td class="num">800</td></tr>
+      <tr><td>산업지원인력 복무 인원 합계</td><td class="num">28,385</td><td class="num">24,381</td><td class="num">20,441</td><td class="num">—</td><td class="num">—</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:13px;color:var(--muted)">출처: <a href="https://mma.go.kr/download/ebook/2024_bmtgyb_1.pdf">2024 병무통계연보</a>(2024.12.31 기준), 한국경제 2026.3.25, 정책브리핑 2025.12.30. 2024년 상근예비역 급감은 대대급 상근 신규 미선발 정책 반영. 2025년 장기대기 전시근로역 처분 12,080명. 2025년 상근예비역 입영, 2026년 사회복무 소집 계획은 병무청 미공개.</p>
+  <p>보충역 축소는 현역 충원을 위해 이미 진행 중인 '조용한 구조조정'이다. 현역판정률을 69.8%→86.7%로 올리고 상근예비역을 5천 명대에서 2천 명대로 줄였음에도 상비병력이 45만으로 떨어졌다는 사실은, 보충역 전환만으로는 더 이상 병력을 지킬 수 없는 한계점에 왔음을 보여준다. 선택적 모병제 논의는 이 한계점에서 출발한다.</p>
+  <p>병장 봉급이 3년간 두 배 이상 오르는 동안 하사 봉급은 10%대 인상에 그쳤다. 하사 초봉 280만 원과 병장 205만 원의 격차가 75만 원에 불과한 구조에서 "18개월 하고 나가지, 누가 5년을 하느냐"는 반응은 합리적 계산의 결과다. 정부가 하사 300만 원·연봉 4천만 원대를 약속한 것은 이 역전 구조를 인지했다는 뜻이지만, 청년 A씨의 "알바로 250만 원"이라는 비교 기준을 넘어서는지가 관건이다.</p>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="s9">
+  <div class="sec-no">SECTION 09</div>
+  <h2>해외 사례 — 회귀국과 비교국의 실패 원인 분석</h2>
+  <p class="lead">2010년대 이후 유럽과 대만은 '모병제의 충원 실패'와 '안보 위협 증가'라는 두 이유로 징병을 되살렸다. 한국 정부안은 이 흐름 위에서 '징병 유지 + 장기 지원병 확대'를 택한 것이므로, 해외 사례는 찬반 양쪽 모두의 근거가 된다.</p>
+
+  <h3>분석 틀 — 군 인력 충원의 네 변수</h3>
+  <p>개별 국가의 성패를 나열하기 전에, 모병제가 작동하기 위한 조건을 네 변수로 정리한다. 이 틀은 1970년 미국 게이츠위원회(Gates Commission)가 제시한 '군 노동시장' 접근(RAND 회고 2023 경유), 국회입법조사처의 유럽 모병제 도입·징병제 재도입 비교분석, 스웨덴 징병 재도입 연구(Strand, <i>Armed Forces &amp; Society</i>, 2024)를 <b>필자가 재구성</b>한 것으로, 확립된 표준 분석틀은 아니다.</p>
+  <div class="two">
+    <div class="card"><h4>① 공급 — 유보임금(reservation wage)과 인구 풀</h4><ul>
+      <li>청년이 군 복무를 선택하는 최소 보수 = 민간 대체 임금 + 복무의 비금전적 비용(구속·위험·지방 근무)에 대한 프리미엄.</li>
+      <li>성공 사례의 공통 기준: <b>최저임금의 1.4배 이상 또는 대졸 초임 수준</b>(독일 €2,600, 대만 NT$41,000, 미국 E-4 $3,300+G.I. Bill).</li>
+      <li>인구 풀이 작을수록 같은 충원율에 더 높은 보수가 필요하다. KIDA 추계: 모병으로 30만 유지 시 20세 남성 10%가 12년 복무해야 — 이는 공급 곡선이 수직에 가깝다는 뜻.</li>
+    </ul></div>
+    <div class="card"><h4>② 선발 메커니즘 — 누가 고르는가</h4><ul>
+      <li><b>국가 선발형</b>(스웨덴·노르웨이): 전원 설문 → 적성·동기 기반 상위 7~16% 선발. 입대가 '경쟁'이 되어 낙인이 사라지고 여성 비율이 자연 상승.</li>
+      <li><b>개인 선택형</b>(한국 정부안·대만 혼합제): 개인이 단기/장기를 고름. 보수가 낮으면 유보임금이 낮은 집단(저소득·저학력)만 장기를 택하는 <b>역선택(adverse selection)</b>이 구조적으로 발생.</li>
+      <li>따라서 '빈자의 군대' 우려는 도덕 논쟁이 아니라 <b>선발 설계의 귀결</b>이며, 주로 보수 인상과 선발 경쟁 확보로 완화되며, 전공 무관 교육 트랙 같은 보완 장치가 함께 필요하다.</li>
+    </ul></div>
+    <div class="card"><h4>③ 동원 인프라 — 징병이 남기는 것</h4><ul>
+      <li>징병제는 병력뿐 아니라 신검·등록·훈련소·예비군이라는 <b>동원 인프라</b>를 유지한다. 독일·스웨덴·프랑스는 징병 폐지 10~15년 만에 이 인프라가 사라져 재건에 상당한 비용과 시간을 들이고 있다(독일은 2027년까지 24개 검사센터 신설, 프랑스는 2026~30년 €23억 중 €14억이 인프라). 폐지 당시 절감액과의 정확한 비교는 공개 자료로 확인되지 않는다.</li>
+      <li>한국은 예비군 275만·병무청 체계가 살아 있어 이 변수에서만 유리하다. 정부안이 '개병제 유지'를 고수하는 실질적 이유.</li>
+    </ul></div>
+    <div class="card"><h4>④ 전환 속도 — 정치 일정 vs 충원 지표</h4><ul>
+      <li>대만은 충원 목표를 못 채웠는데도 선거 일정에 맞춰 전환을 강행해 2015 연기 → 2018 강행 → 2022 철회를 반복했다.</li>
+      <li>성공적 전환은 <b>'지표 연동형'</b>: 독일은 자원 충원 실적을 매년 의회에 보고하고 부족 시 징병 발동, 프랑스는 3,000 → 1만 → 5만이라는 단계 목표를 대통령 발표와 국방계획법 논의에 담았다(2025.11 발표 단계로, 최종 법제화 여부는 확인 필요).</li>
+      <li>한국의 "연내 발표·2027년 시행·3천 명"은 첫 단계로는 적절하나, 이후 단계를 지표(충원율·이탈률)에 연동하는 장치가 없다.</li>
+    </ul></div>
+  </div>
+  <p>이 네 변수로 보면, 모병제 실패국은 예외 없이 ①(보수 부족 또는 인구 풀 축소)과 ③(인프라 상실)을 동시에 겪었고, 대만은 ④까지 겹쳤다. 한국 정부안은 ③을 지키면서 ①·②·④에서 취약하다. 아래 국가별 분석은 이 틀에 따라 읽는다.</p>
+
+  <div class="cc">
+    <div class="card"><div class="flag">Taiwan · 가장 직접적인 비교 대상</div><div class="name">대만</div><div class="verdict"><span class="pill con">모병제 실패 → 징병 부활</span></div>
+      <p><b>경과</b> 2013년 4개월 훈련 도입 → 2018년 말 1년 의무복무 종료(모병제) → 2022.12 전환 철회 → 2024.1.1 1년 복무 부활(2005년생부터).</p>
+      <p><b>실패 원인</b> 2015년 '처참한 모집실적'으로 전환 1차 연기. 지원병 2021년 164,884 → 2024년 152,885명(−1.2만). 조기전역 2020년 400 → 2024년 1,565명. 일부 부대 충원율 50~60%, 전투부대 80% 미만. 모집가능 남성 2024년 처음 10만 명 미만.</p>
+      <p><b>현재</b> 총병력 약 23만("nearly 230,000", 2021년 대비 +1만), 지원병 76.9%·1년 의무병 2.3%, 결원율 20.8%(2025.11 국방부 입법원 보고, Taipei Times 원문 재확인). 2025년 충원: 부사관 651·장교 3,820·병 10,407명. 지원병 이병 초봉 NT$41,000(≈US$1,300, 최저임금 NT$28,590의 1.4배). 2025년 모집 달성률 102.2%로 회복세. 1년 의무병 입영 2024년 6,900 → 2027년 약 3.5만 명 전망.</p>
+      <div class="why"><div class="t">왜 실패했나</div><ol>
+        <li><b>인구 기반 자체가 부족</b> — 출산율 0.87(세계 최저권). 모집 가능 남성 연 10만 명 미만으로 줄어 아무리 조건을 올려도 지원자 풀이 없었다.</li>
+        <li><b>민간 대비 급여·경력 경쟁력 열세</b> — 초기 지원병 급여가 대졸 초임 수준에 그쳤고, 반도체·IT 호황기 민간 임금이 더 빨리 올랐다. "좋은 남자는 군인 안 한다(好男不當兵)"는 사회 인식도 발목.</li>
+        <li><b>4개월 훈련병의 전력 무의미</b> — 징병 폐지 대신 남긴 4개월 훈련은 부대 전력에 기여하지 못해 '병력 공백'만 키웠다.</li>
+        <li><b>안보 위협 급증</b> — 2022년 이후 중국 군사 압박이 커지며 '양보다 질' 논리가 무너졌고, 미국도 복무기간 연장을 압박.</li>
+        <li><b>급진적 일괄 전환</b> — 단계별 충원 목표를 못 채웠는데도 전환 시한을 정치 일정에 맞춰 밀어붙여 2015년 연기, 2018년 강행, 2022년 철회로 이어졌다.</li>
+      </ol></div>
+      <p><b>시사점</b> 한국과 같은 '징모혼합'으로 수렴. 김종대의 지적대로 모병 성공 조건은 '대졸 초임 2배 급여'였으나 그래도 충원은 어려웠다. 한국 정부안이 '첫해 3천 명·점진 확대'를 택한 것은 대만의 급진 전환 실패를 의식한 결과로 읽힌다.</p></div>
+    <div class="card"><div class="flag">Germany · 조건부 징병</div><div class="name">독일</div><div class="verdict"><span class="pill warn">모병제 14년 → 2026 신병역법</span></div>
+      <p><b>경과</b> 2011.7 징병 '중지' → 2025.12.5 신병역법(Wehrdienstmodernisierungsgesetz) 통과 → 2026.1.1 발효.</p>
+      <p><b>설계</b> 18세 남성 설문 의무(여성 자발), 2027.7부터 2008년생 이후 남성 신체검사 의무. 자원복무 월 약 €2,600(세전). 자원이 부족하면 연방의회 의결로 '수요징병' 발동.</p>
+      <p><b>성과</b> 2026.7.31 현병력 186,700명(13년래 최대), 자원복무자 약 12,100명, 설문 378,000통(남성 응답 96%). <b>목표 2035년 현역 26만 + 예비군 20만 = 46만 (공식 확정)</b> — 연방정부 법안 설명 "more than 260,000 active soldiers and 200,000 reservists", BMVg 「국토·동맹방위 전략」(2026.4.22) "260.000 aktiven… 200.000 Reservisten… 460.000 kampfbereiten". 27만 표기는 공식 문서에 없음.</p>
+      <div class="why"><div class="t">왜 모병제를 포기했나</div><ol>
+        <li><b>14년간 병력 정체</b> — 2011년 이후 목표 20만 명대를 한 번도 채우지 못했고 2025년에도 18.4만에 머물렀다. 고령화·완전고용 사회에서 군은 청년의 선택지에 들지 못했다.</li>
+        <li><b>징병 폐지와 함께 인프라가 사라짐</b> — 신검 센터·훈련소·예비군 체계가 해체돼 유사시 동원 능력 자체를 잃었다. 신병역법의 '설문·신검 의무'는 이 인프라를 복원하는 것이 1차 목적.</li>
+        <li><b>러시아-우크라이나 전쟁</b> — NATO 동부 방어 책임을 맡으면서 2035년 현역 26만·예비군 20만이 필요해졌고, 자원만으로는 불가능하다는 계산.</li>
+        <li><b>사회적 합의의 한계</b> — 전면 징병 부활은 연정 내 반대가 커서 '자원 우선 + 부족 시 의회 의결로 징병'이라는 타협안이 됐다.</li>
+      </ol></div>
+      <p><b>시사점</b> '자원 우선, 징병은 안전판'. 보수를 최저임금 대비 충분히 높게 설정(월 €2,600). 한국이 배울 점은 "징병을 중지하더라도 신검·등록 인프라는 유지한다"는 원칙.</p></div>
+    <div class="card"><div class="flag">Sweden · 선택적 징병의 원형</div><div class="name">스웨덴</div><div class="verdict"><span class="pill con">모병제 7년 → 2017 젠더중립 징병 부활</span></div>
+      <p><b>경과</b> 2010.7 폐지 → 2017.3 의회 재도입(2018년 첫 소집).</p>
+      <p><b>설계</b> 18세 전원(남녀) 설문 의무(미응답 시 벌금) → 약 30% 신검 소집 → 약 7% 입영(코호트 11만 중 약 8,000명). 복무 9~15개월. 연 4,000(2018) → 8,000(2025) → 2032~35년 12,000명 목표. 여성 16~17%.</p>
+      <p><b>주의</b> 의무복무 후 직업군인 전환률 20%(모병제 시기 60%) — 징병이 장기 간부 저변을 오히려 약화시킬 수 있음.</p>
+      <div class="why"><div class="t">왜 모병제가 실패했나 (2010~2017)</div><ol>
+        <li><b>지원자 수·질 모두 미달</b> — 모병제 7년간 연간 필요 인원의 절반 안팎만 채웠고, 들어온 인원도 중도 이탈률이 높아 부대 가동률이 떨어졌다.</li>
+        <li><b>복무 매력도 부족</b> — 복지국가 스웨덴에서 군 급여는 민간 초임과 경쟁이 안 됐고, 평화 시기 군 복무의 사회적 위신도 낮았다.</li>
+        <li><b>2014년 크림 병합</b> — 발트해 안보 위기로 병력 소요가 급증. 고틀란드 섬 재무장 등 즉각적 수요를 모병으로는 감당 불가.</li>
+        <li><b>징병 폐지로 예비군 저변 붕괴</b> — 총력방위(Total Defence) 체계의 핵심인 예비군 충원 경로가 사라졌다.</li>
+      </ol></div>
+      <p><b>시사점</b> 북유럽 용례에서 '선택적(selective)'은 "국가가 필요 인원을 고르는 것"이지, "개인이 복무 형태를 고르는 것"이 아니다. 한국 정부안 명칭과 개념이 다르다. 스웨덴은 '경쟁 선발'로 만들어 입대를 낙인이 아닌 성취로 바꿨다.</p></div>
+    <div class="card"><div class="flag">France · 자원복무 신설</div><div class="name">프랑스</div><div class="verdict"><span class="pill warn">모병제 25년 → 2026 자원 군복무</span></div>
+      <p><b>경과</b> 1997 시라크 징병 중단 → 2001 완전 폐지 → 2025.11.27 마크롱 '자원 군복무' 발표, 2026년 여름 시작.</p>
+      <p><b>설계</b> 10개월(훈련 1 + 부대 9), <b>핵심 대상 18~19세, 지원은 25세까지 가능</b>(국방부 공식 문구 "18 à 19 ans, avec la possibilité de candidater jusqu'à 25 ans" — '18~19세'와 '18~25세' 보도 모두 부분적으로 정확), 월 최소 €800 세전 + 숙식. 2026년 3,000명 → 2030년 1만 → 2035년 5만. 2026~30년 €23억. 위기 시 의회 승인으로 의무화 가능. 예비군 4만 → 8만.</p>
+      <div class="why"><div class="t">왜 자원복무를 다시 만들었나</div><ol>
+        <li><b>예비군 고갈</b> — 2001년 징병 폐지 후 예비군이 4만 명 수준으로 줄어 장기전 지속 능력이 없었다. 우크라이나 전쟁이 '예비 전력'의 중요성을 재확인.</li>
+        <li><b>사회와 군의 단절</b> — 직업군인만 남으면서 국민의 국방 참여 의식이 약화됐다는 마크롱의 진단. 2019년 도입한 '보편국민복무(SNU, 2주)'는 실효가 없어 폐기됐다.</li>
+        <li><b>완전 징병 복원은 불가능</b> — 인프라·비용(€수십억) 부담으로 '자원 10개월 + 위기 시 의무화'라는 중간안을 택했다.</li>
+      </ol></div></div>
+    <div class="card"><div class="flag">USA · 모병제 53년</div><div class="name">미국</div><div class="verdict"><span class="pill neu">모병제 유지, 주기적 모집난</span></div>
+      <p><b>경과</b> 1969 게이츠위원회 → 1973.1 징집 종료, 선발징병등록(Selective Service)은 유지.</p>
+      <p><b>모집난</b> FY2022 육군 목표 6만 중 4.5만(25% 미달). FY2023 육·해·공 모두 미달. FY2024 회복, FY2025 전군 달성(육군 목표 61,000 4개월 조기 달성), FY2026 육군 61,500명 5월 조기 달성.</p>
+      <p><b>보수</b> 2026년 기본급 3.8% 인상: E-1 $2,226~2,407, E-4(2년) $3,303/월 + 숙식·의료·G.I. Bill.</p>
+      <div class="why"><div class="t">2022~23 모집난의 원인</div><ol>
+        <li><b>노동시장 호황</b> — 실업률 3%대에서 민간 초임이 군 기본급을 앞질렀고, 입대 없이도 대학 학비 지원 경로가 늘었다.</li>
+        <li><b>자격 인구 축소</b> — 17~24세 중 신체·학력·범죄경력 기준을 충족하는 비율이 23%에 불과(비만·약물·정신건강). 모집 풀 자체가 줄었다.</li>
+        <li><b>군에 대한 신뢰·친숙도 하락</b> — 군인 가족 출신 입대 비율이 높은 구조에서 현역 가족의 "자녀 입대 권유" 의향이 급락. 아프간 철수·정치화 논란도 영향.</li>
+        <li><b>팬데믹으로 학교 방문 모집 중단</b> — 대면 모집 채널이 2년간 끊기며 파이프라인이 말랐다.</li>
+      </ol><p style="margin-top:6px !important"><b>회복 요인(2024~26):</b> 입대 전 학력·체력 보충 과정(Future Soldier Prep Course), 보너스 최대 5만 달러, 모집관 증원, 기본급 3.8~5.2% 인상.</p></div>
+      <p><b>시사점</b> 인구 3.4억의 나라도 경기 호황기엔 모집이 흔들린다. 모병제는 '교육·주택 보상 패키지(G.I. Bill)'와 한 묶음이며, 회복도 돈과 제도를 동시에 투입해야 가능했다.</p></div>
+    <div class="card"><div class="flag">Israel · 보편 징병</div><div class="name">이스라엘</div><div class="verdict"><span class="pill con">징병 유지, 그래도 1.2만 명 부족</span></div>
+      <p><b>복무기간 확정: 남 32개월</b>·여 24개월. 연혁은 1995년 36개월 → 2015년 32개월 → 2020년 30개월 단축 결정 → 2021년 32개월 환원(30개월 적용은 2024년 입대자부터) → 2024.7 갈란트 장관 '36개월 연장' 임시법안 1독회 통과(56-44)했으나 최종 입법 무산 → <b>2026.7.17 크네세트 32개월 확정</b>(43-12, 임시명령; 2029.6 입대자부터 30개월 환원 구조). IDF는 36개월·1.2만 명 추가를 요구했으나 반영 안 됨.</p>
+      <p>하레디 면제 2023.6 만료, 2024.6 대법원 "법적 근거 없이 면제 불가". 2026.5 IDF "1.2만 명 부족(전투 7천)", 하레디 징집 목표 연 4,800 vs 실적 약 3,000. 예비군 연 80~100일.</p>
+      <div class="why"><div class="t">보편 징병국의 역설</div><p>전시 상태의 이스라엘조차 복무기간 연장을 의회가 거부했다. 인력 부족의 해법이 '더 길게'가 아니라 '면제 집단 축소(하레디)'로 간 것은, 한국에서 "18개월을 늘리자"는 선택지가 정치적으로 사실상 닫혀 있음을 시사한다. NBS 조사에서 "늘려야" 29%(남성 40%)라는 수치가 있지만 20대는 "적정" 75%다.</p></div>
+      <p style="font-size:12px;color:var(--muted)">출처: Times of Israel 2026.7.17, Jerusalem Post 2024.7.18·2026.7, Ynet 2026.7.6</p></div>
+    <div class="card"><div class="flag">Norway · 젠더중립</div><div class="name">노르웨이</div><div class="verdict"><span class="pill pro">선택적 징병 성공 사례</span></div>
+      <p>2015년 NATO 최초 젠더중립 징병. 17세 코호트 약 63,000명 등록 → 연 8,000~10,000명 입영(등록 코호트의 13~16%). 지원자가 정원 초과(경쟁 선발). 여성 비율 신병 30%. 복무 12개월.</p></div>
+    <div class="card"><div class="flag">Denmark · 2025 여성 징집</div><div class="name">덴마크</div><div class="verdict"><span class="pill warn">4개월 → 11개월, 여성 포함</span></div>
+      <p>2025.7.1 여성 징집 의무화 + 11개월로 연장. 자원자 우선, 부족 시 젠더중립 추첨. 2026.8.3 첫 11개월 기수 1,600명(전원 자원, 여성 약 20%). 2033년 연 6,500명 목표.</p></div>
+    <div class="card"><div class="flag">Baltics · Croatia</div><div class="name">리투아니아 · 라트비아 · 크로아티아</div><div class="verdict"><span class="pill con">징병 재도입 3국</span></div>
+      <p><b>리투아니아</b> 2008 중단 → 2015 재도입(EU 최초). 추첨식 9개월. 2026년 5,000명 소집.</p>
+      <p><b>라트비아</b> 2006 폐지 → 2023.7 첫 소집, 2024.1 의무화. 11개월, 자원 우선 + 추첨. 첫 2년 1,076명 중 강제징집 64명뿐. 자원자 €600/월, 징집자 €300/월. 지지율 64%(2024) → 53.8%(2025), 교관·시설 부족.</p>
+      <div class="why"><div class="t">세 나라가 징병으로 돌아간 공통 원인</div><ol>
+        <li><b>러시아 위협</b> — 2014 크림, 2022 전면 침공이 직접 계기. 인구 200만~300만 소국은 모병으로 여단급 전력도 채우기 어려웠다.</li>
+        <li><b>모병제 기간의 예비군 공백</b> — 징병 중단 10~15년 만에 훈련받은 예비 인력이 고갈돼 총력방위 체계가 무너졌다.</li>
+        <li><b>NATO 병력 기여 요구</b> — 동맹 방위계획상 할당 병력을 모병으로는 맞출 수 없었다.</li>
+      </ol><p style="margin-top:6px !important"><b>재도입 후 교훈:</b> 라트비아처럼 교관·막사·장비 없이 서두르면 지지율이 빠르게 떨어진다(64%→54%). 복무기간을 2~11개월로 짧게 잡고 자원자 우대 급여로 '사실상 자원제'로 운영하는 것이 공통 전략.</p></div>
+      <p><b>크로아티아</b> 2008 중단 → 2026.1 재도입. 2개월 기초훈련, 월 €1,100, 연 4,000명.</p></div>
+    <div class="card"><div class="flag">Japan · 모병제 모집난</div><div class="name">일본 자위대</div><div class="verdict"><span class="pill con">FY2023 충원 51%</span></div>
+      <p>FY2023 채용 목표 약 2만 중 9,959명(51%). 정원 24.7만 대비 현원 22.7만(92%), 士(병) 충원율 75.6%. 2024.12 처우개선 패키지(30여 개 수당 신설) 후 FY2025 11,177명(3년 만에 1만 초과).</p>
+      <div class="why"><div class="t">왜 모집이 안 되나</div><ol>
+        <li><b>18~26세 인구 30년간 40% 감소</b> — 1994년 1,700만 → 2023년 1,050만. 한국과 같은 구조적 원인.</li>
+        <li><b>민간 인력난과 임금 경쟁</b> — 완전고용 상태에서 기업이 고졸 인력까지 흡수. 자위대 초임은 민간과 비슷하거나 낮았다.</li>
+        <li><b>근무환경·이미지</b> — 낡은 숙소, 긴 근무시간, 성희롱·괴롭힘 사건 보도가 이어지며 젊은 층 기피. 해상자위대는 장기 항해로 특히 미달.</li>
+        <li><b>'士(병)' 계급의 단기 임기제</b> — 2~3년 임기 후 재계약 구조라 안정성이 낮아 지원 유인이 약했다.</li>
+      </ol><p style="margin-top:6px !important"><b>반등 요인(2025):</b> 수당 30여 개 신설·숙소 개선·임기제 대원 처우 인상 패키지 → 채용 1만 명 회복. 돈을 쓰면 반응은 오지만 정원의 절반 수준이라는 한계.</p></div>
+      <p><b>시사점</b> 저출생·고학력 사회에서 모병은 돈으로만 풀리지 않는다. 한국과 인구구조가 가장 닮은 나라이며, 한국 정부안의 '3~4년 기술부사관'은 일본 임기제 士 계급과 구조가 유사해 같은 문제를 예고한다.</p></div>
+  </div>
+
+  <h3>실패 원인 한눈에 보기 — 모병제가 흔들린 나라들의 공통 요인</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>요인</th><th>대만</th><th>독일</th><th>스웨덴</th><th>미국</th><th>일본</th><th>발트·크로아티아</th><th>한국 해당 여부</th></tr></thead>
+    <tbody>
+      <tr><td><b>청년 인구 감소</b></td><td>●</td><td>○</td><td>○</td><td>△ (자격자 23%)</td><td>●</td><td>● (소국)</td><td><span class="pill con">해당 (2040년 14만)</span></td></tr>
+      <tr><td><b>민간 임금 대비 열세</b></td><td>●</td><td>●</td><td>●</td><td>● (호황기)</td><td>●</td><td>○</td><td><span class="pill con">해당 (하사 300만 = 최저임금 1.2배)</span></td></tr>
+      <tr><td><b>안보 위협 급증</b></td><td>● (중국)</td><td>● (러시아)</td><td>● (러시아)</td><td>○</td><td>△ (중·북)</td><td>● (러시아)</td><td><span class="pill con">상시 해당 (북한 128만·핵)</span></td></tr>
+      <tr><td><b>예비군·동원 인프라 붕괴</b></td><td>△</td><td>●</td><td>●</td><td>○</td><td>○</td><td>●</td><td><span class="pill pro">비해당 (예비군 275만 유지)</span></td></tr>
+      <tr><td><b>군 이미지·처우·근무환경</b></td><td>● ("좋은 남자는 군인 안 한다")</td><td>△</td><td>△</td><td>● (가족 권유율 하락)</td><td>● (괴롭힘·숙소)</td><td>△ (시설 부족)</td><td><span class="pill warn">부분 해당 (격오지·사고·탄핵 청원)</span></td></tr>
+      <tr><td><b>급진적·정치일정형 전환</b></td><td>●</td><td>○</td><td>○</td><td>○</td><td>—</td><td>△ (라트비아 준비 부족)</td><td><span class="pill warn">주의 (연내 발표·2027 시행)</span></td></tr>
+      <tr><td><b>단기 임기제 구조의 불안정</b></td><td>△</td><td>○</td><td>● (직업 전환률 20%)</td><td>○</td><td>● (士 2~3년 임기)</td><td>○</td><td><span class="pill warn">주의 (3~4년 기술부사관 후 진로)</span></td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:13px;color:var(--muted)">● 주요 원인 · △ 부분 원인 · ○ 해당 없음. 필자 종합 판단.</p>
+  <p>일곱 요인 중 한국은 <b>여섯</b>에 해당하거나 주의가 필요하다(직접 해당 3 · 부분 해당 1 · 주의 2). 유일하게 유리한 조건은 '징병을 유지하므로 예비군·동원 인프라가 살아 있다'는 점인데, 정부안이 전면 모병이 아닌 징모혼합을 택한 것은 바로 이 자산을 지키기 위해서다. 반대로 가장 취약한 조건은 '처우'와 '급진 일정'이며, 이 둘은 대만이 실패한 지점과 정확히 겹친다.</p>
+
+  <div class="key">
+    <div class="t">해외 사례의 교훈 — 네 가지</div>
+    <p><b>① 인구가 적을수록 모병이 어렵다.</b> 대만(2,300만)·일본(1.2억)이 대표적이고, 미국(3.4억)조차 주기적으로 미달한다. 발트 3국은 모병제 시기 자원병만으로 NATO 할당 병력을 채우지 못해 징병으로 돌아갔다. 한국 20세 남성 14만 명(2040) 시대에 '자원'만으로 35만을 채울 수는 없다 — 정부가 징병 유지를 못 박은 이유.</p>
+    <p><b>② 모병 성공은 보수가 결정한다.</b> 독일 €2,600, 대만 최저임금의 1.4배, 일본은 수당 30개 신설 후 반등. 한국 하사 초봉 300만 원은 2026년 법정 최저임금 월 환산액(215.7만 원)의 <b>1.39배</b>로 대만 기준선(1.4배)에 근접하나, 청년이 체감 비교 대상으로 삼는 '주휴·연장 포함 알바 소득 약 250만 원' 기준으로는 1.2배에 그친다. 이 분모의 차이가 정부와 당사자의 인식 격차를 그대로 설명한다.</p>
+    <p><b>③ '선택적 징병'의 북유럽 용례는 국가가 고르는 것.</b> 스웨덴·노르웨이는 설문·적성으로 상위 7~16%를 선발해 오히려 입대가 '경쟁'이 됐다. 한국 정부안은 개인이 형태를 고르는 방식이라 '하위 선택(가난한 청년)'의 우려를 구조적으로 안는다.</p>
+    <p><b>④ 징병 회귀국은 복무기간이 짧다.</b> 크로아티아 2개월을 예외로 하면 스웨덴 9~15, 라트비아 11, 덴마크 11, 리투아니아 9개월로 <b>대체로 9~12개월</b>에 수렴한다. 한국의 18개월 유지는 '징병 + 모병' 병행국 중 가장 길다. 단축 없는 선택제에 대한 청년 반발은 국제 비교로도 설명된다.</p>
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="s10">
+  <div class="sec-no">SECTION 10</div>
+  <h2>비용 추계</h2>
+  <p class="lead">"연 1.2조"부터 "연 12조"까지 추계가 10배 차이 나는 것은 전제(감축 규모·보수 수준)가 다르기 때문이다. 정부안(연 3천 명 부사관)의 직접 비용은 이들 추계보다 훨씬 작지만, 처우 개선 전체를 합치면 커진다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>주체</th><th>전제</th><th>추계</th><th>출처</th></tr></thead>
+    <tbody>
+      <tr><td>이재명 (2017)</td><td>10개월 복무 + 전문요원 10만 모병</td><td class="num">약 3조 원 (감축 절감분으로 충당)</td><td>뉴스토마토</td></tr>
+      <tr><td>이재명 공약 (2021)</td><td>징집 15만 + 부사관 5만 + 군무원 5만, 병 200만 원</td><td class="num">약 4.4조 원 (예산 재배분)</td><td>경향</td></tr>
+      <tr><td>국회예산정책처 (2019)</td><td>병 30만 중 50% 모병 전환</td><td class="num">5년 6조 172억 (연 1.2조)</td><td>서울경제 2025.4 인용</td></tr>
+      <tr><td>국회예산정책처 (2019)</td><td>병 33% 감축(20만 유지)</td><td class="num">5년 13.3조 (연 2.66조)</td><td>같은 출처</td></tr>
+      <tr><td>김대일 (서울대, 경제학연구 2020)</td><td>병 월 233만 원(연 2,800만) 추가 지급</td><td class="num">연 12조 추가 소요, 국방예산 +14%, 총예산 +2.3%. 징병제의 암묵적 청년 과세를 제거할 때의 효율 개선을 GDP 대비 +0.96%로 추정</td><td>아시아경제 2020.10</td></tr>
+      <tr><td>학계 종합</td><td>적정병력 25~30만, 연봉 2,500~3,000만</td><td class="num">병 인건비 2~3배, 연 최대 7~9조 추가</td><td>서울경제 2025.4</td></tr>
+      <tr><td>김세진 (펜앤마이크)</td><td>장기 모병 월 300만 원</td><td class="num">연 4조 원 이상</td><td>펜앤마이크</td></tr>
+      <tr><td>KIDA (최병욱 인용)</td><td>모병으로 30만 유지</td><td class="num">20세 남성 10명 중 1명이 12년 이상 복무 필요 (미국의 2배)</td><td>미래한국 2024.9</td></tr>
+    </tbody>
+  </table></div>
+  <p>정부안이 첫해 3,000명, 3~4년 복무라면 인건비 증가분은 연 수백억 원대로 제한적이다. 진짜 비용은 (1) 2040년 간부 63% 구조로 가기 위한 초급간부 연봉 4천만 원대 인상, (2) 병 봉급 205만 원 유지·인상, (3) AI 경계·무인체계 투자다. 국방비 GDP 3.5%(2026년 국방예산 65.9조를 GDP 약 2,700조로 나누면 2.4% 수준) 구상은 이 세 가지를 동시에 감당하기 위한 전제조건이다. 칼럼에서는 "모병제 비용"이 아니라 "군 구조 전환 비용"으로 프레임을 바꿔 설명하는 것이 정확하다.</p>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="s11">
+  <div class="sec-no">SECTION 11</div>
+  <h2>쟁점별 찬반 논거</h2>
+  <div class="two">
+    <div class="card pro"><h4>찬성 · 추진 논거</h4><ul>
+      <li><b>인구절벽</b> — 2040년 20세 남성 14.2만. 18개월 유지 시 병 16~17만에 불과(한국일보 2023). 구조 전환 외 대안 없음.</li>
+      <li><b>전문성</b> — 드론·AI·사이버는 18개월 징집병이 운용할 수 없다(김병주·국방부). 2040년 간부 63% 구조 필요.</li>
+      <li><b>경제 효율</b> — 징병제는 청년에 대한 암묵적 과세, 병 월 233만 원 지급 시나리오에서 GDP 대비 +0.96% 규모의 효율 개선 추정(김대일 2020).</li>
+      <li><b>형평 보완</b> — 개병제를 유지하므로 '빈자의 군대'가 아니라 '직업훈련 기회'(정한범). 부유층이 빠지는 구조가 아님.</li>
+      <li><b>직업 경로</b> — 전역 후 취업 연계·재산 형성(대통령 8.13). "군 생활이 인생의 낭비가 아니게."</li>
+      <li><b>국제 흐름과 정합</b> — 독일·프랑스·대만 모두 '징병 틀 + 자원 장기복무'로 수렴.</li>
+    </ul></div>
+    <div class="card con"><h4>반대 · 신중 논거</h4><ul>
+      <li><b>병력 공백</b> — 인구절벽 속 모병 병행은 충원을 더 악화(최보윤). 대만·일본·미국의 모집 실패.</li>
+      <li><b>계층 편중</b> — "경제적 형편이 모병·징병을 가른다"(이진우·유승민·한동훈). 민주당 FGI에서도 "부유층은 빠질 것" 불신 확인.</li>
+      <li><b>실효성 의문</b> — 부사관 충원율 42%인데 '이름만 바꾼 부사관 모집'이 통하겠나(포털 댓글·한기호). 하사 300만 원은 최저임금 1.2배.</li>
+      <li><b>복무기간 미단축</b> — 징집병에게 돌아가는 것이 없어 '선택적 징병제'라는 냉소. 징병 회귀국은 대체로 9~12개월.</li>
+      <li><b>안보 환경</b> — 북한 상비병력 128만(2022 국방백서 이래 동일 추계)·핵. 유럽은 징병 강화 중인데 한국만 역방향이라는 인식.</li>
+      <li><b>타이밍·동기</b> — 청년 지지율 31%·27.9% 시점 발표 → 포퓰리즘 공격(장동혁·유승민). 장관 탄핵 청원 30만.</li>
+      <li><b>기회 불평등</b> — IT 전공자 유리, 고졸 청년 배제 가능성(서복경).</li>
+      <li><b>세대 내 형평</b> — 이미 복무한 세대·현역의 박탈감. 소급 보상 설계 부재.</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section id="s12">
+  <div class="sec-no">SECTION 12</div>
+  <h2>종합 진단</h2>
+  <p class="lead">여섯 축으로 현재 정부안을 평가한다. 등급은 필자 판단이며, 칼럼의 논지를 세우기 위한 작업 가설이다.</p>
+  <div class="diag">
+    <div class="card"><div class="s">01 · 필요성</div><div class="h">구조 전환은 불가피 <span class="grade g-a">A</span></div><p>인구·기술·간부 충원 세 지표가 모두 같은 방향을 가리킨다. 야당도 '방향'이 아니라 '방식·타이밍'을 공격한다. 이 지점은 칼럼에서 여야 공통 전제로 삼을 수 있다.</p></div>
+    <div class="card"><div class="s">02 · 명칭과 기대 관리</div><div class="h">'모병'이란 간판이 자충수 <span class="grade g-c">C</span></div><p>국제 표준의 '선택적 징병'(국가가 선발)과도, 청년이 기대한 '짧은 복무'와도 다르다. "선택적 징병제라 해야지"라는 커뮤니티 반응이 정확하다. 명칭을 '선택형 복무제'·'기술부사관 선택복무' 등으로 재정의하는 것이 논쟁 비용을 줄인다.</p></div>
+    <div class="card"><div class="s">03 · 유인 설계(처우)</div><div class="h">기준선 근접, 패키지는 미비 <span class="grade g-b">B</span></div><p>하사 초봉 300만 원은 법정 최저임금(215.7만)의 <b>1.39배</b>로 대만 기준선(1.4배)에 사실상 도달했다 — 이 점은 인정해야 한다. 문제는 둘이다. 첫째, 청년의 실제 비교 기준은 법정 최저임금이 아니라 주휴·연장 포함 실수령 약 250만 원이며 그 분모로는 1.2배에 그친다. 둘째, 해외 성공 사례의 유인은 급여 단독이 아니라 <b>급여 + 전역 후 보상 패키지</b>다(미국 G.I. Bill, 독일 직업교육 연계). 한국은 '전역 후 취업 연계'가 선언 수준이어서 급여만으로 3~4년의 기회비용을 상쇄해야 한다.</p></div>
+    <div class="card"><div class="s">04 · 형평성</div><div class="h">이론상 방어 가능, 체감상 취약 <span class="grade g-b">B−</span></div><p>개병제 유지로 '부유층 면제'는 구조적으로 막힌다. 이것이 정한범 교수의 반론이 성립하는 지점이다. 그러나 개인 선택형 구조에서는 유보임금이 낮은 집단이 장기복무를 택하는 <b>역선택</b>이 이론적으로 예측되며, "가난한 청년만"이라는 체감은 도덕 논쟁이 아니라 이 설계의 귀결이다. 지원자가 정원을 넘어 <b>선발 경쟁</b>이 성립하면 낙인은 상당 부분 완화된다 — 다만 부사관 충원율 42%인 현 상황에서 그것이 가능할지가 관건이다.</p></div>
+    <div class="card"><div class="s">05 · 당사자 수용성</div><div class="h">정책 대상이 가장 반대 <span class="grade g-c">C</span></div><p>18~29세 반대 55.3%, 매우 반대 41.1%, 남녀 차이 없음. 복무기간 미단축·현역 박탈감·지지율용 의심이 결합했다. 입영 연기 조짐은 실무적 부작용이다. '당사자 협의체'(입영 예정자·현역·전역자·초급간부) 없이 연내 발표하면 수용성은 더 떨어진다.</p></div>
+    <div class="card"><div class="s">06 · 단계적 이행 설계</div><div class="h">방향은 맞으나 로드맵 공백 <span class="grade g-b">B</span></div><p>첫해 3천 명 → 점진 확대는 대만의 급진 전환 실패를 피하는 올바른 선택. 그러나 "몇 년 뒤 몇 명, 그때 징집병은 몇 개월"이라는 이정표가 없어 청년이 계획을 세울 수 없다. 독일처럼 법에 단계·조건·발동 요건을 명문화해야 한다.</p></div>
+  </div>
+
+  <div class="key">
+    <div class="t">진단 결론</div>
+    <p>선택적 모병제는 <b>'해야 하는 정책'이지만 '지금의 설계로는 대상자를 설득하지 못하는 정책'</b>이다. 성공 조건은 다섯 가지로 압축된다. ① 처우를 최저임금 1.5배 이상으로 끌어올리고 전역 후 보상을 법제화할 것, ② 선발을 '경쟁'으로 만들어 낙인을 제거할 것, ③ 징집병에게도 돌아가는 것(복무기간·가산점·G.I. Bill형 보상)을 명시할 것, ④ 이미 복무한 세대에 대한 소급 보상을 함께 설계할 것, ⑤ 단계별 이정표(연도·규모·복무기간)를 법에 못 박고 당사자 협의체를 상설화할 것.</p>
+  </div>
+</section>
+
+<!-- ============ 12-2 대안 설계 ============ -->
+<section id="s12b">
+  <div class="sec-no">SECTION 12-2</div>
+  <h2>대안 설계 — 다섯 모델의 비교와 권고안</h2>
+  <p class="lead">"당사자를 설득할 대안"은 구호가 아니라 설계로 제시돼야 한다. 현 정부안을 포함한 다섯 모델을 같은 기준으로 비교하고, 그 위에서 2027~2035년 단계별 권고안을 제시한다.</p>
+
+  <h3>비교 대상 모델</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>모델</th><th>핵심 구조</th><th>원형</th><th>징집병 복무</th><th>장기복무자</th></tr></thead>
+    <tbody>
+      <tr><td><b>A. 현 정부안</b><br><span style="font-size:12px;color:var(--muted)">개인 선택형 징모혼합</span></td><td>개병제 유지, 개인이 18개월 병 또는 3~4년 기술부사관 선택. 첫해 3천 명</td><td>대만 2024~ (부분)</td><td class="num">18개월 유지</td><td class="num">3~4년, 하사 300만 원</td></tr>
+      <tr><td><b>B. 선발형 징병</b><br><span style="font-size:12px;color:var(--muted)">국가 선발형</span></td><td>전원 설문·신검 → 적성·동기·체력 기준으로 필요 인원만 선발. 젠더중립 가능. 미선발자는 대체복무 또는 면제</td><td>스웨덴·노르웨이</td><td class="num">12개월 (선발자만)</td><td class="num">선발자 중 지원</td></tr>
+      <tr><td><b>C. 조건부 징병</b><br><span style="font-size:12px;color:var(--muted)">자원 우선 + 안전판</span></td><td>징집 '중지', 자원복무(10~12개월, 고보수) 운영. 충원율이 기준 미달 시 국회 의결로 징집 발동</td><td>독일 2026, 프랑스 2026</td><td class="num">0 (발동 시 12개월)</td><td class="num">자원 10~12개월 + 직업군인</td></tr>
+      <tr><td><b>D. 단축형 징모혼합</b><br><span style="font-size:12px;color:var(--muted)">공약 계열안</span></td><td>개병제 유지, 징집병 10~12개월로 단축 + 장기 36개월 모병 5만 명</td><td>2017 제안(10개월)·2021 공약(부사관 5만)·2025 캠프 검토안(10개월+36개월)을 종합한 구성</td><td class="num">10~12개월</td><td class="num">36개월, 월 300만 원+</td></tr>
+      <tr><td><b>E. 전면 모병제</b><br><span style="font-size:12px;color:var(--muted)">AVF</span></td><td>징집 폐지, 등록제만 유지. 병력 25~30만으로 감축</td><td>미국·일본·영국</td><td class="num">0</td><td class="num">전원 직업군인</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>평가 기준별 비교</h3>
+  <p>일곱 기준은 앞선 진단과 해외 분석에서 도출했다. ◎ 우수 · ○ 양호 · △ 취약 · × 불가. 필자 종합 판단이며 정량 모형이 아니다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>기준</th><th>A 정부안</th><th>B 선발형</th><th>C 조건부</th><th>D 단축형</th><th>E 전면모병</th><th>근거</th></tr></thead>
+    <tbody>
+      <tr><td><b>병력 규모 유지</b> (2040년 35만)</td><td>○</td><td>△</td><td>△</td><td>△</td><td>×</td><td>B·C·D는 병 수가 줄어 간부·군무원·무인체계로 대체해야. E는 KIDA 추계상 불가</td></tr>
+      <tr><td><b>충원 가능성</b> (역선택 회피)</td><td>△</td><td>◎</td><td>○</td><td>△</td><td>×</td><td>A·D는 보수가 낮으면 저소득층 편중. B는 선발 경쟁으로 낙인 완화. C는 €2,600급 보수 전제</td></tr>
+      <tr><td><b>당사자 수용성</b> (2030)</td><td>×</td><td>△</td><td>○</td><td>◎</td><td>○</td><td>A는 징집병에게 돌아가는 것이 없음(반대 55.3%). D는 복무 단축이 직접 유인이라 수용성 최고. B는 세대 내부 형평 논쟁으로 전환될 뿐 반대가 사라지지 않을 가능성 — 개혁연구원 조사에서 2030의 1순위가 '현행 유지'(48.3%)였다는 점이 이를 시사</td></tr>
+      <tr><td><b>형평성</b> — 계층·젠더</td><td>△</td><td>◎</td><td>○</td><td>△</td><td>×</td><td>B만 젠더중립·능력 기반 설계가 가능. A·D는 개인 선택형이라 계층 편중(역선택) 우려가 구조적으로 내재</td></tr>
+      <tr><td><b>형평성</b> — 세대 내부</td><td>△</td><td>△</td><td>○</td><td>△</td><td>○</td><td>B는 '선발되지 않은 사람'이 생겨 "왜 나만 가나"라는 새로운 형평 논쟁을 낳는다. C·E는 복무 자체가 자원이라 이 문제가 없다. A·D는 이미 복무한 세대의 박탈감이 남는다</td></tr>
+      <tr><td><b>재정 부담</b></td><td>◎</td><td>○</td><td>△</td><td>△</td><td>×</td><td>A 첫해 수백억. D 연 3~4.4조(공약 추계). C는 고보수 자원복무 + 징집 인프라 이중 유지. E 연 7~12조</td></tr>
+      <tr><td><b>전력 공백 위험</b> (전환기)</td><td>◎</td><td>△</td><td>△</td><td>△</td><td>×</td><td>A는 현 구조 위에 점진 추가. D는 복무 단축 시 훈련 강도·전투숙련 저하 우려(KIDA 견해로 언론 인용, 원 보고서 미확인). B·C는 병 수 급감</td></tr>
+      <tr><td><b>동원 인프라 유지</b></td><td>◎</td><td>◎</td><td>○</td><td>◎</td><td>×</td><td>개병제 유지 모델은 모두 유지. C는 등록·신검만 유지</td></tr>
+      <tr><td><b>종합</b></td><td><b>안정적이나 설득력 부족</b></td><td><b>계층 형평 최선, 세대 내 형평은 새 쟁점</b></td><td><b>이상적이나 고비용</b></td><td><b>수용성 높으나 전력·재정 부담</b></td><td><b>현 조건에서 불가</b></td><td></td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="key">
+    <div class="t">비교에서 드러나는 것</div>
+    <p>어느 단일 모델도 일곱 기준을 모두 충족하지 못한다. 정부안 A의 강점(안정·저비용·인프라)과 약점(수용성·형평)은 정확히 거울상이다. 즉 A는 <b>'군을 위한 설계'로는 합리적이지만 '청년을 위한 설계'가 빠져 있다</b>. 반대로 D(단축형)는 청년에게는 매력적이지만 군에는 부담이다. 따라서 현실적 권고안은 A를 골격으로 유지하되, B의 선발 메커니즘과 D의 '징집병 몫'을 단계적으로 이식하는 <b>'A+B+D 혼합 경로'</b>다.</p>
+  </div>
+
+  <h3>권고안 — 'A에서 출발해 B로 가는' 3단계 로드맵</h3>
+  <div class="tl">
+    <div class="ev hot"><div class="d">1단계 · 2027 ~ 2029</div><div class="h">정부안 시행 + 징집병 몫 명시 + 소급 보상 착수</div>
+      <p><b>정부안 그대로 시작하되 네 가지를 추가한다.</b></p>
+      <p>① <b>보수 법정 하한.</b> 기술부사관 보수 하한을 '법정 최저임금 월 환산액의 1.5배'로 설정(2026년 기준 약 324만 원, 현 계획 300만 원 = 1.39배). 대만이 모병 회복 국면에서 유지한 1.4배, 독일 자원복무 €2,600을 참조한 <b>필자 제안 수치</b>다. 3천 명 기준 추가 소요는 연 약 90억 원에 그친다(1인 월 24만 원 차액 × 12개월 × 3,000명).</p>
+      <p>② <b>징집병 몫의 동시 발표.</b> 복무 중 학점·자격 취득 제도화, 전역 시 복무보상금(장병내일준비적금 매칭 확대), 공공부문 채용 시 복무기간 경력 산입. 이것이 없으면 제도는 계속 '나와 무관한 부사관 모집'으로 읽힌다.</p>
+      <p>③ <b>선발 경쟁 원칙.</b> 기술부사관은 첫해부터 지원자가 정원을 넘도록 설계하고, <b>미달 시 정원을 이월하되 기준을 낮추지 않는다</b>(부사관 충원율 42% 상황을 감안한 안전장치). 전공 무관 지원자를 위한 기초교육 트랙을 병설해 'IT 전공자만 유리하다'는 서복경 교수의 지적에 대응한다.</p>
+      <p>④ <b>소급 보상 입법 착수(집행은 2단계).</b> '한국형 G.I. Bill' 법안을 1단계에 발의·통과시키되 재정 집행은 2단계부터 단계 적용한다 — 1단계는 징집 규모가 그대로여서 재원 이동이 발생하지 않기 때문이다(아래 재정 표 참조).</p></div>
+    <div class="ev"><div class="d">2단계 · 2030 ~ 2032</div><div class="h">지표 연동 확대 + 복무기간 단축 검토 개시</div>
+      <p>기술부사관을 연 3천 → 1만 명으로 확대하되, <b>확대 여부를 전년도 충원율(90% 이상)·3년 내 이탈률(15% 이하)·지원자 계층 분포</b>에 연동해 국회에 매년 보고한다(독일 수요징병의 의회 보고 방식 차용). 임계치는 <b>필자가 제안하는 예시 수치</b>이며, 실제 값은 1단계 실적을 보고 설정해야 한다.</p>
+      <p>GOP 과학화 경계(2.2만 → 6천)와 무인체계 전력화가 계획대로 진행되면 절감 병력 규모에 맞춰 징집병 복무 <b>18 → 15개월 단축</b>을 검토한다. 단축은 <b>조건부</b>다 — 무인화가 지연되면 자동 보류되며, 이것이 "10개월 복무는 훈련이 부족하다"는 KIDA·한국일보 사설의 지적에 대한 답이다. 이 시점에 전원 설문·적성검사를 병무청 병역판정검사에 통합(스웨덴 방식)해 3단계 판단 데이터를 축적하고, <b>설문은 남녀 공통으로 실시</b>한다(덴마크·스웨덴·노르웨이 선례). 여성 대상 설문은 징집이 아니라 데이터 수집과 자원 기회 개방을 의미하며, 3단계 젠더중립 논의의 사실적 토대가 된다.</p></div>
+    <div class="ev"><div class="d">3단계 · 2033 ~ 2035</div><div class="h">선발형 전환 여부 국민 결정</div>
+      <p>2040년 20세 남성 14만 명 시대 직전에 두 갈림길을 공론화 절차로 결정한다.</p>
+      <p><b>(가) 국가선발형 전환.</b> 설문·적성 기반으로 필요 인원만 12개월 선발한다. 다만 <b>규모의 현실을 직시해야 한다.</b> 2040년 목표 병력 35만에서 병 비중 37%면 약 13만 명, 12개월 복무 시 연 소요 인원은 약 13만 명이다. 20세 남녀 인구 약 28만 명(남 14만) 기준으로 남성만 대상이면 선발률이 90%를 넘어 '선발'의 의미가 없고, 젠더중립으로 확대해도 약 46%다. 즉 <b>한국형 선발은 스웨덴(7%)·노르웨이(13~16%)식 '소수 정예 선발'이 될 수 없으며, 따라서 그들이 얻은 낙인 제거 효과도 제한적으로만 기대할 수 있다.</b> 선발률을 30% 이하로 낮추려면 병 규모를 7만 명 이하로 줄여야 하고, 이는 간부·군무원·무인체계로 6만 명분을 대체한다는 뜻이다. (가)안의 실현 가능성은 결국 2단계 무인화 성과에 달려 있다.</p>
+      <p><b>(나) 혼합 유지.</b> 15 → 12개월 추가 단축 + 기술부사관 5만 체제로 정착. 전력 공백 위험이 낮은 대신 계층 편중 우려는 남는다.</p>
+      <p>어느 쪽이든 2단계까지 축적된 충원·이탈·계층 분포 데이터가 판단 근거가 되며, 대만처럼 정치 일정에 맞춘 강행을 막기 위해 <b>전환 조건(충원율·무인화 달성률·인구 지표)을 병역법 부칙에 수치로 명문화</b>한다.</p></div>
+  </div>
+
+  <h3>권고안의 핵심 장치 다섯 가지</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>장치</th><th>내용</th><th>해소하는 반대 논거</th><th>해외 근거</th></tr></thead>
+    <tbody>
+      <tr><td><b>1. 보수 법정 하한</b></td><td>기술부사관 월 보수 ≥ 법정 최저임금 월 환산액의 1.5배(2026년 기준 약 <b>324만 원</b>), 매년 자동 연동 <span style="color:var(--muted)">(필자 제안 수치)</span></td><td>"알바만 해도 250만 원", "누가 지원하나"</td><td>독일 €2,600, 대만 1.4배, 일본 수당 30개 신설 후 반등</td></tr>
+      <tr><td><b>2. 경쟁 선발 원칙</b></td><td>정원 대비 지원자 초과 유지, 적성·동기 평가, 전공 무관 기초교육 트랙 병설</td><td>"가난한 사람만 장기복무", "IT 전공자만 유리"</td><td>노르웨이 지원자 &gt; 정원, 스웨덴 상위 7% 선발</td></tr>
+      <tr><td><b>3. 징집병 몫 동시 발표</b></td><td>학점·자격·경력 산입·복무보상금. 2단계 충원 성과에 연동한 복무기간 단축 조항</td><td>"18개월 그대로면 뭐가 바뀌냐", "선택적 징병제"</td><td>징병 회귀국 복무 대체로 9~12개월, 이스라엘 의회의 32개월 연장 거부</td></tr>
+      <tr><td><b>4. 소급 보상(한국형 G.I. Bill)</b></td><td>전역 후 5년 내 교육비·주거자금·창업자금 지원, 공공부문 경력 인정</td><td>"이미 다녀온 세대 호구", "최근 전역자가 제일 불쌍"</td><td>미국 G.I. Bill(1944~), 모병제의 핵심 보상 패키지</td></tr>
+      <tr><td><b>5. 지표 연동·정치일정 차단</b></td><td>충원율·이탈률·계층 분포 연례 국회 보고, 확대·단축·전환 조건을 병역법 부칙에 명문화, 당사자 협의체(입영 예정자·현역·전역자·초급간부) 상설화</td><td>"지지율용 포퓰리즘", "당사자 빠진 설계"</td><td>독일 수요징병 의회 의결, 프랑스 단계 목표 공표(법제화 진행 중), 대만 강행 실패의 반면교사</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>권고안의 재정 소요 — 단계별 개략 추계</h3>
+  <p>권고안의 최대 약점은 "정부안 A의 강점이던 저비용이 사라진다"는 점이다. 이를 회피하지 않고 단계별로 추계한다. <b>모든 수치는 공개 자료를 바탕으로 한 필자의 개략 추계이며 정밀 재정 추계가 아니다.</b> 정확한 값은 국회예산정책처 추계요구제도를 통해 산출해야 한다.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>항목</th><th>1단계 (2027~29)</th><th>2단계 (2030~32)</th><th>3단계 (2033~35)</th><th>산출 근거</th></tr></thead>
+    <tbody>
+      <tr><td>기술부사관 인건비 (보수 1.5배 적용)</td><td class="num">연 +90억<br><span style="font-size:12px;color:var(--muted)">3천 명 × 월 24만 차액</span></td><td class="num">연 +300억<br><span style="font-size:12px;color:var(--muted)">1만 명 규모</span></td><td class="num">연 +1,500억<br><span style="font-size:12px;color:var(--muted)">5만 명 규모</span></td><td>324만 vs 계획 300만의 차액. 기본 인건비는 기존 부사관 정원 내 재배치로 상당 부분 흡수</td></tr>
+      <tr><td>징집병 몫 (학점·자격·복무보상금)</td><td class="num">연 +3,000억~5,000억</td><td class="num">연 +3,000억</td><td class="num">연 +2,000억</td><td>현 장병내일준비적금 정부 매칭(월 55만)의 확대분. 징집 규모 감소에 따라 총액은 점차 감소</td></tr>
+      <tr><td>한국형 G.I. Bill (소급 보상)</td><td class="num">입법만, 집행 0</td><td class="num">연 +5,000억~1조<br><span style="font-size:12px;color:var(--muted)">최근 5년 전역자 우선</span></td><td class="num">연 +1조 내외</td><td>연간 전역자 약 20만 명 기준, 1인당 교육·주거 지원 연 250만~500만 원 가정. 대상 범위(최근 N년)가 총액을 좌우하는 핵심 변수</td></tr>
+      <tr><td><b>순증 소요 (합계)</b></td><td class="num"><b>연 +0.3~0.5조</b></td><td class="num"><b>연 +0.8~1.3조</b></td><td class="num"><b>연 +1.2~1.4조</b></td><td>—</td></tr>
+      <tr><td>상쇄 재원 (징집병 감소분)</td><td class="num">0<br><span style="font-size:12px;color:var(--muted)">복무 18개월 유지</span></td><td class="num">−0.6조 내외<br><span style="font-size:12px;color:var(--muted)">15개월 단축 시 병 인건비 5.1조의 약 1/6</span></td><td class="num">−1.2조 이상<br><span style="font-size:12px;color:var(--muted)">12개월 + 병 규모 축소</span></td><td>병 인건비 2025년 5조 1,013억이 기준. 복무기간·인원 감소에 비례해 감소</td></tr>
+      <tr><td><b>실질 추가 부담</b></td><td class="num"><b>연 +0.3~0.5조</b></td><td class="num"><b>연 +0.2~0.7조</b></td><td class="num"><b>거의 상쇄</b></td><td>국방예산 65.9조(2026) 대비 1단계 0.5~0.8% 수준</td></tr>
+    </tbody>
+  </table></div>
+  <div class="caveat"><b>재정 논리의 정직한 정리.</b> 1단계는 재원 이동 없이 <b>순수 추가 지출</b>이 발생한다(연 0.3~0.5조). 이는 국방예산 증가율 7.5%(2026년) 안에서 흡수 가능한 규모이지만, "예산 재배분으로 충당된다"는 2021년 공약식 설명은 1단계에 한해 성립하지 않는다. 재원 이동은 복무기간이 실제로 줄어드는 2단계부터 발생하며, 3단계에 이르러서야 대체로 상쇄된다. 반대로 말하면 <b>복무기간 단축 없는 선택적 모병제는 재정적으로도 '추가 부담만 있고 절감은 없는' 구조</b>이며, 이것이 정부안이 재정 등급 ◎를 유지하려면 청년 몫을 포기해야 하는 딜레마의 실체다.</div>
+
+  <h3>권고안의 리스크와 반론</h3>
+  <div class="two">
+    <div class="card con"><h4>예상 반론</h4><ul>
+      <li><b>① 재정</b> — 1단계부터 연 0.3~0.5조가 순수 추가 지출. "재배분으로 충당"이라는 설명이 성립하지 않는다.</li>
+      <li><b>② 안보·전력 공백</b> — 최보윤 수석대변인의 "병력 공백 심화" 지적. 2단계 복무 단축과 징집 축소는 북한 상비병력 128만 앞에서 전력 약화로 읽힌다. 유럽은 징병을 강화하는데 한국만 역방향이라는 인식도 있다.</li>
+      <li><b>③ 숙련도</b> — 복무 단축은 KIDA가 지적한 훈련 강도·전투숙련 저하를 동반한다.</li>
+      <li><b>④ 선발형의 형평 역설</b> — 3단계 (가)안은 '안 가는 사람'을 만들어 "왜 나만"이라는 새 논쟁을 부른다.</li>
+      <li><b>⑤ 젠더</b> — 2030 남성 71.7%가 여성징병에 찬성하는데 권고안은 3단계까지 결론을 미룬다. "또 미루기"라는 비판을 피하기 어렵다.</li>
+      <li><b>⑥ 정치적 지속성</b> — 2027년 이후 정권 교체 시 로드맵이 폐기될 수 있다.</li>
+    </ul></div>
+    <div class="card pro"><h4>반론에 대한 답</h4><ul>
+      <li><b>① 재정</b> — 순수 추가 지출임을 인정한다. 다만 규모가 국방예산의 0.5~0.8%이고, 2026년 국방예산 증가율 7.5% 안에서 흡수 가능하다. 2단계부터 복무기간 감소분(병 인건비 5.1조 기준)이 재원으로 전환되며 3단계에 대체로 상쇄된다. 정확한 추계는 국회예산정책처 추계요구제도로 확정해야 한다.</li>
+      <li><b>② 안보</b> — 단축의 <b>전제조건을 전력 지표에 연동</b>하는 것이 답이다. GOP 경계 2.2만→6천 달성, 무인체계 전력화 목표 달성, 간부 비율 목표 도달 — 이 세 지표를 충족해야 단축이 발동되도록 법에 못 박으면, 단축은 '병력 감축'이 아니라 '대체 완료 확인'이 된다. 병력 규모 자체는 인구 때문에 어차피 줄어든다(2040년 35만). 선택지는 '줄일 것인가'가 아니라 '무엇으로 대체할 것인가'다.</li>
+      <li><b>③ 숙련도</b> — 단축은 조건부이므로 과학화가 지연되면 자동 보류된다. 이것이 '지표 연동'의 존재 이유이며, 대만이 목표 미달에도 전환을 강행한 것과 정반대 설계다.</li>
+      <li><b>④ 선발형 역설</b> — 위 3단계 분석대로 한국형 선발은 선발률 46~90%로 '소수 선발'이 될 수 없다. 따라서 (가)안의 낙인 제거 효과는 제한적이며, 이를 인정한 위에서 국민이 선택하도록 하는 것이 정직한 절차다. 3단계는 결정 시점이지 강제가 아니다.</li>
+      <li><b>⑤ 젠더</b> — 미루는 것이 아니라 <b>순서를 두는 것</b>이다. 1단계에서 기술부사관을 남녀 동일 조건으로 개방하고(현 여군 비율 5.5% → 10% 이상 목표), 2단계에서 남녀 공통 설문·적성검사를 실시해 <b>여성의 복무 의향·적합도에 관한 실증 데이터</b>를 확보한 뒤, 3단계에서 그 데이터를 근거로 결정한다. 데이터 없이 여성징병을 논하면 강선미가 지적한 '젠더 감사' 없는 설계가 되고, 노르웨이·덴마크도 모두 자원·설문 단계를 거쳐 의무화로 갔다.</li>
+      <li><b>⑥ 지속성</b> — 여야 모두 '방향'에는 이견이 없다(야당의 공격도 방식·타이밍에 집중). 초당적 합의가 가능한 영역(지표 연동·소급 보상·처우 하한)을 법으로 고정하는 것이 현실적 최선이며, 이것이 정치 일정과 무관하게 제도를 지키는 유일한 장치다.</li>
+    </ul></div>
+  </div>
+  <p class="note">본 권고안의 3단계 로드맵, 지표 임계치(충원율 90%·이탈률 15%), 보수 하한 배수(1.5배), 재정 추계는 모두 <b>필자가 공개 자료를 근거로 구성한 제안</b>이며 정부·연구기관의 공식 안이 아니다. 칼럼에 인용할 때는 이 성격을 밝히는 것이 정확하다.</p>
+</section>
+
+<!-- ============ 13 ============ -->
+<section id="s13">
+  <div class="sec-no">SECTION 13</div>
+  <h2>국방일보 칼럼 기고 전략</h2>
+  <p class="lead">국방일보 독자는 현역 장병·간부·군 가족이다. 정파적 찬반보다 '당사자인 2030이 제도를 어떻게 받아들이는가'를 전달하는 필자의 위치(청년 정치인)가 가장 큰 자산이다.</p>
+  <div class="strat">
+    <h3>논지 구성 제안 (1,800~2,200자 기준)</h3>
+    <ol>
+      <li><b>도입 — 숫자 하나로 시작.</b> "2040년, 스무 살 남성은 14만 명이다." 찬반 이전에 전제를 공유시킨다.</li>
+      <li><b>정부안을 정확히 설명.</b> 징병 폐지가 아니라 '18개월 vs 3~4년 기술부사관' 선택이라는 점을 국방일보 독자에게 명확히. 현역이 "호구"가 아님을 짚는다.</li>
+      <li><b>당사자의 시선.</b> "왜 20대는 더 반대하나" — 복무기간·처우·형평·박탈감 네 가지를 세대 내부자의 언어로 설명. 여론조사 수치(55.3%·41.1%·남녀 무차이)를 인용하되 정당 싱크탱크 조사임을 밝힌다.</li>
+      <li><b>해외의 교훈 두 가지만.</b> 대만(급진 전환 실패 → 혼합제 회귀)과 스웨덴(선발형으로 입대를 '경쟁'으로 만든 사례). 나머지는 생략.</li>
+      <li><b>제안 — 청년이 요구하는 다섯 조건.</b> 처우 1.5배·선발 경쟁·징집병 몫·소급 보상·이정표 법제화(12-2장의 '핵심 장치'). 이 다섯 가지가 칼럼의 '기여'다. 원장님 자문 결과에 따라 "왜 반대하는가"(7장)에 무게를 둘지 "어떻게 설득할 것인가"(12-2장)에 무게를 둘지 배분을 조정한다 — 두 방향은 양자택일이 아니라 순서의 문제다.</li>
+      <li><b>마무리 — 공정의 언어로.</b> "특별한 희생에 특별한 보상"(대통령 6.24 발언)을 인용하며, 그 보상이 '앞으로 복무할 사람'뿐 아니라 '지금 복무 중인 사람'과 '이미 복무한 사람'에게도 닿아야 한다는 메시지로 닫는다.</li>
+    </ol>
+    <h3>톤 · 유의사항</h3>
+    <ol>
+      <li>국방일보는 국방부 산하 매체다. 정부안 비판은 '보완 제안' 형식으로, 야당 프레임('포퓰리즘')은 직접 인용하지 않는 편이 게재 가능성과 신뢰도 모두에 유리하다.</li>
+      <li>커뮤니티 게시글은 직접 인용하지 말고 "입영을 앞둔 청년들 사이에서는 ~는 반응이 많다"로 간접화한다.</li>
+      <li>수치는 국방부 연내 발표안이 나오면 업데이트. 특히 '3천 명·3~4년'은 8.20 국회 답변 기준이므로 기고 시점에 재확인.</li>
+      <li>칼럼 ②('2030 청년이 대한민국에 바라는 점')와 연결고리를 남긴다 — 병역은 2030 공정 담론의 핵심이므로 ①에서 제기한 '소급 보상·G.I. Bill'을 ②에서 청년 정책 전반으로 확장할 수 있다.</li>
+      <li>국방TV 출연 대비: 예상 질문 — "여성징병은?", "복무기간 단축은?", "북한 128만 병력은?", "예산은 어디서?" 각각에 본 보고서 6·8·9·10장이 답변 자료다.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section id="s14">
+  <div class="sec-no">APPENDIX</div>
+  <h2>연구 방법 · 확인 결과 · 출처</h2>
+  <p class="lead">1차 보고서(8.20 오전)에서 '미확인'으로 남긴 12개 항목을 2차 추적 조사했다. 9개 확정·정정, 3개는 공개 자료 부재로 미확인 유지.</p>
+
+  <h3>연구 방법과 한계</h3>
+  <div class="two">
+    <div class="card"><h4>자료 수집 범위</h4><ul>
+      <li><b>기간</b> — 2017년 1월(최초 제안)부터 2026년 8월 20일 보도분까지. 집중 분석 구간은 2026년 6~8월.</li>
+      <li><b>1차 자료</b> — NBS 183차 원 통계표, 병무청 2024 병무통계연보, 국방부 2026년 예산 확정 보도자료, korea.kr 국정과제 원문, BMVg·엘리제궁·프랑스 국방부 공식 발표문.</li>
+      <li><b>2차 자료</b> — 국내 일간지·통신사·전문지 보도, 해외 매체(Taipei Times, Times of Israel, Defense News, OSW, RAND 등), 대학언론.</li>
+      <li><b>당사자 자료</b> — 언론 인터뷰, 대학언론 기획, 포털 댓글 빅데이터 분석 기사, 입영 대기·현역 밀집 온라인 커뮤니티 게시글.</li>
+    </ul></div>
+    <div class="card con"><h4>방법론적 한계 (해석 시 유의)</h4><ul>
+      <li><b>커뮤니티 자료의 대표성 없음</b> — 디시인사이드 각 갤러리는 자기선택 표본이며 연령·지역 분포를 알 수 없다. 여론의 '분포'가 아니라 '논점의 구조'를 파악하는 용도로만 사용했고, 인용은 추천 수가 높은 게시글로 한정했다.</li>
+      <li><b>여론조사 간 문항 비교 불가</b> — '전면 모병제'(갤럽·NBS·리얼미터)와 '선택적 모병제'(한국리서치·개혁연구원) 문항이 혼재해 시계열 비교에 한계가 있다. 개혁연구원 조사는 정당 부설기관의 ARS 자체조사(응답률 2.3%)로 표본 편향 가능성이 있다.</li>
+      <li><b>교차표 부재</b> — 성별×연령, 이념×연령 교차표가 어느 조사에서도 공개되지 않아 하위 집단 추론이 제한된다.</li>
+      <li><b>접근 차단 자료</b> — 국회 회의록·의안정보시스템·KCI 논문·군인권센터·병무청 일부 페이지가 기술적으로 조회되지 않았다. '검색 결과 없음'이 곧 '존재하지 않음'은 아니다.</li>
+      <li><b>정책 미확정</b> — 국방부 최종안이 연내 발표 예정이어서 복무기간·규모·처우 수치가 바뀔 수 있다.</li>
+      <li><b>필자 판단 영역</b> — 9장 분석틀(네 변수), 11장 실패 요인 교차표, 12장 진단 등급, 12-2장 모델 평가·3단계 로드맵·재정 추계는 모두 필자가 구성한 것으로 공인된 분류나 공식 추계가 아니다.</li>
+    </ul></div>
+  </div>
+
+  <h3>미확인 항목 추적 결과</h3>
+  <div class="tbl"><table>
+    <thead><tr><th style="width:30px">#</th><th>항목</th><th>결과</th><th>확인 내용</th><th>출처</th></tr></thead>
+    <tbody>
+      <tr><td class="num">①</td><td>안규백 인사청문회(2025.7.15) 모병제 답변</td><td><span class="pill warn">미확인</span></td><td>정책 발언 없음이 유력. 청문회는 본인 방위병 복무기간 논란에 집중, 야당 보이콧으로 파행. 국회 회의록은 JS 기반이라 직접 조회 불가. 국정감사(2025.10)에서도 모병제 언급 없음.</td><td>경향 2025.7.16 · 문화일보 2025.7.14</td></tr>
+      <tr><td class="num">②</td><td>123대 국정과제 명시 여부</td><td><span class="pill pro">확정</span></td><td>'선택적 모병제'·'기술집약형 부사관' 문구 없음. 과제 111번에 "병력 모집방식 다양화"로 포괄. 112번 초급간부 급여 현실화.</td><td><a href="https://www.korea.kr/govVision/">korea.kr</a> · <a href="https://www.mnd.go.kr/mnd/499/subview.do">국방부</a></td></tr>
+      <tr><td class="num">③</td><td>TF 조직 · 법안 발의 · 공청회</td><td><span class="pill pro">확정</span></td><td>전담 TF 보도 없음. 관련 법안 발의 없음(의안정보시스템 접속 차단으로 보도 기준). 공청회는 2026.6.9 '2040년을 향한 국방개혁 세미나'로 개최.</td><td><a href="https://mnd.go.kr/bbs/mnd/13000005/DPIM_115160/artclView.do">국방부 공지</a></td></tr>
+      <tr><td class="num">④</td><td>김민석·정청래·박지원·조국혁신당·군인권센터 발언</td><td><span class="pill warn">미확인</span></td><td>5개 주체 모두 반복 검색에서 직접 발언 없음. 군인권센터 사이트 403 차단. '발언 부재' 자체가 여당 지도부의 전략적 침묵으로 해석 가능.</td><td>—</td></tr>
+      <tr><td class="num">⑤</td><td>갤럽·한국리서치 2026 교차표 / NBS 원자료</td><td><span class="pill pro">확정</span></td><td>갤럽 2026년 647~671호 전수 확인: 모병제 문항 없음. 한국리서치 '여론 속의 여론' 마지막 병역 기획은 2021년. NBS 183차 원자료(통계표) 입수 → 6장에 전체 표 수록. 성×연령 교차표는 원자료에도 없음.</td><td><a href="http://nbsurvey.kr/files?vid=184">nbsurvey.kr 183차</a> · <a href="https://www.gallup.co.kr/gallupdb/reportContent.asp?seqNo=1652">갤럽 671호</a></td></tr>
+      <tr><td class="num">⑥</td><td>입영대상자 '부사관 전환 의향' 설문</td><td><span class="pill warn">미확인</span></td><td>병무청·국방부·KIDA·청소년정책연구원·대학내일20대연구소 모두 공개 조사 없음. KIDA '범국민 안보의식 조사'는 접속 차단. 있더라도 국정감사 제출자료 수준으로 추정 — <b>국회 국방위 의원실 통해 요구 가능</b>.</td><td>—</td></tr>
+      <tr><td class="num">⑦</td><td>국방 인건비 공식 통계</td><td><span class="pill con">정정</span></td><td>2025년 18조 8,134억(30.7%) → 2026년 19조 2,347억(29.2%). 병 인건비 2025년 5조 1,013억. 기존 '22.8조·37%'는 연금·급식 합산 칼럼치 → 8장 정정.</td><td><a href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156733517">국방부 보도자료 2025.12.3</a></td></tr>
+      <tr><td class="num">⑧</td><td>상근예비역·사회복무요원 인원</td><td><span class="pill pro">확정</span></td><td>2024 병무통계연보로 확정: 상근예비역 2,324명(2023년 5,907), 사회복무 27,199명 → 2025년 24,129명. 8장에 표 신설.</td><td><a href="https://mma.go.kr/download/ebook/2024_bmtgyb_1.pdf">2024 병무통계연보</a></td></tr>
+      <tr><td class="num">⑨</td><td>리얼미터 '300만 원 모병제' 조사</td><td><span class="pill con">정정</span></td><td>2019.11.8, CBS 의뢰, n=501, ±4.4%p, 반대 52.5% vs 찬성 33.3%. 기존 '2021~22년' 표기 오류 → 6장 정정.</td><td><a href="https://www.hankyung.com/politics/article/201911117851Y">한국경제 2019.11.11</a></td></tr>
+      <tr><td class="num">⑩</td><td>개혁신당 조사 표본</td><td><span class="pill pro">확정</span></td><td>1,006명(6개 매체 일치). 경기일보 1,600명은 오기(±3.2%p는 n≈1,000에 부합, 1,600명이면 ±2.5%p). 사회현안조사로 선관위 미등록.</td><td>여성신문·매일신문·이데일리·아시아경제·디지털타임스</td></tr>
+      <tr><td class="num">⑪</td><td>이스라엘·프랑스·독일·대만 수치 상충</td><td><span class="pill pro">확정</span></td><td>이스라엘 32개월(2026.7.17 크네세트 확정, 36개월안 무산). 프랑스 핵심 18~19세·지원 25세까지(둘 다 맞음). 독일 26만+20만=46만(BMVg 공식). 대만 76.9%·20.8% 원문 재확인.</td><td>Times of Israel · defense.gouv.fr · bundesregierung.de · Taipei Times</td></tr>
+      <tr><td class="num">⑫</td><td>2027년 병장 165만 원 인상안</td><td><span class="pill con">정정</span></td><td>공식 계획 아님. 165만 원은 2024년 수치. 국방중기계획은 2025년 205만 원이 최종이며 2026년 이후 로드맵 없음. 단일 블로그 매체 오기 → 삭제.</td><td>국방중기계획 2024~28 · 한국경제 2023.8.29</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>주요 출처 목록</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>분류</th><th>매체 · 문서</th><th>날짜</th><th>내용</th><th>링크</th></tr></thead>
+    <tbody>
+      <tr><td rowspan="9">대통령·청와대</td><td>뉴스토마토</td><td class="num">2017.01.03</td><td>성남시장 '선택제 모병제' 첫 제안</td><td><a href="https://www.newstomato.com/ReadNews.aspx?no=721241">열기</a></td></tr>
+      <tr><td>경향신문</td><td class="num">2021.12.24</td><td>20대 대선 국방공약 5대 과제</td><td><a href="https://www.khan.co.kr/article/202112242005025">열기</a></td></tr>
+      <tr><td>머니투데이</td><td class="num">2025.04.17</td><td>ADD 방문 발언·부승찬 제안</td><td><a href="https://www.mt.co.kr/politics/2025/04/17/2025041714200416565">열기</a></td></tr>
+      <tr><td>채널A(다음)</td><td class="num">2025.04.17</td><td>캠프 10개월·36개월 검토</td><td><a href="https://v.daum.net/v/20250417191245047">열기</a></td></tr>
+      <tr><td>뉴스1</td><td class="num">2025.05.26</td><td>공약 "징집병과 기술집약형 부사관 중 선택"</td><td><a href="https://www.news1.kr/politics/assembly/5793915">열기</a></td></tr>
+      <tr><td>경향신문</td><td class="num">2026.06.24</td><td>연평부대 "징집병 최소화"</td><td><a href="https://www.khan.co.kr/article/202606242132005/">열기</a></td></tr>
+      <tr><td>파이낸셜뉴스</td><td class="num">2026.08.13</td><td>제43차 수보회의 도입 지시</td><td><a href="https://www.fnnews.com/news/202608131421244711">열기</a></td></tr>
+      <tr><td>서울신문</td><td class="num">2026.08.14</td><td>청년·여성 지지율 맥락</td><td><a href="https://www.seoul.co.kr/news/politics/president/2026/08/14/20260814006004">열기</a></td></tr>
+      <tr><td>YTN</td><td class="num">2026.08.14</td><td>연내 발표·2027년 시행</td><td><a href="https://www.ytn.co.kr/_ln/0101_202608140008356838">열기</a></td></tr>
+      <tr><td rowspan="8">국방부·정부</td><td>korea.kr 국정과제</td><td class="num">2025.08.13</td><td>123대 국정과제 (111·112번)</td><td><a href="https://www.korea.kr/govVision/">열기</a></td></tr>
+      <tr><td>국방부 보도자료</td><td class="num">2025.12.03</td><td>2026년 국방예산 확정·재원배분</td><td><a href="https://www.korea.kr/briefing/pressReleaseView.do?newsId=156733517">열기</a></td></tr>
+      <tr><td>뉴시스</td><td class="num">2026.04.08</td><td>안규백 기자간담회</td><td><a href="https://www.newsis.com/view/NISX20260408_0003583129">열기</a></td></tr>
+      <tr><td>중앙일보(다음)</td><td class="num">2026.04.22</td><td>국방부 "10개월 단축 검토 안 함"</td><td><a href="https://v.daum.net/v/Hw2sbYJ6Cz">열기</a></td></tr>
+      <tr><td>국방부 공지</td><td class="num">2026.06.09</td><td>2040년을 향한 국방개혁 세미나</td><td><a href="https://mnd.go.kr/bbs/mnd/13000005/DPIM_115160/artclView.do">열기</a></td></tr>
+      <tr><td>머니투데이</td><td class="num">2026.06.19</td><td>육군 부사관 제도 개편</td><td><a href="https://www.mt.co.kr/politics/2026/06/19/2026061915155330777">열기</a></td></tr>
+      <tr><td>파이낸셜뉴스</td><td class="num">2026.06.25</td><td>국방부 기술집약형 부사관 공식화</td><td><a href="https://www.fnnews.com/news/202606251829534934">열기</a></td></tr>
+      <tr><td>한겨레</td><td class="num">2026.08.20</td><td>안규백 국방위 "3천 명·3~4년"</td><td><a href="https://www.hani.co.kr/arti/politics/defense/1273834.html">열기</a></td></tr>
+      <tr><td rowspan="6">정치권</td><td>헤럴드경제</td><td class="num">2026.06.30</td><td>김병주 "생존 전략" 기자회견</td><td><a href="https://biz.heraldcorp.com/article/10792635">열기</a></td></tr>
+      <tr><td>매일신문</td><td class="num">2026.06.25</td><td>장동혁 "느닷없이 모병제"</td><td><a href="https://www.imaeil.com/page/view/2026062512112139269">열기</a></td></tr>
+      <tr><td>한국일보</td><td class="num">2026.06.25</td><td>유승민 "용병과 징집병"</td><td><a href="https://www.hankookilbo.com/news/article/A2026062515410004404">열기</a></td></tr>
+      <tr><td>뉴스타파</td><td class="num">2025.04</td><td>한동훈 발언 팩트체크</td><td><a href="https://newstapa.org/article/hIDII">열기</a></td></tr>
+      <tr><td>파이낸셜뉴스</td><td class="num">2025.04.24</td><td>대선 후보 병역공약 비교</td><td><a href="https://www.fnnews.com/news/202504241833596686">열기</a></td></tr>
+      <tr><td>헤럴드경제</td><td class="num">2026.08.19</td><td>이준석 "당사자 빠진 설계"</td><td><a href="https://biz.heraldcorp.com/article/10845252">열기</a></td></tr>
+      <tr><td rowspan="7">여론조사</td><td>NBS 183차 원자료</td><td class="num">2026.07.02</td><td>모병제 찬반 통계표</td><td><a href="http://nbsurvey.kr/files?vid=184">열기</a></td></tr>
+      <tr><td>비즈니스포스트</td><td class="num">2026.07.02</td><td>NBS 보도</td><td><a href="https://www.businesspost.co.kr/BP?command=article_view&num=441396">열기</a></td></tr>
+      <tr><td>여성신문</td><td class="num">2026.08.19</td><td>개혁연구원 조사 상세</td><td><a href="https://www.womennews.co.kr/news/articleView.html?idxno=281235">열기</a></td></tr>
+      <tr><td>한국일보·한국리서치</td><td class="num">2025.05.22</td><td>공약 조사 (선택적 모병제 71%)</td><td><a href="https://www.hankookilbo.com/News/Read/A2025052215340005012">열기</a></td></tr>
+      <tr><td>시사저널(갤럽)</td><td class="num">2021.05</td><td>모병제 43% vs 징병제 42%</td><td><a href="https://www.sisajournal.com/news/articleView.html?idxno=217925">열기</a></td></tr>
+      <tr><td>한국경제(리얼미터)</td><td class="num">2019.11.11</td><td>300만 원 모병제 반대 52.5%</td><td><a href="https://www.hankyung.com/politics/article/201911117851Y">열기</a></td></tr>
+      <tr><td>빅터뉴스</td><td class="num">2026.08.20</td><td>포털 댓글 빅데이터</td><td><a href="https://www.bigtanews.co.kr/article/view/big202608200017">열기</a></td></tr>
+      <tr><td rowspan="4">당사자·전문가</td><td>서강학보</td><td class="num">2025.08.24</td><td>청년 A씨·교수 인터뷰</td><td><a href="https://sgunews.sogang.ac.kr/front/cmsboardview.do?siteId=sgunews&bbsConfigFK=3614&pkid=926124">열기</a></td></tr>
+      <tr><td>코리아헤럴드</td><td class="num">2026.04.27</td><td>30대 남성 인터뷰·군 가산점</td><td><a href="https://www.koreaherald.com/article/10726406">열기</a></td></tr>
+      <tr><td>경향신문 영문</td><td class="num">2026.07.09</td><td>정한범·서복경·김종대</td><td><a href="https://www.khan.co.kr/en/article/202607091700007/">열기</a></td></tr>
+      <tr><td>참여연대</td><td class="num">2026.06.25</td><td>평화군축센터 논평</td><td><a href="https://peoplepower21.org/peace/2025004">열기</a></td></tr>
+      <tr><td rowspan="8">데이터</td><td>헤럴드경제</td><td class="num">2025.08</td><td>병력 45만·판정률·선발률</td><td><a href="https://biz.heraldcorp.com/article/10550625">열기</a></td></tr>
+      <tr><td>한국일보</td><td class="num">2023.06</td><td>20세 남성 인구 추계</td><td><a href="https://www.hankookilbo.com/News/Read/A2023061016140000952">열기</a></td></tr>
+      <tr><td>뉴시안</td><td class="num">2025.10</td><td>부사관 충원율 42% (국감)</td><td><a href="http://www.newsian.co.kr/news/articleView.html?idxno=82982">열기</a></td></tr>
+      <tr><td>2024 병무통계연보</td><td class="num">2025</td><td>보충역·대체복무 인원</td><td><a href="https://mma.go.kr/download/ebook/2024_bmtgyb_1.pdf">열기</a></td></tr>
+      <tr><td>서울신문(기재부)</td><td class="num">2024.08.27</td><td>병 인건비 5조 1,013억</td><td><a href="https://www.seoul.co.kr/news/newsView.php?id=20240827500090">열기</a></td></tr>
+      <tr><td>서울경제</td><td class="num">2025.04.28</td><td>예산정책처·학계 비용 추계</td><td><a href="https://www.sedaily.com/article/14059157">열기</a></td></tr>
+      <tr><td>아시아경제</td><td class="num">2020.10.01</td><td>김대일 연구 (연 12조)</td><td><a href="https://www.asiae.co.kr/article/2020100108585903418">열기</a></td></tr>
+      <tr><td>미래한국</td><td class="num">2024.09.05</td><td>최병욱·KIDA 추계</td><td><a href="https://www.futurekorea.co.kr/news/articleView.html?idxno=147264">열기</a></td></tr>
+      <tr><td rowspan="12">해외</td><td>The Diplomat</td><td class="num">2025.04</td><td>대만 징병 재개</td><td><a href="https://thediplomat.com/2025/04/taiwan-races-to-scale-up-revamped-conscription-program-before-2027/">열기</a></td></tr>
+      <tr><td>Taipei Times</td><td class="num">2025.11.13</td><td>대만 병력 구성 76.9%·20.8%</td><td><a href="https://www.taipeitimes.com/News/front/archives/2025/11/13/2003847118">열기</a></td></tr>
+      <tr><td>Bundesregierung</td><td class="num">2025.12</td><td>독일 신병역법 (26만+20만)</td><td><a href="https://www.bundesregierung.de/breg-en/news/new-draft-military-service-law-2397962">열기</a></td></tr>
+      <tr><td>BMVg</td><td class="num">2026.04.22</td><td>국토·동맹방위 전략</td><td><a href="https://www.bmvg.de/de/presse/strategie-zur-landes-und-buendnisverteidigung-6093690">열기</a></td></tr>
+      <tr><td>CZDefence</td><td class="num">—</td><td>스웨덴 선발 모델</td><td><a href="https://www.czdefence.com/article/the-inspirational-swedish-model-of-military-service-seven-percent-of-the-most-capable-recruited-annually">열기</a></td></tr>
+      <tr><td>defense.gouv.fr</td><td class="num">2025.11.27</td><td>프랑스 자원복무 공식</td><td><a href="https://www.defense.gouv.fr/actualites/service-national-ce-quil-faut-retenir-lannonce-du-president-republique">열기</a></td></tr>
+      <tr><td>US Army</td><td class="num">2025.06</td><td>FY25 모집 달성</td><td><a href="https://www.army.mil/article/286027/army_meets_fiscal_year_2025_recruiting_goals_four_months_early">열기</a></td></tr>
+      <tr><td>RAND</td><td class="num">2023.01</td><td>미 모병제 50년</td><td><a href="https://www.rand.org/pubs/commentary/2023/01/50-years-without-the-draft-behind-the-bold-move-that.html">열기</a></td></tr>
+      <tr><td>Times of Israel</td><td class="num">2026.07.17</td><td>크네세트 32개월 확정</td><td><a href="https://www.timesofisrael.com/liveblog_entry/knesset-votes-43-12-to-extend-mandatory-idf-service-for-males-to-32-months/">열기</a></td></tr>
+      <tr><td>RUSI</td><td class="num">—</td><td>노르웨이 젠더중립 징병</td><td><a href="https://www.rusi.org/explore-our-research/publications/commentary/conscripting-change-norways-case-neutrality">열기</a></td></tr>
+      <tr><td>OSW</td><td class="num">2025.11.05</td><td>크로아티아 징병 재도입</td><td><a href="https://www.osw.waw.pl/en/publikacje/analyses/2025-11-05/short-conscription-period-big-ambitions-croatia-reinstates">열기</a></td></tr>
+      <tr><td>KDI 경제정보센터</td><td class="num">—</td><td>국회입법조사처 유럽 사례 비교</td><td><a href="https://eiec.kdi.re.kr/policy/domesticView.do?ac=0000172391">열기</a></td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+</div>
+<footer><div class="wrap">
+  <p style="margin:0 0 6px">본 보고서는 2026년 8월 20일까지의 공개 보도·1차 자료·연구를 취합해 작성한 <b>국방일보 칼럼 기고 준비용 내부 자료</b>다. 사실 관계는 각 항목의 출처로 확인 가능하며, 분석틀·진단 등급·대안 설계·재정 추계는 필자의 판단이다.</p>
+  <p style="margin:0 0 6px">정부 최종안이 연내 발표될 예정이므로 복무기간·선발 규모·처우 수치는 기고 시점에 국방부 공식 발표로 재확인을 권한다. 온라인 커뮤니티 인용은 대표성이 없으므로 칼럼에서는 간접 인용을 권한다.</p>
+  <p style="margin:0">v3 · 2026. 8. 20. · 2차 검증 반영 (미확인 12개 항목 중 9개 확정·정정)</p>
+</div></footer>
+
+</body>
+</html>

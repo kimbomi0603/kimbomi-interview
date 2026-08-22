@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>부동산 정책·세제개편 현안 총정리 (2026.8.11 기준)</title>
+<style>
+:root{
+  --bg:#0e1116; --bg2:#161b23; --card:#1b222c; --line:#2a323f;
+  --tx:#e9eef5; --tx2:#a7b3c4; --tx3:#6f7d90;
+  --acc:#ffb547; --acc2:#4fd1a1; --red:#ff6b6b; --blue:#63a4ff; --purple:#b18cff;
+  --hl:#3a2f14;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",sans-serif;
+  font-size:19px; line-height:1.85; letter-spacing:-.01em;
+  padding-bottom:210px;
+}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+
+/* ---------- header ---------- */
+header{
+  padding:44px 0 26px; border-bottom:1px solid var(--line);
+  background:radial-gradient(120% 90% at 50% 0%, #1d2634 0%, var(--bg) 70%);
+}
+.eyebrow{color:var(--acc);font-weight:800;font-size:15px;letter-spacing:.12em}
+h1{font-size:35px;line-height:1.3;margin:12px 0 10px;font-weight:900;letter-spacing:-.03em}
+.sub{color:var(--tx2);font-size:17px;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{background:var(--bg2);border:1px solid var(--line);color:var(--tx2);
+  padding:7px 13px;border-radius:999px;font-size:14px;font-weight:600}
+.badge.on{background:#2c2210;border-color:#5c4718;color:var(--acc)}
+
+.startbar{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.bigbtn{
+  flex:1;min-width:210px;border:0;border-radius:18px;padding:22px 18px;
+  font-size:21px;font-weight:900;cursor:pointer;font-family:inherit;
+  background:linear-gradient(180deg,#ffc45f,#f0a021);color:#20180a;
+  box-shadow:0 8px 26px rgba(255,181,71,.22);
+}
+.bigbtn.ghost{background:var(--card);color:var(--tx);border:1px solid var(--line);box-shadow:none}
+
+.notice{
+  margin-top:22px;background:#231a1a;border:1px solid #4a2f2f;border-left:5px solid var(--red);
+  border-radius:12px;padding:16px 18px;font-size:16px;color:#ffd6d6;line-height:1.7
+}
+
+/* ---------- chapters ---------- */
+section.ch{padding:44px 0 8px;border-bottom:1px solid var(--line);scroll-margin-top:20px}
+.chnum{display:inline-block;background:var(--card);border:1px solid var(--line);
+  color:var(--acc);font-weight:900;font-size:14px;padding:5px 12px;border-radius:8px;letter-spacing:.05em}
+h2{font-size:29px;line-height:1.35;margin:14px 0 6px;font-weight:900;letter-spacing:-.03em}
+.chsub{color:var(--tx3);font-size:16px;margin:0 0 24px}
+
+p.say{
+  margin:0 0 18px;font-size:21px;line-height:1.95;
+  padding:6px 12px;margin-left:-12px;border-radius:10px;transition:background .18s
+}
+p.say.now{background:var(--hl);box-shadow:inset 3px 0 0 var(--acc)}
+strong{color:var(--acc);font-weight:800}
+em{font-style:normal;color:var(--acc2);font-weight:700}
+
+/* ---------- visuals ---------- */
+.vis{background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px;margin:8px 0 26px;overflow-x:auto}
+.vis h4{margin:0 0 14px;font-size:15px;color:var(--tx3);font-weight:800;letter-spacing:.08em}
+table{border-collapse:collapse;width:100%;font-size:16px;min-width:460px}
+th,td{border-bottom:1px solid var(--line);padding:11px 10px;text-align:left;line-height:1.5}
+th{color:var(--tx3);font-size:13.5px;font-weight:800;letter-spacing:.04em;white-space:nowrap}
+td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.up{color:var(--red);font-weight:800}
+.dn{color:var(--acc2);font-weight:800}
+.keep{color:var(--tx3)}
+
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.kv .box{background:var(--bg2);border:1px solid var(--line);border-radius:13px;padding:15px}
+.kv .box .k{font-size:13.5px;color:var(--tx3);font-weight:800;margin-bottom:7px;letter-spacing:.04em}
+.kv .box .v{font-size:20px;font-weight:900;line-height:1.45}
+@media(max-width:640px){.kv{grid-template-columns:1fr}}
+
+ul.chk{list-style:none;padding:0;margin:0}
+ul.chk li{background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+  padding:14px 16px 14px 46px;margin-bottom:10px;position:relative;font-size:17px;line-height:1.65}
+ul.chk li:before{content:"✓";position:absolute;left:17px;top:13px;color:var(--acc2);font-weight:900;font-size:18px}
+
+.tl{position:relative;padding-left:26px}
+.tl:before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl .it{position:relative;margin-bottom:16px}
+.tl .it:before{content:"";position:absolute;left:-25px;top:9px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2.5px solid var(--tx3)}
+.tl .it.hot:before{border-color:var(--acc);background:var(--acc)}
+.tl .d{font-size:13.5px;color:var(--acc);font-weight:900;letter-spacing:.04em}
+.tl .t{font-size:17px;font-weight:700;margin-top:2px}
+.tl .m{font-size:15px;color:var(--tx2);margin-top:3px;line-height:1.6}
+
+/* ---------- player ---------- */
+#player{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(14,17,22,.97);backdrop-filter:blur(14px);
+  border-top:1px solid var(--line);padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+}
+#bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:11px}
+#fill{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .25s}
+#nowline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+#nowtitle{font-size:15.5px;font-weight:800;color:var(--tx);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#nowmeta{font-size:13px;color:var(--tx3);font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+.ctrls{display:flex;gap:9px;align-items:stretch}
+.pb{
+  flex:1;background:var(--card);border:1px solid var(--line);color:var(--tx);
+  border-radius:15px;padding:16px 6px;font-size:16px;font-weight:800;cursor:pointer;
+  font-family:inherit;line-height:1.2;min-height:62px
+}
+.pb:active{background:#243040}
+.pb.main{flex:1.9;background:linear-gradient(180deg,#ffc45f,#f0a021);color:#20180a;border:0;font-size:19px;font-weight:900}
+.pb small{display:block;font-size:11.5px;color:var(--tx3);font-weight:700;margin-top:3px}
+.pb.main small{color:#5a4212}
+
+/* ---------- drawer ---------- */
+#drawer{
+  position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:none;
+}
+#drawer.open{display:block}
+#dpanel{
+  position:absolute;left:0;right:0;bottom:0;max-height:78vh;overflow-y:auto;
+  background:var(--bg2);border-top-left-radius:22px;border-top-right-radius:22px;
+  padding:20px 16px calc(24px + env(safe-area-inset-bottom));
+}
+#dpanel h3{margin:0 0 14px;font-size:18px}
+.crow{display:flex;align-items:center;gap:12px;padding:15px 14px;border-radius:13px;
+  background:var(--card);border:1px solid var(--line);margin-bottom:9px;cursor:pointer}
+.crow.cur{border-color:var(--acc);background:#2a2213}
+.crow .i{width:30px;height:30px;flex:none;border-radius:8px;background:var(--bg);color:var(--acc);
+  display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px}
+.crow .t{font-size:16.5px;font-weight:700;line-height:1.4}
+.speedrow{display:flex;gap:8px;margin:6px 0 18px;flex-wrap:wrap}
+.sp{flex:1;min-width:64px;background:var(--card);border:1px solid var(--line);color:var(--tx2);
+  border-radius:11px;padding:13px 4px;font-size:15px;font-weight:800;cursor:pointer;font-family:inherit}
+.sp.on{background:#2a2213;border-color:var(--acc);color:var(--acc)}
+.closeb{width:100%;background:var(--card);border:1px solid var(--line);color:var(--tx);
+  border-radius:13px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;margin-top:6px}
+
+footer{padding:38px 0 60px;color:var(--tx3);font-size:14.5px;line-height:1.8}
+footer a{color:var(--tx2)}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">2026년 8월 11일 기준 · 듣는 브리핑</div>
+  <h1>정부 부동산 정책 &amp;<br>세제개편 현안 총정리</h1>
+  <p class="sub">종합부동산세 · 양도소득세 · 대출규제 · 규제지역 · 공급대책 · 청년지원까지<br>운전하면서 들을 수 있는 12개 챕터 · 기본 속도 약 33분, 1.15배속이면 약 28분</p>
+  <div class="badges">
+    <span class="badge on">2026 세제개편안 (8.3 발표)</span>
+    <span class="badge">10·15 대책 후속</span>
+    <span class="badge">대출규제 현행</span>
+    <span class="badge">공급대책 예고</span>
+    <span class="badge">청년·생애최초</span>
+  </div>
+  <div class="startbar">
+    <button class="bigbtn" onclick="toggle()">▶ 처음부터 듣기</button>
+    <button class="bigbtn ghost" onclick="openDrawer()">☰ 챕터 · 속도</button>
+  </div>
+  <div class="notice">
+    <b>⚠️ 안전 안내</b> — 재생을 시작한 뒤에는 화면을 보지 않아도 됩니다. 챕터 이동·속도 조절 등 조작은 반드시 <b>정차 중에</b> 해주세요. 하단 재생바의 버튼은 크게 만들어 두었습니다.
+  </div>
+</header>
+
+
+<!-- ============ 1 ============ -->
+<section class="ch" id="c0">
+<span class="chnum">CHAPTER 01</span>
+<h2>지금 무슨 일이 벌어지고 있나</h2>
+<p class="chsub">큰 그림 · 정책의 3축과 타임라인</p>
+
+<p class="say">안녕하세요. 2026년 8월 11일 기준, 대한민국 부동산 정책과 세제개편 현안을 처음부터 끝까지 정리해 드리겠습니다. 운전하시면서 들으셔도 되도록, 숫자는 천천히, 그리고 중요한 건 여러 번 반복해서 말씀드리겠습니다.</p>
+
+<p class="say">지금 정부의 부동산 정책은 크게 세 갈래로 움직이고 있습니다. 첫째는 <strong>대출 조이기</strong>, 둘째는 <strong>세금 재설계</strong>, 셋째는 <strong>공급 밀어내기</strong>입니다. 이 세 개를 머릿속에 세 개의 서랍으로 만들어 두시면, 앞으로 나오는 뉴스가 어느 서랍에 들어가는지 바로 정리가 됩니다.</p>
+
+<p class="say" data-say="흐름을 시간순으로 짚어보겠습니다. 2025년 6월 27일, 수도권 주택담보대출을 6억 원으로 묶는 대출 대책이 나왔습니다. 갭투자를 원천 차단하겠다는 신호탄이었습니다. 이어 9월 7일에는 주택공급 확대방안이 발표됐고, 10월 15일에는 서울 전역과 경기 12곳을 한꺼번에 규제지역으로 묶는, 이른바 10·15 대책이 나왔습니다.">흐름을 시간순으로 짚어보겠습니다. 2025년 6월 27일, 수도권 주택담보대출을 6억 원으로 묶는 대출 대책이 나왔습니다. 갭투자를 원천 차단하겠다는 신호탄이었습니다. 이어 9월 7일에는 주택공급 확대방안이 발표됐고, 10월 15일에는 서울 전역과 경기 12곳을 한꺼번에 규제지역으로 묶는, 이른바 <strong>10·15 대책</strong>이 나왔습니다.</p>
+
+<p class="say">해가 바뀌어 2026년 1월 29일에는 도심 주택공급 방안으로 수도권 6만 호 계획이 나왔고, 6월 30일에는 풍선효과가 나타난 화성 동탄, 용인 기흥, 구리시가 추가로 규제지역으로 묶였습니다. 그리고 지난주, <strong>8월 3일에 2026년 세제개편안</strong>이 발표됐습니다. 오늘 브리핑의 가장 큰 덩어리가 바로 이 세제개편안입니다.</p>
+
+<p class="say">정부가 이번 세제개편에서 내건 원칙은 한 문장입니다. <em>"집은 사는 곳이지, 사고파는 것이 아니다."</em> 그래서 세금 체계 전체를 <strong>보유에서 거주 중심으로</strong> 갈아엎었습니다. 오래 갖고만 있으면 주던 혜택을 줄이고, 실제로 살고 있는 사람에게 혜택을 몰아주는 방향입니다.</p>
+
+<p class="say">여기서 아주 중요한 단서를 하나 붙이겠습니다. <strong>8월 3일 발표된 세제개편안은 아직 정부안입니다.</strong> 입법예고가 8월 4일부터 20일까지 진행 중이고, 차관회의 8월 27일, 국무회의 9월 1일을 거쳐 9월 3일 이전에 정기국회에 제출됩니다. 즉, <em>국회를 통과해야 확정</em>됩니다. 숫자는 국회 심의 과정에서 바뀔 수 있으니, 오늘 말씀드리는 내용은 "정부가 이런 방향으로 가겠다고 선언했다"로 받아들여 주시면 됩니다.</p>
+
+<div class="vis">
+<h4>정책 타임라인</h4>
+<div class="tl">
+  <div class="it"><div class="d">2025.06.27</div><div class="t">대출 규제 (6·27 대책)</div><div class="m">수도권·규제지역 주담대 6억 원 한도, 다주택자 주담대 금지, 정책대출 축소</div></div>
+  <div class="it"><div class="d">2025.09.07</div><div class="t">주택공급 확대방안</div><div class="m">공공 주도 공급 확대 로드맵</div></div>
+  <div class="it hot"><div class="d">2025.10.15</div><div class="t">10·15 주택시장 안정화 대책</div><div class="m">서울 전역+경기 12곳 규제지역·토지거래허가구역 지정, 시가별 주담대 한도 차등</div></div>
+  <div class="it"><div class="d">2026.01.29</div><div class="t">도심 주택공급 방안</div><div class="m">수도권 6만 호 (공공택지 4.4만, 노후청사 1만, 신규지구 6천)</div></div>
+  <div class="it"><div class="d">2026.06.30</div><div class="t">규제지역 추가 지정</div><div class="m">화성 동탄 · 용인 기흥 · 구리 (7월 1일 효력)</div></div>
+  <div class="it hot"><div class="d">2026.08.03</div><div class="t">2026년 세제개편안 발표</div><div class="m">종부세·양도세 전면 재설계 — 보유 → 거주 중심 전환</div></div>
+  <div class="it hot"><div class="d">2026.08.13 (예정)</div><div class="t">추가 주택공급대책</div><div class="m">수도권 5만 호+ 유휴부지 활용, 인허가 단축</div></div>
+</div>
+</div>
+</section>
+
+
+<!-- ============ 2 ============ -->
+<section class="ch" id="c1">
+<span class="chnum">CHAPTER 02</span>
+<h2>종합부동산세, 이렇게 바뀝니다</h2>
+<p class="chsub">기본공제 14억 / 9억 이원화 · 주택수 → 주택가액</p>
+
+<p class="say">먼저 종합부동산세, 줄여서 종부세입니다. 이번 개편의 핵심은 딱 두 글자, <strong>거주</strong>입니다.</p>
+
+<p class="say">지금은 1세대 1주택자면 공시가격 12억 원까지 종부세를 안 냅니다. 개편안은 이걸 둘로 쪼갭니다. <strong>내가 살고 있는 1주택이면 14억 원까지 공제</strong>, 시가로 따지면 대략 20억 원까지는 종부세가 없습니다. 반대로 <strong>내가 살지 않는 1주택이면 공제가 9억 원으로 줄어듭니다.</strong> 지금보다 3억 원 깎이는 겁니다.</p>
+
+<p class="say">이게 무슨 뜻이냐면, 서울에 집 한 채 사놓고 전세를 준 다음 본인은 다른 데 사는, 이른바 갭투자 형태의 1주택자는 <em>세금이 늘어난다</em>는 겁니다. 반대로 실제로 그 집에 살고 계신 분은 부담이 줄어듭니다. 정부 메시지가 아주 선명합니다.</p>
+
+<p class="say" data-say="다주택자는 어떨까요. 지금은 합산 9억 원 공제인데, 개편안은 계산식을 바꿉니다. 기본 4억 원에, 5억 원 곱하기 내가 거주하는 주택 가액을 전체 주택 가액 합계로 나눈 비율을 더합니다. 쉽게 말해, 내가 사는 집의 비중이 클수록 공제가 늘고, 전부 세 주고 나는 다른 데 산다면 공제는 4억 원뿐입니다.">다주택자는 어떨까요. 지금은 합산 9억 원 공제인데, 개편안은 계산식을 바꿉니다. <strong>기본 4억 원 + (5억 원 × 거주주택 가액 ÷ 전체 주택 가액)</strong>. 쉽게 말해, 내가 사는 집의 비중이 클수록 공제가 늘고, 전부 세 주고 나는 다른 데 산다면 공제는 4억 원뿐입니다.</p>
+
+<div class="vis">
+<h4>종부세 기본공제 비교</h4>
+<table>
+<tr><th>구분</th><th>현행</th><th>개정안</th></tr>
+<tr><td>1세대 1주택 · <b>거주</b></td><td class="n keep">12억</td><td class="n dn">14억 ▲</td></tr>
+<tr><td>1세대 1주택 · <b>비거주</b></td><td class="n keep">12억</td><td class="n up">9억 ▼</td></tr>
+<tr><td>다주택</td><td class="n keep">9억</td><td class="n up">4억 + (5억 × 거주비중)</td></tr>
+</table>
+</div>
+
+<p class="say">두 번째 큰 변화는 세율입니다. 지금까지 종부세 세율은 <strong>집을 몇 채 가졌느냐</strong>로 갈렸습니다. 1·2주택이면 낮은 세율, 3주택 이상이면 중과세율. 개편안은 이걸 <strong>집이 얼마짜리냐</strong>, 즉 주택 가액 기준으로 바꿉니다. 2027년은 과도기이고, <em>2028년부터는 주택 수와 관계없이 단일 세율표</em>가 적용됩니다.</p>
+
+<p class="say">여기서 오해하기 쉬운 지점을 짚겠습니다. "다주택 중과가 폐지된다"는 표현을 뉴스에서 보셨을 텐데요, 실제 내용을 보면 <strong>3주택자 세율이 내려가는 게 아니라, 1·2주택자 세율이 중과 수준으로 올라가서 만나는 구조</strong>입니다. 예를 들어 과세표준 6억에서 12억 구간은 지금 1.0퍼센트인데 1.3퍼센트로 오르고, 12억에서 25억 구간은 1.3퍼센트에서 2.0퍼센트로 오릅니다. 고가 1주택자 입장에서는 세율이 분명히 오르는 겁니다.</p>
+
+<div class="vis">
+<h4>종부세 세율 개편 (2028년 완전 일원화)</h4>
+<table>
+<tr><th>과세표준</th><th>현행 1·2주택</th><th>현행 3주택+</th><th>2028년~ 전 주택</th></tr>
+<tr><td class="n">3억 이하</td><td class="n">0.5%</td><td class="n">0.5%</td><td class="n keep">0.5%</td></tr>
+<tr><td class="n">3~6억</td><td class="n">0.7%</td><td class="n">0.7%</td><td class="n keep">0.7%</td></tr>
+<tr><td class="n">6~12억</td><td class="n">1.0%</td><td class="n">1.0%</td><td class="n up">1.3%</td></tr>
+<tr><td class="n">12~25억</td><td class="n">1.3%</td><td class="n">2.0%</td><td class="n up">2.0%</td></tr>
+<tr><td class="n">25~50억</td><td class="n">1.5%</td><td class="n">3.0%</td><td class="n up">3.0%</td></tr>
+<tr><td class="n">50~94억</td><td class="n">2.0%</td><td class="n">4.0%</td><td class="n up">4.0%</td></tr>
+<tr><td class="n">94억 초과</td><td class="n">2.7%</td><td class="n">5.0%</td><td class="n up">5.0%</td></tr>
+</table>
+</div>
+
+<p class="say">세 번째, <strong>공정시장가액비율</strong>입니다. 공시가격에 이 비율을 곱해서 과세표준을 만드는데, 지금은 60퍼센트입니다. 2027년에 <strong>70퍼센트</strong>로 오르고, 3주택 이상 보유자나 조정대상지역 주택을 가진 다주택자는 2028년에 <strong>80퍼센트</strong>까지 올라갑니다. 세율이 그대로여도 이 비율만 올라가면 세금은 늘어납니다. 조용하지만 위력이 큰 변수입니다.</p>
+
+<p class="say">네 번째, <strong>세부담 상한</strong>이 150퍼센트에서 <strong>200퍼센트</strong>로 올라갑니다. 지금은 작년 세금의 1.5배를 넘길 수 없었는데, 앞으로는 2배까지 오를 수 있다는 뜻입니다. 급격한 인상을 막아주던 안전장치가 느슨해지는 겁니다.</p>
+
+<p class="say">다섯 번째, 1주택자 세액공제도 <strong>보유에서 거주로</strong> 갑니다. 지금은 오래 보유하면 최대 50퍼센트를 깎아주는데, 2028년부터는 <em>거주 기간</em>으로만 계산합니다. 5년 이상 20퍼센트, 10년 이상 40퍼센트, 15년 이상 50퍼센트. 여기에 60세 이상 연령 공제를 더해 최대 80퍼센트까지는 그대로인데, <strong>금액 한도가 새로 생깁니다.</strong> 2027년 800만 원, 2028년부터는 600만 원까지만 깎아줍니다.</p>
+
+<p class="say">마지막으로 좋은 소식 하나. <strong>납부유예 요건이 완화</strong>됩니다. 총급여 기준이 7천만 원에서 8천만 원으로, 종합소득은 6천만 원에서 7천만 원으로 올라갑니다. 그리고 <strong>만 65세 이상이면서 10년 이상 거주</strong>했고, 소득 대비 보유세 부담이 10퍼센트를 넘으면 소득 요건 없이도 납부를 미룰 수 있게 됩니다. 은퇴하신 분들이 집 한 채 때문에 세금 낼 현금이 없어 힘들어하시던 문제를 겨냥한 조항입니다.</p>
+
+<p class="say">종부세 개편은 <strong>2027년 1월 1일 납세의무 성립분부터</strong> 적용됩니다. 종부세 과세기준일은 매년 6월 1일이니까, <em>실제로 고지서에 반영되는 건 2027년 12월분부터</em>라고 생각하시면 됩니다.</p>
+</section>
+
+
+<!-- ============ 3 ============ -->
+<section class="ch" id="c2">
+<span class="chnum">CHAPTER 03</span>
+<h2>양도소득세 — 보유가 아니라 거주</h2>
+<p class="chsub">장기보유특별공제 이원화 · 공제한도 신설 · 중과 한시완화</p>
+
+<p class="say">이제 양도소득세입니다. 개인적으로는 이번 개편에서 <strong>가장 파급력이 큰 부분</strong>이라고 봅니다. 왜냐하면 장기보유특별공제, 줄여서 장특공제가 완전히 다시 설계되기 때문입니다.</p>
+
+<p class="say">지금 1세대 1주택자는 집을 팔 때 보유 기간에 연 4퍼센트, 거주 기간에 연 4퍼센트를 곱해서, 10년이면 <strong>최대 80퍼센트</strong>까지 양도차익에서 빼줍니다. 오래 갖고 있으면서 오래 살면 세금이 거의 안 나오는 구조였죠.</p>
+
+<p class="say">개편안은 이 이름부터 바꿉니다. 주택은 <strong>장기거주 소득공제</strong>, 토지나 건물 같은 주택 외 자산은 <strong>장기보유 소득공제</strong>로 나눕니다. 그리고 주택에서는 보유 공제를 <em>단계적으로 없애버립니다.</em></p>
+
+<p class="say">일정을 정확히 말씀드리겠습니다. <strong>2027년은 유예</strong>입니다. 지금과 똑같습니다. <strong>2028년 양도분부터</strong> 거주 연 6퍼센트, 보유 연 2퍼센트로 바뀌고, <strong>2029년부터는 거주 연 8퍼센트만</strong> 남습니다. 최대 80퍼센트, 10년이라는 큰 틀은 유지되지만, <em>보유만 오래 한 집은 공제를 거의 못 받게 되는 겁니다.</em></p>
+
+<p class="say">다주택자, 그러니까 조정대상지역이 아닌 곳의 주택은 지금 보유 연 2퍼센트로 15년에 최대 30퍼센트를 받는데, 2029년부터는 <strong>거주 연 2퍼센트만</strong> 인정됩니다. 세를 주고 있는 집은 사실상 장특공제가 사라진다고 보시면 됩니다.</p>
+
+<div class="vis">
+<h4>장기보유특별공제 개편 일정</h4>
+<table>
+<tr><th>구분</th><th>2027년 (유예)</th><th>2028년</th><th>2029년~</th></tr>
+<tr><td>1세대 1주택</td><td>거주 4% + 보유 4%<br>(최대 80%)</td><td>거주 6% + 보유 2%<br>(최대 80%)</td><td class="up">거주 8%만<br>(최대 80%)</td></tr>
+<tr><td>다주택(비조정)</td><td>보유 2%<br>(최대 30%)</td><td>보유 1% 또는 거주 2%</td><td class="up">거주 2%만<br>(최대 30%)</td></tr>
+<tr><td><b>공제 한도</b></td><td class="keep">없음</td><td class="up n">20억</td><td class="up n">10억</td></tr>
+</table>
+</div>
+
+<p class="say">그리고 지금까지 없던 <strong>공제 금액 한도</strong>가 새로 생깁니다. <strong>2028년은 20억 원, 2029년부터는 10억 원.</strong> 이건 인별 연간 한도와 물건별 한도로 각각 적용되고, 공동명의면 지분 비율로 나눕니다. 초고가 주택 한 채로 수십억 차익을 보는 경우를 겨냥한 장치입니다.</p>
+
+<p class="say">그럼 1세대 1주택 비과세 기준 12억 원은 어떻게 됐을까요. <em>그대로 유지됩니다.</em> 이건 안 건드렸습니다. 12억 원까지는 여전히 비과세이고, 12억을 넘는 부분에 대해서만 세금을 계산하는 구조도 그대로입니다.</p>
+
+<p class="say">대신 <strong>기본공제가 확 커집니다.</strong> 지금 연 250만 원인 양도소득 기본공제를, <strong>10년 이상 거주한 1세대 1주택이면서 양도가액 30억 원 이하</strong>인 경우에 한해 <strong>2,500만 원으로 열 배</strong> 올려줍니다. 부부 공동명의면 각각 2,500만 원씩 받습니다. 단, 자녀나 친족 같은 특수관계인에게 파는 경우와 비거주자는 제외입니다. 이건 <strong>2027년 양도분부터</strong>입니다.</p>
+
+<p class="say">이제 다주택자분들이 가장 궁금해하실 부분입니다. <strong>조정대상지역 다주택 양도세 중과가 한시적으로 완화됩니다.</strong> 지금은 2주택이면 기본세율에 20퍼센트포인트, 3주택 이상이면 30퍼센트포인트를 얹습니다. 이걸 <strong>2027년에는 2주택 5퍼센트포인트, 3주택 이상 10퍼센트포인트</strong>로, <strong>2028년에는 각각 10퍼센트포인트, 15퍼센트포인트</strong>로 낮춰줍니다. 그리고 <em>2029년에는 원래대로 돌아갑니다.</em></p>
+
+<p class="say">즉, 정부가 <strong>"2027년과 2028년, 2년 안에 파세요"</strong>라고 문을 열어준 겁니다. 매물을 시장에 나오게 하려는 유도책이죠. 단, 보유 기간 2년 이상인 주택만 해당됩니다. 그리고 한 가지 더, <strong>2026년에 이미 중과세율로 양도하신 분도</strong> 2027년 1월 1일 이후 신고할 때 완화 세율을 적용받을 수 있습니다. 사실상 소급 적용입니다.</p>
+
+<div class="vis">
+<h4>조정대상지역 다주택 양도세 중과 한시완화</h4>
+<table>
+<tr><th>구분</th><th>현행</th><th>2027년</th><th>2028년</th><th>2029년~</th></tr>
+<tr><td>1세대 2주택</td><td class="n">+20%p</td><td class="n dn">+5%p</td><td class="n dn">+10%p</td><td class="n up">+20%p 원복</td></tr>
+<tr><td>1세대 3주택 이상</td><td class="n">+30%p</td><td class="n dn">+10%p</td><td class="n dn">+15%p</td><td class="n up">+30%p 원복</td></tr>
+</table>
+</div>
+
+<p class="say">주의하실 점은, <strong>한시 완화 기간에도 장기보유특별공제는 여전히 안 됩니다.</strong> 세율만 낮춰주는 것이지 공제까지 주는 게 아닙니다.</p>
+
+<p class="say">몇 가지 더 짚겠습니다. <strong>일시적 2주택</strong> 종전주택 처분기한이 3년에서 <strong>2년으로 단축</strong>됩니다. 단, 종전 주택과 새 주택이 <em>둘 다 조정대상지역</em>일 때만 해당됩니다. 이건 이미 <strong>2026년 8월 4일, 발표 다음 날부터 취득한 주택</strong>에 적용되니 특히 조심하셔야 합니다.</p>
+
+<p class="say">등록임대사업자도 큰 변화가 있습니다. 조정대상지역 매입임대 아파트의 양도세 중과 배제 혜택이 <strong>2027년 말까지만 유지</strong>되고, 2028년에는 절반만 중과, 2029년부터는 전면 중과로 바뀝니다. 그리고 <strong>상생임대주택 특례는 예정대로 2026년 12월 31일에 일몰</strong>됩니다.</p>
+
+<p class="say">마지막으로 <strong>비사업용 토지</strong>입니다. 2028년 양도분부터 장기보유특별공제가 아예 배제되고, 중과세율이 기본세율에 10퍼센트포인트에서 <strong>20퍼센트포인트로 두 배</strong>가 됩니다. 법인 추가과세도 10퍼센트에서 20퍼센트로 오릅니다. 노는 땅을 그냥 깔고 앉아 있지 말라는 신호입니다.</p>
+</section>
+
+
+<!-- ============ 4 ============ -->
+<section class="ch" id="c3">
+<span class="chnum">CHAPTER 04</span>
+<h2>지방·고령자·취득세</h2>
+<p class="chsub">세컨드홈 특례 확대 · 지방 이주 감면 신설</p>
+
+<p class="say">이번 개편안에는 <strong>지방 주택에 대한 당근</strong>이 꽤 많이 들어 있습니다. 수도권은 조이고 지방은 풀어주는 구도입니다.</p>
+
+<p class="say">먼저 <strong>세컨드홈 특례</strong>입니다. 지방에 집을 한 채 더 사도 1세대 1주택으로 봐주는 제도인데, 대상 지역과 가액 기준이 세 단계로 정리됐습니다. 비수도권 인구감소지역은 <strong>공시가격 9억 원까지</strong>, 인구감소관심지역과 수도권 접경지역은 4억에서 <strong>6억 원으로 상향</strong>, 그리고 <em>광역시를 제외한 비수도권 전 지역이 새로 추가되어 4억 원까지</em> 인정됩니다.</p>
+
+<p class="say">여기서 흔한 오해를 바로잡겠습니다. 일부 요약 글에서 "공시가격 4억 원으로 통일"이라고 쓴 걸 보실 수 있는데, <strong>사실이 아닙니다.</strong> 9억, 6억, 4억 <em>세 단계 차등</em>입니다. 적용기한은 2026년 말에서 <strong>2029년 말까지 3년 연장</strong>되고, 2027년 취득분부터 적용됩니다. 다만 기존 주택과 <strong>같은 시·군·구</strong>에 있는 집을 사면 제외됩니다.</p>
+
+<p class="say">두 번째는 완전히 새로 생기는 제도입니다. <strong>고령 1주택자 지방 이주 양도세 감면</strong>입니다. <strong>만 65세 이상</strong>이 5년 이상 거주한 수도권 주택을 제3자에게 팔고, <strong>6개월 안에 비수도권으로 이주</strong>하면 양도세를 깎아줍니다. <strong>2027년에는 50퍼센트, 최대 5억 원 한도</strong>, <strong>2028년에는 30퍼센트, 3억 원 한도</strong>입니다. 2027년과 2028년, 딱 2년 한시입니다.</p>
+
+<p class="say">단, 사후관리가 있습니다. 6개월 안에 이주하지 않거나, 양도 후 <strong>5년 안에 수도권 주택을 다시 사거나 수도권으로 되돌아오면 감면받은 세금을 다시 추징</strong>당합니다. 은퇴 후 지방 이주를 진지하게 고민 중이시라면, 2027년이 가장 유리한 해입니다.</p>
+
+<div class="kv" style="margin-bottom:26px">
+  <div class="box"><div class="k">세컨드홈 · 인구감소지역</div><div class="v">공시가 9억까지<br><span style="font-size:15px;color:var(--tx3);font-weight:600">1세대1주택 특례 유지</span></div></div>
+  <div class="box"><div class="k">세컨드홈 · 비수도권 전 지역</div><div class="v">공시가 4억까지 <span class="dn">신규</span></div></div>
+  <div class="box"><div class="k">고령자 지방이주 (2027)</div><div class="v">양도세 50% 감면<br><span style="font-size:15px;color:var(--tx3);font-weight:600">한도 5억 원</span></div></div>
+  <div class="box"><div class="k">고령자 지방이주 (2028)</div><div class="v">양도세 30% 감면<br><span style="font-size:15px;color:var(--tx3);font-weight:600">한도 3억 원</span></div></div>
+</div>
+
+<p class="say">그리고 많은 분들이 궁금해하시는 <strong>취득세</strong>. 결론부터 말씀드리면 <em>이번 세제개편안에는 취득세가 아예 들어있지 않습니다.</em> 취득세는 지방세라서 행정안전부 소관이고, 재정경제부가 발표한 이번 개편안 372페이지 전문에 "취득세"라는 단어 자체가 나오지 않습니다.</p>
+
+<p class="say">따라서 <strong>다주택자 취득세 중과, 2주택 8퍼센트, 3주택 이상과 법인 12퍼센트는 그대로 유지</strong>됩니다. 생애최초 취득세 감면 최대 200만 원도 변동 없습니다. 취득세 관련해서는 <em>행정안전부의 별도 지방세제 개편안을 따로 지켜보셔야</em> 합니다.</p>
+</section>
+
+
+<!-- ============ 5 ============ -->
+<section class="ch" id="c4">
+<span class="chnum">CHAPTER 05</span>
+<h2>대출 규제 — 지금 얼마나 빌릴 수 있나</h2>
+<p class="chsub">주담대 한도 · LTV · DSR · 전세대출 · 정책대출</p>
+
+<p class="say">이번엔 대출입니다. 세금보다 당장 체감되는 게 대출이죠. 2026년 8월 현재 기준으로 정리해 드리겠습니다.</p>
+
+<p class="say" data-say="가장 먼저, 주택담보대출 최대 한도가 집값에 따라 세 구간으로 나뉩니다. 시가 15억 원 이하면 6억 원, 15억 원 초과 25억 원 이하면 4억 원, 25억 원을 넘으면 단 2억 원까지만 빌릴 수 있습니다. 30억짜리 아파트를 사려면 28억을 현금으로 준비해야 한다는 뜻입니다.">가장 먼저, 주택담보대출 최대 한도가 집값에 따라 세 구간으로 나뉩니다. <strong>시가 15억 원 이하면 6억 원, 15억~25억 원이면 4억 원, 25억 원을 넘으면 단 2억 원</strong>까지만 빌릴 수 있습니다. 30억짜리 아파트를 사려면 28억을 현금으로 준비해야 한다는 뜻입니다.</p>
+
+<div class="vis">
+<h4>주담대 한도 & LTV (2026.8 현재)</h4>
+<table>
+<tr><th>주택 시가</th><th>최대 한도</th></tr>
+<tr><td class="n">15억 이하</td><td class="n">6억 원</td></tr>
+<tr><td class="n">15억 ~ 25억</td><td class="n up">4억 원</td></tr>
+<tr><td class="n">25억 초과</td><td class="n up">2억 원</td></tr>
+</table>
+<table style="margin-top:16px">
+<tr><th>LTV 구분</th><th>규제지역</th><th>비규제지역</th></tr>
+<tr><td>무주택자</td><td class="n">40%</td><td class="n">70%</td></tr>
+<tr><td>1주택자(처분조건부)</td><td class="n">40%</td><td class="n">60%</td></tr>
+<tr><td>2주택 이상</td><td class="n up">0% (금지)</td><td class="n">—</td></tr>
+<tr><td>생애최초</td><td class="n dn">70% (6개월 전입의무)</td><td class="n dn">70%</td></tr>
+</table>
+</div>
+
+<p class="say">엘티브이(LTV)는 규제지역 기준으로 <strong>무주택자 40퍼센트, 처분조건부 1주택자 40퍼센트, 2주택 이상은 0퍼센트</strong>, 즉 아예 안 나옵니다. <strong>생애최초는 70퍼센트</strong>로 우대하되, 6개월 안에 전입해야 합니다. 규제지역 주담대는 만기도 30년으로 제한됩니다.</p>
+
+<p class="say">디에스알(DSR)은 은행권 40퍼센트, 2금융권 50퍼센트입니다. 여기에 <strong>스트레스 금리</strong>가 붙는데, 수도권과 규제지역은 3단계가 적용되어 스트레스 금리가 1.5퍼센트에서 <strong>3.0퍼센트로 두 배</strong>가 됐습니다. 실제 금리보다 훨씬 높은 금리로 계산해서 한도를 깎는 방식이라, 체감 한도가 크게 줄었습니다.</p>
+
+<p class="say">다만 <strong>지방은 예외</strong>입니다. 규제지역이 아닌 지방은 스트레스 디에스알 2단계, 즉 금리 1.5퍼센트에 적용비율 50퍼센트가 유지되고 있습니다. 이 유예는 2026년 6월 30일에 <em>세 번째로 연장</em>되어 <strong>2026년 12월 31일까지</strong> 이어집니다. 연말에 또 연장될지가 지방 시장의 변수입니다.</p>
+
+<p class="say"><strong>전세대출</strong>도 중요합니다. 2025년 10월 29일부터, <strong>1주택자</strong>가 수도권이나 규제지역에서 새로 전세대출을 받으면 <em>이자상환분이 디에스알에 반영</em>됩니다. 원금은 아직 안 들어갑니다. 그리고 <strong>무주택자는 현재 적용 대상이 아닙니다.</strong> 금융당국은 무주택자 고액 전세대출과 1억 원 이하 소액대출은 계속 제외하는 방향으로 검토 중입니다.</p>
+
+<p class="say">또 하나, <strong>소유권 이전 조건부 전세대출은 금지</strong>됐습니다. 전세를 끼고 집을 사는 갭투자의 자금줄을 끊은 조치입니다.</p>
+
+<p class="say">정책대출도 이미 크게 줄었습니다. <strong>디딤돌 대출</strong>은 일반 2억 원, 생애최초 2억 4천만 원, 신혼부부 3억 2천만 원, 신생아 특례 4억 원으로 각각 약 20에서 25퍼센트 축소됐습니다. <strong>버팀목 전세자금</strong>도 일반 6,400만 원, 청년 1억 5천만 원, 신혼 2억 4천만 원으로 줄었습니다.</p>
+
+<div class="vis">
+<h4>정책대출 한도 축소</h4>
+<table>
+<tr><th>디딤돌</th><th>변경 전</th><th>현재</th><th>버팀목</th><th>변경 전</th><th>현재</th></tr>
+<tr><td>일반</td><td class="n">2.5억</td><td class="n up">2.0억</td><td>일반</td><td class="n">8,000만</td><td class="n up">6,400만</td></tr>
+<tr><td>생애최초</td><td class="n">3.0억</td><td class="n up">2.4억</td><td>청년</td><td class="n">2.0억</td><td class="n up">1.5억</td></tr>
+<tr><td>신혼부부</td><td class="n">4.0억</td><td class="n up">3.2억</td><td>신혼</td><td class="n">3.0억</td><td class="n up">2.4억</td></tr>
+<tr><td>신생아 특례</td><td class="n">5.0억</td><td class="n up">4.0억</td><td></td><td></td><td></td></tr>
+</table>
+</div>
+
+<p class="say">그 배경에는 금융위원회의 <strong>2026년 가계부채 관리방안</strong>이 있습니다. 부제가 무려 <em>"부동산 시장과 금융의 절연"</em>입니다. 2026년 가계대출 증가율 목표를 <strong>1.5퍼센트</strong>로 묶고, GDP 대비 가계부채 비율을 2030년까지 80퍼센트로 낮추며, <strong>정책대출 비중을 30퍼센트에서 20퍼센트로</strong> 줄이겠다는 내용입니다.</p>
+
+<p class="say">다만 최근에는 완화 논의도 나오고 있습니다. 재건축 이주비 대출 확대, 중도금·잔금 대출을 은행 총량 관리에서 빼는 방안, 건설사 프로젝트 파이낸싱 지원 등이 검토되고 있고, 지난 8월 6일에는 부총리가 <strong>"청년·신혼부부 핀셋 지원을 검토하겠다"</strong>고 밝혔습니다. <em>다만 구체적인 수치는 아직 나오지 않았습니다.</em></p>
+</section>
+
+
+<!-- ============ 6 ============ -->
+<section class="ch" id="c5">
+<span class="chnum">CHAPTER 06</span>
+<h2>규제지역과 토지거래허가구역</h2>
+<p class="chsub">서울 25개구 전역 + 경기 15곳 · 2년 실거주 의무</p>
+
+<p class="say">어디가 규제지역인지, 이건 정확히 아셔야 합니다. 대출도 세금도 여기서 갈리기 때문입니다.</p>
+
+<p class="say">2025년 10월 16일부터 <strong>서울 25개 자치구 전역</strong>이 투기과열지구이자 조정대상지역입니다. 여기에 경기도 12곳이 함께 지정됐습니다. <strong>과천, 광명, 성남 분당·수정·중원구, 수원 영통·장안·팔달구, 안양 동안구, 용인 수지구, 의왕, 하남</strong>입니다.</p>
+
+<p class="say">그리고 2026년 7월 1일부터 <strong>화성 동탄, 용인 기흥, 구리시</strong>가 추가됐습니다. 10·15 대책 이후 이 지역들로 수요가 몰리는 풍선효과가 나타났기 때문입니다. 지정과 동시에 무주택자 엘티브이가 70퍼센트에서 <strong>40퍼센트로 반토막</strong>이 났습니다. 결과적으로 지금은 <strong>서울 전역 + 경기 15곳</strong>이 규제지역입니다.</p>
+
+<div class="vis">
+<h4>규제지역 현황 (2026.8.11)</h4>
+<div class="kv">
+  <div class="box"><div class="k">서울</div><div class="v" style="font-size:17px">25개 자치구 전역<br><span style="font-size:14.5px;color:var(--tx3);font-weight:600">투기과열지구 + 조정대상지역 + 토지거래허가구역</span></div></div>
+  <div class="box"><div class="k">경기 (2025.10.16~)</div><div class="v" style="font-size:16px;line-height:1.6">과천 · 광명 · 성남(분당·수정·중원) · 수원(영통·장안·팔달) · 안양 동안 · 용인 수지 · 의왕 · 하남</div></div>
+  <div class="box"><div class="k">경기 추가 (2026.7.1~)</div><div class="v" style="font-size:17px">화성 동탄 · 용인 기흥 · 구리</div></div>
+  <div class="box"><div class="k">토지거래허가 기간</div><div class="v" style="font-size:16px;line-height:1.6">서울·경기12곳: ~2026.12.31<br>동탄·기흥·구리: ~2027.12.31</div></div>
+</div>
+</div>
+
+<p class="say"><strong>토지거래허가구역</strong>은 더 강력합니다. 서울 전역을 토지거래허가구역으로 묶은 건 <em>헌정사상 처음</em>입니다. 대상은 아파트, 그리고 같은 단지 안에 아파트가 한 개 동 이상 포함된 연립·다세대주택입니다.</p>
+
+<p class="say">토허구역에서 집을 사려면 <strong>구청 허가를 받아야 하고, 취득일로부터 2년간 반드시 실제로 살아야 합니다.</strong> 허가 없이 한 거래는 무효입니다. 이게 뭘 의미하냐면, <em>전세를 끼고 사는 갭투자가 물리적으로 불가능</em>해진다는 뜻입니다. 대출 규제보다 이게 더 센 장치일 수 있습니다.</p>
+
+<p class="say">여기서 중요한 일정 하나. <strong>서울과 경기 12곳의 토지거래허가 지정 기간이 2026년 12월 31일에 끝납니다.</strong> 연말에 연장할지 말지가 <em>올해 하반기 최대 변수</em> 중 하나입니다. 아직 정부의 결정은 나오지 않았습니다.</p>
+
+<p class="say">이 밖에 서울·경기·인천은 <strong>외국인 토지거래허가구역</strong>으로도 지정돼 외국인 매수가 제한되고 있습니다. 또 2026년 1월부터는 주택 매매계약을 신고할 때 <strong>계약서와 자금 증빙을 반드시 제출</strong>해야 하고, 자금조달계획서 서식도 강화됐습니다. 부동산 감독기구 신설도 추진 중입니다.</p>
+</section>
+
+
+<!-- ============ 7 ============ -->
+<section class="ch" id="c6">
+<span class="chnum">CHAPTER 07</span>
+<h2>공급대책 — 이번 주가 고비</h2>
+<p class="chsub">수도권 5만 호+ · 유휴부지 · 인허가 60개월 → 30개월</p>
+
+<p class="say">세 번째 서랍, 공급입니다. 사실 규제와 세금만으로는 집값을 잡을 수 없다는 게 시장의 공통된 지적이었습니다. 정부도 이걸 알고 있습니다.</p>
+
+<p class="say">숫자 하나만 말씀드리겠습니다. <strong>2026년 상반기 주택 준공 실적이 연간 목표의 24.3퍼센트</strong>에 그쳤습니다. 지난 몇 년간 인허가와 착공이 급감한 결과가 지금 준공 물량 부족으로 나타나고 있는 겁니다. 이게 현재 시장 불안의 근본 원인입니다.</p>
+
+<p class="say">그래서 정부는 2025년 9월 7일 주택공급 확대방안, 2026년 1월 29일 도심 주택공급 방안을 연달아 내놨습니다. 1·29 방안은 수도권 6만 호 규모로, 공공택지 4만 4천 호, 노후 청사 재개발 34곳에서 1만 호, 신규 공공주택지구 6천 호로 구성됩니다.</p>
+
+<p class="say">그리고 <strong>이르면 8월 13일, 이번 주에 추가 공급대책이 발표될 예정</strong>입니다. 대통령이 "신속한 공급을 위한 가용 수단을 총동원하라"고 지시한 데 따른 것으로, 언론에 알려진 윤곽은 이렇습니다.</p>
+
+<ul class="chk" style="margin-bottom:26px">
+  <li><b>수도권 5만 호 이상</b> 추가 공급 목표</li>
+  <li><b>공공 유휴부지 활용</b> — 강남 LH 서울본부, 서초 조달청 부지 등 노후 청사·국유지·군부지</li>
+  <li><b>도심 정비 확대</b> — 강남 논현1동 사례처럼 2,490호를 4,000호 이상으로 복합개발</li>
+  <li><b>인허가 병렬 처리</b> — 통상 60개월 걸리던 절차를 <b>30개월 이하</b>로 단축</li>
+  <li><b>비아파트 규제 완화</b> — 다세대주택 기준 660㎡ → 990㎡, 층수 제한 완화, 신축매입임대 확대</li>
+  <li><b>금융 지원</b> — 브리지론 확대, 부동산 PF 공적 펀드 기능 강화</li>
+  <li><b>쟁점 사안</b> — 그린벨트 해제, 용산공원 부지 활용 (오세훈 서울시장 반대 중)</li>
+</ul>
+
+<p class="say">여기서 냉정하게 봐야 할 점이 있습니다. 유휴부지 활용이나 정비사업 확대는 <em>땅 주인 동의, 공사비 부담, 서울시와의 협의</em>라는 세 개의 관문을 통과해야 합니다. 그린벨트와 용산공원은 서울시장이 공개적으로 반대하고 있고요. <strong>발표 물량과 실제 입주 물량 사이에는 최소 5년에서 10년의 시차</strong>가 있다는 점도 꼭 기억하셔야 합니다.</p>
+
+<p class="say">또 하나 흥미로운 포인트. 국세청장은 등록임대사업자의 양도세 중과 배제 혜택을 손질하면 <strong>서울에서만 6만 8천 가구의 매물이 나올 수 있다</strong>고 추산했습니다. 정부가 세제와 공급을 한 세트로 보고 있다는 증거입니다. <em>새로 짓는 것뿐 아니라, 이미 있는 집을 시장에 나오게 하는 것도 공급이라는 접근</em>입니다.</p>
+</section>
+
+
+<!-- ============ 8 ============ -->
+<section class="ch" id="c7">
+<span class="chnum">CHAPTER 08</span>
+<h2>청년 — 무엇이 유리하고 무엇이 불리한가</h2>
+<p class="chsub">청년 ISA · 버팀목 · 생애최초 LTV · 신생아 특공</p>
+
+<p class="say">이번 챕터는 청년층을 위한 내용입니다. 대출도 세금도 청년에게는 다르게 작동합니다. 유리한 것부터 하나씩 짚겠습니다.</p>
+
+<p class="say">첫째, 이번 세제개편안에 <strong>청년 개인종합자산관리계좌, 청년 ISA</strong>가 새로 들어갔습니다. <strong>만 15세부터 34세까지, 연소득 7,500만 원 이하</strong>면 가입할 수 있고, <em>납입액의 10퍼센트를 소득공제</em>받으면서 <em>이자와 배당은 비과세</em>입니다. 내 집 마련 종잣돈을 모으는 통로로 설계된 상품입니다. 청약통장과 별개로 챙기실 만합니다.</p>
+
+<p class="say">둘째, <strong>생애최초 주택 구입자의 엘티브이는 70퍼센트</strong>입니다. 규제지역이든 아니든 70퍼센트가 적용됩니다. 무주택자 일반이 규제지역에서 40퍼센트인 걸 생각하면, <em>생애최초 자격은 지금 가장 강력한 무기</em>입니다. 단, 6개월 안에 전입해야 하는 의무가 붙습니다.</p>
+
+<p class="say">셋째, <strong>전세대출 디에스알 규제에서 무주택자는 아직 빠져 있습니다.</strong> 1주택자만 이자상환분이 반영되고 있고, 금융당국도 무주택자와 1억 원 이하 소액 전세대출은 계속 제외하는 방향으로 보고 있습니다. 또 전세대출 보증비율을 낮추는 방안이 추진 중인데, 여기서도 <strong>무주택 청년과 취약계층은 제외</strong>됩니다.</p>
+
+<p class="say">넷째, <strong>민영주택 신생아 특별공급</strong>이 2026년 6월 15일부터 시행됐습니다. 특별공급 물량의 <strong>10퍼센트</strong>를 만 2세 미만 자녀가 있는 가구에 배정하는데, 핵심은 <em>혼인 7년 이내라는 신혼부부 요건과 무관하게</em> 신청할 수 있다는 점입니다. 결혼 7년이 지나 출산한 가구가 그동안 사각지대였는데 이걸 메운 겁니다.</p>
+
+<p class="say">이제 불리한 쪽입니다. <strong>정책대출 한도가 이미 크게 줄었습니다.</strong> 청년 버팀목 전세자금은 2억 원에서 1억 5천만 원으로, 디딤돌 생애최초는 3억 원에서 2억 4천만 원으로 축소됐습니다. 게다가 정부는 정책대출 비중 자체를 30퍼센트에서 20퍼센트로 줄이겠다고 밝혔고, 정책대출 소득요건도 <strong>중위소득 기준으로 전환</strong>할 계획입니다.</p>
+
+<p class="say">또 하나, 전세보증금 반환보증의 담보인정비율이 낮아지고 보증료도 사고율에 따라 조정됩니다. <em>전세 사기와 역전세 위험이 여전한 만큼, 청년 세입자는 계약 전에 등기부와 선순위 보증금을 반드시 확인</em>하셔야 합니다.</p>
+
+<p class="say">그래서 청년층에게 드릴 실전 조언을 세 가지로 정리하면 이렇습니다. 하나, <strong>생애최초 자격은 한 번뿐이니 아껴서 결정적일 때 쓰십시오.</strong> 둘, <strong>청약통장은 어떤 일이 있어도 유지</strong>하십시오. 신생아·신혼 특공처럼 새 유형이 계속 생기고 있습니다. 셋, 정부가 <strong>청년·신혼부부 핀셋 지원을 검토하겠다</strong>고 8월 6일에 공식 언급했으니, <em>이번 주 공급대책 발표에 청년 지원안이 함께 나오는지 꼭 확인</em>하십시오.</p>
+</section>
+
+
+<!-- ============ 9 ============ -->
+<section class="ch" id="c8">
+<span class="chnum">CHAPTER 09</span>
+<h2>1주택 실거주자 액션 플랜</h2>
+<p class="chsub">지금 확인해야 할 것들</p>
+
+<p class="say">이번 개편에서 <strong>가장 유리해진 그룹이 바로 실거주 1주택자</strong>입니다. 다만 "실거주"라는 조건을 증명할 수 있어야 한다는 게 핵심입니다.</p>
+
+<p class="say">첫째, <strong>거주 기간을 관리하십시오.</strong> 2029년부터 양도세 장특공제는 거주 기간만 인정합니다. 지금까지 보유만 오래 하고 실제로는 다른 곳에 사셨다면, 앞으로의 거주 기간이 곧 절세액입니다. 주민등록만 옮겨두는 게 아니라 실제 거주 사실이 필요합니다.</p>
+
+<p class="say">둘째, <strong>종부세는 거주 여부로 공제가 14억이냐 9억이냐가 갈립니다.</strong> 5억 원 차이입니다. 공시가격이 9억에서 14억 사이인 집을 갖고 계신데 지금 그 집에 살고 있지 않다면, <em>2027년부터 없던 종부세가 새로 생길 수 있습니다.</em> 지금 계산해 보셔야 합니다.</p>
+
+<p class="say">셋째, <strong>10년 이상 거주하셨고 집값이 30억 원 이하라면 2027년부터 기본공제 2,500만 원</strong>을 받을 수 있습니다. 부부 공동명의면 각각 2,500만 원, 합쳐서 5,000만 원입니다. <em>매도를 2026년 말이 아니라 2027년으로 미루는 게 유리할 수 있다는 뜻</em>입니다.</p>
+
+<p class="say">넷째, <strong>일시적 2주택은 처분기한이 2년으로 줄었습니다.</strong> 둘 다 조정대상지역이고 2026년 8월 4일 이후에 새 집을 취득하셨다면 3년이 아니라 2년입니다. 갈아타기를 계획 중이시라면 <em>달력에 처분 기한을 지금 표시</em>해 두십시오.</p>
+
+<p class="say">다섯째, <strong>부득이한 사유로 거주하지 못한 기간도 최장 3년까지 인정</strong>됩니다. 취학, 직장 변경이나 전근, 질병 요양, 학교폭력 전학, 해외 체류, 부모 봉양 같은 사유입니다. 재건축 공사 기간도 절반은 인정됩니다. <em>해당되신다면 증빙 서류를 미리 모아두십시오.</em></p>
+
+<p class="say">여섯째, 만 65세 이상이시고 오래 거주하셨다면 <strong>종부세 납부유예</strong>를 활용할 수 있습니다. 소득 요건도 완화됐고, 65세 이상 10년 거주 조건이면 소득 요건 없이도 가능해집니다.</p>
+</section>
+
+
+<!-- ============ 10 ============ -->
+<section class="ch" id="c9">
+<span class="chnum">CHAPTER 10</span>
+<h2>다주택자·투자자 액션 플랜</h2>
+<p class="chsub">2027~2028년, 정부가 열어준 2년의 창</p>
+
+<p class="say">다주택자분들께는 <strong>시간표가 명확하게 정해졌습니다.</strong> 이번 개편안의 메시지를 한 문장으로 압축하면, <em>"2027년과 2028년에 정리하십시오. 2029년부터는 문이 닫힙니다."</em>입니다.</p>
+
+<p class="say">첫째, <strong>중과 한시완화 창구</strong>입니다. 조정대상지역 주택을 2027년에 팔면 2주택은 기본세율 +5퍼센트포인트, 3주택 이상은 +10퍼센트포인트입니다. 2028년에는 각각 +10, +15퍼센트포인트로 올라가고, <strong>2029년에는 +20, +30퍼센트포인트로 원복</strong>됩니다. 즉 <em>2027년이 가장 유리하고, 늦을수록 불리합니다.</em> 보유 2년 이상 요건은 챙기셔야 합니다.</p>
+
+<p class="say">둘째, <strong>2026년에 이미 중과세율로 파신 분</strong>은 2027년 1월 1일 이후에 신고하면 완화 세율을 적용받을 수 있습니다. 놓치면 큰돈입니다. 세무 상담 때 반드시 확인하십시오.</p>
+
+<p class="say">셋째, <strong>보유세는 시간이 갈수록 무거워집니다.</strong> 2027년 공정시장가액비율 70퍼센트, 3주택 이상이나 조정지역 다주택은 2028년 80퍼센트. 세부담 상한도 200퍼센트로 올라갑니다. 세율은 2028년에 사실상 중과 수준으로 일원화됩니다. <em>버티는 전략의 비용이 매년 커지는 구조</em>입니다.</p>
+
+<p class="say">넷째, <strong>등록임대사업자</strong>는 특히 주의하셔야 합니다. 조정대상지역 매입임대 아파트의 양도세 중과 배제는 <strong>2027년 말까지 양도한 경우에만 현행대로</strong> 유지되고, 2028년에는 절반, 2029년부터는 전면 중과입니다. 장특 우대도 50퍼센트에서 2028년 30퍼센트, 2029년 배제로 갑니다.</p>
+
+<p class="say">다섯째, <strong>상생임대주택 특례는 2026년 12월 31일 일몰</strong>입니다. 활용하실 계획이었다면 올해가 마지막입니다.</p>
+
+<p class="say">여섯째, <strong>토지</strong>를 갖고 계시다면 2028년이 분기점입니다. 비사업용 토지는 2028년 양도분부터 장특공제가 완전히 배제되고 중과세율이 두 배가 됩니다. <em>사업용으로 전환하든 정리하든, 2027년 안에 결정</em>하셔야 합니다.</p>
+
+<p class="say">마지막으로 균형 잡힌 시각도 하나 말씀드리겠습니다. <strong>이 모든 건 아직 정부안입니다.</strong> 국회에서 야당이 반대하면 완화될 수도 있고, 반대로 시장이 다시 과열되면 더 강해질 수도 있습니다. <em>세금 하나만 보고 급하게 매도를 결정하기보다, 대체 투자처와 거래비용, 그리고 가족의 실거주 계획까지 함께 놓고 판단하시길 권합니다.</em> 저는 세무사도 투자자문사도 아니니, 실제 실행 전에는 반드시 세무 전문가와 상담하십시오.</p>
+</section>
+
+
+<!-- ============ 11 ============ -->
+<section class="ch" id="c10">
+<span class="chnum">CHAPTER 11</span>
+<h2>지금 시장, 그리고 앞으로의 변수</h2>
+<p class="chsub">전월세 · 임대차 2법 · 하반기 일정표</p>
+
+<p class="say">시장 상황을 짚고 넘어가겠습니다. 규제 직후에는 거래가 뚝 끊겼지만, 한 달쯤 지나자 선호 지역을 중심으로 가격이 다시 오르는 흐름이 나타났습니다. 규제가 <em>수요를 없앤 게 아니라 미뤄놓았을 뿐</em>이라는 해석이 나오는 이유입니다.</p>
+
+<p class="say">전월세 시장은 더 팽팽합니다. 수도권 전월세 수급지수가 110, 서울은 <strong>122</strong>입니다. 100을 넘으면 공급보다 수요가 많다는 뜻이니, 서울은 상당히 타이트합니다. 여기에 이번 세제개편으로 <strong>비거주 1주택자의 세 부담이 커지면 전월세 매물이 줄어들 수 있다는 우려</strong>가 제기되고 있습니다. 국토교통부 장관은 8월 11일 국회에서 "단계적 시행과 전세 공급 확대로 충격을 최소화하겠다"고 답변했습니다.</p>
+
+<p class="say"><strong>임대차 2법</strong>, 그러니까 계약갱신청구권과 전월세상한제는 <em>현행 그대로 유지</em>되고 있습니다. 2년 살고 한 번 더 2년 연장할 수 있는 2+2, 갱신할 때 5퍼센트 이내 인상 제한, 그대로입니다. 2025년에 국토부 연구용역에서 "폐지 또는 수정"이 제시되면서 논의가 있었지만, <strong>2026년 들어 정부의 공식 개편안이나 국회 통과 법안은 아직 없습니다.</strong></p>
+
+<div class="vis">
+<h4>2026년 하반기 체크포인트</h4>
+<div class="tl">
+  <div class="it hot"><div class="d">8월 13일 (예정)</div><div class="t">추가 주택공급대책 발표</div><div class="m">청년·신혼 지원안 포함 여부가 관전 포인트</div></div>
+  <div class="it"><div class="d">8월 20일</div><div class="t">세제개편안 입법예고 종료</div></div>
+  <div class="it"><div class="d">8월 27일 / 9월 1일</div><div class="t">차관회의 / 국무회의</div></div>
+  <div class="it hot"><div class="d">9월 3일 이전</div><div class="t">정기국회 제출</div><div class="m">여기서부터 본게임 — 수치·시기 모두 바뀔 수 있음</div></div>
+  <div class="it hot"><div class="d">12월 31일</div><div class="t">서울·경기12곳 토지거래허가 기간 만료</div><div class="m">연장 여부 미정 — 하반기 최대 변수</div></div>
+  <div class="it"><div class="d">12월 31일</div><div class="t">지방 스트레스 DSR 2단계 유예 종료</div></div>
+  <div class="it"><div class="d">12월 31일</div><div class="t">상생임대주택 특례 일몰</div></div>
+  <div class="it"><div class="d">2027년 2월 (예정)</div><div class="t">시행령 개정</div><div class="m">공정시장가액비율·세컨드홈 대상지역 확정</div></div>
+</div>
+</div>
+
+<p class="say">정리하면, <strong>올해 남은 넉 달 동안 세 가지를 지켜보시면 됩니다.</strong> 하나, 국회에서 세제개편안이 어떻게 다듬어지는가. 둘, 12월 말 토지거래허가구역을 연장하는가. 셋, 이번 주 공급대책에 실제로 물량과 속도가 담기는가. 이 세 가지가 2027년 시장의 방향을 결정할 겁니다.</p>
+</section>
+
+
+<!-- ============ 12 ============ -->
+<section class="ch" id="c11">
+<span class="chnum">CHAPTER 12</span>
+<h2>30초 요약 — 딱 이것만 기억하세요</h2>
+<p class="chsub">마무리</p>
+
+<p class="say">마지막입니다. 오늘 내용을 여덟 문장으로 압축하겠습니다.</p>
+
+<p class="say">하나. 정부 정책의 축은 <strong>보유에서 거주로</strong> 완전히 이동했습니다. 실제로 사는 사람이 이깁니다.</p>
+
+<p class="say">둘. 종부세 1주택 공제는 <strong>거주하면 14억, 안 하면 9억</strong>으로 갈립니다. 2027년부터입니다.</p>
+
+<p class="say">셋. 양도세 장기보유공제는 <strong>2029년부터 거주 기간만</strong> 인정하고, 공제에 <strong>10억 원 한도</strong>가 생깁니다.</p>
+
+<p class="say">넷. 다주택 중과 완화는 <strong>2027년과 2028년, 딱 2년짜리 문</strong>입니다. 2029년에 닫힙니다.</p>
+
+<p class="say">다섯. 주담대는 <strong>15억 이하 6억, 25억 초과는 2억</strong>. 규제지역 2주택 이상은 아예 안 나옵니다.</p>
+
+<p class="say">여섯. 규제지역은 <strong>서울 전역과 경기 15곳</strong>이고, 토허구역에서는 <strong>2년 실거주 의무</strong>로 갭투자가 불가능합니다.</p>
+
+<p class="say">일곱. 청년은 <strong>생애최초 엘티브이 70퍼센트, 청년 ISA, 신생아 특공</strong>이 무기입니다. 청약통장은 절대 해지하지 마십시오.</p>
+
+<p class="say">여덟. 그리고 가장 중요한 것. <strong>세제개편안은 아직 국회를 통과하지 않은 정부안입니다.</strong> 9월 정기국회에서 숫자가 바뀔 수 있으니, <em>큰 결정은 국회 통과를 확인한 뒤에</em> 하시는 게 안전합니다.</p>
+
+<p class="say">이상으로 2026년 8월 기준 부동산 정책과 세제개편 현안 브리핑을 마치겠습니다. 안전 운전하시고, 오늘 하루도 좋은 하루 보내시기 바랍니다. 감사합니다.</p>
+</section>
+
+
+<footer>
+  <b>자료 기준일</b> 2026년 8월 11일 · 본 자료는 정부 발표자료와 언론보도를 정리한 <b>참고용 정보</b>이며 세무·투자 자문이 아닙니다. 2026년 세제개편안은 국회 심의 전 정부안으로 확정 내용과 다를 수 있습니다. 실제 의사결정 전 세무 전문가와 상담하시기 바랍니다.<br><br>
+  <b>주요 출처</b> 재정경제부 「2026년 세제개편안」 상세본·문답자료(2026.8.3) · 국토교통부·금융위원회 보도자료 · 「10·15 주택시장 안정화 대책」(2025.10.15) · 대한민국 정책브리핑 · 법무법인 세종·광장 뉴스레터 · 각 언론 보도
+</footer>
+
+</div><!-- /wrap -->
+
+
+<!-- ================= PLAYER ================= -->
+<div id="player">
+  <div id="bar"><div id="fill"></div></div>
+  <div id="nowline">
+    <div id="nowtitle">준비됨 — ▶ 버튼을 누르세요</div>
+    <div id="nowmeta">0 / 0</div>
+  </div>
+  <div class="ctrls">
+    <button class="pb" onclick="prevCh()">⏮<small>이전 챕터</small></button>
+    <button class="pb main" id="ppb" onclick="toggle()">▶ 재생<small>스페이스바</small></button>
+    <button class="pb" onclick="nextCh()">⏭<small>다음 챕터</small></button>
+    <button class="pb" onclick="openDrawer()">☰<small>목차·속도</small></button>
+  </div>
+</div>
+
+<div id="drawer" onclick="if(event.target===this)closeDrawer()">
+  <div id="dpanel">
+    <h3>재생 속도</h3>
+    <div class="speedrow" id="speeds"></div>
+    <h3>챕터 이동</h3>
+    <div id="clist"></div>
+    <button class="closeb" onclick="closeDrawer()">닫기</button>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- build queue ---------- */
+var sections = Array.prototype.slice.call(document.querySelectorAll('section.ch'));
+var chapters = sections.map(function(s,i){
+  return {el:s, title:s.querySelector('h2').textContent.trim(), idx:i, start:0, end:0};
+});
+
+var queue = []; // {text, el, ch}
+function splitText(t){
+  t = t.replace(/\s+/g,' ').trim();
+  var parts = t.split(/(?<=[.!?…])\s+/);
+  var out=[], buf='';
+  parts.forEach(function(p){
+    if((buf+' '+p).trim().length > 170 && buf){ out.push(buf.trim()); buf=p; }
+    else { buf = (buf?buf+' ':'')+p; }
+  });
+  if(buf.trim()) out.push(buf.trim());
+  return out.filter(function(x){return x.length>0});
+}
+
+chapters.forEach(function(ch){
+  ch.start = queue.length;
+  // chapter heading spoken
+  queue.push({text:'챕터 '+(ch.idx+1)+'. '+ch.title, el:ch.el.querySelector('h2'), ch:ch.idx});
+  Array.prototype.forEach.call(ch.el.querySelectorAll('p.say'), function(p){
+    var src = p.getAttribute('data-say') || p.textContent;
+    splitText(src).forEach(function(s){ queue.push({text:s, el:p, ch:ch.idx}); });
+  });
+  ch.end = queue.length-1;
+});
+
+/* ---------- state ---------- */
+var i = 0, playing = false, rate = 1.0, voice = null, keepAlive = null, wakeLock = null;
+var synth = window.speechSynthesis;
+var supported = !!synth && typeof SpeechSynthesisUtterance !== 'undefined';
+
+var $ppb=document.getElementById('ppb'), $fill=document.getElementById('fill'),
+    $title=document.getElementById('nowtitle'), $meta=document.getElementById('nowmeta');
+
+function pickVoice(){
+  if(!supported) return;
+  var vs = synth.getVoices()||[];
+  var ko = vs.filter(function(v){return /^ko/i.test(v.lang||'')});
+  if(!ko.length) { voice=null; return; }
+  // prefer natural/neural sounding names, else first
+  var pref = ko.filter(function(v){return /natural|neural|premium|enhanced|siri|yuna|sunhi|heami/i.test(v.name||'')});
+  voice = pref[0] || ko[0];
+}
+if(supported){ pickVoice(); synth.onvoiceschanged = pickVoice; }
+
+function highlight(){
+  document.querySelectorAll('p.say.now').forEach(function(e){e.classList.remove('now')});
+  var it = queue[i]; if(!it) return;
+  if(it.el && it.el.classList && it.el.classList.contains('say')) it.el.classList.add('now');
+  var r = it.el.getBoundingClientRect();
+  if(r.top < 90 || r.bottom > window.innerHeight - 210){
+    it.el.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+function ui(){
+  var it = queue[i]||{ch:0};
+  var ch = chapters[it.ch];
+  $title.textContent = (playing?'▶ ':'⏸ ') + 'CH' + (it.ch+1) + '. ' + (ch?ch.title:'');
+  $meta.textContent = (i+1) + ' / ' + queue.length;
+  $fill.style.width = ((i+1)/queue.length*100).toFixed(2) + '%';
+  $ppb.innerHTML = playing ? '⏸ 일시정지<small>스페이스바</small>' : '▶ 재생<small>스페이스바</small>';
+  document.querySelectorAll('.crow').forEach(function(e,n){ e.classList.toggle('cur', n===it.ch); });
+}
+
+function speak(){
+  if(!supported){ $title.textContent='이 브라우저는 음성 재생을 지원하지 않습니다'; return; }
+  if(i >= queue.length){ stop(); i=0; ui(); return; }
+  synth.cancel();
+  var u = new SpeechSynthesisUtterance(queue[i].text);
+  u.lang = 'ko-KR';
+  if(voice) u.voice = voice;
+  u.rate = rate; u.pitch = 1.0; u.volume = 1.0;
+  u.onend = function(){ if(!playing) return; i++; if(i<queue.length){ highlight(); ui(); speak(); } else { stop(); } };
+  u.onerror = function(e){ if(!playing) return; if(e && e.error==='interrupted') return; i++; if(i<queue.length) speak(); else stop(); };
+  synth.speak(u);
+  highlight(); ui();
+}
+
+function start(){
+  if(!supported){ alert('이 브라우저는 음성 읽기(TTS)를 지원하지 않습니다.\n크롬 또는 사파리 최신 버전에서 열어주세요.'); return; }
+  playing = true;
+  if(!voice) pickVoice();
+  speak();
+  if(keepAlive) clearInterval(keepAlive);
+  keepAlive = setInterval(function(){ // Chrome ~15s cutoff workaround
+    if(playing && synth.speaking && !synth.paused){ synth.pause(); synth.resume(); }
+  }, 9000);
+  requestWake();
+  ui();
+}
+function stop(){
+  playing = false;
+  if(keepAlive){ clearInterval(keepAlive); keepAlive=null; }
+  if(supported) synth.cancel();
+  releaseWake();
+  ui();
+}
+window.toggle = function(){ playing ? stop() : start(); };
+
+window.prevCh = function(){
+  var c = queue[i] ? queue[i].ch : 0;
+  var target = (i > chapters[c].start + 1) ? c : Math.max(0, c-1);
+  jump(target);
+};
+window.nextCh = function(){
+  var c = queue[i] ? queue[i].ch : 0;
+  jump(Math.min(chapters.length-1, c+1));
+};
+function jump(c){
+  i = chapters[c].start;
+  chapters[c].el.scrollIntoView({behavior:'smooth', block:'start'});
+  if(playing){ speak(); } else { highlight(); ui(); }
+}
+window.gotoCh = function(c){ jump(c); closeDrawer(); if(!playing) start(); };
+
+/* wake lock so the screen doesn't sleep */
+function requestWake(){
+  try{ if('wakeLock' in navigator){ navigator.wakeLock.request('screen').then(function(w){ wakeLock=w; }).catch(function(){}); } }catch(e){}
+}
+function releaseWake(){ try{ if(wakeLock){ wakeLock.release(); wakeLock=null; } }catch(e){} }
+document.addEventListener('visibilitychange', function(){ if(document.visibilityState==='visible' && playing) requestWake(); });
+
+/* ---------- drawer ---------- */
+var $clist = document.getElementById('clist');
+chapters.forEach(function(ch,n){
+  var d = document.createElement('div');
+  d.className='crow';
+  d.innerHTML = '<div class="i">'+(n+1)+'</div><div class="t">'+ch.title+'</div>';
+  d.onclick = function(){ gotoCh(n); };
+  $clist.appendChild(d);
+});
+var $sp = document.getElementById('speeds');
+[0.9,1.0,1.15,1.3,1.5].forEach(function(r){
+  var b = document.createElement('button');
+  b.className='sp'+(r===1.0?' on':''); b.textContent = r.toFixed(2).replace(/0$/,'')+'x';
+  b.onclick = function(){
+    rate = r;
+    document.querySelectorAll('.sp').forEach(function(e){e.classList.remove('on')});
+    b.classList.add('on');
+    if(playing) speak();
+  };
+  $sp.appendChild(b);
+});
+window.openDrawer = function(){ document.getElementById('drawer').classList.add('open'); };
+window.closeDrawer = function(){ document.getElementById('drawer').classList.remove('open'); };
+
+/* ---------- keyboard ---------- */
+document.addEventListener('keydown', function(e){
+  if(e.code==='Space'){ e.preventDefault(); toggle(); }
+  if(e.code==='ArrowRight'){ e.preventDefault(); nextCh(); }
+  if(e.code==='ArrowLeft'){ e.preventDefault(); prevCh(); }
+});
+window.addEventListener('beforeunload', function(){ if(supported) synth.cancel(); });
+
+ui();
+if(!supported){ $title.textContent = '⚠ 이 브라우저는 음성 읽기를 지원하지 않습니다'; }
+})();
+</script>
+</body>
+</html>
