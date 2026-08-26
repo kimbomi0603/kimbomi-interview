@@ -175,7 +175,7 @@ mark{background:#ffe88a;padding:0 1px}
 <script>
 const P=JSON.parse(document.getElementById('__payload').textContent);
 const {DATA,ARTICLES,REFS,ISSUES,MEDIAS,VOICE,SLOGANS,PLEDGES,PLEDGES11,SPEECH_PLEDGES,PROFILE,KWGROUPS,TIMELINE,CNT}=P;
-let view='today', activeKw=null, q='', showAllKw=false;
+let view='signal', activeKw=null, q='', showAllKw=false;
 // ---- 편집 저장/복원 (localStorage) ----
 const LSKEY='kbm_edits_v6';
 (function(){try{const s=localStorage.getItem(LSKEY);if(s){const ed=JSON.parse(s);ed.forEach(sd=>{const i=DATA.findIndex(d=>d.no===sd.no);if(i>-1)DATA[i]=sd});}}catch(e){}})();
@@ -194,7 +194,7 @@ const QLBL={
 2308:'Q9 2030 이탈 해법',2309:'Q10 앞으로의 계획',2310:'부록 5무 재현 대조표'};
 const qlabel=d=>QLBL[d.no]||d.q.slice(0,15);
 // ---------- NAV ----------
-const NAV=[['today','⭐ 오늘 — 한겨레21(14:00) + 기자회견 Q&A'],['hani','🎙️ 한겨레뷰리핑(7.27)'],['kbc','🎥 KBC광주방송(7.24)'],['sbs','📺 SBS뉴스브리핑(7.23)'],['ytn','🎙️ YTN뉴스명당(7.23 아침)'],['newsba','🔥 뉴스바사삭(7.22)'],['live','🔴 무등의아침(7.22)'],['written','📰 JTBC·서면 인터뷰'],['kw','🔑 키워드별 발언'],['greet','👋 첫인사·마무리'],['pledge11','📜 공약 총정리'],['timeline','📅 날짜별 타임라인'],['speech','🎤 연설·성명'],['about','📋 프로필']];
+const NAV=[['signal','🔴 시그널픽 최종 답변지'],['today','⭐ 오늘 — 한겨레21(14:00) + 기자회견 Q&A'],['hani','🎙️ 한겨레뷰리핑(7.27)'],['kbc','🎥 KBC광주방송(7.24)'],['sbs','📺 SBS뉴스브리핑(7.23)'],['ytn','🎙️ YTN뉴스명당(7.23 아침)'],['newsba','🔥 뉴스바사삭(7.22)'],['live','🔴 무등의아침(7.22)'],['written','📰 JTBC·서면 인터뷰'],['kw','🔑 키워드별 발언'],['greet','👋 첫인사·마무리'],['pledge11','📜 공약 총정리'],['timeline','📅 날짜별 타임라인'],['speech','🎤 연설·성명'],['about','📋 프로필']];
 function renderNav(){const n=document.getElementById('nav');n.innerHTML='';NAV.forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=view===k?'on':'';b.onclick=()=>{view=k;if(k!=='kw')activeKw=null;render()};n.appendChild(b)})}
 
 // ---------- KEYWORD PANEL ----------
@@ -866,9 +866,20 @@ h+='<div class="sec-h">🗺️ 실행 3단계 로드맵 — 말이 아니라 시
 ROAD3.forEach(function(r){h+='<div class="card open"><div class="qhead"><span class="mtag" style="background:#0b7a3d">'+r[0]+'</span><span class="qtxt">'+r[1]+'</span></div><div class="body" style="display:block"><div class="script"><p>'+r[2]+'</p></div></div></div>';});
 m.innerHTML=h;}
 
+function viewSignal(){
+  const m=document.getElementById('main');
+  const main=DATA.filter(d=>d.no>=3001&&d.no<=3011);
+  const app=DATA.filter(d=>d.no>=3012&&d.no<=3022);
+  let html='<div class="hero"><h2>🔴 정치시그널 「시그널픽」 최종 확정 답변지</h2>'+
+    '<p><b>20분 · 본편 11문항 + 돌발 대비 11문항 (2026-08-26 최종)</b> · ★ 표시 = 꼭 해야 할 말 · 전 문항 결론 먼저</p></div>';
+  html+='<div class="sec-h" style="color:#c62828">📌 본편 Q1~Q11 (최종 확정)</div>'+main.map(d=>cardHTML(d,true)).join('');
+  html+='<div class="sec-h">⚡ [부록] 돌발 질문 대비 11문항</div>'+app.map(d=>cardHTML(d,false)).join('');
+  m.innerHTML=html;
+}
 function render(){
   renderNav();renderKwPanel();
-  if(view==='today')viewToday();
+  if(view==='signal')viewSignal();
+  else if(view==='today')viewToday();
   else if(view==='kw')viewKw();
   else if(view==='timeline')viewTimeline();
   else if(view==='live')viewLive();
