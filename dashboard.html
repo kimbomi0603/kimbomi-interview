@@ -181,7 +181,7 @@ const LSKEY='kbm_edits_v6';
 (function(){try{const s=localStorage.getItem(LSKEY);if(s){const ed=JSON.parse(s);ed.forEach(sd=>{const i=DATA.findIndex(d=>d.no===sd.no);if(i>-1)DATA[i]=sd});}}catch(e){}})();
 function persistEdits(){try{localStorage.setItem(LSKEY,JSON.stringify(DATA))}catch(e){}}
 const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-const hl=(s)=>{s=esc(s);if(!q)return s;try{return s.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>')}catch(e){return s}};
+const hl=(s)=>{s=esc(s);if(!q)return s;try{const toks=q.split(/\s+/).filter(Boolean);let out=s;toks.forEach(tk=>{out=out.replace(new RegExp('('+tk.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>')});return out}catch(e){return s}};
 
 const QLBL={
 2351:'Q1 TV토론 총평·수박겉핥기',2352:'Q2 득표율 비공개',2353:'Q3 가장 높은 벽(5일·1천만)',2354:'Q4 운동장 입장불가',
@@ -273,6 +273,49 @@ function issueMatch(k){return ISSUES.filter(i=>i[3].includes(k))}
 function refMatch(k){return REFS.filter(r=>r[3].includes(k))}
 function artMatch(k){return ARTICLES.filter(a=>(a[1]+' '+a[3]).includes(k))}
 function textHit(d){if(!q)return true;const hay=(d.q+' '+(d.script||[]).join(' ')+' '+(d.quotes||[]).map(x=>x[1]).join(' ')+' '+(d.tags||[]).join(' ')+' '+(d.notes||[]).join(' ')).toLowerCase();return hay.includes(q.toLowerCase())}
+function qToks(){return q.toLowerCase().split(/\s+/).filter(Boolean)}
+function hasAll(hay,toks){hay=hay.toLowerCase();return toks.every(tk=>hay.includes(tk))}
+function scoreCard(d,toks){
+  const qt=(d.q||'').toLowerCase();
+  const tags=(d.tags||[]).join(' ').toLowerCase();
+  const quotes=(d.quotes||[]).map(x=>x[1]).join(' ').toLowerCase();
+  const must=(d.script||[]).filter(p=>p.startsWith('★')).join(' ').toLowerCase();
+  const rest=(d.script||[]).filter(p=>!p.startsWith('★')).join(' ').toLowerCase();
+  const notes=(d.notes||[]).join(' ').toLowerCase();
+  if(!hasAll(qt+' '+tags+' '+quotes+' '+must+' '+rest+' '+notes,toks))return 0;
+  let sc=1;
+  toks.forEach(tk=>{
+    if(quotes.includes(tk))sc+=50;
+    if(must.includes(tk))sc+=40;
+    if(rest.includes(tk))sc+=22;
+    if(tags.includes(tk))sc+=30;
+    if(qt.includes(tk))sc+=8;
+    if(notes.includes(tk))sc+=3;
+  });
+  sc+=(d.no||0)/2000; // 최신 카드 소폭 가산
+  return sc;
+}
+function matchedLines(d,toks){
+  const out={quotes:[],must:[],rest:[]};
+  (d.quotes||[]).forEach(x=>{if(hasAllAny(x[1],toks))out.quotes.push(x)});
+  (d.script||[]).forEach(p=>{
+    const m=p.startsWith('★');const body=m?p.slice(1).trim():p;
+    if(hasAllAny(body,toks)){(m?out.must:out.rest).push(body)}
+  });
+  return out;
+}
+function hasAllAny(s,toks){s=(s||'').toLowerCase();return toks.some(tk=>s.includes(tk))}
+function hitCardHTML(d,toks){
+  const ml=matchedLines(d,toks);
+  let quotes=ml.quotes.map(([s2,tx])=>'<div class="quote">&ldquo;'+hl(tx)+'&rdquo;<b>— '+esc(s2)+'</b></div>').join('');
+  let lines=ml.must.map(p=>'<p class="must">'+hl(p)+'</p>').join('')+ml.rest.slice(0,3).map(p=>'<p>'+hl(p)+'</p>').join('');
+  if(!quotes&&!lines){lines=(d.script||[]).slice(0,2).map(p=>'<p>'+hl(p.replace(/^★\s*/,''))+'</p>').join('')}
+  let tags=(d.tags||[]).map(x=>'<span class="t" data-k="'+esc(x)+'">#'+esc(x)+'</span>').join('');
+  return '<div class="card open" data-no="'+d.no+'"><div class="qhead"><span class="mtag">'+esc(d.media)+'</span><span class="qtxt">'+hl(d.q)+'</span><span class="editbtn" data-no="'+d.no+'">✏️</span></div>'+
+    '<div class="body">'+quotes+'<div class="script">'+lines+'</div>'+
+    '<div style="margin-top:6px"><span class="t showfull" data-no="'+d.no+'" style="cursor:pointer">📖 이 카드 전체 보기</span></div>'+
+    (tags?'<div class="tagrow">'+tags+'</div>':'')+'</div></div>';
+}
 
 // ---------- CARD RENDER ----------
 function cardHTML(d,open){
@@ -322,6 +365,34 @@ function viewKw(){
   let html='';
   if(activeKw){html+='<div class="hero"><h2>#'+esc(activeKw)+'</h2><p>이 키워드와 관련된 김보미 발언·답변·이슈·글·기사를 모았습니다. 아래 카드를 눌러 펼쳐보세요.</p></div>'}
   else{html+='<div class="hint">🔎 "'+esc(q)+'" 검색 결과입니다.</div>'}
+  if(q&&!activeKw){
+    const toks=qToks();
+    const ranked=DATA.map(d=>[scoreCard(d,toks),d]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]);
+    // 바로 쓸 발언: 상위 카드의 매칭 quotes·★ 라인, 중복 제거
+    const seen=new Set();const speak=[];
+    ranked.forEach(([sc,d])=>{
+      const ml=matchedLines(d,toks);
+      ml.quotes.forEach(([s2,tx])=>{const k=tx.replace(/\s+/g,'');if(!seen.has(k)&&speak.length<8){seen.add(k);speak.push({tx,src:d})}});
+      ml.must.forEach(tx=>{const k=tx.replace(/\s+/g,'');if(!seen.has(k)&&speak.length<8){seen.add(k);speak.push({tx,src:d})}});
+    });
+    const vs=VOICE.filter(v=>hasAll(v.lines.join(' '),toks));
+    const iss=ISSUES.filter(i=>hasAll(i.join(' '),toks));
+    const rf=REFS.filter(r=>hasAll(r.join(' '),toks));
+    const ar=ARTICLES.filter(a=>hasAll(a.join(' '),toks));
+    const total=ranked.length+vs.length+iss.length+rf.length+ar.length;
+    if(!total){m.innerHTML=html+'<div class="empty">해당 키워드로 찾은 내용이 없습니다. 두 단어로 검색하면 두 단어가 모두 들어간 카드만 나옵니다.</div>';return}
+    if(speak.length){html+='<div class="sec-h">🎯 바로 쓸 수 있는 발언 <span class="count">연관도순 · 중복 제거</span></div>';
+      html+=speak.map(s=>'<div class="quote" style="margin:8px 0">&ldquo;'+hl(s.tx)+'&rdquo;<b>— '+esc(s.src.media)+' · '+esc((s.src.q||'').slice(0,30))+'&hellip;</b></div>').join('');}
+    const top=ranked.slice(0,25);
+    if(top.length){html+='<div class="sec-h">💡 연관 답변 카드 <span class="count">'+ranked.length+'건 중 상위 '+top.length+'건 · 매칭 문장만 발췌</span></div>'+top.map(([sc,d])=>hitCardHTML(d,toks)).join('');}
+    if(iss.length){html+='<div class="sec-h">⚡ 이슈 대응 카드 <span class="count">'+iss.length+'건</span></div>'+iss.map(issueHTML).join('')}
+    if(vs.length){html+='<div class="sec-h">🎤 정견연설 속 목소리</div>'+vs.map(voiceHTML).join('')}
+    if(rf.length){html+='<div class="sec-h">📌 관련 글·성명·공약 <span class="count">'+rf.length+'건</span></div>'+rf.map(refHTML).join('')}
+    if(ar.length){html+='<div class="sec-h">📰 관련 기사 <span class="count">'+ar.length+'건</span></div>'+ar.map(artHTML).join('')}
+    m.innerHTML=html;bindCards();bindTags();
+    m.querySelectorAll('.showfull').forEach(el=>el.onclick=(e)=>{e.stopPropagation();const no=+el.dataset.no;const d=DATA.find(x=>x.no===no);if(!d)return;const card=m.querySelector('.card[data-no="'+no+'"]');if(card){card.outerHTML=cardHTML(d,true);bindCards();bindTags();}});
+    return;
+  }
   const vs=activeKw?voiceMatch(activeKw).filter(textHit):VOICE.filter(v=>v.lines.join(' ').toLowerCase().includes(q.toLowerCase()));
   const ds=(activeKw?dataMatch(activeKw):DATA).filter(textHit);
   const iss=(activeKw?issueMatch(activeKw):ISSUES).filter(i=>!q||(i.join(' ').toLowerCase().includes(q.toLowerCase())));
