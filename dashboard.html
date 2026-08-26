@@ -888,8 +888,8 @@ function viewSignal(){
   let html='<div class="hero"><h2>🔴 채널A 「라디오쇼 정치시그널」 시그널픽 — 8/27(목) 08:35 생방송</h2>'+
     '<p><b>본편 14문항(방송사 질문지 순서) + 돌발 대비 12문항</b> · ★ 표시 = 꼭 해야 할 말 · 전 문항 결론 먼저</p></div>';
   html+='<div class="sec-h" style="color:#c62828">📌 본편 Q1~Q14 (방송사 질문지 순서 · 최종)</div>'+main.map(d=>cardHTML(d,true)).join('');
-  html+='<div class="sec-h">⚡ [부록] 돌발 질문 대비 12문항</div>'+app.map(d=>cardHTML(d,false)).join('');
-  m.innerHTML=html;
+  html+='<div class="sec-h">⚡ [부록] 돌발 질문 대비 12문항</div>'+app.map(d=>cardHTML(d,true)).join('');
+  m.innerHTML=html;bindCards();bindTags();
 }
 function render(){
   renderNav();renderKwPanel();
