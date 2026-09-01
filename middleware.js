@@ -1,46 +1,64 @@
-// 비밀번호 게이트 — 진단 모드
-// 비밀번호 자체는 절대 출력하지 않고, 길이/일치여부만 알려줍니다.
+// 비밀번호 게이트
+//
+// 보안 원칙: 401 응답은 인증 실패 사실 외에 아무것도 알려주지 않는다.
+// 아이디, 비밀번호 길이, 환경변수 설정 여부, 입력값 일치 여부를 노출하면
+// 공격자에게 탐색 범위를 좁혀 주므로 어떤 진단 정보도 출력하지 않는다.
+// (2026-09-01 진단 출력 블록 제거 — 아이디 평문·비밀번호 길이가 공개돼 있었음)
 
 export const config = { matcher: '/(.*)' };
+
+const UNAUTHORIZED = () =>
+  new Response('접근하려면 아이디와 비밀번호가 필요합니다.', {
+    status: 401,
+    headers: {
+      'WWW-Authenticate': 'Basic realm="kimbomi-interview", charset="UTF-8"',
+      'content-type': 'text/plain; charset=utf-8',
+      'cache-control': 'no-store',
+      'x-content-type-options': 'nosniff',
+      'referrer-policy': 'no-referrer'
+    }
+  });
+
+// 길이 정보가 응답 시간으로 새지 않도록 상수 시간에 가깝게 비교한다.
+function safeEqual(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string') return false;
+  const len = Math.max(a.length, b.length);
+  let diff = a.length ^ b.length;
+  for (let i = 0; i < len; i++) {
+    diff |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
+  }
+  return diff === 0;
+}
 
 export default function middleware(request) {
   const rawUser = process.env.SITE_USER;
   const rawPass = process.env.SITE_PASS;
-  const USER = (rawUser === undefined ? 'bomi' : String(rawUser)).trim();
-  const PASS = rawPass === undefined ? undefined : String(rawPass).trim();
+
+  // 환경변수가 없으면 열지 않고 닫는다(fail closed). 아이디 기본값도 두지 않는다.
+  if (rawUser === undefined || rawPass === undefined) return UNAUTHORIZED();
+
+  const USER = String(rawUser).trim();
+  const PASS = String(rawPass).trim();
+  if (USER === '' || PASS === '') return UNAUTHORIZED();
 
   const header = request.headers.get('authorization') || '';
-  let gotUser = null, gotPass = null;
-  if (header.slice(0, 6).toLowerCase() === 'basic ') {
-    try {
-      const d = atob(header.slice(6).trim());
-      const i = d.indexOf(':');
-      if (i > -1) { gotUser = d.slice(0, i); gotPass = d.slice(i + 1); }
-    } catch (e) {}
+  if (header.slice(0, 6).toLowerCase() !== 'basic ') return UNAUTHORIZED();
+
+  let gotUser = '', gotPass = '';
+  try {
+    const decoded = atob(header.slice(6).trim());
+    const i = decoded.indexOf(':');
+    if (i < 0) return UNAUTHORIZED();
+    gotUser = decoded.slice(0, i).trim();
+    gotPass = decoded.slice(i + 1).trim();
+  } catch (e) {
+    return UNAUTHORIZED();
   }
 
-  if (PASS !== undefined && PASS !== '' && gotUser !== null &&
-      gotUser.trim() === USER && gotPass.trim() === PASS) {
-    return; // 통과
-  }
+  // 두 비교를 모두 수행해 어느 쪽이 틀렸는지 응답 시간으로 구분되지 않게 한다.
+  const userOk = safeEqual(gotUser, USER);
+  const passOk = safeEqual(gotPass, PASS);
+  if (userOk && passOk) return;
 
-  // 진단 정보 (값은 노출하지 않음)
-  const diag = [
-    'SITE_PASS 정의됨   : ' + (rawPass !== undefined),
-    'SITE_PASS 글자수   : ' + (rawPass === undefined ? '-' : String(rawPass).length),
-    'SITE_PASS 공백제거 : ' + (PASS === undefined ? '-' : PASS.length),
-    'SITE_USER 값       : ' + USER,
-    '보낸 아이디        : ' + (gotUser === null ? '(없음)' : gotUser),
-    '보낸 비번 글자수   : ' + (gotPass === null ? '-' : gotPass.length),
-    '아이디 일치        : ' + (gotUser !== null && gotUser.trim() === USER),
-    '비번 일치          : ' + (gotPass !== null && PASS !== undefined && gotPass.trim() === PASS),
-  ].join('\n');
-
-  return new Response('접근하려면 아이디와 비밀번호가 필요합니다.\n\n--- 진단 ---\n' + diag, {
-    status: 401,
-    headers: {
-      'WWW-Authenticate': 'Basic realm="kimbomi-interview", charset="UTF-8"',
-      'content-type': 'text/plain; charset=utf-8'
-    }
-  });
+  return UNAUTHORIZED();
 }
