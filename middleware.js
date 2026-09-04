@@ -30,16 +30,42 @@ function safeEqual(a, b) {
   return diff === 0;
 }
 
+// 설정 누락은 응답으로는 알리지 않되(정보 노출 방지) 서버 로그에는 남긴다.
+// Vercel → 프로젝트 → Logs 에서 확인. 이 줄이 찍히면 누가 무엇을 입력해도 로그인이 안 되는 상태다.
+// 필요한 환경변수: SITE_USER, SITE_PASS — 둘 다 Production·Preview 모두 체크할 것.
+// 값을 등록·수정한 뒤에는 반드시 재배포해야 반영된다(환경변수는 배포 시점에 묶인다).
+function logMisconfig(problem) {
+  try {
+    console.error(
+      '[auth-gate] 설정 문제로 모든 로그인이 차단되고 있습니다. ' +
+      problem.join(', ') + ' — ' +
+      'Vercel → Settings → Environment Variables 등록 후 재배포 필요.'
+    );
+  } catch (e) {}
+}
+
 export default function middleware(request) {
   const rawUser = process.env.SITE_USER;
   const rawPass = process.env.SITE_PASS;
 
   // 환경변수가 없으면 열지 않고 닫는다(fail closed). 아이디 기본값도 두지 않는다.
-  if (rawUser === undefined || rawPass === undefined) return UNAUTHORIZED();
+  if (rawUser === undefined || rawPass === undefined) {
+    const missing = [];
+    if (rawUser === undefined) missing.push('SITE_USER 미등록');
+    if (rawPass === undefined) missing.push('SITE_PASS 미등록');
+    logMisconfig(missing);
+    return UNAUTHORIZED();
+  }
 
   const USER = String(rawUser).trim();
   const PASS = String(rawPass).trim();
-  if (USER === '' || PASS === '') return UNAUTHORIZED();
+  if (USER === '' || PASS === '') {
+    const empty = [];
+    if (USER === '') empty.push('SITE_USER 값이 비어 있음');
+    if (PASS === '') empty.push('SITE_PASS 값이 비어 있음');
+    logMisconfig(empty);
+    return UNAUTHORIZED();
+  }
 
   const header = request.headers.get('authorization') || '';
   if (header.slice(0, 6).toLowerCase() !== 'basic ') return UNAUTHORIZED();
