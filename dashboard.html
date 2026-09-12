@@ -394,12 +394,14 @@ function viewKw(){
     const iss=ISSUES.filter(i=>hasAll(i.join(' '),toks));
     const rf=REFS.filter(r=>hasAll(r.join(' '),toks));
     const ar=ARTICLES.filter(a=>hasAll(a.join(' '),toks));
-    const total=ranked.length+vs.length+iss.length+rf.length+ar.length;
+    const au=(AUTO||[]).filter(x=>hasAll([x.topic,x.one_liner,...(x.points||[]),...(x.questions||[]),...(x.ideas||[])].join(' '),toks));
+    const total=ranked.length+vs.length+iss.length+rf.length+ar.length+au.length;
     if(!total){m.innerHTML=html+'<div class="empty">해당 키워드로 찾은 내용이 없습니다. 두 단어로 검색하면 두 단어가 모두 들어간 카드만 나옵니다.</div>';return}
     if(speak.length){html+='<div class="sec-h">🎯 바로 쓸 수 있는 발언 <span class="count">연관도순 · 중복 제거</span></div>';
       html+=speak.map(s=>'<div class="quote" style="margin:8px 0">&ldquo;'+hl(s.tx)+'&rdquo;<b>— '+esc(s.src.media)+' · '+esc((s.src.q||'').slice(0,30))+'&hellip;</b></div>').join('');}
     const top=ranked.slice(0,25);
     if(top.length){html+='<div class="sec-h">💡 연관 답변 카드 <span class="count">'+ranked.length+'건 중 상위 '+top.length+'건 · 매칭 문장만 발췌</span></div>'+top.map(([sc,d])=>hitCardHTML(d,toks)).join('');}
+    if(au.length){html+='<div class="sec-h">🤖 자동 발언포인트 <span class="count">'+au.length+'건 · 매일 아침 심층보고서</span></div>'+au.map(x=>autoCardHTML(x,toks)).join('')}
     if(iss.length){html+='<div class="sec-h">⚡ 이슈 대응 카드 <span class="count">'+iss.length+'건</span></div>'+iss.map(issueHTML).join('')}
     if(vs.length){html+='<div class="sec-h">🎤 정견연설 속 목소리</div>'+vs.map(voiceHTML).join('')}
     if(rf.length){html+='<div class="sec-h">📌 관련 글·성명·공약 <span class="count">'+rf.length+'건</span></div>'+rf.map(refHTML).join('')}
@@ -894,6 +896,12 @@ function viewSignal(){
 
 // ---------- 🤖 자동 발언포인트 (bomi-ops 매일 아침 심층보고서 → data/auto-points.json) ----------
 let AUTO=null;
+function autoCardHTML(x,toks){
+  const pts=(x.points||[]).map(p=>'<div class="quote" style="margin:6px 0">&ldquo;'+(toks?hl(p):esc_(p))+'&rdquo;</div>').join('');
+  return '<div class="card open" style="border-left:5px solid #7b3fe4"><div class="qhead"><span class="mtag" style="background:#7b3fe4">'+esc_(x.date||'')+'</span><span class="qtxt">'+esc_(x.topic||'')+'</span>'+(x.page?'<a href="'+esc_(x.page)+'" style="margin-left:auto;font-size:12px;font-weight:700">보고서 전문 →</a>':'')+'</div><div class="body">'+(x.one_liner?'<div style="color:#2b3444;margin-bottom:6px">'+(toks?hl(x.one_liner):esc_(x.one_liner))+'</div>':'')+pts+'</div></div>';
+}
+// 시작 시 미리 읽어 두면 키워드 검색(🔑 탭)에도 자동 발언포인트가 함께 잡힌다
+fetch('data/auto-points.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.ok?r.json():[]).then(j=>{AUTO=Array.isArray(j)?j:[];if(view==='auto'||q)render();}).catch(()=>{AUTO=[];});
 function esc_(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function viewAuto(){
   const m=document.getElementById('main');
