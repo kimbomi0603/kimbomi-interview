@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>운영 기록 — 사이트 점검·아침 자동화</title>
+<link rel="stylesheet" href="issue-style.css">
+<style>
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{border-bottom:1px solid #e6e2da;padding:8px 6px;text-align:left;vertical-align:top}
+th{background:#f3f0ea;position:sticky;top:48px}.ok{color:#2e6b30;font-weight:700}.bad{color:#b02020;font-weight:700}.warn{color:#8a6a00;font-weight:700}
+.filters{margin:10px 0;display:flex;gap:8px;flex-wrap:wrap}.filters button{border:1px solid #d9e3ef;background:#fff;border-radius:16px;padding:5px 12px;cursor:pointer}
+.filters button.on{background:#1c1a17;color:#fff}.small{color:#6b675f;font-size:12px}
+</style></head><body>
+<div class="topbar"><div class="in"><a href="index.html">← 이슈현안 목록</a><a href="dashboard.html">🥚 김보미 발언 대시보드</a><span class="now" id="now"></span></div></div>
+<div class="wrap">
+<h1>🛠 운영 기록</h1>
+<p class="small">bomi-ops 가 자동으로 남깁니다 — 사이트 전수 점검(05:00·15:00), 아침 자동화(07:30), 수동 메모. 최근 400건.</p>
+<div class="filters"><button data-k="" class="on">전체</button><button data-k="sitecheck">사이트 점검</button><button data-k="morning">아침 자동화</button><button data-k="note">메모</button><button data-k="__bad">문제만</button></div>
+<div style="overflow-x:auto"><table><thead><tr><th style="width:150px">시각</th><th style="width:90px">종류</th><th style="width:70px">상태</th><th>내용</th></tr></thead><tbody id="rows"><tr><td colspan="4">불러오는 중…</td></tr></tbody></table></div>
+</div>
+<script>
+let ALL=[],K='';
+const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function render(){const rows=ALL.filter(x=>K==='__bad'?x.status!=='ok':(!K||x.kind===K));
+ document.getElementById('rows').innerHTML=rows.length?rows.map(x=>'<tr><td>'+esc(x.at)+'</td><td>'+esc({sitecheck:'사이트 점검',morning:'아침 자동화',note:'메모'}[x.kind]||x.kind)+'</td><td class="'+(x.status==='ok'?'ok':x.status==='warn'?'warn':'bad')+'">'+esc({ok:'정상',warn:'주의',bad:'문제'}[x.status]||x.status)+'</td><td>'+esc(x.text).replace(/\n/g,'<br>')+(x.link?' <a href="'+esc(x.link)+'">로그</a>':'')+'</td></tr>').join(''):'<tr><td colspan="4">기록 없음</td></tr>';}
+document.querySelectorAll('.filters button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');K=b.dataset.k;render();});
+fetch('data/ops-log.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(j=>{ALL=Array.isArray(j)?j:[];document.getElementById('now').textContent=(ALL[0]&&ALL[0].at||'')+' 기준';render();}).catch(()=>{document.getElementById('rows').innerHTML='<tr><td colspan="4">불러오기 실패</td></tr>';});
+</script></body></html>
