@@ -194,7 +194,7 @@ const QLBL={
 2308:'Q9 2030 이탈 해법',2309:'Q10 앞으로의 계획',2310:'부록 5무 재현 대조표'};
 const qlabel=d=>QLBL[d.no]||d.q.slice(0,15);
 // ---------- NAV ----------
-const NAV=[['signal','🔴 시그널픽 최종 답변지'],['today','📚 지난 — 한겨레21 + 기자회견'],['hani','🎙️ 한겨레뷰리핑(7.27)'],['kbc','🎥 KBC광주방송(7.24)'],['sbs','📺 SBS뉴스브리핑(7.23)'],['ytn','🎙️ YTN뉴스명당(7.23 아침)'],['newsba','🔥 뉴스바사삭(7.22)'],['live','🔴 무등의아침(7.22)'],['written','📰 JTBC·서면 인터뷰'],['kw','🔑 키워드별 발언'],['greet','👋 첫인사·마무리'],['pledge11','📜 공약 총정리'],['timeline','📅 날짜별 타임라인'],['speech','🎤 연설·성명'],['about','📋 프로필']];
+const NAV=[['signal','🔴 시그널픽 최종 답변지'],['auto','🤖 오늘의 자동 발언포인트'],['today','📚 지난 — 한겨레21 + 기자회견'],['hani','🎙️ 한겨레뷰리핑(7.27)'],['kbc','🎥 KBC광주방송(7.24)'],['sbs','📺 SBS뉴스브리핑(7.23)'],['ytn','🎙️ YTN뉴스명당(7.23 아침)'],['newsba','🔥 뉴스바사삭(7.22)'],['live','🔴 무등의아침(7.22)'],['written','📰 JTBC·서면 인터뷰'],['kw','🔑 키워드별 발언'],['greet','👋 첫인사·마무리'],['pledge11','📜 공약 총정리'],['timeline','📅 날짜별 타임라인'],['speech','🎤 연설·성명'],['about','📋 프로필']];
 function renderNav(){const n=document.getElementById('nav');n.innerHTML='';NAV.forEach(([k,l])=>{const b=document.createElement('button');b.textContent=l;b.className=view===k?'on':'';b.onclick=()=>{view=k;if(k!=='kw')activeKw=null;render()};n.appendChild(b)})}
 
 // ---------- KEYWORD PANEL ----------
@@ -891,9 +891,42 @@ function viewSignal(){
   html+='<div class="sec-h">⚡ [부록] 돌발 질문 대비 12문항</div>'+app.map(d=>cardHTML(d,true)).join('');
   m.innerHTML=html;bindCards();bindTags();
 }
+
+// ---------- 🤖 자동 발언포인트 (bomi-ops 매일 아침 심층보고서 → data/auto-points.json) ----------
+let AUTO=null;
+function esc_(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function viewAuto(){
+  const m=document.getElementById('main');
+  if(AUTO===null){
+    m.innerHTML='<div class="sec-h">🤖 오늘의 자동 발언포인트</div><div class="empty">불러오는 중…</div>';
+    fetch('data/auto-points.json?v='+Date.now(),{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()})
+      .then(j=>{AUTO=Array.isArray(j)?j:[];if(view==='auto')viewAuto();})
+      .catch(e=>{AUTO=[];if(view==='auto')viewAuto();});
+    return;
+  }
+  const hit=x=>!q||(x.topic+' '+x.one_liner+' '+(x.points||[]).join(' ')+' '+(x.questions||[]).join(' ')+' '+(x.ideas||[]).join(' ')).includes(q);
+  const list=AUTO.filter(hit);
+  let html='<div class="sec-h">🤖 오늘의 자동 발언포인트 <span style="font-size:12px;font-weight:600;color:var(--gray)">매일 아침 심층보고서에서 자동 추출 · Gemini 작성 · Groq 교차검토 · '+AUTO.length+'건</span></div>';
+  if(!list.length){m.innerHTML=html+'<div class="empty">아직 자동 발언포인트가 없습니다. 내일 아침 7:30 첫 보고서부터 쌓입니다.</div>';return;}
+  html+=list.map(x=>{
+    const pts=(x.points||[]).map(p=>'<li>★ '+esc_(p)+'</li>').join('');
+    const qs=(x.questions||[]).map(p=>'<li>'+esc_(p)+'</li>').join('');
+    const ids=(x.ideas||[]).map(p=>'<li>'+esc_(p)+'</li>').join('');
+    return '<div class="card" style="background:#fff;border:1px solid var(--line);border-left:5px solid #7b3fe4;border-radius:12px;padding:14px 16px;margin:0 0 12px;box-shadow:0 2px 8px rgba(31,78,121,.08)">'
+      +'<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:6px"><span style="background:#7b3fe4;color:#fff;border-radius:6px;padding:2px 8px;font-size:12px;font-weight:700">'+esc_(x.date||'')+'</span><b style="font-size:16px">'+esc_(x.topic||'')+'</b>'
+      +(x.page?'<a href="'+esc_(x.page)+'" style="margin-left:auto;font-size:13px;font-weight:700">보고서 전문 →</a>':'')+'</div>'
+      +(x.one_liner?'<div style="color:#2b3444;margin-bottom:8px">'+esc_(x.one_liner)+'</div>':'')
+      +(pts?'<div style="font-weight:800;color:#7b3fe4;margin-top:6px">🗣️ 발언 포인트</div><ul style="margin:4px 0 8px 18px;padding:0">'+pts+'</ul>':'')
+      +(qs?'<details style="margin:4px 0"><summary style="cursor:pointer;font-weight:700;color:var(--blue)">❓ 예상 질문 '+(x.questions||[]).length+'개</summary><ul style="margin:4px 0 4px 18px;padding:0">'+qs+'</ul></details>':'')
+      +(ids?'<details style="margin:4px 0"><summary style="cursor:pointer;font-weight:700;color:var(--green)">💡 실행 아이디어 '+(x.ideas||[]).length+'개</summary><ul style="margin:4px 0 4px 18px;padding:0">'+ids+'</ul></details>':'')
+      +'</div>';
+  }).join('');
+  m.innerHTML=html;
+}
 function render(){
   renderNav();renderKwPanel();
   if(view==='signal')viewSignal();
+  else if(view==='auto')viewAuto();
   else if(view==='today')viewToday();
   else if(view==='kw')viewKw();
   else if(view==='timeline')viewTimeline();
