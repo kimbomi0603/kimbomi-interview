@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>162조 미래대응기금 — 국회 통제를 벗어나는가</title>
+<link rel="stylesheet" href="issue-style.css">
+<style>
+.player{position:sticky;top:52px;z-index:40;background:#211d17;color:#fff;border-radius:12px;padding:12px 16px;margin:0 0 26px}
+.player .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.player button{background:#e8c34d;color:#211d17;border:none;border-radius:8px;padding:7px 13px;font-weight:800;font-size:13.5px;cursor:pointer}
+.player button.ghost{background:rgba(255,255,255,.14);color:#fff}
+.player button:disabled{opacity:.4;cursor:default}
+.player .st{font-size:12.5px;color:#c9c2b4;margin-left:auto;text-align:right}
+.player .bar{height:4px;background:rgba(255,255,255,.16);border-radius:99px;margin-top:11px;overflow:hidden}
+.player .bar i{display:block;height:100%;width:0;background:#e8c34d;border-radius:99px;transition:width .3s}
+.player .tip{font-size:11.5px;color:#9a9287;margin-top:8px;line-height:1.5}
+.voiceonly{display:none}
+.reading{background:#fff3c4;box-shadow:0 0 0 6px #fff3c4;border-radius:3px}
+.srcs li{margin-bottom:7px;line-height:1.6}
+.fcheck{margin:22px 0;border:1.5px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
+.fcheck h3{margin:0;padding:13px 18px;font-size:15px;background:#f1eee9;border-bottom:1px solid var(--line)}
+.fcheck ul{margin:0;padding:14px 18px 16px 34px;font-size:14.5px}
+.fcheck li{margin-bottom:9px}
+.fc-ok::marker{content:'확인  '}
+.tag{display:inline-block;font-size:11.5px;font-weight:800;border-radius:999px;padding:2px 9px;vertical-align:2px;margin-right:6px}
+.tag.ok{background:#eaf5ee;color:#2e7d46}
+.tag.dispute{background:#fbf3e6;color:#b06a12}
+.tag.no{background:#fdf1f1;color:#b02020}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="index.html">← 이슈현안 목록</a><a href="dashboard.html">🥚 김보미 발언 대시보드</a>
+  <span class="now">2026.9.13 기준 · 원문 교차검증</span>
+</div></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">이슈현안 심층분석 · 재정</div>
+  <h1>162조 미래대응기금 —<br>국회 승인 없이 30%를 움직일 수 있는 돈</h1>
+  <p class="sub">반도체 호황으로 들어온 세수 162조 3천억을 별도 기금에 담는다. 그중 104조 4천억은 쓰지 않고 쌓아 둔다. 그런데 국회가 정한 항목별 지출액을 정부가 국회에 다시 묻지 않고 30%까지 바꿀 수 있게 하는 법 개정이 함께 간다. 입법예고 기간은 5일이었다.</p>
+  <div class="pathnote">📖 <b>읽는 법:</b> Lv.1 왕초보 → Lv.2 사실관계 → Lv.3 여야·이해관계자 → Lv.4 전문가 심화 → Lv.5 인터뷰 대비. 맨 아래에 <b>팩트체크 노트</b>(확인된 것과 아직 쟁점인 것의 구분)와 출처. 시간이 없으면 Lv.1과 Lv.5만 보셔도 됩니다.</div>
+</header>
+
+<div class="player" id="player">
+  <div class="row">
+    <button id="pbtn">▶ 듣기</button>
+    <button class="ghost" id="prevbtn">◀◀ 이전 단계</button>
+    <button class="ghost" id="nextbtn">다음 단계 ▶▶</button>
+    <button class="ghost" id="rbtn">배속 1.0×</button>
+    <button class="ghost" id="sbtn">■ 정지</button>
+    <span class="st" id="pst">운전 중 듣기용 · 표·각주는 건너뛰고 본문만 읽습니다</span>
+  </div>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="tip">아이폰은 화면이 꺼지면 낭독이 멈춥니다. 거치대에 화면을 켜 둔 채로 들으세요. 안드로이드는 화면을 꺼도 대체로 이어집니다.</div>
+</div>
+
+<!-- ============ Lv.1 ============ -->
+<section class="lv lv1" id="lv1">
+  <div class="lvhead"><span class="lvbadge">Lv.1 왕초보</span><h2>초등학생도 이해하는 한 줄 설명</h2></div>
+  <p class="lvdesc">재정이 뭔지 몰라도 여기서부터 읽으면 됩니다</p>
+
+  <div class="box key"><span class="bt">한 줄 요약</span>
+    <p class="say">반도체가 잘 팔려서 나라에 세금이 예상보다 훨씬 많이 걷혔습니다. 정부는 그 돈을 나랏빚 갚는 데 쓰는 대신 <strong>미래대응기금</strong>이라는 새 통장을 만들어 162조 3천억 원을 넣기로 했습니다. 문제는 돈의 액수가 아니라 <strong>누가 그 돈을 감시하느냐</strong>입니다. 함께 추진되는 법 개정안은 국회가 정해 준 항목별 금액을 정부가 국회에 다시 묻지 않고 30퍼센트까지 늘리거나 줄일 수 있게 합니다.</p>
+  </div>
+
+  <div class="box analogy"><span class="bt">🏫 학교로 비유하면</span>
+    <p class="say">학교 바자회가 대박이 나서 돈이 왕창 남았습니다. 선생님이 말합니다. 이 돈은 학생회 예산으로 안 넣고 따로 통장을 만들어 두겠다, 나중에 좋은 데 쓰겠다. 학생들이 묻습니다. 그럼 그 통장은 누가 검사해요? 선생님이 답합니다. 내가 검사할게. 그리고 학생회가 정해 준 항목별 금액도 내가 30퍼센트까지는 알아서 바꿔 쓸게. 돈을 좋은 데 쓰겠다는 말은 맞을 수도 있습니다. 그런데 검사를 스스로 하겠다는 부분은 다른 이야기입니다. 지금 국회에서 벌어지는 논쟁이 정확히 이 구조입니다.</p>
+  </div>
+
+  <div class="box"><span class="bt">꼭 알아야 할 낱말 네 개</span>
+    <dl class="gloss">
+      <dt>기금</dt>
+      <dd class="say">정부 돈에는 크게 예산과 기금이 있습니다. 예산은 해마다 국회가 하나하나 따져서 승인합니다. 기금은 특정 목적을 위해 따로 떼어 두고 조금 더 자유롭게 굴리는 돈입니다. 국회 심사를 아예 안 받는 건 아니지만, 예산보다 손대기가 쉽습니다.</dd>
+      <dt>추가세수</dt>
+      <dd class="say">최근 십 년간의 세금 추세선을 그렸을 때, 그 선보다 더 걷힌 부분을 말합니다. 미래대응기금은 이 초과분을 재원으로 삼습니다.</dd>
+      <dt>주요항목 지출금액</dt>
+      <dd class="say">국회가 승인할 때 그냥 통째로 승인하는 게 아니라 항목별로 얼마씩 쓰라고 정해 줍니다. 이번 논쟁의 30퍼센트는 기금 전체의 30퍼센트가 아니라 바로 이 항목별 금액의 30퍼센트입니다. 이 구분이 중요합니다.</dd>
+      <dt>관리재정수지</dt>
+      <dd class="say">나라 살림이 흑자냐 적자냐를 볼 때 국민연금 같은 사회보장성 기금을 빼고 계산한 지표입니다. 정부의 진짜 살림살이를 보는 숫자라고 생각하시면 됩니다.</dd>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ Lv.2 ============ -->
+<section class="lv lv2" id="lv2">
+  <div class="lvhead"><span class="lvbadge">Lv.2 사실관계</span><h2>숫자와 날짜로 확인된 것</h2></div>
+  <p class="lvdesc">아래 숫자는 2027년도 예산안과 복수 언론 보도를 대조해 일치하는 것만 실었습니다</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="n">820.9<small>조</small></div><div class="l">2027년 총지출<br>전년 본예산 대비 93조·12.8% 증가</div></div>
+    <div class="tile"><div class="n">162.3<small>조</small></div><div class="l">미래대응기금 규모<br>67개 기금 중 세 번째</div></div>
+    <div class="tile"><div class="n">104.4<small>조</small></div><div class="l">쓰지 않고 쌓아 두는<br>여유자금</div></div>
+    <div class="tile"><div class="n">45.4<small>조</small></div><div class="l">내년에 실제 집행하는<br>사업비 (140개 사업)</div></div>
+    <div class="tile"><div class="n">30<small>%</small></div><div class="l">국회 재의결 없이 바꿀 수 있는<br>주요항목 지출액 한도</div></div>
+    <div class="tile"><div class="n">5<small>일</small></div><div class="l">입법예고 기간<br>행정절차법 원칙은 40일 이상</div></div>
+  </div>
+
+  <p class="say">핵심 숫자를 말로 정리하면 이렇습니다. 내년 총지출은 820조 9천억 원으로 올해 본예산보다 93조 원, 12.8퍼센트 늘어납니다. 총지출이 800조를 넘은 건 처음이고, 증가율도 금융위기 직후인 2009년의 10.6퍼센트를 웃돕니다. 이게 가능한 이유는 세금입니다. 내년 국세수입 전망이 584조 4천억 원으로 올해보다 약 50퍼센트 늘어납니다. 반도체 호황에 따른 법인세 증가가 주된 이유입니다.</p>
+
+  <h3>기금은 어떻게 쪼개져 있나</h3>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>계정</th><th>배정액</th><th>성격</th></tr></thead>
+    <tbody>
+      <tr><td><b>총괄계정</b></td><td class="n">109조 4천억</td><td>세수 결손·경기 변동에 대비하는 재정안정화 기능. 이 중 12조 5천억은 국채 상환에 사용</td></tr>
+      <tr><td>청년계정</td><td class="n">13조 3천억</td><td rowspan="4">4대 사업계정 합계 52조 9천억.<br>이 중 내년 실제 집행액은 45조 4천억<br>(지방계정 5조, 교육·인재계정 2조 5천억은 이월)</td></tr>
+      <tr><td>성장동력계정</td><td class="n">14조 2천억</td></tr>
+      <tr><td>지방계정</td><td class="n">15조 3천억</td></tr>
+      <tr><td>교육·인재계정</td><td class="n">10조 1천억</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="say voiceonly">기금 구성을 말로 설명하면, 총괄계정에 109조 4천억 원이 들어갑니다. 전체의 약 70퍼센트입니다. 이 중 12조 5천억 원은 국채를 갚는 데 씁니다. 나머지 30퍼센트인 52조 9천억 원이 네 개 사업계정으로 갑니다. 청년 13조 3천억, 성장동력 14조 2천억, 지방 15조 3천억, 교육·인재 10조 1천억입니다. 다만 이 돈을 내년에 다 쓰는 건 아니고, 실제 집행액은 45조 4천억 원입니다.</p>
+
+  <p class="say">그리고 이 모든 계산을 마친 뒤 남는 돈이 104조 4천억 원입니다. 이 돈은 민간 금융기관 등에 맡겨 운용할 계획이고, 정부가 잡은 목표 수익률은 3.85퍼센트입니다. 이 숫자가 나중에 야당 비판의 핵심 근거가 됩니다.</p>
+
+  <h3>어떻게 여기까지 왔나</h3>
+  <div class="timeline">
+    <div class="tl"><div class="d">2026년 5월</div><div class="t say">김용범 당시 청와대 정책실장이 초과세수를 어떻게 쓸 것인가를 처음 공론화합니다.</div></div>
+    <div class="tl"><div class="d">8월 21일</div><div class="t say">기획예산처가 재정운용전략협의회에서 미래대응기금 추진방안을 발표합니다. 같은 날 국회 의원회관에서 당정협의가 열립니다. 이 시점의 언론 보도에서는 기금 규모를 100조 원 안팎으로 전망했습니다.</div></div>
+    <div class="tl"><div class="d">8월 24일~28일</div><div class="t say">미래대응기금 설치 및 운용에 관한 법률 제정안과 국가재정법 개정안을 묶어 입법예고합니다. 기간은 닷새였습니다.</div></div>
+    <div class="tl"><div class="d">8월 24일</div><div class="t say">국회 예산결산특별위원회 종합정책질의에서 여야가 처음 정면으로 부딪칩니다.</div></div>
+    <div class="tl"><div class="d">9월 1일</div><div class="t say">국무회의가 2027년도 예산안과 미래대응기금법안을 의결합니다. 기금 규모는 예상을 훌쩍 뛰어넘은 162조 3천억 원으로 확정됩니다. 같은 날 정기국회가 개회합니다.</div></div>
+    <div class="tl"><div class="d">9월 8일</div><div class="t say">참여자치지역운동연대가 성명을 내고 전면 재검토를 요구합니다. 참여연대도 지방 소멸 위기를 외면한다는 제목의 성명을 냅니다.</div></div>
+    <div class="tl"><div class="d">9월 10일</div><div class="t say">국민의힘 박수영 의원과 김우철 한국재정학회장이 토론회에서 106조를 빚내 104조를 적립하는 돌려막기라는 분석을 내놓습니다.</div></div>
+    <div class="tl"><div class="d">9월 11일</div><div class="t say">기획예산처가 경제·인문사회연구회, 한국개발연구원과 함께 2027년 예산안 및 미래대응기금 토론회를 엽니다. 조용범 기획처 차관은 재정 역사에 전례가 없는 제도라고 말합니다.</div></div>
+  </div>
+</section>
+
+<!-- ============ Lv.3 ============ -->
+<section class="lv lv3" id="lv3">
+  <div class="lvhead"><span class="lvbadge">Lv.3 여야·이해관계자</span><h2>누가 무엇을 말하고 있나</h2></div>
+  <p class="lvdesc">이 이슈의 특징은 찬반이 깔끔하게 갈리지 않는다는 점입니다</p>
+
+  <div class="box warn"><span class="bt">⚠️ 먼저 알아 둘 것</span>
+    <p class="say">여야가 정면으로 맞서는 구도처럼 보이지만, 실제로는 그렇지 않습니다. 기금이 필요하다는 데에는 대체로 공감대가 있습니다. 세수가 이례적으로 급등했으니 어떤 형태로든 저수지에 담는 게 낫다는 것입니다. 여야가 실제로 부딪치는 지점은 기금의 존재 여부가 아니라 <strong>국회의 통제권을 어디까지 내줄 것인가</strong>입니다. 그리고 국회 통제가 약화될 수 있다는 우려 자체에는 여당 의원들도 공감을 표한 상태입니다. 인터뷰에서 이 구도를 잘못 잡으면 답변 전체가 어긋납니다.</p>
+  </div>
+
+  <div class="vs">
+    <div class="dem">
+      <h4>🔵 정부·여당 — "재정 댐이 필요하다"</h4>
+      <ul>
+        <li>박홍근 기획예산처 장관은 미래대응기금을 대규모 세수를 생산적 지출로 활용하기 위한 전략적 투자 플랫폼이자 재정안정화 장치로 설명하고, 재정 저수지라는 표현을 씁니다.</li>
+        <li>통제 우회 지적에 대해서는 이 기금도 다른 예산·기금과 똑같이 국가재정법과 국회의 통제·규율을 따르며, 모든 사업이 국회의 사전 심의·의결을 거친다고 반박합니다.</li>
+        <li>민주당 안도걸 의원은 경기와 세수의 변동성이 심한 만큼 호황기에 적립해 결손기에 쓰는 재정 댐이 필요하다고 주장합니다.</li>
+        <li>추경은 편성부터 집행까지 오래 걸리는데 기금은 경제 급변 시 신속 대응이 가능하다는 점을 장점으로 듭니다.</li>
+      </ul>
+      <div class="quote"><b>조용범 기획처 차관</b><br>단년도 예산의 한계를 넘어 미래를 위해 적립한다는 점에서 우리 재정 역사에 전례가 없는 제도라고 평가했습니다.</div>
+    </div>
+    <div class="ppp">
+      <h4>🔴 야당 — "국회를 피해 가는 쌈짓돈"</h4>
+      <ul>
+        <li>임이자 의원은 AI와 첨단산업, 미래 인재에 과감히 투자하자는 명분 자체는 반대하지 않는다면서도, 이 기금이 국회 통제를 피해 언제든 꺼내 쓰는 쌈짓돈으로 변질될 우려가 매우 크다고 지적했습니다.</li>
+        <li>조배숙 의원은 제대로 운영하려면 국채부터 갚아야 한다며, 국가재정법 조항을 들어 국회 통제를 비켜 가며 전용할 여지가 있다고 말했습니다.</li>
+        <li>박수영 의원은 106조를 빚내서 104조를 통장에 넣는 돌려막기라고 규정하고, 금리와 목표수익률에 차이가 없어 기대 순수익은 거의 없고 이자만 연 3조에서 4조 원 발생할 것이라고 주장했습니다.</li>
+        <li>국민의힘은 정기국회에서 견제 장치 마련을 예고한 상태입니다.</li>
+      </ul>
+      <div class="quote"><b>박수영 의원</b><br>현금성 지원과 기존 예산의 이전 등 굳이 따로 편성할 필요 없는 예산 투성이라며, 국회 감시를 피하려는 것이라고 비판했습니다.</div>
+    </div>
+  </div>
+
+  <p class="say voiceonly">정부와 여당은 재정 댐이 필요하다는 입장입니다. 박홍근 기획예산처 장관은 이 기금을 전략적 투자 플랫폼이자 재정안정화 장치라고 설명하며 재정 저수지라는 표현을 씁니다. 통제 우회 지적에는 이 기금도 다른 기금과 똑같이 국가재정법과 국회의 통제를 따른다고 반박합니다. 민주당 안도걸 의원은 세수 변동성이 클 때 호황기에 적립해 결손기에 쓰는 재정 댐이 필요하다고 주장했습니다. 반면 야당은 국회를 피해 가는 쌈짓돈이라고 봅니다. 국민의힘 임이자 의원은 투자한다는 명분 자체는 반대하지 않지만 국회 통제를 피해 언제든 꺼내 쓰는 쌈짓돈으로 변질될 우려가 크다고 했고, 조배숙 의원은 제대로 운영하려면 국채부터 갚아야 한다고 말했습니다. 박수영 의원은 106조를 빚내서 104조를 통장에 넣는 돌려막기라고 규정했습니다.</p>
+
+  <h3>정당 밖의 목소리</h3>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>주체</th><th>핵심 주장</th></tr></thead>
+    <tbody>
+      <tr><td><b>참여연대</b></td><td>지방 소멸 위기를 외면하는 기금이라며 재검토를 촉구. 지방계정 15조 3천억이 편성돼도 사용처는 결국 중앙정부가 결정하므로, 지방정부가 자율적으로 쓸 수 있는 재원이 줄어든다는 문제는 달라지지 않는다는 지적</td></tr>
+      <tr><td><b>참여자치지역운동연대</b></td><td>9월 8일 성명. 세수 증가분 배분 방식이 문제의 핵심이며, 지자체에 법적으로 배분되는 재원이 상대적으로 줄어들 수 있다고 주장. 국회에 지역 시민사회와의 충분한 논의를 요구</td></tr>
+      <tr><td><b>경제정의실천시민연합</b></td><td>820조 슈퍼예산에 경고음을 내며 기금에 대한 통제 강화를 요구</td></tr>
+      <tr><td><b>김우철 한국재정학회장</b><br>(서울시립대)</td><td>정부 전체를 하나의 대차대조표로 보면, 적자가 거의 없는 해에 채무가 106조 원 늘어나는 이유는 미래대응기금 적립금 하나뿐이라는 분석</td></tr>
+      <tr><td><b>정부 내부</b></td><td>기금 예산안에 추경 없이 기금 변경으로 탄력 대응이 가능하다고 명시된 점을 두고, 재정경제부 내부망에 국회 통제를 벗어나 헌법상 재정 규율을 우회하려는 꼼수라는 비판 글이 올라온 것으로 보도됨</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="say voiceonly">정당 밖의 목소리도 중요합니다. 참여연대는 지방 소멸 위기를 외면하는 기금이라며 재검토를 촉구했습니다. 지방계정에 15조 3천억이 편성되더라도 사용처는 결국 중앙정부가 결정하므로, 지방정부가 자율적으로 쓸 수 있는 재원이 줄어든다는 문제는 그대로라는 지적입니다. 참여자치지역운동연대도 9월 8일 성명을 내고 같은 취지로 전면 재검토를 요구했습니다. 경실련은 기금 통제 강화를 요구했습니다. 김우철 한국재정학회장은 적자가 거의 없는 해에 국가채무가 106조 원 늘어나는 이유는 미래대응기금 적립금 하나뿐이라고 분석했습니다. 주목할 점은 정부 내부에서도 비판이 나왔다는 것입니다. 재정경제부 내부망에 헌법상 재정 규율을 우회하려는 꼼수라는 글이 올라온 것으로 보도됐습니다.</p>
+</section>
+
+<!-- ============ Lv.4 ============ -->
+<section class="lv lv4" id="lv4">
+  <div class="lvhead"><span class="lvbadge">Lv.4 전문가 심화</span><h2>조문과 구조로 들어가기</h2></div>
+  <p class="lvdesc">여기부터는 인터뷰에서 한 발 더 들어온 질문이 왔을 때 쓰는 내용입니다</p>
+
+  <h3>1. 30퍼센트 조항의 정확한 의미</h3>
+  <p class="say">가장 많이 틀리는 부분부터 짚겠습니다. 국가재정법 제70조 제3항은 국회가 승인한 주요항목별 지출금액을 정부가 국회에 변경안을 내지 않고 조정할 수 있는 한도를 정합니다. 현행은 금융성 기금 30퍼센트, 그 밖의 기금 20퍼센트입니다. 이번 개정안은 제1호에서 미래대응기금을 빼고 제2호에 넣어서, 금융성 기금과 같은 30퍼센트 한도를 적용받게 했습니다. 미래대응기금을 금융성 기금으로 지정한 건 아니고, 변경 한도만 똑같이 취급하겠다는 것입니다.</p>
+
+  <div class="box warn"><span class="bt">⚠️ 가장 흔한 오해</span>
+    <p class="say">기금이 162조니까 정부가 48조를 마음대로 쓴다는 말은 사실이 아닙니다. 30퍼센트는 기금 전체 규모가 아니라 국회가 먼저 심의한 주요항목별 지출금액에 적용됩니다. 국회가 어떤 항목에 10조를 반영했다면, 정부는 변경안을 내지 않고 그 항목을 3조 범위에서 늘리거나 줄일 수 있다는 뜻입니다. 상대가 이 점을 파고들면 반박당하기 쉬우니, 정확히 알고 말씀하시는 편이 훨씬 강합니다. <strong>비판의 힘은 과장이 아니라 정확함에서 나옵니다.</strong></p>
+  </div>
+
+  <p class="say">그렇다면 왜 여전히 문제인가. 첫째, 기금 규모 자체가 전례 없이 크기 때문에 항목별 30퍼센트도 절대 금액으로는 막대합니다. 둘째, 사업성 기금에 적용되는 20퍼센트가 아니라 금융성 기금 기준인 30퍼센트를 적용할 근거가 무엇인지 설명이 충분하지 않습니다. 미래대응기금은 청년, 성장동력, 지방, 교육·인재 등 정책사업에 직접 투자하는 사업성 기금의 성격이 강한데, 변경 재량은 금융성 기금 수준으로 받겠다는 것이기 때문입니다. 셋째, 이 기금은 네 개 사업계정을 가진 다부처 기금이어서 항목 수 자체가 많습니다.</p>
+
+  <h3>2. 심의도 결산도 스스로 한다</h3>
+  <p class="say">미래대응기금법은 미래대응기금운용심의회를 신설합니다. 이 심의회가 기금의 관리와 운용, 운용계획 수립과 변경, 기금 결산을 담당합니다. 그런데 심의회 위원장은 기금을 주관하는 기획예산처 장관이 맡습니다. 기금을 만든 부처의 장관이 그 기금의 운용계획을 심의하고 결산까지 하는 구조입니다. 기획처는 다부처 기금은 주무부처의 장이 위원장을 맡는 게 일반적이라고 설명합니다. 관행상 틀린 말은 아닙니다. 다만 통제를 벗어난다는 지적을 받고 있는 기금에 그 관행을 그대로 적용하는 게 적절한가는 별개의 문제입니다.</p>
+
+  <h3>3. 닷새짜리 입법예고</h3>
+  <p class="say">행정절차법 제43조는 특별한 사정이 없으면 입법예고 기간을 40일 이상으로 하도록 규정합니다. 미래대응기금법 제정안과 국가재정법 개정안의 입법예고는 8월 24일부터 28일까지, 닷새였습니다. 재정 역사에 전례가 없는 제도라고 정부 스스로 말하는 법안의 의견 수렴 기간이 법정 원칙의 8분의 1이었다는 뜻입니다. 절차의 문제는 내용의 옳고 그름과 별개로 성립하는 비판이고, 재정 감시를 하는 쪽에서는 가장 다투기 쉬운 지점이기도 합니다.</p>
+
+  <h3>4. 적자는 3조인데 빚은 106조 느는 이유</h3>
+  <p class="say">정부는 내년 관리재정수지 적자를 3조 1천억 원, GDP 대비 마이너스 0.1퍼센트로 잡았습니다. 올해 본예산의 마이너스 3.9퍼센트에서 크게 개선된 수치입니다. 그런데 같은 예산안에서 국가채무 증가액은 106조 원입니다. 살림은 거의 균형인데 빚은 100조 넘게 는다는 뜻입니다. 김우철 한국재정학회장은 그 이유가 미래대응기금 적립금 하나라고 분석했습니다. 쉽게 말해, 들어온 돈을 빚 갚는 데 쓰지 않고 통장에 넣어 두니 빚은 그대로 남는다는 것입니다.</p>
+  <p class="say">여기서 야당의 돌려막기 비판이 나옵니다. 104조 4천억 원을 민간 금융기관에 맡겨 운용하는데 목표수익률이 3.85퍼센트입니다. 국채 조달금리와 큰 차이가 없으면 기대 순수익은 거의 없고 이자 부담만 남는다는 논리입니다. 다만 이 계산은 국민의힘 박수영 의원실과 김우철 회장의 분석이라는 점, 그리고 조달금리 전망에 따라 결론이 달라질 수 있다는 점은 함께 말씀하시는 게 안전합니다.</p>
+  <p class="say">정부 쪽 반론도 성립합니다. 저수지의 목적은 수익이 아니라 대비라는 것입니다. 세수가 급감했을 때 국채를 새로 찍는 것보다 쌓아 둔 돈을 꺼내 쓰는 편이 낫다면, 보유 비용은 일종의 보험료로 볼 수 있습니다. 문제는 그 보험료가 연 3조에서 4조 원이 적정한가, 그리고 그 판단을 누가 검증하느냐입니다.</p>
+
+  <h3>5. 지방으로 갈 돈이 줄어드는 구조</h3>
+  <p class="say">이 부분이 지역 현장에서 가장 크게 체감될 대목입니다. 정부는 지방교육재정교부금의 내국세 연동 방식을 55년 만에 개편하고, 지방교부세를 산정할 때도 미래대응기금에 적립되는 추가세수를 제외하는 방안을 추진하고 있습니다. 교육교부금과 지방교부세는 내국세가 늘면 자동으로 함께 늘어나는 구조였는데, 이번 세수 급증분은 그 자동 연동에서 빼겠다는 것입니다. 정부는 교육교부금 32조 5천억, 지방교부세 30조 5천억 등을 포함해 의무지출을 기존 제도 유지 때보다 69조 원 줄이는 효과가 있다고 설명합니다.</p>
+  <p class="say">정부 입장에서는 경직적인 의무지출을 합리화한 것입니다. 그러나 지방 입장에서는 반도체 호황으로 늘어난 세수의 몫이 자동으로 내려오지 않게 된 것입니다. 대신 지방계정 15조 3천억이 생겼지만, 참여연대 지적처럼 그 돈의 사용처는 중앙정부가 정합니다. 법적으로 배분되던 재원이 중앙이 용처를 정하는 재원으로 바뀐 셈입니다. <strong>자동으로 내려오던 돈이 심사를 거쳐 내려오는 돈으로 바뀐 것</strong>, 이것이 지방분권 관점에서 본 이번 개편의 핵심입니다.</p>
+
+  <h3>6. 기존 제도와 겹치지 않는가</h3>
+  <p class="say">전문가들이 제기하는 또 하나의 물음은 기능 중복입니다. 미래대응기금이 청년, 성장동력, 지방, 교육 분야에 직접 투자한다는 점에서는 공공자금관리기금과 분명히 다릅니다. 그러나 재정안정화 기능과 정부 내 여유자금을 예수·예탁하는 기능에서는 기존 공공자금관리기금과 겹칠 여지가 있습니다. 참고로 공공자금관리기금은 328조 원으로 국내 기금 중 가장 큽니다. 새로 162조짜리 기금을 만들기 전에, 기존 제도를 보완하는 방식으로는 왜 안 되는지에 대한 설명이 필요하다는 지적입니다. 기금은 이번 개편으로 67개에서 3개가 폐지되고 5개가 신설돼 69개가 되고, 특별회계는 21개에서 22개로 늘어납니다.</p>
+</section>
+
+<!-- ============ Lv.5 ============ -->
+<section class="lv lv5" id="lv5">
+  <div class="lvhead"><span class="lvbadge">Lv.5 인터뷰 대비</span><h2>나올 질문과 답변 뼈대</h2></div>
+  <p class="lvdesc">여당 성향 매체와 야당 성향 매체가 각각 어떻게 물어올지를 나눠 담았습니다</p>
+
+  <div class="qa">
+    <div class="q">Q1. 미래대응기금, 찬성입니까 반대입니까?</div>
+    <div class="a say">기금 자체에 반대하지 않습니다. 세수가 이렇게 급등한 해에 그 돈을 한 해 예산에 다 털어 넣는 건 오히려 위험합니다. 저수지를 만든다는 방향은 맞다고 봅니다. 제가 문제 삼는 건 <b>저수지의 수문을 누가 여느냐</b>입니다. 국회가 정해 준 항목별 금액을 정부가 다시 묻지 않고 30퍼센트까지 움직일 수 있게 하는 것, 그리고 그 기금의 운용계획 심의와 결산을 기금 주관 부처 장관이 위원장인 심의회가 맡는 것. 돈을 쌓는 데는 동의해도 감시를 스스로 하겠다는 데는 동의하기 어렵습니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q2. 야당도 같은 말을 하는데, 결국 정부 비판 아닙니까?</div>
+    <div class="a say">국회의 예산 통제권 문제에서 여야가 갈릴 이유가 없다고 생각합니다. 실제로 예결위에서도 통제가 약해질 수 있다는 우려에는 여야가 함께 공감했습니다. 정권이 바뀌어도 남는 건 제도입니다. 지금 만드는 30퍼센트 조항은 <b>다음 정부도 똑같이 쓰게 될 조항</b>입니다. 우리 정부가 잘 쓸 거라는 믿음으로 통제 장치를 느슨하게 하면, 그 느슨함은 우리가 야당이 됐을 때 그대로 돌아옵니다. 그래서 이건 정부 비판이 아니라 제도 문제 제기입니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q3. 정부는 다른 기금과 똑같이 국회 통제를 받는다고 반박하는데요?</div>
+    <div class="a say">절반은 맞는 말입니다. 최초 기금운용계획은 국회 심의를 받고, 변경 내역도 보고하고, 결산심사도 거칩니다. 그런데 이번 개정안은 바로 그 <b>변경 한도를 20퍼센트에서 30퍼센트로 올리는</b> 내용입니다. 똑같은 통제를 받는다면 굳이 국가재정법 제70조 3항을 고칠 이유가 없습니다. 고쳐야 했다는 것 자체가 지금과 다른 재량을 원했다는 뜻입니다. 게다가 미래대응기금은 정책사업에 직접 투자하는 사업성 기금에 가까운데 변경 한도는 금융성 기금 기준을 적용받습니다. 왜 30퍼센트여야 하는지에 대한 설명을 아직 듣지 못했습니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q4. 그럼 어떻게 고치자는 겁니까? 대안이 있습니까?</div>
+    <div class="a say">세 가지입니다. 첫째, <b>변경 한도를 사업성 기금과 같은 20퍼센트로 되돌리고</b>, 그 이상 변경이 필요하면 국회에 기금운용계획변경안을 내게 하면 됩니다. 둘째, <b>운용심의회 구성을 바꿔야 합니다.</b> 기금 주관 장관이 위원장을 맡더라도 외부 위원과 국회 추천 위원의 비중을 못 박고, 회의록과 의결 내용을 공개해야 합니다. 셋째, <b>집행 내역을 상시 공개해야 합니다.</b> 104조가 어디에 예탁되고 얼마의 수익과 비용이 났는지를 분기마다 인터넷에 올리는 건 기술적으로 전혀 어렵지 않습니다. 저는 이걸 정당 국고보조금에서도 똑같이 요구해 왔습니다. 국민 돈에 예외를 두지 말자는 원칙 하나입니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q5. 지방에는 좋은 것 아닙니까? 지방계정이 15조나 되는데요.</div>
+    <div class="a say">숫자만 보면 그렇습니다. 그런데 구조를 보면 다릅니다. 원래 내국세가 늘면 지방교부세와 교육교부금이 <b>자동으로</b> 따라 늘어납니다. 지방이 따로 신청하거나 심사받지 않아도 법에 따라 내려오는 돈입니다. 이번에는 그 연동에서 추가세수를 빼고, 대신 중앙이 용처를 정하는 지방계정 15조 3천억을 만들었습니다. <b>자동으로 내려오던 돈이 중앙의 판단을 거쳐 내려오는 돈으로 바뀐 겁니다.</b> 참여연대와 참여자치지역운동연대가 지방 소멸을 외면한다고 지적한 이유가 이것입니다. 저는 군의회에서 예산을 다뤄 봤습니다. 자동으로 오는 100원과 신청해서 받는 150원은 지자체 입장에서 완전히 다른 돈입니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">Q6. 그래도 반도체 돈으로 청년에 투자하겠다는데 반대할 명분이 있습니까?</div>
+    <div class="a say">투자에 반대하는 게 아닙니다. 저는 <b>162조 중에 실제로 내년에 청년과 지방과 교육에 쓰이는 돈은 45조 4천억</b>이라는 점을 봐 주시길 부탁드립니다. 나머지 104조 4천억은 쌓아 두는 돈입니다. 투자 예산이라는 이름으로 발표됐지만 실제 성격은 적립금입니다. 그리고 그 적립금 때문에 내년 국가채무가 106조 늘어납니다. 저는 이걸 반대한다기보다, <b>이름과 실제가 다르면 국민이 판단할 수 없다</b>고 말씀드리는 겁니다. 투자면 투자라고, 적립이면 적립이라고 정확히 부르고 시작하면 됩니다.</div>
+  </div>
+
+  <div class="box key"><span class="bt">김보미 발언 포인트 세 가지</span>
+    <p class="say">첫째, 저수지는 좋다, 수문을 누가 여느냐가 문제다. 기금의 필요성을 인정하고 들어가야 통제 이야기에 힘이 실립니다. 무조건 반대로 들리면 야당 논리를 따라간다는 인상만 남습니다.</p>
+    <p class="say">둘째, 지금 만드는 조항은 다음 정부가 쓰게 될 조항이다. 이 한 문장이 여당 지지층을 설득하는 열쇠입니다. 진영 논리를 제도 논리로 옮겨 놓습니다.</p>
+    <p class="say">셋째, 국민 돈에 예외를 두지 말자. 정당 국고보조금 상시 공개를 요구해 온 것과 미래대응기금 집행 내역 공개를 요구하는 것이 같은 원칙이라는 점을 연결하면, 이슈마다 말이 바뀌는 정치인이 아니라 하나의 기준을 가진 사람으로 보입니다.</p>
+  </div>
+
+  <div class="box warn"><span class="bt">피해야 할 표현</span>
+    <p class="say">기금 162조를 정부가 마음대로 쓴다는 식의 표현은 쓰지 마십시오. 사실이 아니고, 아는 기자에게 바로 반박당합니다. 30퍼센트는 항목별 금액에 적용된다는 점을 정확히 짚고 들어가는 편이 훨씬 강합니다. 쌈짓돈이라는 단어도 야당 프레임으로 굳어져 있어서, 그대로 쓰면 발언 전체가 야당 논평으로 분류됩니다. 통제 장치, 변경 한도, 상시 공개 같은 제도 용어로 말씀하시는 편이 좋습니다.</p>
+  </div>
+</section>
+
+<!-- ============ 팩트체크 노트 ============ -->
+<div class="fcheck">
+  <h3>🔍 팩트체크 노트 — 확인된 것과 아직 다투는 것</h3>
+  <ul>
+    <li><span class="tag ok">확인</span>총지출 820조 9천억, 증가율 12.8퍼센트, 기금 162조 3천억, 계정별 배분액, 여유자금 104조 4천억, 내년 집행액 45조 4천억 — 복수 매체에서 동일하게 확인됩니다.</li>
+    <li><span class="tag ok">확인</span>국가재정법 개정안이 제70조 제3항을 고쳐 미래대응기금에 30퍼센트 변경 한도를 적용하려는 것, 입법예고 기간이 8월 24일~28일이었던 것.</li>
+    <li><span class="tag ok">확인</span>미래대응기금운용심의회 위원장을 기획예산처 장관이 맡는 것.</li>
+    <li><span class="tag dispute">쟁점</span>돌려막기 여부. 106조를 빚내 104조를 적립한다는 계산은 국민의힘 박수영 의원실과 김우철 한국재정학회장의 분석입니다. 정부는 재정안정화 기능의 대가로 봅니다. 어느 쪽도 아직 검증이 끝나지 않았습니다.</li>
+    <li><span class="tag dispute">쟁점</span>기금 최종 규모. 초과세수가 30조~50조에 이르면 200조 안팎으로 불어난다는 전망이 있으나 9월 세입 재추계 결과에 달려 있습니다.</li>
+    <li><span class="tag dispute">쟁점</span>국회 통제 약화 여부. 정부는 국가재정법과 국회 통제를 그대로 따른다는 입장이고, 야당과 시민사회는 변경 한도 확대가 실질적 우회라는 입장입니다.</li>
+    <li><span class="tag no">미확인</span>재정경제부 내부망 비판 글은 언론 보도로만 확인되며 원문은 공개되지 않았습니다. 인용하실 때는 보도에 따르면이라는 단서를 붙이십시오.</li>
+    <li><span class="tag no">미확인</span>여유자금 목표수익률 3.85퍼센트와 연 3~4조 이자 부담은 야당 측 추계입니다. 정부 공식 수치로 대조되지 않았습니다.</li>
+  </ul>
+</div>
+
+<div class="srcs">
+  <h3>출처</h3>
+  <ol>
+    <li>기획예산처, 2027년도 예산안 (2026.9.1 국무회의 의결) 및 미래대응기금 설치 및 운용에 관한 법률 제정안·국가재정법 개정안 입법예고 (2026.8.24~28)</li>
+    <li>비즈니스포스트, 「정부 '100조 전망' 미래대응기금 '30% 탄력 운용' 설계, 국회 통제 범위 쟁점」 — 국가재정법 제70조 3항 개정 구조와 30퍼센트 한도의 적용 범위</li>
+    <li>한국경제, 「'162조+α' 미래대응기금…느슨한 통제 논란」 — 계정별 배분, 여유자금 104조 4천억, 변경 한도 비교</li>
+    <li>머니투데이, 「미래대응기금 국회 통제 불가 지적에도 '셀프 심의·결산'」 — 운용심의회 구성</li>
+    <li>매일일보, 「미래대응기금 공방, 與 "재정댐" vs 野 "국회 통제 피하려는 꼼수"」 — 예결위 종합정책질의 발언</li>
+    <li>이데일리, 「108조 칼질해 만든 162조 '미래기금'…장밋빛 세수·꼼수 재정에 십자포화」 — 지출구조조정, 재정경제부 내부망 비판</li>
+    <li>글로벌뉴스통신·머니투데이, 박수영 의원·김우철 한국재정학회장 분석 (2026.9.10) — 106조·104조 돌려막기, 입법예고 기간</li>
+    <li>참여연대 성명, 「지방 소멸 위기 외면하는 '미래대응기금' 재검토하라」 / 참여자치지역운동연대 성명 (2026.9.8)</li>
+    <li>이투데이, 「162조 미래대응기금 신설…교육교부금 55년 만에 개편」 — 교육교부금 연동 개편, 기금 개편 규모</li>
+    <li>오마이뉴스, 「미래대응기금, 속도전보다 촘촘한 설계가 필요하다」 — 공공자금관리기금과의 기능 중첩</li>
+    <li>세계일보, 「막대한 세수로 탄생한 미래기금…"중대한 목적 변경은 국회 승인받아야"」 (2026.9.11 토론회)</li>
+    <li>뉴스토마토, 「미래대응기금만 162.3조…상시 추경 땐 '재정 구멍'」 — 계정 비중, 기금 순위</li>
+  </ol>
+  <p style="margin-top:14px">※ 이 보고서는 2026년 9월 13일 기준입니다. 9월 세입 재추계와 정기국회 예산 심사 진행에 따라 숫자와 쟁점이 바뀝니다. 인터뷰 직전에 날짜를 확인하십시오.</p>
+</div>
+
+</div>
+<script>
+(function(){
+  var synth = window.speechSynthesis;
+  var player = document.getElementById('player');
+  if(!synth){ player.style.display='none'; return; }
+
+  var pbtn=document.getElementById('pbtn'), sbtn=document.getElementById('sbtn'),
+      rbtn=document.getElementById('rbtn'), pst=document.getElementById('pst'),
+      pbar=document.getElementById('pbar'),
+      prevbtn=document.getElementById('prevbtn'), nextbtn=document.getElementById('nextbtn');
+
+  // ── 낭독 큐 만들기: 표·각주는 제외하고 .say 문단만, 170자 단위로 분할
+  var queue=[], marks=[], chapters=[];
+  document.querySelectorAll('section.lv').forEach(function(sec){
+    chapters.push(queue.length);
+    var h=sec.querySelector('h2');
+    if(h){ queue.push(h.textContent.trim()); marks.push(h); }
+    sec.querySelectorAll('.say').forEach(function(el){
+      var t=el.textContent.replace(/\s+/g,' ').trim();
+      if(!t) return;
+      var parts=t.split(/(?<=[.!?…])\s+/), buf='';
+      parts.forEach(function(p){
+        if((buf+' '+p).trim().length>170 && buf){ queue.push(buf.trim()); marks.push(el); buf=p; }
+        else { buf=(buf?buf+' ':'')+p; }
+      });
+      if(buf.trim()){ queue.push(buf.trim()); marks.push(el); }
+    });
+  });
+
+  var i=0, playing=false, rate=1.0, rates=[1.0,1.25,1.5,0.85], last=null;
+
+  function highlight(el){
+    if(last){ last.classList.remove('reading'); }
+    if(el && !el.classList.contains('voiceonly')){
+      el.classList.add('reading'); last=el;
+      var r=el.getBoundingClientRect();
+      if(r.top<90 || r.bottom>window.innerHeight-40){
+        window.scrollTo({top:window.scrollY+r.top-180, behavior:'smooth'});
+      }
+    } else { last=null; }
+  }
+  function status(){
+    pst.textContent=(i+1)+' / '+queue.length+' 문단';
+    pbar.style.width=((i+1)/queue.length*100)+'%';
+  }
+  function speak(){
+    if(i>=queue.length){ stop(); pst.textContent='재생 완료'; pbar.style.width='100%'; return; }
+    highlight(marks[i]); status();
+    var u=new SpeechSynthesisUtterance(queue[i]);
+    u.lang='ko-KR'; u.rate=rate;
+    u.onend=function(){ if(playing){ i++; speak(); } };
+    u.onerror=function(){ if(playing){ i++; speak(); } };
+    synth.speak(u);
+  }
+  function stop(){
+    playing=false; synth.cancel(); pbtn.textContent='▶ 듣기';
+    if(last){ last.classList.remove('reading'); last=null; }
+  }
+  function jump(n){
+    i=Math.max(0,Math.min(queue.length-1,n));
+    synth.cancel();
+    if(playing){ speak(); } else { highlight(marks[i]); status(); }
+  }
+
+  pbtn.addEventListener('click',function(){
+    if(playing){ playing=false; synth.cancel(); pbtn.textContent='▶ 이어 듣기'; return; }
+    playing=true; pbtn.textContent='⏸ 일시정지'; synth.cancel(); speak();
+  });
+  sbtn.addEventListener('click',function(){ stop(); i=0; pst.textContent='정지됨'; pbar.style.width='0'; });
+  rbtn.addEventListener('click',function(){
+    rate=rates[(rates.indexOf(rate)+1)%rates.length];
+    rbtn.textContent='배속 '+rate.toFixed(2).replace(/0$/,'')+'×';
+    if(playing){ synth.cancel(); speak(); }
+  });
+  nextbtn.addEventListener('click',function(){
+    for(var c=0;c<chapters.length;c++){ if(chapters[c]>i){ jump(chapters[c]); return; } }
+    jump(queue.length-1);
+  });
+  prevbtn.addEventListener('click',function(){
+    for(var c=chapters.length-1;c>=0;c--){ if(chapters[c]<i-1){ jump(chapters[c]); return; } }
+    jump(0);
+  });
+  window.addEventListener('beforeunload',function(){ synth.cancel(); });
+  status();
+})();
+</script>
+</body>
+</html>
