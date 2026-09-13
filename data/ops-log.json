@@ -1,5 +1,12 @@
 [
  {
+  "kind": "morning",
+  "status": "ok",
+  "text": "아침 자동화 날씨=success 브리핑=success 심층=success 지역=success 팟캐스트=success",
+  "at": "2026-09-13 09:13 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/34726585751"
+ },
+ {
   "kind": "sitecheck",
   "status": "warn",
   "text": "10개 사이트 · 문제 1건 — 김보미.com (대한민국 재정 365)(1)",
