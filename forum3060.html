@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3060정치혁신포럼 — 인물·문제의식·발언 대시보드</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="issue-style.css">
+<style>
+.person{display:flex;gap:18px;align-items:flex-start;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0}
+.person .av{width:56px;height:56px;border-radius:50%;background:#15368c;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;flex-shrink:0}
+.person .av.k{background:#2e7d46}
+.person h4{margin:0 0 6px;font-size:17px}
+.person p{margin:0;font-size:14.5px;color:#3a3630}
+.quote{border-left:4px solid #e8a800;background:#fffaf0;padding:12px 16px;margin:14px 0;font-size:15px;border-radius:0 8px 8px 0}
+.quote .m{display:block;font-size:12.5px;color:var(--muted);margin-top:6px}
+.steps{counter-reset:s;margin:16px 0;padding:0;list-style:none}
+.steps li{position:relative;padding-left:40px;margin-bottom:12px;font-size:15.5px}
+.steps li::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.chips a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 13px;font-size:13.5px;font-weight:700;color:var(--ink);text-decoration:none}
+.chips a:hover{border-color:var(--acc);color:var(--acc)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in">
+  <a href="index.html">← 이슈현안 목록</a><a href="forum3060.html">🤝 3060포럼 허브</a><a href="dashboard.html">🥚 김보미 발언 대시보드</a><a href="forum3060-agenda.html">📋 9.13 워크샵 안건</a>
+  <span class="now">2026.9.13 기준</span>
+</div></div>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">3060 Political Innovation Forum</div>
+  <h1>🤝 3060정치혁신포럼<br><span style="font-size:20px;color:#6b675f">인물 · 문제의식 심층보고서 · 발언 대시보드</span></h1>
+  <p class="sub">포럼 참여 전문가(정승일·강원택)의 문제의식을 아무것도 모르는 상태에서 토론 가능한 수준까지 — 인물 페이지 → 문제의식별 5단계 보고서 → 발언 검색</p>
+  <div class="pathnote">📖 <b>읽는 법:</b> <b>인물</b>에서 사람을 잡고, <b>문제의식별 보고서</b>를 Lv.1부터 읽고, <b>발언 대시보드</b>에서 원문 표현을 찾습니다. 오늘 워크샵 안건은 별도 페이지.</div>
+</header>
+
+<div class="box key"><span class="bt">3060정치혁신포럼이란</span><p>신진 청년 정치인 지원과 세대교체를 위해 박동완 대표가 2026년 8월 23일 텔레그램방을 열어 준비 중인 모임. <strong>"60은 떠날 준비를 하면서 모든 것을 30에게 넘겨주고 지원하고, 30은 바닥을 박박 기면서 시작할 준비를 하는" 포럼.</strong> 8.30 1차 줌회의에서 "대결정치가 아닌 해결정치, 청년이 실질적인 정치 주체가 되는 세대교체"를 공유하고 김혜민 사무총장 선임·자체 플랫폼·첫 오프라인 모임을 결정. <strong>9.13(일) 15시 국회의원회관 제8간담회의실에서 1차 워크샵</strong> — 강원택 교수 강의, 박동완 대표 강의, 사업계획 토론.</p></div><div class="chips"><a href="forum3060-agenda.html">오늘 워크샵 안건·명칭 추천안</a><a href="issue-20260913-constitution-election-multiparty.html">개헌·선거제도·다당제 종합보고서</a><a href="issue-yonghyein.html">용혜인 논란</a></div><h2 id="people" style="margin-top:30px">인물</h2><div class="person"><div class="av">정</div><div><h4><a href="person-jeongseungil.html" style="color:inherit">정승일 →</a></h4><p>정치경제학 박사 · 사회민주주의센터 공동대표 · 복지국가소사이어티 정책위원. 장하준과 『쾌도난마 한국경제』 공저. "소득이 먼저, 자산은 그 위에". 청년정치를 세대가 아니라 저임금 노동자·세입자의 정치경제로 조직하자.</p></div></div><div class="person"><div class="av k">강</div><div><h4><a href="person-kangwontaek.html" style="color:inherit">강원택 →</a></h4><p>서울대 정치외교학부 교수(2026.8 정년퇴임 보도) · 국가미래전략원장 · 한국정치학회장 역임. "개헌보다 선거제도, 양당제보다 다당제". 9.13 워크샵 강연자.</p></div></div><h2 id="reports" style="margin-top:30px">문제의식별 심층보고서</h2><p class="lvdesc">각 보고서는 Lv.1 왕초보 → Lv.5 토론 대비 5단계. 아무것도 모르는 상태에서 Lv.1부터 읽으면 됩니다.</p><h3>정승일</h3><div class="chips"><a href="issue-jsi-asset-welfare.html">① 자산형성 복지 vs 소득복지 (우리아이자립펀드)</a><a href="issue-jsi-chip-tax.html">② 반도체 세액공제 한시 정지</a><a href="issue-jsi-political-economy.html">③ 정치경제적 진보 vs 정체성 정치</a><a href="issue-jsi-worker-power.html">④ 노동자 권력국·청년 노동정치</a><a href="issue-jsi-union-solidarity.html">⑤ 노조 연대 논쟁 (최승호)</a><a href="issue-jeonse.html">전세난·월세난 + 정승일 글</a></div><h3>강원택</h3><div class="chips"><a href="issue-kwt-multiparty.html">① 다당제·선거제도 개혁</a><a href="issue-kwt-satellite.html">② 위성정당</a><a href="issue-kwt-87system.html">③ 87년 체제·개헌</a><a href="issue-kwt-party-reform.html">④ 정당 개혁·양극화·세대교체</a><a href="issue-20260913-constitution-election-multiparty.html">개헌·선거제도·다당제 종합 (강원택 발제 대비)</a></div><h3>최근 현안</h3><div class="chips"><a href="issue-yonghyein.html">용혜인 논란 — 위성정당·겸직·보조금</a><a href="issue-politicalfund.html">정치자금·국고보조금 총망라</a><a href="issue-samsung-union.html">삼성 노조 사태</a><a href="issue-hormuz.html">호르무즈 파병</a></div><h2 id="quotes" style="margin-top:34px">발언 대시보드</h2>
+<p class="lvdesc">정승일·강원택의 확인된 발언을 날짜순으로. 인물·주제 버튼과 검색으로 거릅니다. 각 발언은 해당 보고서로 연결.</p>
+<style>
+.qfilter{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.qfilter button{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:700;cursor:pointer;color:var(--ink)}
+.qfilter button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+#qsearch{width:100%;padding:9px 12px;font-size:14px;border:1.5px solid var(--line);border-radius:9px;margin:6px 0 12px;font-family:inherit}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+.qcard .qm{font-size:12.5px;color:var(--muted);margin-bottom:6px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.qcard .who{font-weight:900;color:#15368c}.qcard .who.k{color:#2e7d46}
+.qcard .qt{font-size:15px}
+.qcard .qk{display:inline-block;background:#f1eee9;border-radius:999px;padding:2px 9px;font-size:11.5px;font-weight:800;color:#6b675f}
+.qcard a.go{font-size:12.5px;font-weight:800;color:var(--acc);text-decoration:none;margin-left:auto}
+.qcnt{font-size:12.5px;color:var(--muted);margin-bottom:8px}
+</style>
+<div class="qfilter" id="fwho"><button data-v="" class="on">전체</button><button data-v="정승일">정승일</button><button data-v="강원택">강원택</button></div>
+<div class="qfilter" id="fkey"></div>
+<input id="qsearch" placeholder="키워드 검색 — 예: 위성정당, 세액공제, 세입자, 당원">
+<div class="qcnt" id="qcnt"></div>
+<div id="qlist"></div>
+<script>
+const Q=[{"who": "정승일", "d": "2026.9.6", "m": "포럼방", "t": "이광재의 국부펀드·출생아 자산계좌와 정부 출생아 계좌 정책은 \"소득 중심 복지국가에서 자산형성형 금융복지국가로의 이동\". 핵심은 아동복지처럼 보이지만 저축률을 높이는 정책", "k": "자산형성 복지", "h": "issue-jsi-asset-welfare.html"}, {"who": "정승일", "d": "2026.9.6", "m": "포럼방", "t": "\"왜 가난한 육아 가구에게 지금 당장 필요한 소득을 주지 않고 20년 뒤 사용할 금융자산으로 묶어두느냐\" — 부모 매칭은 분배 문제도 큼", "k": "자산형성 복지", "h": "issue-jsi-asset-welfare.html"}, {"who": "강원택", "d": "2026.9.13", "m": "3060포럼 1차 워크샵", "t": "위성정당·선거제도 강연 (국회의원회관 제8간담회의실 15:00) — 내용 추후 기록", "k": "위성정당", "h": "issue-kwt-satellite.html"}, {"who": "정승일", "d": "2026.9.11", "m": "포럼방", "t": "\"청년정치는 취업지원 정책에 머물 것이 아니라, 실제로 일하고 있는 저임금 청년들의 임금과 노동권을 높이는 노동정치가 되어야 한다\"", "k": "노동정치", "h": "issue-jsi-worker-power.html"}, {"who": "정승일", "d": "2026.9.11", "m": "포럼방", "t": "샌더스–맘다니 흐름은 진보정치의 중심축을 정체성·문화에서 정치경제로 되돌리는 것. 청년을 세대·정체성이 아니라 저임금 노동자·세입자로 조직해야", "k": "정치경제적 진보", "h": "issue-jsi-political-economy.html"}, {"who": "정승일", "d": "2026.9.11", "m": "포럼방", "t": "\"정치경제학적 진보에서 정체성 정치는 폐기되는 것이 아니라, 보편적 경제·사회권이라는 중심축 아래 차별금지와 구조적 불평등의 시정이라는 형태로 재편된다\"", "k": "정치경제적 진보", "h": "issue-jsi-political-economy.html"}, {"who": "정승일", "d": "2026.9.11", "m": "포럼방", "t": "최승호 삼성 초기업노조 위원장 인터뷰 비판 메시지를 청년 정치인들이 내자 — \"이런 게 바로 정치경제적 진보를 새롭게 만들어나가는 실천\"", "k": "노조 연대", "h": "issue-jsi-union-solidarity.html"}, {"who": "정승일", "d": "2026.9.11", "m": "포럼방", "t": "반도체 세액공제 한시 정지 제안문(경실련 제출) 공유. 최승호는 \"주주 이익 침해\"라며 거부 — \"이기주의의 극치\"", "k": "반도체 세액공제", "h": "issue-jsi-chip-tax.html"}, {"who": "정승일", "d": "2026.9.10", "m": "포럼방", "t": "\"노동조합 운동이 변하길 기대하느니 차라리 시장 시의회 장악해서 뭔가를 하는 게 더 빠를 듯\" — 뉴욕시 노동자 권력국 소개", "k": "노동정치", "h": "issue-jsi-worker-power.html"}, {"who": "정승일", "d": "2026.8.30", "m": "3060포럼 1차 줌회의", "t": "참석. 김보미 후기에서 \"귀한 말씀 나눠 주신 정승일 교수님\"으로 첫 언급", "k": "", "h": ""}, {"who": "강원택", "d": "2026.8.19", "m": "파이낸셜뉴스", "t": "\"개헌보다 선거제도 바꾸는 게 더 중요\", \"제3의 정당이 등장할 공간이 열려야\". 청년은 386을 기득권으로 본다, 2년 뒤 총선부터 대폭 세대교체 불가피", "k": "다당제·선거제도", "h": "issue-kwt-multiparty.html"}, {"who": "정승일", "d": "2026.8", "m": "페이스북", "t": "「서울의 전세난-월세난과 2027-28년 선거」 — 서울 성인 절반이 세입자, 전월세난 4요인 분해, 2027~28 선거 리스크", "k": "부동산·세입자", "h": "issue-jeonse.html"}, {"who": "정승일", "d": "2026.7.23", "m": "사회대개혁위 토론회", "t": "초호황기에는 투자 촉진용 세액공제 필요성을 재검토, 한시 정지하고 소부장 기술·인재에 사용", "k": "반도체 세액공제", "h": "issue-jsi-chip-tax.html"}, {"who": "정승일", "d": "2026.7.14", "m": "고용노동부 토론회", "t": "\"문제는 누구의 돈으로, 누가 하느냐.\" 하청업체는 재투자 여력이 없다 → 초과이윤을 동반성장 기금으로, 세액공제 조항 정지 검토", "k": "반도체 세액공제", "h": "issue-jsi-chip-tax.html"}, {"who": "강원택", "d": "2026.6.16", "m": "경향신문", "t": "\"딱 하나를 골라 무슨 제도를 바꾸겠냐고 물으면 다당이 만들어질 수 있는 시스템\"", "k": "다당제·선거제도", "h": "issue-kwt-multiparty.html"}, {"who": "강원택", "d": "2026.6.16", "m": "경향신문", "t": "\"당원이 되기가 이렇게 쉬워선 안 돼요… 과도한 오픈 프라이머리가 트럼프를 불러낸 것\"", "k": "정당 개혁", "h": "issue-kwt-party-reform.html"}, {"who": "강원택", "d": "2026.6.16", "m": "경향신문", "t": "\"전국 수준에서는 과점, 지역으로 내려가면 독점\" — 조용한 중도의 매서운 민심", "k": "정당 개혁", "h": "issue-kwt-party-reform.html"}, {"who": "강원택", "d": "2026.6.16", "m": "조선일보", "t": "\"보수·진보 시대 끝났다… 청년이 나서야\", \"보수 극단엔 권위주의, 진보 극단엔 포퓰리즘\"", "k": "세대교체", "h": "issue-kwt-party-reform.html"}, {"who": "강원택", "d": "2026.6.16", "m": "서울대 고별강연", "t": "\"거대 양당, 청년 외면에 파산 위기\", \"1987년 개헌이 긴 생명력을 가진 건 합의를 통해 이뤄졌기 때문\"", "k": "87년 체제·개헌", "h": "issue-kwt-87system.html"}, {"who": "강원택", "d": "2026.2.21", "m": "서울경제", "t": "\"연동형 비례대표제는 위성정당이라는 최악의 상황을 낳고 말았다… 현실적으로 변칙을 쓰는 데 막을 방법이 없다\"", "k": "위성정당", "h": "issue-kwt-satellite.html"}, {"who": "강원택", "d": "2026.2.21", "m": "서울경제", "t": "\"권력구조를 바꾸는 개헌은 어렵게 됐다… 개헌이 어렵다면 최소한 양당제를 깨야 한다\", \"계엄은 타협의 종말이 부른 것\"", "k": "87년 체제·개헌", "h": "issue-kwt-87system.html"}, {"who": "강원택", "d": "2025.2.12", "m": "SBS 취재파일", "t": "\"더 이상 작동하지 않는 87년 체제는 이제는 개혁해야\" — 국회 선출 총리, 3~5개 정당의 온건 다당제", "k": "87년 체제·개헌", "h": "issue-kwt-87system.html"}, {"who": "강원택", "d": "2025.1.1", "m": "한국일보", "t": "\"대통령 한 명이 국가 흔들고… 권한 나눠야. 국회에서 선출한 총리에게 많이 주면\"", "k": "87년 체제·개헌", "h": "issue-kwt-87system.html"}, {"who": "강원택", "d": "2023.1.15", "m": "서울신문", "t": "\"독일식 연동형이 가장 바람직\"하지만 \"양당제 폐해를 없애기 위해서라면 중대선거구제라도 도입해야\", \"정당이 양극화되면서 사회도 양극화됐다\"", "k": "다당제·선거제도", "h": "issue-kwt-multiparty.html"}];
+let who='',key='',txt='';
+const keys=[...new Set(Q.map(q=>q.k).filter(Boolean))];
+const fk=document.getElementById('fkey');
+fk.innerHTML='<button data-v="" class="on">모든 주제</button>'+keys.map(k=>`<button data-v="${k}">${k}</button>`).join('');
+function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+function render(){
+  const list=Q.filter(q=>(!who||q.who===who)&&(!key||q.k===key)&&(!txt||(q.t+q.m+q.k).toLowerCase().includes(txt)));
+  document.getElementById('qcnt').textContent=list.length+'건';
+  document.getElementById('qlist').innerHTML=list.map(q=>`<div class="qcard"><div class="qm"><span class="who ${q.who==='강원택'?'k':''}">${q.who}</span><span>${q.d}</span><span>· ${esc(q.m)}</span>${q.k?`<span class="qk">${esc(q.k)}</span>`:''}${q.h?`<a class="go" href="${q.h}">보고서 →</a>`:''}</div><div class="qt">${esc(q.t)}</div></div>`).join('')||'<p>해당 발언이 없습니다.</p>';
+}
+document.getElementById('fwho').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;who=b.dataset.v;[...e.currentTarget.children].forEach(x=>x.classList.toggle('on',x===b));render();});
+fk.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;key=b.dataset.v;[...fk.children].forEach(x=>x.classList.toggle('on',x===b));render();});
+document.getElementById('qsearch').addEventListener('input',e=>{txt=e.target.value.trim().toLowerCase();render();});
+render();
+</script><h2 id="members" style="margin-top:34px">참여자 (텔레그램방 소개 기준, 가나다순 아님 — 발언·역할 순)</h2><div class="tbl"><table><thead><tr><th>이름</th><th>세대</th><th>소개·역할</th></tr></thead><tbody><tr><td>박동완</td><td>60</td><td>글로벌앤로컬브레인파크 대표. 포럼 발의자, 8.23 텔레그램방 개설. 9.13 워크샵 강연</td></tr><tr><td>김혜민</td><td>40</td><td>공동대표. 8.30 사무총장 선임, 실무 총괄</td></tr><tr><td>이왕재</td><td>50</td><td>나라살림연구소 소장, 강득구 의원실 보좌관. 사전워크숍 정리(8.29)·1차 회의록 작성, 플랫폼 담당, 국회 장소 마련</td></tr><tr><td>노민호</td><td>50</td><td>아카데미 대표(염태영). 칼럼 「국경도 주권도 미완인 대한민국」「주식이 투표하는 나라」「100년 만에 처음 생기는 우리 의자」</td></tr><tr><td>정승일</td><td></td><td>정치경제학 박사, 사회민주주의센터 공동대표. 8.29 합류</td></tr><tr><td>박지현</td><td>30</td><td>전 민주당 비대위원장, 전 추적단불꽃 활동가. 원주 북카페 운영. 강원택 섭외, 최승호 비판 글</td></tr><tr><td>김보미</td><td>30</td><td>전 강진군의회 의장, 2026 민주당 당대표 예비후보. 재정주권시민행동. "현안에 단체 이름으로 입장을" 제안</td></tr><tr><td>김희원</td><td></td><td>섀도우캐비닛 대표, The Next GenerationZ 창업. 『나는 지방의원이다』 공저</td></tr><tr><td>정진호</td><td>30</td><td>의정부시장. 김혜영·박재형 초대</td></tr><tr><td>정창수</td><td>50</td><td>나라살림연구소 소장, 행정학 박사. 강북구청장</td></tr><tr><td>김은주</td><td></td><td>사단법인 한국여성정치연구소 소장</td></tr><tr><td>이득규</td><td>54</td><td>ALT 프로덕션 PD, 지역독립언론 다산어보 편집국장(9.4 창간, 강진)</td></tr><tr><td>윤여진</td><td>50</td><td>실장. 회원 플랫폼 데모·릴리즈</td></tr><tr><td>이재정</td><td></td><td>연구활동가. 대통령 직속 국민경제자문회의 미래기획분과 위원, 경제사회노동위원회</td></tr><tr><td>전예슬</td><td>30</td><td>경기도의원(전 오산시의원)</td></tr><tr><td>황대호</td><td></td><td>1986년생. 2018 최연소 경기도의원·재선·상임위원장, 2026 불출마. 공개 예산심사</td></tr><tr><td>최인준</td><td>30</td><td>1995년생. 전 강북구의원. 재정혁신지방정부협의회 준비</td></tr><tr><td>원창희</td><td>40</td><td>강동구의원</td></tr><tr><td>김재상</td><td></td><td>김포시의원</td></tr><tr><td>박재형</td><td></td><td>전 서초구의원, 2026 서울시의원 후보</td></tr><tr><td>김혜영(가을)</td><td></td><td>재정시스템 개발팀. 지역 청년 의제 전문가</td></tr><tr><td>정보나</td><td></td><td>경기도당 청년위원회 수석대변인, 청소년지도사. 2018·2022·2026 경기도 청년비례 도전</td></tr><tr><td>김연웅</td><td></td><td>남다른성교육연구소 사무국장</td></tr><tr><td>박승복</td><td></td><td>서울의소리 기자, 전 국민주권전국회의 사무총장. "세대가 아니라 주류의 교체"</td></tr><tr><td>이현택</td><td></td><td>위키드 대표이사</td></tr><tr><td>장수명</td><td></td><td>"당내 진보 청년 연합체 필요"</td></tr><tr><td>김윤환</td><td>30</td><td></td></tr><tr><td>이석주</td><td>40</td><td></td></tr><tr><td>김장성</td><td></td><td></td></tr><tr><td>정용해</td><td></td><td></td></tr><tr><td>윤희웅</td><td></td><td>OPINIONS 대표</td></tr><tr><td>조유진</td><td></td><td></td></tr><tr><td>우지영</td><td></td><td></td></tr><tr><td>이동학</td><td></td><td></td></tr></tbody></table></div><div class="box warn"><span class="bt">⚠️ 주의</span><p>참여자 소개는 텔레그램방의 자기소개·초대 소개글을 옮긴 것입니다. 세대 표기는 본인이 방에서 밝힌 것만 적었습니다. 새 참여자·역할 변경은 이 표에 추가하세요.</p></div><h2 style="margin-top:34px">지금까지의 흐름</h2><div class="timeline"><div class="tl"><div class="d">8.23</div><div class="t">박동완, 텔레그램방 개설·안내문. 목표: 정치혁신과 세대교체, 청년 정치인 지원. 규모 청년 20명+, 405060 15명. 대표 2030·5060 각 1인</div></div><div class="tl"><div class="d">8.28</div><div class="t">박동완, 2026 알메달렌 보고서 공유. 노민호 칼럼 소개 시작</div></div><div class="tl"><div class="d">8.29</div><div class="t">이왕재, 사전 워크숍 정리 12개 항목 + 실행과제 5단계. 정승일 합류</div></div><div class="tl"><div class="d">8.30</div><div class="t">준비위 1차 줌회의(20:05~21:41). 결정: 자체 플랫폼, 김혜민 사무총장, 실무 준비체제, 첫 오프라인 모임</div></div><div class="tl"><div class="d">8.31</div><div class="t">이왕재 "모여라/모이자", 박동완 "모이자 2060" 명칭 제안. 1차 회의록 공유</div></div><div class="tl"><div class="d">9.1~3</div><div class="t">박승복 "주류의 교체". 박지현 "위성정당 방지 제도 설계". 9.13 국회 오프라인 확정</div></div><div class="tl"><div class="d">9.6</div><div class="t">정보나 합류. 정승일, 이광재·출생아 계좌 비판</div></div><div class="tl"><div class="d">9.9~11</div><div class="t">이왕재, 당 정치제도개혁추진단 보고·여야 청년 위성정당 공동논의 제안. 정승일, 노동자 권력국·정치경제적 진보. 박지현, 최승호 비판 글</div></div><div class="tl"><div class="d">9.12</div><div class="t">강원택 교수 섭외 확정. 김보미 "조직 성격·명칭·역할분담·활동계획을 꼭 정하자". 프로그램 확정</div></div><div class="tl"><div class="d">9.13</div><div class="t">1차 워크샵 (국회의원회관 제8간담회의실 15:00) — 강원택 강의 → 박동완 강의 → 토론 → 식사</div></div></div>
+
+<div class="srcs">
+  <h3>주요 출처</h3>
+  <ol><li>3060정치혁신포럼 텔레그램방 대화 (2026.8.23~9.13)</li><li>각 보고서 하단 출처 참조</li></ol>
+</div>
+</div>
+</body>
+</html>
