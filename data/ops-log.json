@@ -1,5 +1,12 @@
 [
  {
+  "kind": "sitecheck",
+  "status": "warn",
+  "text": "10개 사이트 · 문제 7건 — 김보미.com (대한민국 재정 365)(3), 김보미365.com (강진군 군민재정)(2), jibang-db (강진365 보조 도메인)(2)",
+  "at": "2026-09-13 11:09 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/34732310549"
+ },
+ {
   "kind": "morning",
   "status": "ok",
   "text": "아침 자동화 날씨=success 브리핑=success 심층=success 지역=success 팟캐스트=success",
