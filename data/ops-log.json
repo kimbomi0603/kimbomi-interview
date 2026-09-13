@@ -1,6 +1,13 @@
 [
  {
   "kind": "sitecheck",
+  "status": "warn",
+  "text": "10개 사이트 · 문제 1건 — 김보미.com (대한민국 재정 365)(1)",
+  "at": "2026-09-13 19:35 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/34752213322"
+ },
+ {
+  "kind": "sitecheck",
   "status": "ok",
   "text": "10개 사이트 · 문제 0건",
   "at": "2026-09-13 12:27 KST",
