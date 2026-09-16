@@ -1,6 +1,13 @@
 [
  {
   "kind": "sitecheck",
+  "status": "ok",
+  "text": "2개 사이트 · 문제 0건",
+  "at": "2026-09-16 20:14 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35089156622"
+ },
+ {
+  "kind": "sitecheck",
   "status": "warn",
   "text": "10개 사이트 · 문제 1건 — 봄콜 (웹앱 · Vercel)(1)",
   "at": "2026-09-16 19:16 KST",
