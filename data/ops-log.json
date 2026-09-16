@@ -1,5 +1,12 @@
 [
  {
+  "kind": "sitecheck",
+  "status": "warn",
+  "text": "10개 사이트 · 문제 1건 — 봄콜 (웹앱 · Vercel)(1)",
+  "at": "2026-09-16 19:16 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35084013258"
+ },
+ {
   "kind": "morning",
   "status": "ok",
   "text": "아침 자동화 날씨=success 브리핑=success 심층=success 지역=success 팟캐스트=success",
