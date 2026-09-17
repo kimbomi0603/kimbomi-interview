@@ -5,7 +5,8 @@
 // 공격자에게 탐색 범위를 좁혀 주므로 어떤 진단 정보도 출력하지 않는다.
 // (2026-09-01 진단 출력 블록 제거 — 아이디 평문·비밀번호 길이가 공개돼 있었음)
 
-export const config = { matcher: '/(.*)' };
+// runtime: 'nodejs' — Vercel이 edge 런타임 미들웨어를 폐지 예정으로 경고해 Node.js 런타임으로 전환(2026-09-17 점검)
+export const config = { matcher: '/(.*)', runtime: 'nodejs' };
 
 const UNAUTHORIZED = () =>
   new Response('접근하려면 아이디와 비밀번호가 필요합니다.', {
@@ -72,7 +73,9 @@ export default function middleware(request) {
 
   let gotUser = '', gotPass = '';
   try {
-    const decoded = atob(header.slice(6).trim());
+    // atob은 바이트 문자열을 돌려주므로 UTF-8로 다시 풀어야 한글 등 비ASCII 아이디·비밀번호도 맞게 비교된다.
+    const bin = atob(header.slice(6).trim());
+    const decoded = new TextDecoder().decode(Uint8Array.from(bin, (c) => c.charCodeAt(0)));
     const i = decoded.indexOf(':');
     if (i < 0) return UNAUTHORIZED();
     gotUser = decoded.slice(0, i).trim();
