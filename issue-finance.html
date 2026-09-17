@@ -175,6 +175,7 @@
     margin-bottom: 24px;
   }
 </style>
+<style>/* 모바일 가로 넘침 방지 (2026.9.17) */@media(max-width:640px){body{overflow-wrap:anywhere}table{display:block;overflow-x:auto;max-width:100%}.live{white-space:normal!important;max-width:100%}}</style>
 </head>
 <body>
 <div style="position:sticky;top:0;z-index:50;background:rgba(250,249,247,.94);backdrop-filter:blur(6px);border-bottom:1px solid #e6e2da;padding:10px 20px;font-size:14px;font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Noto Sans KR',sans-serif">
@@ -187,6 +188,11 @@
   <h1>주식이 뭔지도 모르는 사람을 위한<br>국민연금 · 레버리지 사태 총정리</h1>
   <p class="sub">2026년 7월 코스피 폭락과 국민연금 200조 손실 논란을, 가장 밑바닥 개념부터 하나씩 쌓아 올려 설명합니다. 앞에서부터 순서대로 읽으면 마지막엔 뉴스가 그냥 읽힙니다.</p>
 </header>
+<div class="box warn"><span class="bt">🔄 9.17 사실확인·최신 업데이트</span>
+  <p>(1) 수치·제도 재확인: 국민연금 국내주식 목표비중 14.9%→20.8% 상향(2026.5.28 기금운용위원회), 단일종목 레버리지 기본예탁금 3,000만 원 조기 시행(7.31), 코스피 사흘 연속 급락과 시가총액 922조 원 감소, KODEX 레버리지 총보수 연 0.64%, 레버리지·인버스 ETF 매매차익 15.4% 과세는 원문·제도와 일치한다. [출처: 대한민국 정책브리핑 「국민연금, 올해 국내주식 목표비중 14.9%→20.8%로 상향」 https://www.korea.kr/news/policyNewsView.do?newsId=148965365 · 대한민국 정책브리핑 2026.7.24 「이달 31일부터 단일종목 레버리지 예탁금 3000만 원…조기 시행」 https://www.korea.kr/news/policyNewsView.do?newsId=148968739 · 서울신문 2026.7.30 「'922조 증발' 폭락장엔 정부 없었다」 https://www.seoul.co.kr/news/economy/2026/07/30/20260730500263]<br>
+  (2) 정정: "사흘 동안 평균 17.2%씩" 떨어졌다는 설명은 틀렸다. 사흘 동안 <b>모두 합쳐</b> 17.2% 떨어졌다는 뜻이다. 정부 1년 예산은 "약 700조 원"이 아니라 2026년 본예산 727조9000억 원이다(2027년 예산안은 820조9000억 원). 국민연금 1,900조 원은 그 2.6배쯤이어서 "거의 3배"를 "2.5배가 넘는"으로 고쳤다. 비교표의 "국내 상장 상품 양도소득세 면세"는 양도소득세가 없다는 뜻일 뿐, 매매차익에 배당소득세 15.4%가 붙는다는 설명을 덧붙였다. [출처: 대한민국 정책브리핑 「2026년 예산 국회 확정」 https://www.korea.kr/news/policyNewsView.do?newsId=148956215]<br>
+  (3) 작성 이후: 폭락 바로 다음 날인 7월 31일 코스피는 하루 17.91%(1,001.89포인트) 올라 6,595.45로 마감했다. 역대 최대 상승률이다. 본문 타임라인은 폭락 시점까지만 담고 있으니, 인터뷰에서는 이 급반등도 함께 말해야 한다. 9월 현재 지수와 국민연금 기금 평가액은 이번 확인 범위 밖이다 [확인 필요]. [출처: 한국경제 2026.7.31 「코스피 17.91% 사상 최대 폭등 마감」 https://www.hankyung.com/article/202607318501i]</p>
+</div>
 
 <nav class="toc">
   <h2>목차</h2>
@@ -248,7 +254,7 @@
     <p>학교 전체 성적을 알고 싶은데 학생 1,000명 성적표를 다 볼 순 없죠. 그래서 <em>전교 평균 점수</em> 하나만 봐요. 코스피가 바로 그 전교 평균입니다. 평균이 오르면 "대체로 잘했구나", 내리면 "대체로 못했구나"인 거예요.</p>
   </div>
 
-  <p>"코스피가 사흘 만에 17.2% 폭락했다"는 건, 시장 전체가 사흘 동안 평균 17.2%씩 값이 떨어졌다는 뜻이에요. 이건 <strong>굉장히 큰 폭</strong>입니다. 보통 하루 1~2% 움직이면 "출렁였다"고 표현해요.</p>
+  <p>"코스피가 사흘 만에 17.2% 폭락했다"는 건, 시장 전체의 값이 사흘 동안 모두 합쳐 17.2% 떨어졌다는 뜻이에요. 이건 <strong>굉장히 큰 폭</strong>입니다. 보통 하루 1~2% 움직이면 "출렁였다"고 표현해요.</p>
 </section>
 
 <!-- PART 3 -->
@@ -383,7 +389,7 @@
   <p>우리가 매달 월급에서 떼어 내는 돈이에요. 이 돈을 나라가 모아뒀다가, 나이 들면 매달 연금으로 돌려줍니다. <strong>전 국민의 노후 자금 창고</strong>예요.</p>
 
   <h3>규모가 어마어마해요</h3>
-  <p>약 <strong>1,900조 원</strong>이었어요. 이게 얼마나 큰 돈이냐면, 한국 정부의 1년 예산(약 700조 원)의 <strong>거의 3배</strong>예요. 세계에서 손꼽히는 규모의 연기금입니다.</p>
+  <p>약 <strong>1,900조 원</strong>이었어요. 이게 얼마나 큰 돈이냐면, 한국 정부의 1년 예산(2026년 본예산 약 728조 원)의 <strong>2.5배가 넘어요</strong>. 세계에서 손꼽히는 규모의 연기금입니다.</p>
 
   <div class="box warn">
     <span class="label">여기서 딜레마가 생겨요</span>
@@ -602,7 +608,7 @@
     <tr><th>비교 항목</th><th>홍콩 상장 상품</th><th>국내 상장 상품</th></tr>
     <tr><td>거래 수수료</td><td>기준</td><td><strong>5배 저렴</strong></td></tr>
     <tr><td>보수</td><td>1.6%</td><td><strong>0.09%</strong></td></tr>
-    <tr><td>양도소득세</td><td>과세</td><td><strong>면세</strong></td></tr>
+    <tr><td>양도소득세</td><td>과세</td><td><strong>면세</strong> (대신 매매차익에 배당소득세 15.4%)</td></tr>
   </table>
   <p style="font-size:14px;color:var(--muted)">인베스트조선은 이 세 가지 차이가 "필연적 투기 확산"을 낳았다고 분석했습니다.</p>
 </section>
@@ -695,5 +701,6 @@
 </footer>
 
 </div>
+<script src="tts.js" defer></script>
 </body>
 </html>

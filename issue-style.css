@@ -96,3 +96,12 @@ dl.gloss dd{margin:3px 0 0;font-size:14.5px;color:#3a3630}
 .facebook-post p{font-size:15px;margin:0 0 12px}
 .facebook-post .hl{background:#fff3c4;padding:0 2px}
 .updated{display:inline-block;background:var(--accsoft);color:var(--acc);border-radius:999px;font-size:12px;font-weight:800;padding:3px 12px;margin-left:8px;vertical-align:3px}
+
+/* 모바일 가로 넘침 방지 (2026.9.17) */
+.wrap{overflow-wrap:anywhere}
+.srcs,.srcs li,.srcs a,.box p{overflow-wrap:anywhere}
+.tbl{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:640px){
+  .wrap>table,section.lv>table,.box table{display:block;overflow-x:auto;max-width:100%}
+  h1{font-size:25px}
+}
