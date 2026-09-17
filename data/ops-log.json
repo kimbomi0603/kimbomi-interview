@@ -1,5 +1,12 @@
 [
  {
+  "kind": "morning",
+  "status": "bad",
+  "text": "아침 자동화 날씨=success 브리핑=success 심층=success 지역=success 팟캐스트=failure",
+  "at": "2026-09-17 09:24 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35165901746"
+ },
+ {
   "kind": "sitecheck",
   "status": "ok",
   "text": "10개 사이트 · 문제 0건",
