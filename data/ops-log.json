@@ -1,5 +1,12 @@
 [
  {
+  "kind": "sitecheck",
+  "status": "warn",
+  "text": "10개 사이트 · 문제 1건 — 이슈현안 자료실 + 발언 대시보드(1)",
+  "at": "2026-09-18 06:07 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35274772733"
+ },
+ {
   "kind": "morning",
   "status": "bad",
   "text": "아침 자동화 날씨=success 브리핑=success 심층=success 지역=success 팟캐스트=failure",
