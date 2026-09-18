@@ -1,6 +1,22 @@
 [
  {
   "date": "2026-09-18",
+  "slug": "jn-gangjin-rural-basic-income",
+  "topic": "강진군 농어촌 기본소득 추진",
+  "one_liner": "한 줄 요약 – 강진군은 2026‑09‑17에 11개 읍·면을 대상으로 ‘월 최대 20만 원’ 지급을 앞세운 농어촌 기본소득 사업을 현장 설명회와 찾아가는 설득으로 본격 추진하고 있다 (s2)(s4)(s6).",
+  "page": "issue-20260918-jn-gangjin-rural-basic-income.html",
+  "points": [
+   "재정 주권 – 지방이 자체 재원을 확보하고 중앙 지원을 효율적으로 활용해야 한다.",
+   "주민 참여 – ‘찾아가는 설득’은 정책 수용성을 높이는 핵심 메커니즘이다.",
+   "평가·피드백 – 파일럿 단계에서 정량·정성 평가를 통해 전국 확대 여부를 판단해야 한다."
+  ],
+  "questions": [],
+  "ideas": [],
+  "writer": "groq",
+  "checker": "gemini"
+ },
+ {
+  "date": "2026-09-18",
   "slug": "gyeonggi-fiscal-crisis-choo-mi-ae-diagnosis",
   "topic": "경기도 재정위기 진단 및 해법",
   "one_liner": "한 줄 요약 : 부서 간 소통이 끊기고 3개월 예산이 비어 있으며, 취득세가 3조 원 급감해 경기도가 재정위기에 빠졌다.",
