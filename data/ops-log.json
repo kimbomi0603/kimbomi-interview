@@ -3,6 +3,13 @@
   "kind": "sitecheck",
   "status": "warn",
   "text": "10개 사이트 · 문제 1건 — 전국 지방의원·단체장 인물 DB(1)",
+  "at": "2026-09-19 06:50 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35398675236"
+ },
+ {
+  "kind": "sitecheck",
+  "status": "warn",
+  "text": "10개 사이트 · 문제 1건 — 전국 지방의원·단체장 인물 DB(1)",
   "at": "2026-09-19 06:07 KST",
   "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35395102493"
  },
