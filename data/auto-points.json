@@ -1,5 +1,21 @@
 [
  {
+  "date": "2026-09-18",
+  "slug": "gyeonggi-fiscal-crisis-choo-mi-ae-diagnosis",
+  "topic": "경기도 재정위기 진단 및 해법",
+  "one_liner": "한 줄 요약 : 부서 간 소통이 끊기고 3개월 예산이 비어 있으며, 취득세가 3조 원 급감해 경기도가 재정위기에 빠졌다.",
+  "page": "issue-20260918-gyeonggi-fiscal-crisis-choo-mi-ae-diagnosis.html",
+  "points": [
+   "소통 체계 재정비 – “예산 부서 간 실시간 협업 플랫폼 구축이 급선무다.”(소통 부재가 원인이라는 점을 근거로 함)",
+   "세입 다변화 – “취득세 의존도를 낮추고, 디지털·친환경 세원을 확대해야 한다.”(취득세 급감 사실에 기반)",
+   "시민 의견 반영 – “청원 등 시민 목소리를 정책 설계에 체계적으로 반영해야 신뢰를 회복할 수 있다.”(청원 현황을 근거로 함)"
+  ],
+  "questions": [],
+  "ideas": [],
+  "writer": "groq",
+  "checker": "gemini"
+ },
+ {
   "date": "2026-09-17",
   "slug": "approval-2030-hearings",
   "topic": "인사청문 정국과 지지율 하락 — 2030 민심은 왜 먼저 떠났나",
