@@ -1,5 +1,12 @@
 [
  {
+  "kind": "sitecheck",
+  "status": "warn",
+  "text": "10개 사이트 · 문제 8건 — 전국 지방의원·단체장 인물 DB(1), 이슈현안 자료실 + 발언 대시보드(7)",
+  "at": "2026-09-21 06:07 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/35537654405"
+ },
+ {
   "kind": "morning",
   "status": "ok",
   "text": "아침 자동화 날씨=success 브리핑=success 심층=success 지역=success 팟캐스트=success",
