@@ -1,5 +1,12 @@
 [
  {
+  "kind": "morning",
+  "status": "ok",
+  "text": "아침 자동화 브리핑폴백=success 심층=success 팟캐스트=success",
+  "at": "2026-10-01 11:15 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/36804914852"
+ },
+ {
   "kind": "sitecheck",
   "status": "ok",
   "text": "10개 사이트 · 문제 0건",
