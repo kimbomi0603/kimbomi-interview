@@ -3,6 +3,13 @@
   "kind": "sitecheck",
   "status": "ok",
   "text": "10개 사이트 · 문제 0건",
+  "at": "2026-10-03 08:14 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/37076526957"
+ },
+ {
+  "kind": "sitecheck",
+  "status": "ok",
+  "text": "10개 사이트 · 문제 0건",
   "at": "2026-10-03 06:46 KST",
   "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/37068726385"
  },
