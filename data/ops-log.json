@@ -1,5 +1,12 @@
 [
  {
+  "kind": "morning",
+  "status": "ok",
+  "text": "아침 자동화 브리핑폴백=success 심층=success 팟캐스트=success",
+  "at": "2026-10-02 11:20 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/36955180324"
+ },
+ {
   "kind": "sitecheck",
   "status": "warn",
   "text": "10개 사이트 · 문제 1건 — 봄콜 봇 서버 (Render)(1)",
