@@ -2,6 +2,13 @@
  {
   "kind": "sitecheck",
   "status": "bad",
+  "text": "1개 사이트 · 문제 1건 — 김보미.com (대한민국 재정 365)(1)\n🚨 재정분석 API 장애: 김보미.com (대한민국 재정 365) /api/lofin?hub=JFIED&fyr=2024&pSize=3",
+  "at": "2026-10-18 07:02 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/39073406561"
+ },
+ {
+  "kind": "sitecheck",
+  "status": "bad",
   "text": "10개 사이트 · 문제 1건 — 김보미.com (대한민국 재정 365)(1)\n🚨 재정분석 API 장애: 김보미.com (대한민국 재정 365) /api/budget?zone=ALL",
   "at": "2026-10-18 06:42 KST",
   "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/39072056893"
