@@ -1,5 +1,12 @@
 [
  {
+  "kind": "morning",
+  "status": "ok",
+  "text": "아침 자동화 브리핑폴백=success 심층=success 팟캐스트=success",
+  "at": "2026-10-18 10:16 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/39085854996"
+ },
+ {
   "kind": "sitecheck",
   "status": "bad",
   "text": "1개 사이트 · 문제 1건 — 김보미.com (대한민국 재정 365)(1)\n🚨 재정분석 API 장애: 김보미.com (대한민국 재정 365) /api/lofin?hub=JFIED&fyr=2024&pSize=3",
