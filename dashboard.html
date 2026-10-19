@@ -210,6 +210,12 @@ function renderKwPanel(){
   sp.innerHTML='<div class="hd-t">🆕 9월 현안 답변지</div><div class="hd-s">2030 민심 · 용혜인 사퇴 · 위성정당 · 정당 보조금 · 인사청문 — 클릭하면 바로 보기</div>';
   sp.onclick=()=>{view='sep';activeKw=null;render()};
   box.appendChild(sp);
+  // 🎤 10.27 연세대 토론회 최상단 고정
+  const yd=document.createElement('div');yd.className='hd-pin';
+  yd.style.background='linear-gradient(135deg,#1f4fa3,#14326b)';
+  yd.innerHTML='<div class="hd-t">🎤 10.27 연세대 여야정책토론회</div><div class="hd-s">기조발언 · 의제 답변 · 이준석·박태훈 대응 · 정부별 정책 — 클릭하면 준비실로</div>';
+  yd.onclick=()=>{location.href='debate-yonsei-20261027.html'};
+  box.insertBefore(yd,sp);
   // 🔴 정치시그널 최상단 고정
   const sg=document.createElement('div');
   sg.className='hd-pin'+(view==='signal'?' on':'');

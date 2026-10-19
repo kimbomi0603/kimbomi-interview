@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>연세대 여야정책토론회 준비</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.svg">
+<style>
+/* 연세대 토론회 준비실: 상단 고정 목차 + 섹션별 접기. 원고는 명조, 근거는 작은 회색 링크 */
+:root{
+  --bg:#f5f6f8;--surface:#fff;--ink:#1b2333;--muted:#5d6676;--line:#dfe3ea;
+  --accent:#1f4fa3;--accent-soft:#e6edf9;--mark:#fff1a8;--warn:#9a5a00;--warn-soft:#fff4e0;
+  --ok:#256b46;--ok-soft:#e5f3eb;--red:#b42318;--red-soft:#fdecea;
+  --f-body:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+  --f-script:"AppleMyungjo","Batang","Nanum Myeongjo",serif;
+  --script-size:1.1rem;
+}
+@media (prefers-color-scheme:dark){:root{--bg:#121620;--surface:#1a202c;--ink:#e7eaf0;--muted:#9aa3b2;--line:#2c3445;--accent:#8fb1ff;--accent-soft:#1e2a44;--mark:#4a4214;--warn:#f2b45c;--warn-soft:#33270f;--ok:#7fd1a2;--ok-soft:#16291f;--red:#ff9a8f;--red-soft:#3a1a18;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .in{max-width:860px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px max(14px,env(safe-area-inset-left));scrollbar-width:none}
+.top a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-size:.84rem;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.top a.home{background:var(--accent);color:#fff;border-color:var(--accent)}
+.wrap{max-width:860px;margin:0 auto;padding:8px max(16px,env(safe-area-inset-left)) 80px}
+header.hero{padding:26px 0 6px}
+.eyebrow{font-size:.78rem;letter-spacing:.06em;color:var(--accent);font-weight:800}
+h1{font-size:1.6rem;line-height:1.3;margin:.3em 0 .4em}
+h2{font-size:1.25rem;margin:0 0 .6em;scroll-margin-top:64px}
+h3{font-size:1.04rem;margin:1.3em 0 .4em}
+section{padding:28px 0 4px;border-top:1px solid var(--line);margin-top:24px}
+p{margin:.5em 0}
+.facts{display:grid;grid-template-columns:5.5em 1fr;gap:6px 12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.facts dt{color:var(--muted);font-size:.88rem}.facts dd{margin:0;font-weight:600}
+.hl{background:var(--mark);padding:0 .2em;border-radius:3px}
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.good{border-left:3px solid var(--ok);background:var(--ok-soft);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:3px solid var(--red);background:var(--red-soft);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
+.card ul,.body ul{padding-left:1.15em;margin:.4em 0}.card li,.body li{margin:.25em 0}
+.tag{font-size:.74rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-left:6px}
+.lbl{font-size:.78rem;font-weight:800;color:var(--muted);letter-spacing:.04em;margin-top:12px}
+.src{font-size:.8rem;color:var(--muted)}.src a{color:var(--muted)}
+.script{font-family:var(--f-script);font-size:var(--script-size);line-height:1.95;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 18px}
+.script p{margin:0 0 1em}
+.script .cut{color:var(--muted)}
+.script .cut::before{content:"시간 짧으면 생략";display:block;font-family:var(--f-body);font-size:.72rem;font-weight:800;color:var(--warn)}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+button{font:inherit;font-size:.85rem;padding:6px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.time{font-size:.82rem;color:var(--muted)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:10px 0}
+details>summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:700;display:flex;gap:10px}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+";flex:0 0 1.1em;color:var(--accent);font-weight:800}
+details[open]>summary::before{content:"−"}
+details>summary small{display:block;font-weight:400;color:var(--muted);font-size:.84rem}
+details .body{padding:0 16px 14px}
+.lv{display:grid;grid-template-columns:3.6em 1fr;gap:4px 10px;padding:10px 0;border-top:1px dashed var(--line)}
+.lv:first-child{border-top:none}
+.lv .n{font-size:.74rem;font-weight:800;color:var(--accent)}.lv .n span{display:block;color:var(--muted);font-weight:500}
+.lv>div{min-width:0}
+.qa{padding:12px 0;border-top:1px dashed var(--line)}.qa:first-child{border-top:none}
+.qa .q{font-weight:700}.qa .a{margin-top:4px}.qa .a::before{content:"답 ";color:var(--accent);font-weight:800}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:520px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;color:var(--muted);font-weight:800;background:var(--bg)}
+tr:last-child td{border-bottom:none}
+.num{font-variant-numeric:tabular-nums}
+.big{font-size:1.5rem;font-weight:800;color:var(--accent)}
+.quote{border-left:3px solid var(--accent);padding:4px 0 4px 12px;margin:10px 0}
+.quote .m{font-size:.8rem;color:var(--muted)}
+ol.srcs{padding-left:1.4em;font-size:.86rem}ol.srcs li{margin:.3em 0}
+.chk li{list-style:none;margin:.35em 0}.chk li::before{content:"☐ ";color:var(--accent)}
+</style>
+</head><body>
+<nav class="top"><div class="in">
+<a class="home" href="index.html">← 자료실</a>
+<a href="#now">한눈에</a><a href="#speech">기조발언</a><a href="#answers">의제 답변</a><a href="#numbers">숫자 카드</a><a href="#rivals">상대 발언·대응</a><a href="#dem">민주당 지적 대비</a><a href="#history">정부별 정책</a><a href="#issues">현안 풀이</a><a href="#yonsei">연세대·학생회</a><a href="#alumni">정외과 출신 정치인</a><a href="#myword">김보미 과거 발언</a><a href="#check">준비 체크</a><a href="#sources">출처</a>
+</div></nav>
+<div class="wrap">
+
+<header class="hero">
+<div class="eyebrow">10.27(화) 19:00 · 연세대 연희관 401호 · 18:40 도착</div>
+<h1>연세대 정치외교학과 여야정책토론회 준비실</h1>
+<p>토론자는 박태훈(진보당)·이준석(개혁신당)·김보미. 여당 쪽은 대표님 혼자입니다. 원칙은 하나입니다. <b>정답은 정당이 아니라 국민에게 있다. 틀린 건 우리 당이어도 틀렸다고 한다.</b> 모든 숫자에는 출처를 달았습니다. 작성 2026.10.19.</p>
+</header>
+
+<section id="now">
+<h2>한눈에</h2>
+<dl class="facts">
+<dt>일시</dt><dd>2026.10.27(화) 19:00~21:00, <span class="hl">18:40 도착</span>(마이크 점검)</dd>
+<dt>장소</dt><dd>연세대 신촌캠퍼스 연희관 401호</dd>
+<dt>청중</dt><dd>정치외교학과 학부생 약 50명</dd>
+<dt>순서</dt><dd>기조발언 → 상호토론 → 질의응답(학생 질문 사전 수합 + 현장 질의)</dd>
+<dt>의제 1</dt><dd>청년 주거 환경, 무엇을 우선적으로 바꿔야 하는가?</dd>
+<dt>의제 2</dt><dd>열심히 준비해도 취업이 어려운 사회, 청년 일자리 정책은 어디서부터 바뀌어야 하는가?</dd>
+<dt>토론자</dt><dd>박태훈(진보당 청년진보당 전국대학생위원회 준비위원장) · 이준석(개혁신당 국회의원) · 김보미 — 가나다순</dd>
+<dt>주최</dt><dd>제62대 정치외교학과 학생회 &lt;이륙&gt; 미래진로국(담당 황금별)</dd>
+</dl>
+<div class="note"><b>이 행사의 의미</b><br>
+'여야정책토론회'는 &lt;이륙&gt; 학생회의 미래진로국 공약입니다. 공개된 공약 이행표(이행률 78.3%)에서 아직 '미이행'으로 남아 있습니다. 학생회 입장에서는 꼭 성공시켜야 하는 공약 이행 행사입니다. 공개 자료로 찾을 수 있는 범위에서 이 학생회가 여야 정치인 여러 명을 맞붙인 토론회는 이번이 처음입니다.<br>
+<span class="src">근거: <a href="https://coda.io/d/_dJNlsDc6TLs/_suG-cZG4" target="_blank" rel="noopener">&lt;이륙&gt; 공약 이행률 페이지</a> · <a href="https://linktr.ee/yonsei.psis" target="_blank" rel="noopener">학생회 링크트리</a></span></div>
+<div class="bad"><b>분위기 경고</b><br>
+① 9월 이 학생회가 서울대·고려대와 연 연합 학술세미나에서 국민의힘 윤상현 의원 초청을 재학생 반발로 철회했습니다. ② 6월 10일 연세대 시국선언에서 정외과 24학번 학생의 발언이 정치적이라며 학생들끼리 충돌했고, 사회자가 사과했습니다. <b>학생들은 진영 구호에 예민합니다.</b> 내란·극우 같은 구호보다 정책과 숫자로 말하는 게 안전합니다.<br>
+<span class="src">근거: <a href="https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003265192" target="_blank" rel="noopener">오마이뉴스 9.7</a> · <a href="https://www.newsis.com/view/NISX20260610_0003664523" target="_blank" rel="noopener">뉴시스 6.10</a></span></div>
+</section>
+
+<section id="speech">
+<h2>기조발언 원고 (수정본)</h2>
+<p>약 5분 분량입니다. 회색 문단을 빼면 4분. 학생회가 기조발언 시간을 알려주면 맞춰 줄입니다. 비교는 전부 연세대 앞(창천동) 기준입니다.</p>
+<div class="tools"><button type="button" id="bigger">글자 크게</button><button type="button" id="smaller">글자 작게</button><span class="time" id="chars"></span></div>
+<div class="script" id="script">
+<p>여러분 학교 앞 8평 원룸이 얼마에 팔리는지 아십니까? 올해 6월, 창천동 8평 원룸 하나가 5억 3천만 원에 거래됐습니다. 제 고향 강진에서는 34평 아파트가 1억 7천5백만 원에 팔렸습니다. 여러분 학교 앞 8평 원룸이 강진 34평 아파트보다 세 배 비쌉니다. 평수로 따지면 열세 배입니다.</p>
+<p>저는 그 강진에서 34평 임대아파트에 삽니다. 그런데 지금 일하는 곳 근처에서는 방 한 칸을 못 구했습니다. 선거 두 번 치르면서 빚이 늘어서 더 빌릴 데도 없습니다. 그래서 요즘 화성에 있는 언니 집에서 출퇴근합니다. 전 군의회 의장도 수도권에서 방 한 칸 못 구합니다. 웃기면서도 슬픈 현실입니다. 여러분은 오죽하겠습니까?</p>
+<p>오늘 여기 오면서 '보증금'이라는 말을 계속 생각했습니다.</p>
+<p>방 한 칸 얻으려면 보증금이 필요합니다. 그런데 요즘은 일자리를 얻을 때도 보증금을 내라고 합니다. 경력이라는 보증금입니다. 신입을 뽑는다면서 경력부터 묻습니다. 경력이 없어서 일을 못 하고, 일을 못 해서 경력이 없습니다. 이게 말이 됩니까?</p>
+<p>숫자도 똑같이 말합니다. 15세부터 29세까지 청년 취업자는 지난달까지 47개월째 줄었습니다. 졸업하고 한 번이라도 일해 본 청년은 84.8%, 통계를 낸 뒤로 가장 낮습니다. 우리나라 25세에서 34세 대학 이수율은 OECD 1위인데, 대학 나온 사람의 고용률은 OECD 평균보다 낮습니다. 여러분이 공부를 덜 해서입니까? 아닙니다. 이 사회가 청년한테 보증금을 너무 많이 받고 있어서입니다.</p>
+<p class="cut">저는 스물여덟에 강진군의원이 됐고, 서른둘에 전국에서 가장 어린 기초의회 의장이 됐습니다. 의장이 되자마자 업무추진비를 홈페이지에 전부 공개했습니다. 본회의를 유튜브로 생중계했습니다. 돌아온 건 불신임안이었습니다. 당대표 선거 때는 기탁금이 없어서 다섯 군데에서 빌렸습니다. 정치에도 청년이 내야 하는 보증금이 있었던 겁니다.</p>
+<p>저는 민주당입니다. 그래도 틀린 건 틀렸다고 말하겠습니다. 정답은 정당에 있지 않습니다. 국민에게 있습니다. 오늘 이 방에서는 여러분이 정답입니다.</p>
+<p>세 가지를 말씀드리겠습니다.</p>
+<p>하나. 청년 주거는 공공이 가진 방이 먼저입니다. 서울 대학 기숙사 수용률이 16.8%, 전국 17개 시도 중 꼴찌입니다. 정부 청년 월세 지원은 한 달 20만 원, 여러분 학교 앞 월세의 3분의 1도 안 됩니다. 올려야 합니다. 그런데 지원만 올리면 월세도 따라 오릅니다. 대학가 기숙사와 공공 원룸을 숫자로 약속하고, 몇 호를 언제 지었는지 공개하게 해야 합니다.</p>
+<p>둘. 첫 일자리의 경력 보증금은 나라가 대신 내줘야 합니다. 저는 이걸 청년취업보장제라고 부릅니다. 나라가 첫 고용의 인건비와 교육비를 대고, 기업과 공공기관이 실제 일과 멘토링을 맡는 겁니다. 몇 달짜리 인턴이 아니라 경력으로 쳐 주는 첫 일자리입니다. 지방은 더 급합니다. 지방 청년은 수도권 청년보다 취업까지 석 달 넘게 더 걸립니다.</p>
+<p>셋. 청년 정책은 청년이 직접 정하게 해야 합니다. 저는 당대표 선거에서 당 예산 10%를 청년이 직접 짜고 쓰게 하자고 했습니다. 나라와 지방정부 청년 예산도 마찬가지입니다. 청년한테 쓰는 돈은 청년이 짜야 합니다.</p>
+<p>저는 군수 경선에서도, 당대표 예비경선에서도 떨어졌습니다. 계란으로 바위를 쳤고, 계란이 깨졌습니다. 그래도 바위에 금은 갔다고 생각합니다. 오늘 여러분 질문에는 보증금 안 받겠습니다. 무엇이든 물어 주십시오.</p>
+</div>
+<div class="note"><b>원고 확인 필요 2건</b><br>
+① "선거 두 번 치르면서 빚이 늘어서"는 대표님 말씀(낙선 후 빚)을 옮긴 표현입니다. 실제와 다르면 "선거 치르고 빚이 늘어서"로 바꾸십시오. 7월 인터뷰 대비 자료에는 신고 재산이 마이너스 9,178만 원으로 적혀 있습니다(공개 여부 판단 필요).<br>
+② "기탁금 다섯 군데에서 빌렸다"는 7월 뉴스바사삭 대비 답변지의 대표님 발언입니다.</div>
+<p class="src">원고 숫자 출처: 창천동 8평 원룸 5.3억(프릭스빌, 2026.6.23 실거래) <a href="https://zippoom.com/browse/%EC%84%9C%EC%9A%B8-%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC-%EC%B0%BD%EC%B2%9C%EB%8F%99/%EB%B9%8C%EB%9D%BC-%EB%A7%A4%EB%A7%A4" target="_blank" rel="noopener">집품 창천동</a> · 강진 34평 1.75억(중흥파크S-클래스빌, 2026.6.20) <a href="https://m.richgo.ai/realty/apt-hub/%EC%A0%84%EB%82%A8%EA%B4%91%EC%A3%BC/%EA%B0%95%EC%A7%84%EA%B5%B0/30%ED%8F%89%EB%8C%80" target="_blank" rel="noopener">리치고 강진</a> · 승원팰리체 리버시티 전용84㎡(34평형) 10년 민간임대 <a href="https://www.jgynews.com/news/articleView.html?idxno=33434" target="_blank" rel="noopener">장강뉴스</a>, <a href="https://www.nsori.com/news/articleView.html?idxno=23309" target="_blank" rel="noopener">강진일보</a> · 청년 취업자 47개월 감소 <a href="https://www.smarttoday.co.kr/ko-kr/articles/112773" target="_blank" rel="noopener">9월 고용동향</a> · 취업경험률 84.8% <a href="https://eiec.kdi.re.kr/policy/materialView.do?num=284575" target="_blank" rel="noopener">청년층 부가조사</a> · OECD <a href="https://www.fnnews.com/news/202609291351196534" target="_blank" rel="noopener">교육지표 2026</a> · 서울 기숙사 16.8% <a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">이투데이 10.15</a> · 월세 지원 20만 원 <a href="https://mobile.newsis.com/view/NISX20260318_0003552925" target="_blank" rel="noopener">뉴시스 3.18</a> · 연세대 인근 월세 67.8만 <a href="https://biz.sbs.co.kr/amp/article/20000327969" target="_blank" rel="noopener">SBS Biz</a> · 지방 취업 3.4개월 더 <a href="https://www.kukinews.com/article/view/kuk202511270015" target="_blank" rel="noopener">고용정보원 브리프</a> · 청년취업보장제·당 예산 10%는 대표님 기존 공약(신동아·프레시안).</p>
+</section>
+
+<section id="answers">
+<h2>의제별 답변 (토론 중 1~2분)</h2>
+<details open><summary>의제 1. 청년 주거, 무엇을 먼저 바꾸나</summary><div class="body script" style="border:none;padding:0 16px 14px">
+<p>월세 그 자체입니다. 안전도 통학도 중요합니다. 그런데 돈이 없으니까 어두운 골목, 먼 동네로 밀려나는 겁니다. 세 문제의 뿌리는 하나입니다.</p>
+<p>순서가 있습니다. 첫째, 공공이 가진 방입니다. 서울 대학 기숙사 수용률 16.8%, 전국 꼴찌입니다. 수도권은 5년 동안 오히려 떨어졌습니다. 대학 부지와 국공유지에 기숙사를 짓고, 연도별 숫자로 약속해야 합니다. 둘째, 관리비입니다. 대학가 관리비가 1년 새 10% 넘게 올랐는데, 정부 월세 지원은 관리비를 안 쳐 줍니다. 관리비 내역부터 공개하게 해야 합니다. 셋째, 월세 지원을 현실에 맞게 올리는 겁니다.</p>
+<p>하나 더 있습니다. 청년은 낼 세금이 없어서 힘든 게 아니라, 들어갈 집이 없어서 힘듭니다. 세입자 대책이 곧 청년 대책입니다.</p>
+</div></details>
+<details open><summary>의제 2. 청년 일자리, 어디서부터 바꾸나</summary><div class="body script" style="border:none;padding:0 16px 14px">
+<p>첫 직장 문턱부터입니다. 기업이 신입 대신 경력을 찾는 건, 신입을 가르치는 비용을 혼자 지기 싫어서입니다. 그 비용을 나라가 나눠 지면 됩니다. 그게 제가 말하는 청년취업보장제입니다.</p>
+<p>첫 단추가 평생을 좌우합니다. 국회예산정책처 분석을 보면 계약직으로 시작한 청년 셋 중 하나는 지금도 계약직입니다. 그래서 일자리 숫자만큼 첫 일자리의 질이 중요합니다.</p>
+<p>그리고 정권 바뀔 때마다 청년 정책 이름이 바뀝니다. 내일채움공제는 생겼다가 없어졌고, 도약계좌는 미래적금으로 바뀌었습니다. 청년은 정책을 믿고 계획을 짜야 하는데, 나라가 계획을 자꾸 바꿉니다. 청년 정책의 성적표는 몇 명한테 얼마 줬냐가 아니라, 3년 뒤 그 청년이 어디서 무엇을 하고 있느냐여야 합니다.</p>
+<p>학생회 자료에 18.4개월이란 숫자가 나왔는데, 제가 찾아보니 그건 첫 직장에 버티는 평균 기간이었습니다. 어렵게 들어간 첫 직장을 열에 일곱이 1년 반 만에 그만둡니다. 들어가기도 어렵고, 버티기도 어렵습니다.</p>
+</div></details>
+<details><summary>"8년 지방의원 하며 무엇을 만들었나"<small>학생회가 처음 메일에서 묻고 싶다고 한 질문</small></summary><div class="body script" style="border:none;padding:0 16px 14px">
+<p>제가 제일 자랑하고 싶은 건 조례보다 공개입니다. 의장이 되고 업무추진비를 전부 홈페이지에 올렸습니다. 관행적인 수의계약을 손봤고, 회의를 유튜브로 생중계했습니다. 군민이 볼 수 있으면 정치가 달라집니다.</p>
+<p>대가도 있었습니다. 불신임안이 들어왔습니다. 그래도 공개는 한 번 시작하면 되돌리기 어렵습니다. 그래서 의원을 그만두고도 시민이 동네 예산을 직접 볼 수 있는 재정 공개 플랫폼을 만들었습니다.</p>
+</div></details>
+<details><summary>"떨어져도 왜 계속 도전하나"</summary><div class="body script" style="border:none;padding:0 16px 14px">
+<p>출마 선언 때 계란으로 바위를 치겠다고 했습니다. 군수 경선에서 떨어졌고, 당대표 예비경선에서도 떨어졌습니다. 그런데 제가 안 나갔으면 청년 최고위원이 왜 없어졌는지, 왜 청년한텐 원칙을 들이대고 기득권한텐 예외를 주는지 아무도 묻지 않았을 겁니다.</p>
+<p>지는 건 괜찮습니다. 아무도 안 묻는 게 무섭습니다.</p>
+</div></details>
+</section>
+
+<section id="numbers">
+<h2>숫자 카드 — 토론 중 바로 꺼내 쓰기</h2>
+<div class="tbl"><table>
+<thead><tr><th>숫자</th><th>내용</th><th>출처</th></tr></thead><tbody>
+<tr><td class="num"><b>3배 / 13배</b></td><td>창천동 8평 원룸 5.3억(2026.6.23) vs 강진 34평 아파트 1.75억(2026.6.20). 평당 6,625만 원 vs 515만 원</td><td><a href="https://zippoom.com/browse/%EC%84%9C%EC%9A%B8-%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC-%EC%B0%BD%EC%B2%9C%EB%8F%99/%EB%B9%8C%EB%9D%BC-%EB%A7%A4%EB%A7%A4" target="_blank" rel="noopener">집품</a>·<a href="https://m.richgo.ai/realty/apt-hub/%EC%A0%84%EB%82%A8%EA%B4%91%EC%A3%BC/%EA%B0%95%EC%A7%84%EA%B5%B0/30%ED%8F%89%EB%8C%80" target="_blank" rel="noopener">리치고</a></td></tr>
+<tr><td class="num">1.5배</td><td>신축 기준 반박용: 창천동 8평 5.3억 vs 강진 신축 33평(서성남양휴튼2단지) 3.58억(2026.8.20)</td><td><a href="https://m.richgo.ai/realty/apt-hub/%EC%A0%84%EB%82%A8%EA%B4%91%EC%A3%BC/%EA%B0%95%EC%A7%84%EA%B5%B0/30%ED%8F%89%EB%8C%80" target="_blank" rel="noopener">리치고</a></td></tr>
+<tr><td class="num">55~65만 원</td><td>창천동 8평 원룸 월세 실거래(2026.9~10)</td><td><a href="https://zippoom.com/browse/%EC%84%9C%EC%9A%B8-%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC-%EC%B0%BD%EC%B2%9C%EB%8F%99/%EB%B9%8C%EB%9D%BC-%EC%9B%94%EC%84%B8" target="_blank" rel="noopener">집품</a></td></tr>
+<tr><td class="num">67.8만 원</td><td>연세대 인근 원룸 평균 월세(2026.7, 1년 새 +10.4%), 관리비 +14.3%</td><td><a href="https://biz.sbs.co.kr/amp/article/20000327969" target="_blank" rel="noopener">SBS Biz·다방</a></td></tr>
+<tr><td class="num">16.8%</td><td>서울 대학 기숙사 수용률, 17개 시도 중 최저. 수도권 2020년 18.1% → 2025년 17.7%</td><td><a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">이투데이 10.15</a></td></tr>
+<tr><td class="num">2.6%</td><td>연세대 2026학년도 등록금 인상률(1.29 등록금심의위 의결)</td><td><a href="https://news.tf.co.kr/read/life/2290752.htm" target="_blank" rel="noopener">더팩트 2.8</a></td></tr>
+<tr><td class="num">47개월</td><td>15~29세 취업자 연속 감소(2026.9), 금융위기 이후 최장. 청년 고용률 44.0%</td><td><a href="https://www.smarttoday.co.kr/ko-kr/articles/112773" target="_blank" rel="noopener">스마트투데이</a></td></tr>
+<tr><td class="num">84.8%</td><td>졸업 후 취업경험 비율, 2004년 이후 최저. 1년 이상 미취업 48.6%</td><td><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=284575" target="_blank" rel="noopener">국가데이터처</a>·<a href="https://biz.sbs.co.kr/amp/article/20000324195" target="_blank" rel="noopener">SBS Biz</a></td></tr>
+<tr><td class="num">71.1% / 80.1%</td><td>25~34세 고등교육 이수율 OECD 1위 / 대졸 고용률 80.1%(OECD 86.0%)</td><td><a href="https://www.fnnews.com/news/202609291351196534" target="_blank" rel="noopener">파이낸셜뉴스</a></td></tr>
+<tr><td class="num">34.5%</td><td>계약직으로 시작한 청년 중 지금도 계약직(정규직 출발은 18.7%)</td><td><a href="https://v.daum.net/v/20260502202635766" target="_blank" rel="noopener">국회예산정책처</a></td></tr>
+<tr><td class="num">75.9%</td><td>전세사기 피해자 중 40세 미만 비율(누적 4만 1,559명)</td><td><a href="https://www.heraldk.com/article/2026101114382405541" target="_blank" rel="noopener">헤럴드경제 10월</a></td></tr>
+<tr><td class="num">86.6%</td><td>저소득 청년 중 공공임대도 주거급여도 못 받는 비율. 저소득 임차 청년 소득 대비 임대료 58%</td><td><a href="https://www.fnnews.com/news/202608110630517454" target="_blank" rel="noopener">국토연구원 보도</a></td></tr>
+<tr><td class="num">43.3조</td><td>2027 정부 청년예산(2026년 28.2조에서 +53.5%). 청년 공공임대 9.4조 → 18.1조</td><td><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=285992" target="_blank" rel="noopener">관계부처 합동</a>·<a href="https://www.heraldk.com/article/2026083120041480854" target="_blank" rel="noopener">헤럴드</a></td></tr>
+</tbody></table></div>
+<p class="src">"29.9조 청년예산"은 한 매체에만 나오고 기준이 달라 쓰지 않습니다. 이전 자료의 해당 숫자는 43.3조로 바로잡았습니다.</p>
+</section>
+
+<section id="rivals">
+<h2>상대 토론자 발언과 대응</h2>
+
+<h3>이준석 <span class="tag">개혁신당 · 경기 화성을 · 8.26 당대표 사퇴</span></h3>
+<div class="tbl"><table><thead><tr><th>날짜</th><th>발언 요지</th><th>출처</th></tr></thead><tbody>
+<tr><td>2025.5.12</td><td><b>연세대 '학식먹자'</b>(학생 10여 명, 90분). 서울 신입 초봉 세전 5천만 원 타협론, 지방 기피는 인프라보다 심리 문제라 세제·규제 인센티브가 답, 현행 연금은 '세대 착취', 이재명식 복지는 '물통 나눠주기'</td><td><a href="https://www.sidae.com/article/2025051214455242590" target="_blank" rel="noopener">시대</a></td></tr>
+<tr><td>2025.5.18</td><td>대선 토론: 주4.5일제는 '어떻게'가 빠졌다, 정년 연장하면 청년 일자리가 어떻게 느냐</td><td><a href="https://www.seoul.co.kr/news/2025/05/23/20250523500170" target="_blank" rel="noopener">서울신문</a></td></tr>
+<tr><td>2025.5.28</td><td>최저임금을 지자체가 ±30% 범위에서 정하게 하자(노컷 팩트체크: 근거 약함)</td><td><a href="https://www.nocutnews.co.kr/news/6346286" target="_blank" rel="noopener">노컷뉴스</a></td></tr>
+<tr><td>2025.10.14</td><td>10·15 부동산 대책은 '문재인 정부 2.0', 젊은층 신축 선호는 투기가 아니다</td><td><a href="https://www.heraldk.com/article/2025101420330226891" target="_blank" rel="noopener">헤럴드</a></td></tr>
+<tr><td>2026.2.2</td><td>민주당 의원 중 다주택자 25명, 강남4구 보유 20명이라며 "집 파실 겁니까"</td><td><a href="https://www.twig24.com/news/2026/02/02/20260202500077" target="_blank" rel="noopener">트윅</a></td></tr>
+<tr><td>2026.4.14·4.23</td><td>전월세 대란은 이재명 정부가 전세를 없앤 탓, '민생 내란'. 본인 동탄 전셋집이 2년 새 약 2억 올랐다는 경험, 서울 전셋값 61주 연속 상승</td><td><a href="https://www.heraldk.com/article/2026041423510949260" target="_blank" rel="noopener">헤럴드</a>·<a href="https://www.insight.co.kr/news/551358" target="_blank" rel="noopener">인사이트</a></td></tr>
+<tr><td>2026.5.16</td><td>오세훈과 노원구 청년 원룸 방문, 정부 아집으로 주거 사다리가 막혔다</td><td><a href="https://www.heraldk.com/article/2026051600220463059" target="_blank" rel="noopener">헤럴드</a></td></tr>
+<tr><td>2026.9.30</td><td>국민의힘 조정훈과 '수도권 주거혁신포럼' 공동대표. 전세는 줄고 대출은 막혔다, 집 팔라면서 대출 문턱은 높인다</td><td><a href="https://m.dailian.co.kr/news/view/1696182" target="_blank" rel="noopener">데일리안</a></td></tr>
+</tbody></table></div>
+<div class="card"><div class="lbl">토론 스타일</div><p>상대 공약의 재원·실행을 숫자로 캐묻고, 본인 경험을 근거로 쓰고, '민생 내란'·'세대 착취' 같은 강한 이름을 붙이고, "집 파실 겁니까" 같은 반문으로 몰아붙입니다. 2025 대선 토론 전문가 평가에서 논리·설득력은 높았고 경청·예의 점수가 가장 낮았습니다. <span class="src"><a href="https://www.sidae.com/article/2025051913323095940" target="_blank" rel="noopener">시대</a> · <a href="https://www.munhwa.com/article/11506441" target="_blank" rel="noopener">문화일보</a></span></p></div>
+<details open><summary>이준석 예상 공격 → 대응</summary><div class="body">
+<div class="qa"><div class="q">"전월세 대란은 이재명 정부가 전세를 없앤 탓입니다."</div><div class="a">대출 규제에 청년 실수요자가 같이 맞은 건 맞습니다. 저도 그건 고쳐야 한다고 말해 왔습니다. 그런데 공공임대 착공을 멈춘 건 지난 정부입니다. LH 공공주택 착공이 2023년 1만 1천 호로 10년 중 가장 적었고, 장기공공임대 융자 예산은 연평균 18.8% 줄었습니다. 그때 안 지은 방이 지금 전세난으로 돌아온 겁니다.<br><span class="src"><a href="https://www.inews24.com/view/2012115" target="_blank" rel="noopener">아이뉴스24</a> · <a href="https://peoplepower21.org/stablelife/1951231" target="_blank" rel="noopener">참여연대 2023.11</a></span></div></div>
+<div class="qa"><div class="q">"민주당 의원은 집 팔았습니까?"</div><div class="a">국민 눈높이에 맞게 정리해야 합니다. 저는 그 질문에서 자유롭습니다. 저는 강진에서 임대아파트에 살고, 서울에선 방이 없어서 언니 집에서 출퇴근합니다.</div></div>
+<div class="qa"><div class="q">"의원님 당 공약처럼 용적률 올려 민간 공급 늘리면 됩니다."</div><div class="a">공급은 찬성합니다. 그런데 지어도 비싸면 청년 방이 아닙니다. 지금 창천동 8평 원룸이 5억 3천만 원입니다. 누가 짓느냐보다 누구의 방이냐가 중요합니다. 시민단체 공약 평가에서도 그 공약은 세입자보다 임대인 쪽이라는 평가를 받았습니다.<br><span class="src"><a href="https://peoplepower21.org/stablelife/2023030" target="_blank" rel="noopener">참여연대</a></span></div></div>
+<div class="qa"><div class="q">"지방 기피는 심리 문제고, 세제 인센티브 주면 기업 갑니다." (연세대 학식먹자 발언)</div><div class="a">강진에 살아 보면 압니다. 면소재지에 밥 먹을 식당이 없어지는 건 심리가 아닙니다. 세금 몇 % 깎아 준다고 기업이 오지 않습니다. 사람, 교통, 학교가 먼저입니다. 지방끼리 세금 깎기 경쟁하면 지방 재정만 줄어듭니다.</div></div>
+<div class="qa"><div class="q">"최저임금을 지역별로 ±30% 다르게 하면 지방 일자리가 늡니다."</div><div class="a">그러면 지방 청년은 같은 일을 하고도 30% 덜 받습니다. 청년이 지방을 더 빨리 떠납니다.</div></div>
+<div class="qa"><div class="q">"청년취업보장제, 재원은 얼마고 어떻게 합니까?"</div><div class="a">정부가 내년 청년 일자리·창업에 5조 1천억 원을 잡았습니다. 이미 있는 장려금·인턴 사업을 첫 고용 보장 하나로 묶는 데서 시작하면 됩니다. 쪼개진 사업을 합치는 게 먼저입니다.<br><span class="src"><a href="https://www.imaeil.com/page/view/2026082918420693610" target="_blank" rel="noopener">매일신문 8.29</a> · <a href="https://www.nabo.go.kr/ko/notice/releasesView.do?idx=8981" target="_blank" rel="noopener">예산정책처: 사업 중복 지적</a></span><br><b>주의:</b> 구체 금액 산출은 아직 없습니다. 숫자로 더 밀면 "설계는 청년과 같이 하겠다"로 받으십시오.</div></div>
+<div class="qa"><div class="q">"정년 연장하면 청년 일자리가 어떻게 늘어납니까?"</div><div class="a">걱정은 맞습니다. 한국은행도 정년 60세 연장 뒤 청년 고용이 줄었다고 분석했습니다. 우리 당 80년대생 의원들도 청년 빼놓고 정하지 말라고 했습니다. 정년 연장은 청년 신규채용 보장과 묶어야 합니다.<br><span class="src"><a href="https://www.mt.co.kr/economy/2025/11/24/2025112316181514504" target="_blank" rel="noopener">머니투데이</a> · <a href="https://www.heraldk.com/article/2026070519522272091" target="_blank" rel="noopener">헤럴드 7.5</a></span><br><b>확인:</b> 정년 연장에 대한 대표님 기존 입장이 있으면 그걸 우선하십시오.</div></div>
+</div></details>
+<div class="bad"><b>하지 말 것</b> — 이준석 의원의 지방선거 성적(기초의원 1석), 부산시장 후보 자작극 사건, 대표 사퇴를 먼저 꺼내지 않습니다. 학생들 앞에서 인신공격은 손해입니다. 상대가 먼저 인신공격을 하면 그때 "정책 얘기 하시죠"로 돌립니다.<br><span class="src">참고: <a href="https://weekly.khan.co.kr/article/202608260909001" target="_blank" rel="noopener">주간경향 8.26</a></span></div>
+
+<h3>박태훈 <span class="tag">진보당 · 1992년생 · 숭실대 정외과</span></h3>
+<div class="tbl"><table><thead><tr><th>날짜</th><th>발언 요지</th><th>출처</th></tr></thead><tbody>
+<tr><td>2025.5</td><td>내란 청산은 민주당과 함께하되, 진보정당은 민주당이 차마 못 하는 의제(차별금지법, 노동)를 앞세워야. 대선에서 청년 의제가 실종됐다</td><td><a href="https://brunch.co.kr/@coolboy95/65" target="_blank" rel="noopener">오마이뉴스 연재</a></td></tr>
+<tr><td>2025.6</td><td>일베폐쇄 서명 11만 명분 대통령실 전달. 20대 남성 74%가 이준석·김문수를 찍었다며 극우화된 온라인 공간 방치하면 안 된다</td><td><a href="https://www.mindlenews.com/news/articleView.html?idxno=14003" target="_blank" rel="noopener">민들레</a></td></tr>
+<tr><td>2026.6.21</td><td>"진보가 집권해도 내 삶이 바뀌지 않는다"는 게 청년 실망의 핵심. 민주진보 진영이 기득권이 됐으니 구호 대신 건설적 과제로 청년을 불러야</td><td><a href="https://www.khan.co.kr/article/202606212153005/" target="_blank" rel="noopener">경향신문</a></td></tr>
+<tr><td>2026.9</td><td>이재명 대통령에 대한 기대를 접기 이르다는 지지글. 대통령이 직접 화답</td><td><a href="https://www.polinews.co.kr/news/articleView.html?idxno=743042" target="_blank" rel="noopener">폴리뉴스</a></td></tr>
+</tbody></table></div>
+<p class="src">청년 주거·일자리에 대한 본인 발언은 기사로 확인되지 않았습니다. 진보당 지선 공약은 '지역별 장기공공임대 20% 의무화'(<a href="https://peoplepower21.org/stablelife/2023030" target="_blank" rel="noopener">참여연대 평가</a>).</p>
+<details open><summary>박태훈 예상 공격 → 대응</summary><div class="body">
+<div class="qa"><div class="q">"민주당이 집권해도 청년 삶은 안 바뀌었습니다."</div><div class="a">맞습니다. 저도 당대표 선거에서 그렇게 말했습니다. 청년들이 민주당이 미워서 떠난 게 아니라 기대할 이유를 못 찾아서 떠난 겁니다. 그래서 청년 정책을 청년이 직접 정하게 하자는 겁니다.</div></div>
+<div class="qa"><div class="q">"민주당 공약은 공급만 말하고 공공임대 숫자가 없습니다."</div><div class="a">숫자 없는 약속은 약속이 아닙니다. 대학가 기숙사부터 연도별 물량으로 약속하자는 데 박 위원장님과 같이 가겠습니다.</div></div>
+<div class="qa"><div class="q">"장기공공임대 20% 의무화, 동의하십니까?"</div><div class="a">방향은 동의합니다. 지역마다 땅값과 수요가 다르니 서울 대학가는 더 높게, 군 단위는 빈집 활용처럼 다르게 가야 합니다. 일괄 숫자보다 지역별 목표를 법으로 정하자는 쪽입니다.</div></div>
+<div class="qa"><div class="q">"민주진보 진영이 기득권이 됐습니다."</div><div class="a">동의합니다. 그 기득권을 제일 세게 비판한 사람이 저입니다. 다만 구호로는 바꿀 수 없습니다. 청년이 결정하는 자리에 앉아야 바뀝니다.</div></div>
+</div></details>
+<div class="good"><b>박태훈과의 관계</b> — 공공임대·세입자 보호 방향이 대표님과 겹칩니다. 이준석 의원과 1대2 구도가 되면 같은 편이 될 수 있는 사람입니다. 그의 민주당 비판은 방어하지 말고 인정하면서 대안으로 넘깁니다.</div>
+</section>
+
+<section id="dem">
+<h2>민주당 지적 대비 — 틀린 건 틀렸다</h2>
+<p>원칙: 방어하지 않습니다. 인정할 건 먼저 인정하고, 대표님이 그 문제를 이미 지적했던 사람이라는 점을 보여 준 뒤 대안으로 넘어갑니다. 정답은 정당이 아니라 국민에게 있습니다.</p>
+<div class="tbl"><table><thead><tr><th>예상 지적</th><th>근거</th><th>대표님 답(소신)</th></tr></thead><tbody>
+<tr><td>20대가 민주당을 떠났다</td><td>갤럽 2025.9 18~29세 민주 16%, 뉴스토마토 2026.8 20대 민주 21.5%·국힘 42.6% <a href="https://www.heraldk.com/article/2025092008392917287" target="_blank" rel="noopener">헤럴드</a> <a href="https://newstomato.com/ReadNews.aspx?no=1311253" target="_blank" rel="noopener">뉴스토마토</a></td><td>떠난 게 아니라 기대할 이유를 못 찾은 겁니다. 몰라서가 아니라 너무 잘 알아서 떠났습니다.</td></tr>
+<tr><td>청년최고위원 무산, 기탁금 인상</td><td>7.14 최고위 부결, 최고위원 예비경선 기탁금 500만 → 2천만 원 <a href="https://www.dailian.co.kr/news/view/1667612" target="_blank" rel="noopener">데일리안</a> <a href="https://news.tf.co.kr/read/ptoday/2345054.htm" target="_blank" rel="noopener">더팩트</a></td><td>틀렸습니다. 저는 그 당사자입니다. 기탁금 없어서 다섯 군데서 빌렸습니다. 지금도 틀렸다고 말합니다.</td></tr>
+<tr><td>청년 몫 지명직 논란</td><td>8.19 김민석 대표가 경선 약속 대신 전용기 의원 지명, 반발 <a href="https://weekly.khan.co.kr/article/202608211114001" target="_blank" rel="noopener">주간경향</a></td><td>청년 몫은 청년이 뽑아야 합니다. 지명은 시혜고, 시혜는 회수됩니다.</td></tr>
+<tr><td>10·15 대출 규제로 청년 실수요자 피해</td><td>규제지역 LTV 40%·전세대출 DSR, 2030 주담대 매수 42.5% 감소 <a href="https://www.heraldk.com/article/2025101517300227331" target="_blank" rel="noopener">헤럴드</a></td><td>투기 잡는 건 맞는데 청년 실수요자가 같이 맞았습니다. 청년·신혼부부 예외는 검토만 할 게 아니라 해야 합니다.</td></tr>
+<tr><td>국토부 차관 "집값 떨어지면 사라" 발언</td><td>이상경 차관 발언 후 갭투자 논란으로 사의 <a href="https://www.heraldk.com/article/2025102419300031571" target="_blank" rel="noopener">헤럴드</a></td><td>잘못된 말이었고 책임을 졌습니다. 청년에게 필요한 건 훈계가 아니라 방입니다.</td></tr>
+<tr><td>폐버스 하우스, 4억 이하 빌라 대출 '가두리'</td><td>8.7 황희 의원 제안 후 삭제·사과, 청년미래보금자리론 4억 이하 비아파트 <a href="https://www.nocutnews.co.kr/news/6560011" target="_blank" rel="noopener">노컷</a> <a href="issue-youthhousing.html">자료실 보고서</a></td><td>청년의 분노를 못 읽은 겁니다. 청년 주거 정책을 청년 없이 만드니 폐버스 얘기가 나옵니다. 선택지는 늘리되 사다리는 끊지 말아야 합니다.</td></tr>
+<tr><td>정부 '보편형 공공임대'는 고소득 청년 특혜</td><td>9.21 주거안정플랜 보편형 약 19만 호, 참여연대 비판 <a href="https://peoplepower21.org/stablelife/2029728" target="_blank" rel="noopener">참여연대</a></td><td>공공임대를 넓히는 방향은 맞습니다. 다만 고시원·반지하 청년이 먼저입니다. 순서를 지켜야 합니다.</td></tr>
+<tr><td>민주당 지선 주거 공약 '복붙'</td><td>주거권네트워크 평가: 구체성 낮음 <a href="https://peoplepower21.org/stablelife/2023030" target="_blank" rel="noopener">참여연대</a></td><td>그 평가 맞습니다. 그래서 숫자로 약속하자는 겁니다.</td></tr>
+<tr><td>청년 고용 악화가 정부 책임</td><td>9월 청년 취업자 47개월 연속 감소, 고용률 29개월 하락 <a href="https://www.smarttoday.co.kr/ko-kr/articles/112773" target="_blank" rel="noopener">스마트투데이</a></td><td>정부·여당이 결과로 책임질 일입니다. 다만 47개월이면 지난 정부부터 이어진 겁니다. 누구 탓보다 첫 일자리를 어떻게 만들지 얘기합시다.</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="history">
+<h2>정부별 청년 정책 변화</h2>
+<p>지금 정부 정책만으로는 부족합니다. 정권마다 무엇을 했고 무엇이 남았는지 알아야 "누구 탓" 공방에서 밀리지 않습니다.</p>
+
+<details open><summary>청년 주거 — 이명박부터 이재명까지</summary><div class="body">
+<div class="tbl"><table><thead><tr><th>정부</th><th>대표 정책</th><th>기조</th><th>비판·성적</th></tr></thead><tbody>
+<tr><td>이명박<br>2008~13</td><td>보금자리주택 150만 호 계획(2008.9), 대학생 전세임대(2011, 첫해 1,000호), 홍제동 연합기숙사(2012, 월 23만 원)</td><td>공공이 짓되 분양 중심</td><td>'로또 아파트', 150만 호 대비 실적 29%. 대학가 원룸은 근린생활시설이 많아 전세임대 매물 부족</td></tr>
+<tr><td>박근혜<br>2013~17</td><td>행복주택 20만 → 14만 가구로 축소(2013.12), 첫 입주 2015.10. 행복기숙사(2014, 월 19.5만 원). 서울시 역세권 청년주택(2016)</td><td>공공임대 + 민간(뉴스테이)</td><td>장기공공임대 재고율 5.5%(OECD 평균 절반), 뉴스테이 건설사 특혜 비판, 목동·잠실 주민 반대</td></tr>
+<tr><td>문재인<br>2017~22</td><td>주거복지로드맵 청년 공공임대 13만 가구(2017.11), 청년정책 기본계획 청년주택 27.3만 호(2020.12), 임대차3법(2020.7)</td><td>공공임대 + 금융 지원 확대</td><td>경실련 "공공주택 85%가 단기·전세임대", 임대차3법 후 서울 아파트 전셋값 23.2% 상승 비판, 행복주택 공가 5,386호</td></tr>
+<tr><td>윤석열<br>2022~25</td><td>공공분양 50만 호 중 34만 호 2030 배정(2022.10), 청년월세 한시 특별지원(2022.8), 청년도약계좌(2023), 전세사기특별법(2023.6)</td><td>분양·자산형성 중심, 공공임대 축소</td><td>장기공공임대 융자 연평균 18.8% 감소, LH 착공 2023년 1.1만 호(10년 최저), 월세지원 집행 목표 15.2만 명 중 5.4만 명</td></tr>
+<tr><td>이재명<br>2025.6~</td><td>9·7 공급대책(2025), 제2차 청년정책 기본계획(2025.12, 최저주거기준 상향), 청년월세 상시화(2026.3, 20만 원×24개월), 주거안정플랜(2026.9, 공적주택 119만 호·보편형 공공임대), 2027 예산 청년 공공임대 18.1조</td><td>공공임대 재확대 + 수요지원 상시화</td><td>참여연대: 전세임대 빼면 실제 공공임대 연 13.3만 호, 보편형은 고소득 특혜, 지옥고 상향 목표 없음. LH 부채 우려</td></tr>
+</tbody></table></div>
+<p class="src">출처: <a href="https://newstomato.com/ReadNews.aspx?no=323206" target="_blank" rel="noopener">뉴스토마토(보금자리)</a> · <a href="https://kidd.co.kr/news/162956" target="_blank" rel="noopener">국토일보</a> · <a href="https://kidd.co.kr/news/155091" target="_blank" rel="noopener">대학생 전세임대</a> · <a href="https://www.khan.co.kr/article/201302062157415" target="_blank" rel="noopener">경향(연합기숙사)</a> · <a href="https://www.etoday.co.kr/news/view/831424" target="_blank" rel="noopener">이투데이(행복주택 축소)</a> · <a href="https://dhnews.co.kr/news/view/179512900270775" target="_blank" rel="noopener">대학저널(행복기숙사)</a> · <a href="https://peoplepower21.org/stablelife/1475092" target="_blank" rel="noopener">참여연대 2017</a> · <a href="https://www.newsis.com/view/NISX20171129_0000161773" target="_blank" rel="noopener">뉴시스(주거복지로드맵)</a> · <a href="https://www.ajunews.com/view/20210225135152191" target="_blank" rel="noopener">아주경제(경실련)</a> · <a href="https://economist.co.kr/article/view/ecn202204030025" target="_blank" rel="noopener">이코노미스트(임대차3법)</a> · <a href="https://www.kukinews.com/newsView/kuk202107150219" target="_blank" rel="noopener">쿠키뉴스(공가)</a> · <a href="https://www.fnnews.com/news/202210261138482522" target="_blank" rel="noopener">파이낸셜(50만 호)</a> · <a href="https://peoplepower21.org/stablelife/1951231" target="_blank" rel="noopener">참여연대 2023</a> · <a href="https://www.inews24.com/view/2012115" target="_blank" rel="noopener">아이뉴스24(LH 착공)</a> · <a href="https://v.daum.net/v/20230729165943725" target="_blank" rel="noopener">헤럴드(월세 집행)</a> · <a href="https://mobile.newsis.com/view/NISX20250907_0003318892" target="_blank" rel="noopener">뉴시스(9·7)</a> · <a href="https://www.newsis.com/view/NISX20251226_0003455397" target="_blank" rel="noopener">뉴시스(2차 기본계획)</a> · <a href="https://mobile.newsis.com/view/NISX20260318_0003552925" target="_blank" rel="noopener">뉴시스(월세 상시화)</a> · <a href="https://news.mtn.co.kr/news-detail/2026092116181617226" target="_blank" rel="noopener">MTN(주거안정플랜)</a> · <a href="https://peoplepower21.org/stablelife/2029728" target="_blank" rel="noopener">참여연대 2026.9</a> · <a href="https://www.heraldk.com/article/2026083120041480854" target="_blank" rel="noopener">헤럴드(2027 예산)</a></p>
+<div class="lv"><div class="n">지표</div><div>청년가구 최저주거기준 미달 2017년 10.5% → 2024년 8.2%(전체 3.8%의 두 배) · 청년가구 자가율 2024년 12.2% · 장기공공임대 재고율 2024년 말 8.4% · 수도권 대학 기숙사 수용률 2020년 18.1% → 2025년 17.7%. <span class="src"><a href="https://mobile.newsis.com/view/NISX20180508_0000302602" target="_blank" rel="noopener">뉴시스</a> · <a href="https://www.kgnews.co.kr/mobile/article.html?no=877661" target="_blank" rel="noopener">경기신문</a> · <a href="https://www.index.go.kr/unify/idx-info.do?idxCd=1232" target="_blank" rel="noopener">e-나라지표</a> · <a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">이투데이</a></span></div></div>
+<div class="good"><b>한 줄로 말하면</b> — 정부마다 목표는 크게 걸었는데 실제로 지은 방은 늘 모자랐습니다. 보금자리는 계획 대비 29%, 역세권 청년주택은 27.5%, 지난 정부 LH 착공은 10년 최저였습니다. 그래서 목표 말고 착공·입주 실적을 공개하자는 게 제 주장입니다.</div>
+</div></details>
+
+<details open><summary>청년 일자리 — 이명박부터 이재명까지</summary><div class="body">
+<div class="tbl"><table><thead><tr><th>정부</th><th>대표 정책</th><th>성적·비판</th><th>청년 지표(15~29세)</th></tr></thead><tbody>
+<tr><td>이명박</td><td>청년인턴제(2009 약 7.7만 명), 마이스터고(2010 개교), 공공기관 고졸채용</td><td>인턴은 '1회용 비정규직' 비판, 공공 행정인턴 업무 70%가 단순지원. 마이스터고 첫 졸업 취업률 92.2%</td><td>2008 고용률 41.9%, 실업률 7.1%</td></tr>
+<tr><td>박근혜</td><td>공공기관 청년 의무고용 3%(2013 개정), 청년고용절벽 종합대책(2015, 일자리 기회 21만 개), 임금피크제, 청년내일채움공제(2016)</td><td>'노·노 갈등' 비판. 정년 60세 연장 후 고령자 1명 늘 때 청년 0.4~1.5명 감소(한국은행)</td><td>2013 고용률 39.7%(첫 30%대), 2016 실업률 9.8%</td></tr>
+<tr><td>문재인</td><td>공공부문 81만 개 공약, 청년추가고용장려금(2017), 2018 추경 4조, 국민취업지원제도(2021)</td><td>감사원: 장려금 부정수급 104억, '땜질식 처방', 공공일자리 의존</td><td>2019 고용률 43.5%, 확장실업률 22.9%. 쉬었음 2020년 44.8만 명</td></tr>
+<tr><td>윤석열</td><td>청년도약계좌(2023), 일경험 지원 10만 개(2024)</td><td>2024 청년 일자리 예산 약 3분의 1 삭감, 내일채움공제 신규 0원으로 사실상 폐지, 도약계좌 해지율 15.3%</td><td>2022 고용률 46.6%(정점) → 2024 46.1%. 첫 취업 11.5개월(역대 최장), 첫 일자리 31.4%가 1년 이하 계약직</td></tr>
+<tr><td>이재명</td><td>일자리 첫걸음 보장제(2025.9), 쉬었음 10만 명 감축 목표, 청년고용촉진특별법 개정(청년 15~34세, 2026.9 시행), 2027 청년예산 43.3조(일자리·창업 5.1조)</td><td>노동부 사업 2.57조가 반도체 세수 기댄 미래대응기금으로 이관, 공공 일자리 상당수 한시직, 사업 중복(예산정책처)</td><td>2026.9 고용률 44.0%, 취업자 47개월 연속 감소, 쉬었음 36.4만 명</td></tr>
+</tbody></table></div>
+<p class="src">출처: <a href="https://peoplepower21.org/?p=636195" target="_blank" rel="noopener">참여연대 2009</a> · <a href="https://m.seoul.co.kr/news/2013/02/06/20130206003005" target="_blank" rel="noopener">서울신문(마이스터고)</a> · <a href="https://m.ekn.kr/view.php?key=468888" target="_blank" rel="noopener">에너지경제</a> · <a href="https://m.go.seoul.co.kr/news/2015/05/21/20150521800125" target="_blank" rel="noopener">서울신문(의무고용)</a> · <a href="https://m.seoul.co.kr/news/2015/07/27/20150727800186" target="_blank" rel="noopener">서울신문(고용절벽)</a> · <a href="https://www.mt.co.kr/economy/2025/11/24/2025112316181514504" target="_blank" rel="noopener">머니투데이(정년)</a> · <a href="https://www.ajunews.com/view/20140115102233940" target="_blank" rel="noopener">아주경제</a> · <a href="https://www.dailian.co.kr/news/view/609361/" target="_blank" rel="noopener">데일리안</a> · <a href="https://www.dailian.co.kr/news/view/1030251/" target="_blank" rel="noopener">데일리안(81만 개)</a> · <a href="https://biz.newdaily.co.kr/site/data/html/2019/11/14/2019111400061.amp.html" target="_blank" rel="noopener">뉴데일리(감사원)</a> · <a href="https://www.newsis.com/view/NISX20200117_0000892681" target="_blank" rel="noopener">뉴시스 2020</a> · <a href="https://www.segye.com/newsView/20230917508924" target="_blank" rel="noopener">세계일보(2024 삭감)</a> · <a href="https://v.daum.net/v/20230903063805342" target="_blank" rel="noopener">내일채움공제</a> · <a href="https://magazine.hankyung.com/business/article/202508051953b" target="_blank" rel="noopener">한경비즈니스(도약계좌)</a> · <a href="https://www.newsis.com/view/NISX20240716_0002812592" target="_blank" rel="noopener">뉴시스 2024</a> · <a href="https://www.index.go.kr/unity/potal/main/EachDtlPageDetail.do?idx_cd=1495" target="_blank" rel="noopener">e-나라지표</a> · <a href="https://www.nocutnews.co.kr/news/6397919" target="_blank" rel="noopener">노컷(첫걸음 보장제)</a> · <a href="https://eiec.kdi.re.kr/policy/materialView.do?num=286506" target="_blank" rel="noopener">KDI(시행령)</a> · <a href="https://www.heraldk.com/article/2026083122004098221" target="_blank" rel="noopener">헤럴드(2027 노동부)</a> · <a href="https://www.nabo.go.kr/ko/notice/releasesView.do?idx=8981" target="_blank" rel="noopener">예산정책처</a> · <a href="https://www.inews24.com/view/2015634" target="_blank" rel="noopener">아이뉴스24</a></p>
+<div class="good"><b>한 줄로 말하면</b> — 정권마다 청년 일자리 사업 이름을 바꿨습니다. 인턴, 내일채움공제, 도약계좌, 미래적금. 생겼다 없어지기를 반복하니 청년은 정책을 믿고 계획을 못 짭니다. 이름 바꾸기 말고, 정권이 바뀌어도 남는 첫 일자리 제도가 필요합니다.</div>
+<p class="src">확인 필요: 공공기관 청년 의무고용 3% 조항이 2026.12.31 일몰이라는 정보는 2차 법령 사이트로만 확인됐습니다. 쓰기 전 국가법령정보센터에서 확인하십시오.</p>
+</div></details>
+</section>
+
+<section id="issues">
+<h2>현안 풀이 (Lv.1 초등학생 → Lv.5 예상 질답)</h2>
+
+<details><summary>대학가 월세, 1년 새 얼마나 올랐나</summary><div class="body">
+<div class="lv"><div class="n">Lv.1<span>왕초보</span></div><div>집이 없는 대학생은 방을 빌리고 매달 돈을 냅니다. 작년에 61만 원 내던 연세대 앞 방을 올해는 68만 원 가까이 내야 합니다. 매달 용돈에서 7만 원이 더 빠져나갑니다.</div></div>
+<div class="lv"><div class="n">Lv.2<span>사실</span></div><div>다방 7월 분석: 서울 주요 10개 대학 인근 원룸 평균 월세 62.5만 원(+7.7%), 관리비 8.4만 원(+10.9%). 연세대 인근 61.4만 → 67.8만 원(+10.4%), 관리비 +14.3%. 월세+관리비 합치면 평균 70.9만 원. 서울 비아파트 전월세의 78%가 월세.</div></div>
+<div class="lv"><div class="n">Lv.3<span>여야</span></div><div>국민의힘·개혁신당: 정부 규제로 전세가 잠기고 월세 폭등, 규제 완화·민간 공급이 답. 정부·민주당: 공급 확대, 월세 지원 상시화, 청년 공적주택. 진보당·정의당: 공공임대 비율, 임대료 상한, 세입자 권리.</div></div>
+<div class="lv"><div class="n">Lv.4<span>심화</span></div><div>전세가 사라지면서 대학가에 학생뿐 아니라 직장인 1인 가구까지 몰립니다. 재개발로 오래된 원룸이 헐리면 공급이 오히려 줄기도 합니다. 관리비는 계약서 밖 비용이라 통계와 지원금 계산에서 자주 빠집니다.</div></div>
+<div class="lv"><div class="n">Lv.5<span>질답</span></div><div><b>Q.</b> 정부·여당 책임 아닌가요? <b>답.</b> 결과로 책임질 일입니다. 1년에 10% 오른 건 변명할 수 없습니다. 그래서 현금 지원만이 아니라 공공이 가진 방을 같이 늘리자는 겁니다.</div></div>
+<p class="src"><a href="https://biz.sbs.co.kr/amp/article/20000327969" target="_blank" rel="noopener">SBS Biz 8.11</a> · <a href="https://www.fnnews.com/news/202610090343485982" target="_blank" rel="noopener">파이낸셜 10.9</a> · <a href="https://www.newsis.com/view/NISX20260423_0003603597" target="_blank" rel="noopener">뉴시스 4.24</a></p>
+</div></details>
+
+<details><summary>대학 기숙사, 서울이 전국 꼴찌</summary><div class="body">
+<div class="lv"><div class="n">Lv.1<span>왕초보</span></div><div>서울에 있는 대학생 100명 중 17명만 학교 기숙사에 들어갑니다. 나머지 83명은 비싼 원룸이나 고시원을 구해야 합니다.</div></div>
+<div class="lv"><div class="n">Lv.2<span>사실</span></div><div>대학알리미 공시로 본 수도권 73개 대학 기숙사 수용률은 2020년 18.1%에서 2025년 17.7%로 떨어졌습니다. 같은 기간 재학생은 2.7만 명 늘었는데 수용인원은 2,042명 느는 데 그쳤습니다. 서울은 16.8%로 17개 시도 중 최저입니다.</div></div>
+<div class="lv"><div class="n">Lv.3<span>여야</span></div><div>정부 제2차 청년정책 기본계획: 국립대 BTL 기숙사 15개소, 연합기숙사 7개소, 다인실을 1~2인실로. 9·7 대책: 수도권 대학 부지에 공유형 기숙사 4개소 약 500실.</div></div>
+<div class="lv"><div class="n">Lv.4<span>심화</span></div><div>기숙사가 안 늘어나는 이유는 땅값, 사학 재정, 그리고 대학가 원룸 임대인들의 반대입니다. 기숙사·청년주택이 주민 반대로 무산되는 일이 반복되니 정부가 직접 중재해야 한다는 게 대표님의 기존 주장입니다.</div></div>
+<div class="lv"><div class="n">Lv.5<span>질답</span></div><div><b>Q.</b> 500실, 15개소로 되겠습니까? <b>답.</b> 턱없이 모자랍니다. 서울 대학생 100명 중 83명이 밖에서 방을 구합니다. 기숙사는 대학생 월세를 제일 직접 낮추는 방법입니다.</div></div>
+<p class="src"><a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">이투데이 10.15</a> · <a href="https://www.newsis.com/view/NISX20251226_0003455397" target="_blank" rel="noopener">뉴시스 2차 기본계획</a> · <a href="https://mobile.newsis.com/view/NISX20250907_0003318892" target="_blank" rel="noopener">뉴시스 9·7</a></p>
+</div></details>
+
+<details><summary>희망하우징·청년 월세 지원, 효과 있나</summary><div class="body">
+<div class="lv"><div class="n">Lv.1<span>왕초보</span></div><div>서울시가 대학생에게 월 9만 원대 방을 빌려주는 제도(희망하우징)가 있고, 나라가 청년 월세를 한 달 20만 원까지 대신 내주는 제도도 있습니다. 둘 다 좋지만 방이 너무 적고, 20만 원은 대학가 월세의 3분의 1도 안 됩니다.</div></div>
+<div class="lv"><div class="n">Lv.2<span>사실</span></div><div>SH 2026년 2차 희망하우징 모집 31호(9.17 공고, 당첨 발표 12.14). 청년 월세 지원은 2026년 3월 상시화, 월 20만 원×24개월, 신규 약 6만 명, 관리비·보증금 제외. 2027 예산안에서 소득기준 중위 60% → 100% 완화, 예산 1,300억 → 2,319억 원.</div></div>
+<div class="lv"><div class="n">Lv.3<span>여야</span></div><div>야권: 현금 지원과 대출 완화가 대학가 월세를 자극. 정부: 상시화와 대상 확대. 시민단체: 공공 공급 없는 수요지원은 가격으로 새어 나감.</div></div>
+<div class="lv"><div class="n">Lv.4<span>심화</span></div><div>공급이 묶여 있으면 지원금이 임대료로 새는 '귀착' 문제가 생깁니다. 지난 정부 한시 지원은 목표 15.2만 명 중 5.4만 명만 받아 집행이 부진했습니다.</div></div>
+<div class="lv"><div class="n">Lv.5<span>질답</span></div><div><b>Q.</b> 월세 지원이 월세를 올린다면 없애야 하나요? <b>답.</b> 아닙니다. 지금 힘든 사람에게 필요합니다. 오히려 현실에 맞게 올려야 합니다. 다만 그것만 하면 집주인 통장으로 갑니다. 공공이 가진 방이 같이 늘어야 합니다.</div></div>
+<p class="src"><a href="https://housing.seoul.go.kr/site/main/sh/publicSale/view?seq=1" target="_blank" rel="noopener">서울시 공고</a> · <a href="https://gobang.kr/contents/7859" target="_blank" rel="noopener">희망하우징 임대료</a> · <a href="https://mobile.newsis.com/view/NISX20260318_0003552925" target="_blank" rel="noopener">뉴시스 3.18</a> · <a href="https://www.heraldk.com/article/2026083120041480854" target="_blank" rel="noopener">헤럴드 8.31</a> · <a href="https://v.daum.net/v/20230729165943725" target="_blank" rel="noopener">예산정책처 분석 기사</a></p>
+</div></details>
+
+<details><summary>청년 취업자 47개월째 감소</summary><div class="body">
+<div class="lv"><div class="n">Lv.1<span>왕초보</span></div><div>일하는 청년 수가 거의 4년 동안 매달 작년보다 적었습니다. 청년 수가 줄어든 탓도 있지만, 청년 중 일하는 비율도 같이 떨어지고 있습니다.</div></div>
+<div class="lv"><div class="n">Lv.2<span>사실</span></div><div>9월 15~29세 취업자 14만 7천 명 감소, 2022년 11월부터 47개월 연속(금융위기 이후 최장). 고용률 44.0%, 29개월째 하락. 청년고용촉진특별법 개정으로 15~34세 통계도 새로 공표(고용률 56.1%).</div></div>
+<div class="lv"><div class="n">Lv.3<span>여야</span></div><div>야권: 정부 경제 실패. 정부: 청년 인구 감소와 경력직 위주 채용 문화. 이준석: 양질의 화이트칼라 일자리 부족.</div></div>
+<div class="lv"><div class="n">Lv.4<span>심화</span></div><div>전체 취업자는 늘었지만 60세 이상, 보건·복지에 몰리고 청년이 많은 숙박·음식점업은 줄었습니다. 청년 '쉬었음'은 36만 4천 명으로 줄었지만 20대 취업자도 같이 줄어 노동시장 복귀로 보긴 어렵습니다.</div></div>
+<div class="lv"><div class="n">Lv.5<span>질답</span></div><div><b>Q.</b> 청년 기준을 34세로 넓힌 건 숫자 좋아 보이려는 것 아닌가요? <b>답.</b> 15~29세 숫자도 같이 공표됩니다. 저는 오늘 15~29세 숫자만 썼습니다.</div></div>
+<p class="src"><a href="https://www.smarttoday.co.kr/ko-kr/articles/112773" target="_blank" rel="noopener">스마트투데이</a> · <a href="https://www.inews24.com/view/2015634" target="_blank" rel="noopener">아이뉴스24</a> · <a href="https://www.segye.com/newsView/20261016505890" target="_blank" rel="noopener">세계일보</a></p>
+</div></details>
+
+<details><summary>졸업해도 일 못 해 본 청년이 늘었다</summary><div class="body">
+<div class="lv"><div class="n">Lv.1<span>왕초보</span></div><div>학교를 졸업하고 한 번도 일해 보지 못한 청년이 예전보다 많아졌습니다. 졸업하자마자 취직하는 사람은 열 명 중 한 명꼴입니다.</div></div>
+<div class="lv"><div class="n">Lv.2<span>사실</span></div><div>2026년 5월 청년층 부가조사: 졸업 후 취업경험 84.8%(2004년 이후 최저), 1년 이상 미취업 48.6%, 첫 취업 평균 11.2개월, 첫 일자리 근속 1년 6.8개월, 대졸 졸업기간 4년 5.7개월. 고용정보원 청년패널: 취업 소요기간 18.7 → 22.7개월, 비수도권 24.6개월 vs 수도권 21.2개월.</div></div>
+<div class="lv"><div class="n">Lv.3<span>여야</span></div><div>국가데이터처: 경력직 선호, 수시채용. 국회예산정책처: 첫 직장 매칭의 질과 재진입 지원에 집중하라.</div></div>
+<div class="lv"><div class="n">Lv.4<span>심화</span></div><div>계약직 출발 청년 34.5%는 지금도 계약직, 정규직 출발은 18.7%. 첫 직장이 경력 전체를 끌고 갑니다. 첫 직장을 그만둔 청년 70.7%, 평균 근속 18.4개월.</div></div>
+<div class="lv"><div class="n">Lv.5<span>질답</span></div><div><b>Q.</b> 결국 눈높이 문제 아닌가요? <b>답.</b> 계약직으로 시작한 청년 셋 중 하나가 계속 계약직입니다. 첫 단추를 아무 데나 끼우라고 하면 평생 그 옷을 입게 됩니다. 구조 문제입니다.</div></div>
+<p class="src"><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=284575" target="_blank" rel="noopener">국가데이터처</a> · <a href="https://biz.sbs.co.kr/amp/article/20000324195" target="_blank" rel="noopener">SBS Biz</a> · <a href="https://www.kukinews.com/article/view/kuk202511270015" target="_blank" rel="noopener">고용정보원 브리프</a> · <a href="https://v.daum.net/v/20260502202635766" target="_blank" rel="noopener">국회예산정책처</a></p>
+</div></details>
+
+<details><summary>대학은 1등, 고용률은 평균 이하</summary><div class="body">
+<div class="lv"><div class="n">Lv.1<span>왕초보</span></div><div>우리나라 젊은 사람들은 세계에서 대학을 제일 많이 나왔습니다. 그런데 대학 나온 사람이 일하는 비율은 다른 나라 평균보다 낮습니다.</div></div>
+<div class="lv"><div class="n">Lv.2<span>사실</span></div><div>OECD 교육지표 2026: 25~34세 고등교육 이수율 71.1%로 1위(평균 47.5%). 대졸 고용률 80.1% vs OECD 86.0%(25~64세, 2025).</div></div>
+<div class="lv"><div class="n">Lv.3<span>여야</span></div><div>보수: 대학 구조조정·직업교육. 진보: 대기업·중소기업 격차, 일자리 질.</div></div>
+<div class="lv"><div class="n">Lv.4<span>심화</span></div><div>격차가 크니 모두 같은 문으로 몰리고 기다리는 시간이 길어집니다. 고졸 이하 청년의 취업 소요기간 33.6개월, 대졸 11.7개월.</div></div>
+<div class="lv"><div class="n">Lv.5<span>질답</span></div><div><b>Q.</b> 대학을 줄여야 한다는 건가요? <b>답.</b> 대학 안 나와도 먹고살 수 있는 사회를 만들면 대학은 알아서 줄어듭니다. 순서가 거꾸로면 안 됩니다.</div></div>
+<p class="src"><a href="https://www.fnnews.com/news/202609291351196534" target="_blank" rel="noopener">파이낸셜 9.29</a> · <a href="https://www.hankyung.com/article/2025112780387" target="_blank" rel="noopener">한국경제</a></p>
+</div></details>
+
+<div class="note"><b>학생회 발제 자료 숫자 확인</b><br>
+발제문의 "첫 일자리 취업까지 평균 18.4개월(한국고용정보원)"은 출처가 섞인 것으로 보입니다. 18.4개월은 국회예산정책처의 <em>첫 직장 평균 근속기간</em>이고, 고용정보원 취업 소요기간은 22.7개월, 국가데이터처는 11.2개월입니다. "고등교육 이수 청년 고용률 80% vs 87%"도 최신은 80.1% vs 86.0%, 연령은 25~64세입니다. 토론 중에는 학생 체면을 깎지 않게 "제가 찾아보니 이런 뜻이었다"로 씁니다.</div>
+</section>
+
+<section id="yonsei">
+<h2>연세대 · 정치외교학과 학생회</h2>
+<div class="card">
+<div class="lbl">제62대 정치외교학과 학생회 &lt;이륙&gt;</div>
+<ul>
+<li>학생회장 김민수(정외 24), 부학생회장 전시은(정외 25). 홍보실·교육자치국·미래진로국·문화교류국·소통복지국·인권연대국 6개 국. <span class="src"><a href="https://www.instagram.com/yonsei_psis/" target="_blank" rel="noopener">인스타 @yonsei_psis</a></span></li>
+<li>김민수 회장은 2024.12 24학번 학번총회(계엄 규탄 성명·대자보)를 주도했고, 2026.6 선관위 비판 대자보와 6.10 시국선언에 참여했습니다. <span class="src"><a href="https://blog.naver.com/yonjpress/224202524752" target="_blank" rel="noopener">연정기자단</a> · <a href="https://weekly.khan.co.kr/article/202606220600011" target="_blank" rel="noopener">주간경향 6.22</a></span></li>
+<li>공약 이행률 78.3%. 미이행: 여야정책토론회, 선배님과의 만남(미래진로국), 석학 초청 강연, 학생회 감사(인권연대국), 정치학 논총(교육자치국). <span class="src"><a href="https://coda.io/d/_dJNlsDc6TLs/_suG-cZG4" target="_blank" rel="noopener">공약 이행 페이지</a></span></li>
+<li>담당 황금별 미래진로국원. 초청 메일(9.2)에서 '강진군'을 '강진구'로 잘못 쓰고 바로 사과·정정 메일을 보냈습니다. 10.18 일정 문제로 한 번 어렵다고 했다가 10.19 다시 정식 초청했습니다.</li>
+</ul></div>
+<div class="tbl"><table><thead><tr><th>시기</th><th>과거 행사</th><th>형식</th><th>출처</th></tr></thead><tbody>
+<tr><td>2023.9.11</td><td>동문회 '선배님과의 만남'(윤형중 당시 한국공항공사 사장 등)</td><td>강연 → 진로 질의응답 → 식사, 학부생 15명</td><td><a href="https://blog.naver.com/yonjpress/223262782802" target="_blank" rel="noopener">연정기자단</a></td></tr>
+<tr><td>2023.5.15</td><td>서대문구의회 이용준 운영위원장 간담회(조례 작성 프로젝트팀)</td><td>인터뷰형 질의응답</td><td><a href="https://www.m-i.kr/news/articleView.html?idxno=1014116" target="_blank" rel="noopener">매일일보</a></td></tr>
+<tr><td>2025.8.4</td><td>안철수 의원, 서울대·연세대·고려대 정외 연합 학생 간담회(국회)</td><td>간담회</td><td><a href="https://www.yna.co.kr/view/PYH20250804167500013" target="_blank" rel="noopener">연합뉴스</a></td></tr>
+<tr><td>2025.9.6</td><td>제3회 SKY 연합 학술세미나 '세대정치와 청년참정권', 민주당 김동아 의원 연사</td><td>세미나</td><td><a href="https://blog.naver.com/dongah_kim_1945/224001311611" target="_blank" rel="noopener">김동아 블로그</a></td></tr>
+<tr><td>2026 상반기</td><td>국제정치학회 공동 연사초청 '2026 미국 중간선거'</td><td>강연, 쟁점 자료 사전 배포</td><td><a href="https://blog.naver.com/yonjpress/224202475553" target="_blank" rel="noopener">연정기자단</a></td></tr>
+<tr><td>2026.6.1</td><td>학생회가 박운기 서대문구청장 후보(민주) 사무소에 정책요구안 전달</td><td>정책 요구</td><td><a href="https://blog.naver.com/sumwool/224302975425" target="_blank" rel="noopener">블로그</a></td></tr>
+<tr><td>2026.9.5</td><td>SKY 연합 학술세미나(참정권·선거민주주의). 윤상현 의원 초청을 9.4 철회 후 진행, 민주당 모경종 의원 참석, 서울대 우석경제관</td><td>세미나 + 패널 토론</td><td><a href="https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003265192" target="_blank" rel="noopener">오마이뉴스</a> · <a href="https://blog.naver.com/moalarm/224401933682" target="_blank" rel="noopener">모경종 블로그</a></td></tr>
+</tbody></table></div>
+<p class="src">기조발언·토론·질의 시간 배분이 공개된 과거 사례는 없습니다. 이번 행사 시간 배분은 학생회 회신을 기다리는 중입니다.</p>
+<h3>연세대 관련 기사</h3>
+<div class="tbl"><table><thead><tr><th>날짜</th><th>내용</th><th>출처</th></tr></thead><tbody>
+<tr><td>2026.2.8</td><td>연세대 2026학년도 등록금 2.6% 인상(1.29 등심위 찬성 6·기권 4). 서울 사립대 27곳 중 23곳 인상, 평균 2.74%</td><td><a href="https://news.tf.co.kr/read/life/2290752.htm" target="_blank" rel="noopener">더팩트</a></td></tr>
+<tr><td>2026.3~4</td><td>총학생회 재선거가 입후보자 없이 무산(3.31), 비상대책위원회 체제</td><td><a href="https://www.mk.co.kr/news/society/12008601" target="_blank" rel="noopener">매일경제</a> · <a href="https://www.truthdaily.co.kr/news/articleView.html?idxno=6406" target="_blank" rel="noopener">트루스데일리</a></td></tr>
+<tr><td>2026.6.10</td><td>연세대 시국선언(학생회관 앞, 약 150명). 투표용지 부족 사태 진상규명 요구. 정외과 24학번 학생 발언이 정치적이라는 항의로 충돌, 황인서 비대위원장이 사과</td><td><a href="https://www.newsis.com/view/NISX20260610_0003664523" target="_blank" rel="noopener">뉴시스</a> · <a href="https://www.yna.co.kr/view/AKR20260610150551004" target="_blank" rel="noopener">연합뉴스</a></td></tr>
+<tr><td>2026.6</td><td>김민수 학생(정외 24) 선관위 비판 대자보</td><td><a href="https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003244018" target="_blank" rel="noopener">오마이뉴스 6.18</a> · <a href="https://www.fnnews.com/news/202606240610544335" target="_blank" rel="noopener">파이낸셜 6.24</a></td></tr>
+<tr><td>2026.7.15</td><td>연세대 인근 원룸 월세 61.4만 → 67.8만 원(+10.4%)</td><td><a href="https://biz.sbs.co.kr/amp/article/20000327969" target="_blank" rel="noopener">SBS Biz 8.11</a></td></tr>
+<tr><td>2026.9.7</td><td>SKY 정외과 학생회 윤상현 초청 철회</td><td><a href="https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003265192" target="_blank" rel="noopener">오마이뉴스</a></td></tr>
+<tr><td>2026.10.15</td><td>서울 대학 기숙사 수용률 16.8% 전국 최저</td><td><a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">이투데이</a></td></tr>
+<tr><td>2025.5.12</td><td>이준석, 연세대 학생식당 '학식먹자' 대담</td><td><a href="https://www.sidae.com/article/2025051214455242590" target="_blank" rel="noopener">시대</a></td></tr>
+</tbody></table></div>
+</section>
+
+<section id="alumni">
+<h2>연세대 정치외교학과 출신 정치인</h2>
+<div id="alumni-body">
+<div class="good"><b>제일 먼저 알아둘 사람: 황주홍</b> — 연세대 정외과 1979년 졸업(같은 대학원 석사). 강진군수 3선, 19·20대 국회의원(장흥·강진). 대표님 고향 강진의 선배이자 이 학과 동문입니다. 학생들이 "강진 출신 정외과 선배"를 아는지 물어보며 친근하게 쓸 수 있습니다. 현재 무소속. <a href="https://ko.wikipedia.org/wiki/황주홍" target="_blank" rel="noopener">위키백과</a></div>
+<h3>22대 국회의원 (학부 기준)</h3>
+<div class="tbl"><table><thead><tr><th>정당</th><th>이름</th><th>직위</th><th>학번</th><th>출처</th></tr></thead><tbody>
+<tr><td>더불어민주당</td><td>임문영</td><td>초선(광주 광산구을, 2026.6 재보선), 전 국가인공지능전략위 상근부위원장</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/임문영" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>조국혁신당</td><td>김준형</td><td>비례 초선, 2026.6~ 원내대표, 전 국립외교원장</td><td>82학번</td><td><a href="https://ko.wikipedia.org/wiki/김준형_(정치학자)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>박대출</td><td>4선(경남 진주갑), 전 사무총장</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/박대출" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>김희정</td><td>3선(부산 연제), 전 여성가족부 장관, 22대 후반기 교육위원장</td><td>1994 졸업</td><td><a href="https://ko.wikipedia.org/wiki/김희정_(1971년)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>배준영</td><td>재선(인천 중구·강화·옹진)</td><td>90학번</td><td><a href="https://ko.wikipedia.org/wiki/배준영" target="_blank" rel="noopener">위키백과</a></td></tr>
+</tbody></table></div>
+<p class="src">위키백과 「22대 국회의원 목록」 321명 문서의 학력란을 전수 확인한 결과입니다. 개혁신당·진보당 의원 중에는 없습니다. 이준석 의원은 하버드대, 박태훈 위원장은 숭실대 정외과 출신입니다. 대학원(정치학)만 연세대인 민주당 부승찬 의원(학부 공군사관학교)은 학과 소속이 확인되지 않아 표에서 뺐습니다.</p>
+<h3>전직 정치인·고위직</h3>
+<div class="tbl"><table><thead><tr><th>정당</th><th>이름</th><th>대표 직위</th><th>졸업</th><th>출처</th></tr></thead><tbody>
+<tr><td>민주당</td><td>김원기</td><td>6선, 17대 전반기 국회의장</td><td>1962</td><td><a href="https://ko.wikipedia.org/wiki/김원기_(1937년)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>민주당</td><td>변재일</td><td>5선(청주 청원)</td><td>1974</td><td><a href="https://ko.wikipedia.org/wiki/변재일" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>민주당</td><td>김현미</td><td>3선, 전 국토교통부 장관(문재인 정부 부동산 정책 담당)</td><td>1985</td><td><a href="https://ko.wikipedia.org/wiki/김현미_(정치인)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>민주당</td><td>송재호</td><td>21대 의원, 전 국가균형발전위원장</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/송재호_(정치인)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>민주당</td><td>김상호</td><td>전 하남시장, 18세선거권 국민연대 공동대표(2017)</td><td>87학번</td><td><a href="https://ko.wikipedia.org/wiki/김상호_(1968년)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>민주당</td><td>노형욱</td><td>전 국토교통부 장관</td><td>1986</td><td><a href="https://ko.wikipedia.org/wiki/노형욱_(공무원)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>유정복</td><td>전 인천시장(2026 지선 낙선), 전 장관</td><td>1980</td><td><a href="https://ko.wikipedia.org/wiki/유정복" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>맹형규</td><td>전 의원, 전 행정안전부 장관</td><td>1972</td><td><a href="https://ko.wikipedia.org/wiki/맹형규" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>정용기</td><td>전 대전 대덕구청장, 전 의원</td><td>1990</td><td><a href="https://ko.wikipedia.org/wiki/정용기_(1962년)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>강석진</td><td>전 거창군수, 20대 의원</td><td>1985</td><td><a href="https://ko.wikipedia.org/wiki/강석진_(정치인)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>김병수</td><td>전 김포시장(2026 지선 낙선)</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/김병수_(1970년_8월)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>국민의힘</td><td>호준석</td><td>전 YTN 기자, 2026.10~ 서울시 대변인</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/호준석" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>무소속·관료</td><td>강경화</td><td>전 외교부 장관, 2025.10~ 주미대사</td><td>1977</td><td><a href="https://ko.wikipedia.org/wiki/강경화" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>무소속·관료</td><td>조현</td><td>2025.7~ 외교부 장관</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/조현_(외교관)" target="_blank" rel="noopener">위키백과</a></td></tr>
+<tr><td>무소속·관료</td><td>홍용표</td><td>전 통일부 장관</td><td>미확인</td><td><a href="https://ko.wikipedia.org/wiki/홍용표" target="_blank" rel="noopener">위키백과</a></td></tr>
+</tbody></table></div>
+<h3>교수진 중 언론·정치 활동</h3>
+<ul>
+<li><b>최종건</b> — 국제정치·안보, 전 외교부 제1차관(2020~22). <a href="https://ko.wikipedia.org/wiki/최종건_(정치학자)" target="_blank" rel="noopener">위키백과</a></li>
+<li><b>진영재</b> — 2017 한국정치학회장. <a href="https://ko.wikipedia.org/wiki/한국대통령학연구소" target="_blank" rel="noopener">위키백과</a></li>
+<li><b>최연식</b> — 한국·동양 정치사상. <a href="http://politics.yonsei.ac.kr/users/politics/prof_en/cys.html" target="_blank" rel="noopener">학과 홈페이지</a></li>
+</ul>
+<div class="note"><b>쓰는 법</b><br>
+① 22대 국회 민주당 의원 중 이 학과 학부 출신은 임문영 의원 1명입니다. ② 김현미 전 장관은 문재인 정부 부동산 정책 책임자였습니다. 이준석 의원이 "문재인 정부 2.0"을 꺼내면 학생들이 이 선배를 떠올릴 수 있습니다. ③ 6·3 지방선거 당선 광역·기초단체장 중 이 학과 학부 출신은 확인되지 않았습니다(6명 미확인).<br>
+<span class="src">학번·학과는 위키백과 학력란 기준입니다. 연세대 총동문회·국회 프로필과는 대조하지 못했습니다.</span></div>
+</div>
+</section>
+
+<section id="myword">
+<h2>김보미 과거 발언 — 이번 의제와 겹치는 것</h2>
+<p>전체 발언은 <a href="dashboard.html">발언 대시보드</a>에서 키워드로 찾을 수 있습니다. 토론 답변이 과거 발언과 어긋나지 않도록 핵심만 모았습니다.</p>
+<div class="quote"><div class="m">신동아 서면 · 청년 정책 대안</div>경력이 없어서 일을 못 하고, 일을 못 해서 경력이 없습니다. 이 고리를 국가가 끊어 줘야 합니다. → 청년취업보장제(국가가 첫 고용 인건비·교육비, 기업·공공기관이 실무·멘토링)</div>
+<div class="quote"><div class="m">신동아 서면 · 청년 정책 평가</div>청년에게 물고기를 나눠 주는 정책에서 첫 번째 사다리를 만들어 주는 정책으로. 성과는 3년 뒤 그 청년이 어디서 무엇을 하는지로 평가.</div>
+<div class="quote"><div class="m">채널A 정치시그널 8.27 · 부동산</div>집값 잡겠다는 의도는 공감. 그 과정에서 피해 보는 청년 대책이 빠졌다. 세입자 대책이 곧 청년 대책.</div>
+<div class="quote"><div class="m">전격시사 8.12 · 버스하우스</div>청년은 낼 세금이 없어서 힘든 게 아니라 낼 집이 없어서 힘들다. 청년 월세 지원 현실화, 월 30만 원대 청년임대 확대, 지방 빈집을 청년 주거로. 경선 때 서울에 잘 곳이 없어 렌터카에서 쪽잠.</div>
+<div class="quote"><div class="m">불교방송 · 청년과 부동산</div>서울 청년의 주거 절망과 지방 청년의 일자리 절망은 같은 문제의 양면. 부동산 대책의 절반은 균형발전.</div>
+<div class="quote"><div class="m">JTBC · 청년 이탈 원인</div>청년들은 민주당이 미워서 떠난 게 아니라 기대할 이유를 찾지 못해서 떠났다. 공천이 바뀌면 혁신은 따라온다.</div>
+<div class="quote"><div class="m">이데일리 · 2030 이탈</div>청년들은 몰라서 떠나는 게 아니라 너무 잘 알아서 떠난다. 당 예산 10% 청년 편성, 기탁금 폐지, 청년취업보장제.</div>
+<div class="quote"><div class="m">한겨레21 · 이준석 같은 청년 대표가 안 나오는 이유</div>사람의 문제가 아니라 판의 문제. 토론으로 승부가 나는 판이면 무명도 올라갈 수 있다.</div>
+<div class="quote"><div class="m">뉴스바사삭 · 재산 프레임</div>기탁금 1천만 원이 없어서 등록 당일 다섯 군데서 빌렸다.</div>
+<div class="note"><b>과거 자료 교차점검에서 나온 주의</b> — "청년월세 20만~30만 원으로 인상"은 하한이 현행과 같아 인상이 아닙니다. <b>"월 30만 원으로"</b>로 말하십시오. 공약 이름은 '청년취업보장제'로 통일하십시오. 입당 2013년 기준이면 2026년은 14년째이고, 첫 당선(2014) 기준이면 13년째입니다. 원고는 "13년째"로 썼습니다.</div>
+</section>
+
+<section id="check">
+<h2>준비 체크리스트</h2>
+<h3>지금 학생회에 확인할 것</h3>
+<ul class="chk">
+<li>기조발언 시간(분), 상호토론·질의응답 시간 배분, 발언 순서</li>
+<li>사전 수합된 학생 질문 목록과 세부 주제</li>
+<li>18:40 도착 회신 ("18시 40분까지 갈게요")</li>
+<li>사회자가 누구인지(학생/교수)</li>
+<li>사진·영상 촬영과 SNS 게시 가능 여부</li>
+<li>차량으로 갈 경우 교내 주차 가능 여부</li>
+<li>PPT·자료 필요 여부(없으면 원고만)</li>
+</ul>
+<h3>대표님이 정할 것</h3>
+<ul class="chk">
+<li>원고의 빚 관련 표현("선거 두 번") 최종 확인</li>
+<li>정년 연장에 대한 본인 입장</li>
+<li>청년기본조례 청년 연령 49세 → 45세 조정 이유 한 줄</li>
+<li>'전국 최초 육아수당 조례' 대표발의 여부(기사마다 다름, 확인 전엔 언급 안 함)</li>
+<li>청년취업보장제 재원 질문에 쓸 한 줄</li>
+</ul>
+<h3>당일</h3>
+<ul class="chk">
+<li>화성에서 신촌까지 퇴근 시간대라 여유 있게 출발</li>
+<li>원고는 큰 글씨로 출력 1부 + 숫자 카드 1장</li>
+<li>상대 토론자 두 분께 먼저 인사(이준석 의원은 2025년 연세대 학식먹자로 학생들과 익숙)</li>
+<li>숫자를 말할 때는 출처를 같이 말하기("이투데이가 대학알리미로 분석한 걸 보면…")</li>
+<li>내란·극우 같은 진영 구호 쓰지 않기</li>
+<li>학생 질문은 이름을 불러 주고 짧게 답하기</li>
+</ul>
+<h3>끝나고</h3>
+<ul class="chk">
+<li>황금별 님과 학생회에 감사 메시지</li>
+<li>페이스북 후기 게시(학생회 게시 동의 범위 안에서)</li>
+<li>나온 질문과 답을 발언 대시보드에 추가</li>
+</ul>
+</section>
+
+<section id="sources">
+<h2>출처 전체</h2>
+<p class="src">각 섹션의 링크가 근거입니다. 아래는 자주 쓰는 원자료입니다.</p>
+<ol class="srcs">
+<li><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=284575" target="_blank" rel="noopener">국가데이터처, 2026년 5월 청년층 부가조사</a></li>
+<li><a href="https://www.smarttoday.co.kr/ko-kr/articles/112773" target="_blank" rel="noopener">2026년 9월 고용동향(스마트투데이)</a></li>
+<li><a href="https://www.fnnews.com/news/202609291351196534" target="_blank" rel="noopener">OECD 교육지표 2026(파이낸셜뉴스)</a></li>
+<li><a href="https://v.daum.net/v/20260502202635766" target="_blank" rel="noopener">국회예산정책처, 청년층 첫 직장 현황 및 시사점</a></li>
+<li><a href="https://www.kukinews.com/article/view/kuk202511270015" target="_blank" rel="noopener">한국고용정보원, 청년패널로 본 첫 직장 특성 변화</a></li>
+<li><a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">수도권 대학 기숙사 수용률(이투데이)</a></li>
+<li><a href="https://biz.sbs.co.kr/amp/article/20000327969" target="_blank" rel="noopener">서울 주요 대학가 원룸 월세(다방, SBS Biz)</a></li>
+<li><a href="https://zippoom.com/browse/%EC%84%9C%EC%9A%B8-%EC%84%9C%EB%8C%80%EB%AC%B8%EA%B5%AC-%EC%B0%BD%EC%B2%9C%EB%8F%99/%EB%B9%8C%EB%9D%BC-%EB%A7%A4%EB%A7%A4" target="_blank" rel="noopener">창천동 원룸·빌라 실거래(집품)</a></li>
+<li><a href="https://m.richgo.ai/realty/apt-hub/%EC%A0%84%EB%82%A8%EA%B4%91%EC%A3%BC/%EA%B0%95%EC%A7%84%EA%B5%B0/30%ED%8F%89%EB%8C%80" target="_blank" rel="noopener">강진군 30평대 아파트 시세(리치고)</a></li>
+<li><a href="https://peoplepower21.org/stablelife/2023030" target="_blank" rel="noopener">참여연대, 2026 지방선거 정당별 주거 공약 평가</a></li>
+<li><a href="https://peoplepower21.org/stablelife/2029728" target="_blank" rel="noopener">참여연대, 주거안정플랜 비판</a></li>
+<li><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=285992" target="_blank" rel="noopener">관계부처 합동, 2027 청년예산</a></li>
+<li><a href="https://www.heraldk.com/article/2026101114382405541" target="_blank" rel="noopener">전세사기 피해자 연령 분포(헤럴드경제)</a></li>
+<li><a href="https://www.fnnews.com/news/202608110630517454" target="_blank" rel="noopener">저소득 청년 주거지원 사각지대(국토연구원 보도)</a></li>
+</ol>
+</section>
+</div>
+<script>
+(function(){var r=document.documentElement,k='debate-yonsei-size',s=1.1;
+try{var v=parseFloat(localStorage.getItem(k));if(v>=.9&&v<=1.8)s=v}catch(e){}
+function a(){r.style.setProperty('--script-size',s.toFixed(2)+'rem');try{localStorage.setItem(k,String(s))}catch(e){}}a();
+document.getElementById('bigger').onclick=function(){s=Math.min(1.8,s+.12);a()};
+document.getElementById('smaller').onclick=function(){s=Math.max(.9,s-.12);a()};
+var ps=document.querySelectorAll('#script p'),t=0,c=0;ps.forEach(function(p){var n=p.textContent.replace(/\s/g,'').length;t+=n;if(p.classList.contains('cut'))c+=n});
+function m(x){var q=Math.round(x/300*60);return Math.floor(q/60)+'분 '+(q%60)+'초'}
+document.getElementById('chars').textContent='전체 '+t+'자 · 약 '+m(t)+' / 생략 시 약 '+m(t-c);})();
+</script>
+</body></html>
