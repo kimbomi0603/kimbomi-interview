@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>연세대 토론회 공부방</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="favicon.svg">
+<style>
+/* 공부방: 상단 고정 목차 + 탭 성격의 큰 섹션 4개(정부·지방·해외·정치제도). 표는 가로 스크롤, 설명은 쉬운 말 */
+:root{
+  --bg:#f5f6f8;--surface:#fff;--ink:#1b2333;--muted:#5d6676;--line:#dfe3ea;
+  --accent:#1f4fa3;--accent-soft:#e6edf9;--warn:#9a5a00;--warn-soft:#fff4e0;--ok:#256b46;--ok-soft:#e5f3eb;--red:#b42318;--red-soft:#fdecea;
+  --f-body:"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{--bg:#121620;--surface:#1a202c;--ink:#e7eaf0;--muted:#9aa3b2;--line:#2c3445;--accent:#8fb1ff;--accent-soft:#1e2a44;--warn:#f2b45c;--warn-soft:#33270f;--ok:#7fd1a2;--ok-soft:#16291f;--red:#ff9a8f;--red-soft:#3a1a18;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+.top{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.top .in{max-width:900px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px max(14px,env(safe-area-inset-left));scrollbar-width:none}
+.top a{flex:0 0 auto;text-decoration:none;color:var(--ink);font-size:.84rem;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.top a.home{background:var(--accent);color:#fff;border-color:var(--accent)}
+.wrap{max-width:900px;margin:0 auto;padding:8px max(16px,env(safe-area-inset-left)) 80px}
+header.hero{padding:26px 0 6px}
+.eyebrow{font-size:.78rem;letter-spacing:.06em;color:var(--accent);font-weight:800}
+h1{font-size:1.6rem;line-height:1.3;margin:.3em 0 .4em}
+h2{font-size:1.3rem;margin:0 0 .5em;scroll-margin-top:64px}
+h3{font-size:1.05rem;margin:1.4em 0 .4em;scroll-margin-top:64px}
+section{padding:30px 0 4px;border-top:2px solid var(--line);margin-top:26px}
+p{margin:.5em 0}
+.lead{background:var(--accent-soft);border-radius:10px;padding:14px 16px;margin:10px 0}
+.lead b{color:var(--accent)}
+.note{border-left:3px solid var(--warn);background:var(--warn-soft);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.good{border-left:3px solid var(--ok);background:var(--ok-soft);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.bad{border-left:3px solid var(--red);background:var(--red-soft);padding:12px 14px;border-radius:0 8px 8px 0;margin:14px 0}
+.src{font-size:.8rem;color:var(--muted)}.src a{color:var(--muted)}
+.tl{list-style:none;padding:0;margin:10px 0}
+.tl li{display:grid;grid-template-columns:6.6em 1fr;gap:4px 14px;padding:14px 0;border-top:1px solid var(--line)}
+.tl li:first-child{border-top:none}
+.tl .d{font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums;font-size:.92rem}
+.tl .d small{display:block;color:var(--muted);font-weight:500;font-size:.75rem}
+.tl .b{min-width:0}
+.tl .t{font-weight:800;font-size:1.02rem}
+.tl .t .tag{font-size:.72rem;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--accent-soft);color:var(--accent);margin-left:6px;vertical-align:2px}
+.tl .t .tag.uni{background:var(--ok-soft);color:var(--ok)}
+.tl .t .tag.house{background:var(--warn-soft);color:var(--warn)}
+.tl .easy{margin:.25em 0}
+.tl .num{font-size:.9rem}
+.tl .crit{font-size:.88rem;color:var(--red)}
+.tbl{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:560px}
+th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.78rem;color:var(--muted);font-weight:800;background:var(--bg)}
+tr:last-child td{border-bottom:none}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
+.card .h{font-weight:800}
+.card .h small{font-weight:500;color:var(--muted)}
+.card ul{padding-left:1.15em;margin:.4em 0}.card li{margin:.2em 0}
+.lbl{font-size:.76rem;font-weight:800;color:var(--muted);letter-spacing:.04em;margin-top:8px}
+.say{font-weight:600}
+.say::before{content:"토론에서 이렇게: ";color:var(--accent);font-weight:800}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;margin:10px 0}
+details>summary{cursor:pointer;list-style:none;padding:14px 16px;font-weight:700}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"+ ";color:var(--accent);font-weight:800}
+details[open]>summary::before{content:"− "}
+details .body{padding:0 16px 14px}
+@media (max-width:520px){.tl li{grid-template-columns:1fr}}
+</style>
+</head><body>
+<nav class="top"><div class="in">
+<a class="home" href="debate-yonsei-20261027.html">← 토론 준비실</a>
+<a href="#how">읽는 법</a><a href="#gov">정부 정책(최근순)</a><a href="#local">지방정부 사례</a><a href="#abroad">해외 사례</a><a href="#system">정당·정부형태 비교</a><a href="#map">한 장 요약</a>
+</div></nav>
+<div class="wrap">
+<header class="hero">
+<div class="eyebrow">10.27 연세대 여야정책토론회 · 공부방</div>
+<h1>청년·대학생 정책 전방위 공부방</h1>
+<p>토론에서 어떤 질문이 와도 답할 수 있게 네 갈래로 모았습니다. 정부가 지금 하는 것, 지방정부가 잘한 것, 해외가 한 것, 그리고 한국 정당·대통령제와 다른 나라 비교입니다. 모든 숫자에는 출처 링크가 있습니다. 작성 2026.10.20.</p>
+</header>
+
+<section id="how">
+<h2>읽는 법</h2>
+<div class="lead">시간이 없으면 <b>맨 아래 '한 장 요약'</b>부터 보십시오. 그다음 정부 정책 목록의 <b>대학생</b> 표시 항목, 그리고 각 섹션 끝의 <b>'토론에서 쓸 Top 5'</b>만 보셔도 됩니다.</div>
+<p>각 항목은 같은 순서입니다. 무엇인지 한 줄(쉬운 말) → 숫자 → 비판·한계 → 출처. 초록 표시는 <b>대학생</b>에게 직접 해당, 주황 표시는 <b>주거</b>, 파랑은 <b>일자리·기타</b>입니다.</p>
+</section>
+
+<section id="gov">
+<h2>정부 청년·대학생 정책 — 최근순</h2>
+<div class="lead"><b>흐름 한 줄</b> — 이재명 정부는 2025년 하반기 '첫 일자리'와 '쉬었음 청년'부터 손대고, 2026년에 월세 지원 상시화·청년 연령 34세 확대·청년미래적금을 했고, 8월 말 2027 예산에서 청년 예산을 43.3조로 크게 늘렸습니다(전년 28.2조). 대학생에게 가장 큰 변화는 <b>지방국립대 신입생 등록금 전액 지원</b>(2027학년도부터)입니다.</div>
+<ul class="tl">
+<li><div class="d">2026.10<small>보도 10.18</small></div><div class="b">
+<div class="t">청년미래적금 10월 추가 모집 마감, 청년 정책 '목록만 늘어난다' 비판<span class="tag">일자리·기타</span></div>
+<p class="easy">10월 16일 청년미래적금 2차 신청이 마감됐다는 보도와 함께, 일자리 구조는 그대로인데 지원 목록만 늘어난다는 비판 기사가 나왔습니다.</p>
+<p class="src"><a href="https://www.kjob.news/news/533988" target="_blank" rel="noopener">전국인력신문 10.18</a> · 2차 신청 일정은 6월 출시 기사(6.29~7.3)와 달라 10월 추가 모집으로 보입니다(확인 필요).</p></div></li>
+<li><div class="d">2026.9.21</div><div class="b">
+<div class="t">주거안정플랜 — 공적주택 119만 호, '보편형 공공임대' 신설<span class="tag house">주거</span></div>
+<p class="easy">2030년까지 나라가 짓거나 빌려주는 집을 119만 호 공급하고, 소득이 중간 이상인 무주택 청년도 들어갈 수 있는 공공임대를 새로 만든다는 계획입니다.</p>
+<p class="num">보편형 공공임대 약 19만 호(소득 기준은 연말 확정) · 차상위 이하 청년 월세 지원 24개월 → 48개월 · 청년주택드림청약통장 소득 기준 5천만 → 7천만 원</p>
+<p class="crit">비판: 전세임대 23만 호를 빼면 실제 공공임대는 연 13.3만 호. 보편형은 고소득 청년 특혜, 고시원·반지하 청년 우선 목표가 없다(참여연대). LH 부채 우려.</p>
+<p class="src"><a href="https://news.mtn.co.kr/news-detail/2026092116181617226" target="_blank" rel="noopener">MTN</a> · <a href="https://supple.kr/news/cmuaykxxd00009c6ajwnopd3r" target="_blank" rel="noopener">서플</a> · <a href="https://newsseoul.co.kr/news/view/1065621616464387" target="_blank" rel="noopener">뉴스서울</a> · <a href="https://peoplepower21.org/stablelife/2029728" target="_blank" rel="noopener">참여연대 9.22</a></p></div></li>
+<li><div class="d">2026.9.18</div><div class="b">
+<div class="t">청년고용촉진특별법 개정 시행 — 법상 청년 15~29세 → 15~34세<span class="tag">일자리·기타</span></div>
+<p class="easy">법에서 말하는 '청년' 나이가 34세까지로 넓어졌습니다. 그래서 10월 발표 고용통계부터 15~34세 청년 숫자도 따로 나옵니다.</p>
+<p class="num">국회 통과 2026.2.12 · 시행령 국무회의 의결 9.8 · 시행 9.18 · 9월 15~34세 청년 고용률 56.1%</p>
+<p class="crit">짚을 점: 공공기관 청년 의무고용 3% 비율이 그대로면 대상만 넓어져 20대 몫이 줄 수 있다는 지적(추론). 3% 조항 일몰(2026.12.31) 여부는 원문 확인 필요.</p>
+<p class="src"><a href="https://biz.sbs.co.kr/amp/article/20000291545" target="_blank" rel="noopener">SBS Biz(국회 통과)</a> · <a href="https://eiec.kdi.re.kr/policy/materialView.do?num=286506" target="_blank" rel="noopener">KDI(시행령)</a> · <a href="https://www.inews24.com/view/2015634" target="_blank" rel="noopener">아이뉴스24(시행·통계)</a></p></div></li>
+<li><div class="d">2026.9.1</div><div class="b">
+<div class="t">모두의카드 정식 출시 — 대중교통 정액·정률 환급, 청년 39세까지<span class="tag uni">대학생</span></div>
+<p class="easy">교통비를 많이 쓰면 일정 금액 넘는 만큼 돌려주는 카드입니다. 서울 기후동행카드가 이걸로 바뀌었습니다. 청년 유형은 만 39세까지입니다.</p>
+<p class="num">발표 7.30 · 정식 출시 9.1 · 가입자 600만 명(7.29 기준)</p>
+<p class="src"><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=284896" target="_blank" rel="noopener">국토교통부 대광위(KDI 경제정보센터)</a></p></div></li>
+<li><div class="d">2026.9.1</div><div class="b">
+<div class="t">2027 노동부 예산안 — 청년 일자리 3.3조, '첫 경력 프로젝트' 대학생 6만 명<span class="tag uni">대학생</span></div>
+<p class="easy">일해 본 적 없는 청년에게 진로 상담부터 일경험·훈련·취업 연결까지 해 주는 제도를 새로 만들고, 대학생 6만 명이 기업·기관에서 현장실습을 하게 합니다.</p>
+<p class="num">청년 일자리 예산 2.6조 → 3.3조 · 청년 첫취업 지원제도·K-유스개런티 신설 · 구직촉진수당 월 60만 → 65만 원 · 일경험 공공 2만·민간 4.5만 명 · 청년일자리도약장려금 비수도권 2년 최대 720만 → 1,800만 원, 수도권 최대 480만 원</p>
+<p class="crit">비판: 노동부 5개 사업 2.57조가 반도체 세수에 기대는 미래대응기금으로 옮겨져 안정성 우려. 생애 1회 구직급여는 예산안에 빠짐.</p>
+<p class="src"><a href="https://biz.sbs.co.kr/amp/article/20000331977" target="_blank" rel="noopener">SBS Biz 9.1</a> · <a href="https://www.heraldk.com/article/2026083122004098221" target="_blank" rel="noopener">헤럴드경제 8.31</a></p></div></li>
+<li><div class="d">2026.8.28</div><div class="b">
+<div class="t">'청년예산 언박싱 2027' — 청년 예산 43.3조<span class="tag uni">대학생</span></div>
+<p class="easy">대통령이 참석한 자리에서 내년 청년 예산을 공개했습니다. 올해보다 절반 넘게 늘었습니다.</p>
+<p class="num">청년 재정투자 28.2조 → 43.3조(+53.5%) · 출생부터 34세 자립까지 최대 1억 9,582만 원 지원 가능</p>
+<p class="num"><b>대학생:</b> 지방국립대 2027학년도 신입생 등록금 전액(국가장학금 신청자, 의·치·약·수의대 제외, 4년간 순차 확대) · 지역균형발전장학금 3,280억 중 지방사립대 지역인재장학금 1,150억, 신규 선발 약 4,300명 → 1만 명, 연 최대 800만 원 상한, 수도권 고졸자도 지원 가능</p>
+<p class="num"><b>주거:</b> 청년 공적주택 7.1만 → 10.6만 호 · 청년 공공임대 예산 9.4조 → 18.1조 · 청년 월세 지원 소득 기준 중위 60% → 100%, 예산 1,300억 → 2,319억</p>
+<p class="num"><b>문화:</b> 청년문화예술패스 대상 19~20세 → 19~34세, 체육까지, 7,925억 원(문체부 예산 기준)</p>
+<p class="crit">비판: 사립대총장협의회 "지원 규모가 국립대 절반, 800만 원 상한으로 실효성 부족". 서울 대학생은 지방국립대 무상 혜택이 없음. 보편형 임대 쏠림(참여연대).</p>
+<p class="src"><a href="https://eiec.kdi.re.kr/policy/materialView.do?num=285992" target="_blank" rel="noopener">관계부처 합동(KDI)</a> · <a href="https://v.daum.net/v/20260828172809434" target="_blank" rel="noopener">조선비즈(지방국립대)</a> · <a href="https://www.mt.co.kr/policy/2026/08/28/2026082814382133389" target="_blank" rel="noopener">머니투데이(지방사립대)</a> · <a href="https://www.heraldk.com/article/2026083120041480854" target="_blank" rel="noopener">헤럴드(주거)</a> · <a href="https://news.mtn.co.kr/news-detail/2026090408222115775" target="_blank" rel="noopener">MTN(문화패스)</a></p></div></li>
+<li><div class="d">2026.8.13</div><div class="b">
+<div class="t">8·13 부동산 대책 — 청년미래보금자리론(4억 이하 비아파트)<span class="tag house">주거</span></div>
+<p class="easy">39세 이하 청년이 4억 원 이하 빌라·오피스텔을 처음 살 때 싸게 빌려주는 대출입니다. 2027년 1월 출시를 준비합니다.</p>
+<p class="num">LTV 최대 80% · 연소득 7천만 원 이하 · 연 3조 원씩 2년</p>
+<p class="crit">비판: 서울 빌라의 64%가 4억 원을 넘어 대상에서 빠짐. 청년 79.7%는 첫 집으로 아파트를 원함. "사다리 대신 가두리"(안철수). 같은 주 폐버스 하우스 논란(황희 의원, 8.7 제안·삭제, 8.10 사과)과 겹침.</p>
+<p class="src"><a href="https://kbthink.com/realestate/basics/8-13-housing-loans.html" target="_blank" rel="noopener">KB의 생각</a> · <a href="https://biz.heraldcorp.com/article/10847568" target="_blank" rel="noopener">헤럴드경제 8.21</a> · <a href="https://www.munhwa.com/article/11609521" target="_blank" rel="noopener">문화일보 8.14</a> · <a href="issue-youthhousing.html">자료실 보고서</a></p></div></li>
+<li><div class="d">2026.8.4</div><div class="b">
+<div class="t">노동부 하반기 업무보고 — 자발적 이직 청년도 생애 1회 구직급여 추진<span class="tag">일자리·기타</span></div>
+<p class="easy">지금은 스스로 회사를 그만두면 실업급여를 못 받습니다. 35세 미만 청년은 일정 기간 일했으면 평생 한 번은 받게 하겠다는 방안입니다.</p>
+<p class="num">연내 고용보험법 개정 추진 · 정부 지원 기업과 청년을 연결하는 '플레이그라운드'(가칭) 신설</p>
+<p class="crit">2027 예산안에는 반영되지 않음(헤럴드).</p>
+<p class="src"><a href="https://www.heraldk.com/article/2026080401112413174" target="_blank" rel="noopener">헤럴드경제 8.4</a></p></div></li>
+<li><div class="d">2026.6.22</div><div class="b">
+<div class="t">청년미래적금 출시<span class="tag">일자리·기타</span></div>
+<p class="easy">청년이 3년 동안 매달 최대 50만 원을 넣으면 나라가 6%(중소기업 재직자 등은 12%)를 얹어 주는 적금입니다. 윤석열 정부 청년도약계좌의 후속입니다.</p>
+<p class="num">만 19~34세(군 복무 기간만큼 연장) · 기본금리 연 5%, 우대 포함 최고 8% · 만기 최대 2,255만 원</p>
+<p class="crit">짚을 점: 도약계좌는 해지율 15.3%, 정권마다 이름이 바뀌는 자산형성 사업(예산정책처 '6개 부처 10개 사업 중복' 지적).</p>
+<p class="src"><a href="https://v.daum.net/v/9o303vtWiL" target="_blank" rel="noopener">bnt뉴스 6.22</a> · <a href="https://magazine.hankyung.com/business/article/202508051953b" target="_blank" rel="noopener">한경비즈니스(도약계좌)</a> · <a href="https://www.nabo.go.kr/ko/notice/releasesView.do?idx=8981" target="_blank" rel="noopener">국회예산정책처</a></p></div></li>
+<li><div class="d">2026.5.22<small>2학기 신청</small></div><div class="b">
+<div class="t">주거안정장학금 — 기초·차상위 원거리 대학생 월 20만 원<span class="tag uni">대학생</span></div>
+<p class="easy">집이 멀어서 따로 사는 기초생활수급·차상위 대학생에게 월세 등 주거비를 월 20만 원까지 주는 장학금입니다. 2025년에 생겼습니다.</p>
+<p class="num">만 39세 이하 미혼 · 직전학기 12학점·70점 이상 · 국가장학금과 함께 신청</p>
+<p class="crit">짚을 점: 기초·차상위만 대상이라 대부분의 자취 대학생은 해당 없음.</p>
+<p class="src"><a href="https://www.syu.ac.kr/blog/%ed%95%9c%ea%b5%ad%ec%9e%a5%ed%95%99%ec%9e%ac%eb%8b%a8-2026-2%ed%95%99%ea%b8%b0-%ec%a3%bc%ea%b1%b0%ec%95%88%ec%a0%95%ec%9e%a5%ed%95%99%ea%b8%88-%ec%8b%a0%ec%b2%ad-%ec%95%88%eb%82%b4/" target="_blank" rel="noopener">한국장학재단 안내(삼육대 게시)</a> · <a href="https://v.daum.net/v/20250204120017172" target="_blank" rel="noopener">2025 도입 기사</a></p></div></li>
+<li><div class="d">2026.3.18</div><div class="b">
+<div class="t">청년 월세 지원 상시화 — 월 20만 원 × 24개월<span class="tag house">주거</span></div>
+<p class="easy">한시 사업이던 청년 월세 지원을 계속 사업으로 바꿨습니다. 청약통장이 없어도 됩니다.</p>
+<p class="num">최대 480만 원 · 신규 약 6만 명 · 관리비·보증금 제외 · 2022·2024년 두 차례 22.2만 명 지원</p>
+<p class="crit">짚을 점: 20만 원은 연세대 앞 평균 월세 67.8만 원의 3분의 1이 안 됨. 공급 없이 지원만 늘리면 월세로 새어 나감.</p>
+<p class="src"><a href="https://mobile.newsis.com/view/NISX20260318_0003552925" target="_blank" rel="noopener">뉴시스 3.18</a> · <a href="https://biz.sbs.co.kr/amp/article/20000327969" target="_blank" rel="noopener">SBS Biz(연세대 월세)</a></p></div></li>
+<li><div class="d">2026.1.13</div><div class="b">
+<div class="t">총리 "청년 공적주택 40만 호 이상"(2026~2030)<span class="tag house">주거</span></div>
+<p class="num">숫자가 출처마다 다름: 40만 호(총리 발언) · 45만 호(2027 예산안 보도) · 24.3만 호(주거안정플랜 미혼청년분). 토론에서는 "총리가 40만 호 이상이라고 했다"로 출처를 붙여 쓰십시오.</p>
+<p class="src"><a href="https://www.heraldk.com/article/2026011300444005321" target="_blank" rel="noopener">헤럴드경제 1.13</a> · <a href="https://nocutnews.co.kr/news/6571021" target="_blank" rel="noopener">노컷뉴스</a> · <a href="https://news.bizwatch.co.kr/article/real_estate/2026/09/15/0035" target="_blank" rel="noopener">비즈워치</a></p></div></li>
+<li><div class="d">2025.12.26</div><div class="b">
+<div class="t">제2차 청년정책 기본계획(2026~2030)<span class="tag uni">대학생</span></div>
+<p class="easy">앞으로 5년 청년 정책의 큰 틀입니다. 주거는 '많이 짓기'에서 '주거비 줄이기와 최저주거기준 올리기'로 초점을 옮겼습니다.</p>
+<p class="num">국립대 BTL 기숙사 15개소 · 연합기숙사 7개소 · 다인실을 1~2인실로 · 반지하·고시원 청년에 공공임대 우선</p>
+<p class="crit">짚을 점: 서울 대학 기숙사 수용률 16.8%(전국 최저)에 비하면 규모가 작음.</p>
+<p class="src"><a href="https://www.newsis.com/view/NISX20251226_0003455397" target="_blank" rel="noopener">뉴시스 12.26</a> · <a href="https://www.opm.go.kr/opm/news/press-release.do?mode=download&amp;articleNo=160759&amp;attachNo=151320" target="_blank" rel="noopener">국무조정실 보도자료</a> · <a href="https://etoday.co.kr/news/view/2635271" target="_blank" rel="noopener">이투데이(기숙사)</a></p></div></li>
+<li><div class="d">2025.12</div><div class="b">
+<div class="t">'쉬었음 청년 10만 명 줄이기' 목표 지시<span class="tag">일자리·기타</span></div>
+<p class="easy">일도 구직도 안 하고 그냥 쉰 청년을 줄이라는 대통령 지시입니다. 2025년 3분기 20~30대 쉬었음은 73.6만 명으로 역대 최대였습니다.</p>
+<p class="num">2026.9 15~29세 쉬었음 36.4만 명(전년보다 4.4만 명 감소) · 고립·은둔 청년 53.8만 명, 사회적 손실 연 5.3조 원(보사연 발표)</p>
+<p class="crit">짚을 점: 쉬었음이 줄었지만 20대 취업자도 같이 줄어 '복귀'로 보기 어렵다는 분석.</p>
+<p class="src"><a href="https://v.daum.net/v/20251209050255668" target="_blank" rel="noopener">서울신문 12.9</a> · <a href="https://www.inews24.com/view/2015634" target="_blank" rel="noopener">아이뉴스24</a> · <a href="https://www.insight.co.kr/news/573456" target="_blank" rel="noopener">인사이트 9.16</a></p></div></li>
+<li><div class="d">2025.11.25</div><div class="b">
+<div class="t">2026 천원의 아침밥 630만 식<span class="tag uni">대학생</span></div>
+<p class="easy">대학생이 아침밥을 천 원에 먹게 하는 사업입니다. 5천 원짜리 밥이면 나라 2천 원, 학생 천 원, 대학 천 원, 지자체 천 원을 냅니다.</p>
+<p class="num">대학생 540만 식 + 산업단지 근로자 90만 식 · 농림축산식품부</p>
+<p class="src"><a href="https://www.etoday.co.kr/news/view/2529052" target="_blank" rel="noopener">이투데이 11.25</a></p></div></li>
+<li><div class="d">2025.11.21</div><div class="b">
+<div class="t">2026학년도 국가장학금 — 셋째 이상 자녀 등록금 전액<span class="tag uni">대학생</span></div>
+<p class="num">기초·차상위 전액 + 8구간 이하 다자녀 셋째 이상 전액 · 연 지원액 1~3구간 600만 · 4~6구간 440만 · 7~8구간 360만 · 9구간 100만 원(일반 기준)</p>
+<p class="crit">짚을 점: 연세대 등록금은 2026학년도 2.6% 인상. 서울 사립대 27곳 중 23곳 인상(평균 2.74%).</p>
+<p class="src"><a href="https://www.kyobit.com/news/articleView.html?idxno=2541" target="_blank" rel="noopener">교육을 비추다 11.21</a> · <a href="https://news.tf.co.kr/read/life/2290752.htm" target="_blank" rel="noopener">더팩트(등록금)</a></p></div></li>
+<li><div class="d">2025.9.10</div><div class="b">
+<div class="t">'일자리 첫걸음 보장제'<span class="tag">일자리·기타</span></div>
+<p class="easy">학교 졸업 후 일자리가 없는 청년을 국가가 명단으로 관리하며 먼저 찾아가 돕겠다는 제도입니다.</p>
+<p class="num">미취업 청년 연 약 15만 명 · 청년미래적금 중소기업 신규 취업자 매칭 12%</p>
+<p class="src"><a href="https://www.nocutnews.co.kr/news/6397919" target="_blank" rel="noopener">노컷뉴스</a></p></div></li>
+<li><div class="d">2025.9.7</div><div class="b">
+<div class="t">9·7 주택공급대책 — 수도권 135만 호 착공, 대학 부지 공유형 기숙사<span class="tag house">주거</span></div>
+<p class="num">2030년까지 수도권 135만 호 착공, LH 직접 시행 · 수도권 대학 부지 공유형 기숙사 4개소 약 500실</p>
+<p class="crit">비판: 서울시 청년안심주택 물량이 빠져 엇박자.</p>
+<p class="src"><a href="https://mobile.newsis.com/view/NISX20250907_0003318892" target="_blank" rel="noopener">뉴시스</a> · <a href="https://www.mt.co.kr/estate/2025/09/15/2025091116083243063" target="_blank" rel="noopener">머니투데이</a></p></div></li>
+</ul>
+<div class="good"><b>정부 정책을 토론에서 쓰는 법</b><br>
+① <b>칭찬할 건 칭찬</b>: 월세 지원 상시화, 지방국립대 등록금 0원, 청년 예산 53% 증액은 방향이 맞습니다.<br>
+② <b>틀린 건 틀렸다</b>: 20만 원은 대학가 월세 3분의 1도 안 되고, 기숙사는 500실·22개소로는 모자라고, 청년미래보금자리론은 서울 빌라 64%가 대상 밖입니다.<br>
+③ <b>대안</b>: 사업 이름을 늘리기보다 쪼개진 사업을 합치고(예산정책처 지적), 착공·입주 실적을 공개하게 하자.<br>
+④ <b>연세대 학생에게 직접</b>: 서울 대학생은 지방국립대 무상 혜택이 없습니다. 이 방 학생들한테 정부 정책이 뭘 주는지 솔직히 말하는 게 신뢰를 얻습니다.</div>
+</section>
+
+<section id="local">
+<h2>지방정부 우수사례</h2>
+<div id="local-body"><div class="lead"><b>핵심 한 줄</b> — 지방정부 사례는 두 갈래입니다. 서울은 <b>수요는 넘치는데 공급이 막혔고</b>(청년안심주택 경쟁률 147대 1, 인허가 0건), 지방은 <b>집을 싸게 줘도 일자리가 없으면 청년이 안 남습니다</b>(청년마을 4,191명 다녀가 68명 정착). 집과 일자리를 같이 줘야 한다는 대표님 주장의 근거가 됩니다.</div><h3>1. 청년·대학생 주거</h3><div class="card"><div class="h">전남 화순군 「만원 임대주택」 <small>2023~</small></div><ul><li>청년·신혼부부에게 월세 1만 원. 2026년까지 400호</li><li>외지 청년 567명 전입, 출생 21명. 2026 대한민국기록문화대상</li><li>2025년 모집 100호에 498명(약 5대 1), 그중 외지인 약 40%</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 임대료 보전이 재정 부담, 공급량·거주기간 제한으로 임시 거처에 그칠 수 있음</p><p class="say">월세 1만 원 집 400호를 지었더니 외지 청년 567명이 들어오고 아이 21명이 태어났습니다.</p><p class="src"><a href="https://www.wikitree.co.kr/articles/1143545" target="_blank" rel="noopener">위키트리</a> · <a href="https://m.seoul.co.kr/news/2025/08/19/20250819500171" target="_blank" rel="noopener">서울신문 2025.8.19</a></p></div><div class="card"><div class="h">전남도·고흥군 「전남형 만원주택」 <small>2025.10 기공</small></div><ul><li>50가구, 보증금 없이 월 1만 원, 최장 10년</li><li>사업비 180억 원(도 150억, 군 30억)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 아직 기공 단계라 성과 미확인</p><p class="src"><a href="https://www.hankyung.com/article/202512106155i" target="_blank" rel="noopener">한국경제</a></p></div><div class="card"><div class="h">전북 전주 「청춘별채」·남원 「피움하우스」 <small>빈집 활용</small></div><ul><li>전주: 월 1만~3만 원, 25명 모집에 1,322명(약 53대 1), 하반기 70.8대 1, 2028년까지 210호</li><li>남원: 11호에 401명(36대 1)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: "빈집 고쳤지만 청년은 오지 않았다". 상가가 일찍 닫고 일자리가 적어 정착이 어려움</p><p class="src"><a href="https://www.jjan.kr/articleAmp/20250328580060" target="_blank" rel="noopener">전북일보</a> · <a href="https://m.seoul.co.kr/news/2025/10/10/20251010012002" target="_blank" rel="noopener">서울신문 기획</a></p></div><div class="card"><div class="h">인천시 「천원주택」 <small>2025~</small></div><ul><li>하루 1천 원, 월 3만 원. 2025년 500가구, 신혼·예비부부·한부모, 최대 6년</li><li>접수 20분 만에 200여 가구 신청</li><li>중개수수료 1천 원 「천원복비」 예정(3억 원, 1천 가구)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 청년 1인 가구는 대상이 아님</p><p class="src"><a href="https://www.newsis.com/view/NISX20250307_0003089616" target="_blank" rel="noopener">뉴시스</a> · <a href="https://www.hankyung.com/article/202512106155i" target="_blank" rel="noopener">한국경제</a></p></div><div class="card"><div class="h">서울시 「청년안심주택」(옛 역세권 청년주택) <small>2016~</small></div><ul><li>2026.7 기준 101곳 3만 3,621호 준공, 2030년 누적 4만 6천 호 목표</li><li>임대료: 공공 시세 30~50%, 민간 75~85% 이하</li><li>경쟁률 2025년 41.9 → 93.7 → 147.4대 1, 2026년 1차 평균 105대 1</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 인허가 2021년 45건 → 2024년 4건 → 2025년 0건. 금리·공사비로 사업성 악화, 2~3년 뒤 공급 절벽 우려</p><p class="say">경쟁률은 147대 1인데 작년 인허가는 0건입니다. 수요가 아니라 공급 구조가 문제입니다.</p><p class="src"><a href="https://www.heraldk.com/article/2026081200362436645" target="_blank" rel="noopener">헤럴드경제 8.12</a> · <a href="https://news.mtn.co.kr/news-detail/2026040115081491453" target="_blank" rel="noopener">MTN 4.1</a></p></div><div class="card"><div class="h">서울시·SH 「미리내집」(신혼부부 장기전세) <small>2024.8~</small></div><ul><li>6차(2025.12) 400가구에 2만 7,874건, 69.7대 1</li><li>최장 20년 거주, 20년 뒤 우선 매수권</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 공급 부족·대출 규제로 입주 어렵다는 보도</p><p class="src"><a href="https://biz.sbs.co.kr/amp/article/20000279729" target="_blank" rel="noopener">SBS Biz</a></p></div><div class="card"><div class="h">지자체 월세 지원·전세사기 청년 <small></small></div><ul><li>서울 2026: 1만 5천 명, 월 최대 20만 원×12개월, 전세사기 피해 청년 1천 명 우선</li><li>대전: 무주택 청년 3천 명, 월 최대 20만 원×12개월(생애 1회), 사업비 54억 원</li><li>서울 「더드림집+」: AI 전세사기 위험 분석 연 3천 건, 보증료 지원 2만 명</li></ul><p class="src"><a href="https://www.heraldk.com/article/2026042913000556361" target="_blank" rel="noopener">헤럴드 4.29</a> · <a href="https://www.newsseoul.co.kr/news/view/1065605431509757" target="_blank" rel="noopener">뉴스서울</a> · <a href="https://www.ajunews.com/view/20260310145039745" target="_blank" rel="noopener">아주경제</a></p></div><div class="card"><div class="h">대학생 기숙사 <small></small></div><ul><li>경북 군위군 「행복기숙사」: 군민 대학생 60명을 수도권·부산·대구 기숙사에 배정, 학생 월 10만 원만 내고 나머지 군 부담</li><li>LH 「기숙사형 전세임대」: 서울대 협약 2030년까지 200호, 이번 학기 60명 입주, 지자체·대학 대상 500호 공모 중</li></ul><p class="say">군위군은 서울 기숙사비를 군이 대신 내줍니다. 지방이 서울 대학생 주거를 책임지는 셈입니다.</p><p class="src"><a href="https://www.kukinews.com/article/view/kuk202601080180" target="_blank" rel="noopener">쿠키뉴스 1.8</a> · <a href="https://www.fnnews.com/news/202610060915536868" target="_blank" rel="noopener">파이낸셜뉴스 10.6</a></p></div><h3>2. 청년 일자리·취업</h3><div class="card"><div class="h">서울시 「청년취업사관학교(SeSAC)」 <small>2021~</small></div><ul><li>2025년 25개 자치구 캠퍼스 완성</li><li>5년간 1만 114명, 누적 취업률 75.4%, 3년 평균 직무 유지율 93%</li><li>AI 특화캠퍼스 1기 86명 중 약 70% 취업</li></ul><p class="say">지역 맞춤 직업훈련 1만 명에 취업률 75%, 3년 유지율 93%. 좋은 정책은 여야 가리지 않고 넓혀야 합니다.</p><p class="src"><a href="https://news.seoul.go.kr/economy/archives/569558" target="_blank" rel="noopener">서울시</a></p></div><div class="card"><div class="h">서울시 고립·은둔 청년 지원(청년기지개센터) <small>2024.4~</small></div><ul><li>서울 고립·은둔 청년 약 12만 9천 명(청년의 4.5%) 추산</li><li>2024년 1,834명 신청, 870명 참여</li><li>고립감 20.0%↓ 우울 20.6%↓ 자기효능감 19.6%↑, 응답 249명 중 92명 취업·진로 변화</li></ul><p class="src"><a href="https://news.tf.co.kr/read/life/2169166.htm" target="_blank" rel="noopener">더팩트</a> · <a href="https://news.seoul.go.kr/gov/archives/573931" target="_blank" rel="noopener">서울시</a></p></div><div class="card"><div class="h">서울시 「청년인생설계학교」 <small></small></div><ul><li>2025년 1,500명(전년 1.5배), 전년 만족도 92%</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 진로 변화 성과 미확인</p><p class="src"><a href="https://mediahub.seoul.go.kr/archives/2014116" target="_blank" rel="noopener">내 손안에 서울</a></p></div><div class="card"><div class="h">경기도 「청년 노동자 통장」 <small></small></div><ul><li>본인 월 10만 원×2년 저축하면 도가 월 14만 2천 원 보태 만기 580만 8천 원</li><li>2025년 3천 명, 중위소득 120% 이하 19~39세 노동자</li></ul><p class="src"><a href="https://newsseoul.co.kr/news/view/1065566431100022" target="_blank" rel="noopener">뉴스서울</a></p></div><div class="card"><div class="h">경기도 「청년기본소득」 <small></small></div><ul><li>24세 도민에게 연 100만 원(분기 25만 원) 지역화폐</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 성남시는 조례 폐지, 의정부는 재정난으로 2024년 빠짐. 효과 분석 미확인</p><p class="src"><a href="https://www.dt.co.kr/article/11563662" target="_blank" rel="noopener">디지털타임스</a></p></div><div class="card"><div class="h">전북도 「청년도전지원사업」(쉬었음·구직단념 청년) <small>2023~</small></div><ul><li>2025년 370명 참여, 성과평가 전국 최우수</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 취업률 미확인</p><p class="src"><a href="https://www.jjan.kr/articleAmp/20251225500192" target="_blank" rel="noopener">전북일보</a></p></div><h3>3. 청년 참여·교통·기타</h3><div class="card"><div class="h">서울시 「청년자율예산」 <small></small></div><ul><li>2023년 예산: 청년 1천여 명이 5개월 230회 숙의해 정책 163건 제안, 12개 사업 약 77억 원 시민투표</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 최근 규모·축소 여부 미확인</p><p class="say">서울시는 청년 1천 명이 77억 원짜리 사업을 직접 정했습니다. 제가 말한 당 예산 10% 청년 편성도 같은 생각입니다.</p><p class="src"><a href="https://news.seoul.go.kr/gov/archives/541685" target="_blank" rel="noopener">서울시</a></p></div><div class="card"><div class="h">서울 「기후동행카드」·경기 「The 경기패스」 <small>2024~</small></div><ul><li>기후동행: 청년(19~39세) 30일권 5만 5천 원, 하루 약 80만 명 이용 → 2026.9 정부 모두의카드로 통합</li><li>경기패스: 청년 19~39세 30% 환급, 2026.6 가입 200만 명, 1인 월 약 5만 3천 원 환급</li></ul><p class="src"><a href="https://www.heraldk.com/article/2026050114450057139" target="_blank" rel="noopener">헤럴드 5.1</a> · <a href="https://m.go.seoul.co.kr/news/2026/06/12/20260612500019" target="_blank" rel="noopener">서울신문 6.12</a></p></div><div class="card"><div class="h">「천원의 아침밥」 지자체 추가 지원 <small></small></div><ul><li>부산시 2025년 시비 1억 8,460만 원으로 12개 대학 추가 지원</li></ul><p class="src"><a href="https://www.khan.co.kr/article/202503311017001" target="_blank" rel="noopener">경향신문</a></p></div><h3>4. 농어촌·군 단위 청년 정착 (강진 포함)</h3><div class="card"><div class="h">「전남형 청년마을」 <small>2022~</small></div><ul><li>13개 시군 17개 마을, 마을당 3년 3억 원</li><li>누적 참여 4,191명 중 실제 정착 68명</li><li>강진 「스테이 돌담빌리지」도 이 사업(2024년 기수당 5명, 5기)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 참여 대비 정착 1.6%</p><p class="say">청년마을에 4,191명이 다녀갔지만 남은 사람은 68명입니다. 집만으로는 청년이 안 남습니다. 일자리가 같이 가야 합니다.</p><p class="src"><a href="https://www.heraldk.com/article/2026060317462970644" target="_blank" rel="noopener">헤럴드 6.3</a> · <a href="https://www.metroseoul.co.kr/article/20240709500312" target="_blank" rel="noopener">메트로신문</a></p></div><div class="card"><div class="h">행정안전부 「청년마을」 <small>2018~</small></div><ul><li>51곳 중 39곳이 국비 없이 자립</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 정착 인원 미확인</p><p class="src"><a href="https://www.kukinews.com/article/view/kuk202512080177" target="_blank" rel="noopener">쿠키뉴스</a></p></div><div class="card"><div class="h">강진군 「강진품애 청년 주거비 지원」 <small>2025</small></div><ul><li>19~45세 1인 가구 월 20만 원, 2인 가구 월 25만 원, 3년</li><li>2025년부터 저연차 공무원·공공기관 직원도 대상(이직·전출 방지)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 실적 미확인</p><p class="src"><a href="https://www.wikitree.co.kr/articles/1022629" target="_blank" rel="noopener">위키트리</a></p></div><div class="card"><div class="h">강진군 창업·정착 지원 <small></small></div><ul><li>청년 창업·가업 승계 시설비 최대 2천만 원</li><li>서울시와 「넥스트로컬」로 6명 이주, 14개 팀 창업</li><li>청년 창업 임대료, 「강진품애 일자리 장려금」</li></ul><p class="src"><a href="https://newsseoul.co.kr/news/view/1065579641951608" target="_blank" rel="noopener">뉴스서울</a></p></div><div class="card"><div class="h">강진군 「반값여행」(생활인구) <small>2024~</small></div><ul><li>2024년 약 282만 명 방문, 군 지원 22억 대비 지역경제 효과 약 47억(군 추산)</li><li>2025년(9.8까지) 161만 명, 소비 약 103억 5천만 원</li><li>2026년 청년 혼자 여행 최대 70% 환급(한도 14만 원)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 군 자체 추산</p><p class="src"><a href="https://www.mt.co.kr/policy/2025/10/02/2025093011087891009" target="_blank" rel="noopener">머니투데이</a> · <a href="https://www.wikitree.co.kr/articles/1139331" target="_blank" rel="noopener">위키트리</a></p></div><div class="card"><div class="h">강진군 「육아수당」 <small>2022.10~</small></div><ul><li>자녀 1명당 월 60만 원, 생후 84개월까지</li><li>출생아 시행 전 같은 기간 83명 → 시행 후 128명(+54.2%)</li><li>대표님 의장 재임 중 의회 성과(대표발의는 다른 청년 의원)</li></ul><p class="crit" style="color:var(--red);font-size:.88rem">한계: 군 자체 통계·설문이라 외부 검증 아님</p><p class="say">제가 의장일 때 우리 의회가 육아수당 조례를 만들었고, 출생아가 54% 늘었습니다.</p><p class="src"><a href="https://newsseoul.co.kr/news/view/1065584424875698" target="_blank" rel="noopener">뉴스서울</a></p></div><div class="good"><b>지방정부 사례 Top 5</b><br>① 화순 만원주택(567명 전입·21명 출생) ② 서울 청년안심주택(147대 1인데 인허가 0건) ③ 전남형 청년마을(4,191명 중 68명 정착: 집만으론 안 된다) ④ 서울 청년취업사관학교(취업률 75.4%, 여야 없이 넓히자) ⑤ 강진 주거비 지원·반값여행·육아수당(고향 사례)<br>교체 후보: 서울 고립·은둔 청년 지원(우울 20.6% 감소)은 쉬었음 질문이 나오면 씁니다.</div><p class="src">수치는 대부분 언론 보도(2차 출처)입니다. 서울시 청년취업사관학교·고립은둔·청년자율예산만 서울시 원문입니다. 전주 청춘별채 경쟁률은 기사마다 52·53·70.8대 1로 다릅니다.</p></div>
+</section>
+
+<section id="abroad">
+<h2>해외 우수사례</h2>
+<div id="abroad-body"><p>조사 중입니다. 오늘 안에 채워집니다.</p></div>
+</section>
+
+<section id="system">
+<h2>한국 정당·대통령제와 다른 나라 비교</h2>
+<div id="system-body"><p>조사 중입니다. 오늘 안에 채워집니다.</p></div>
+</section>
+
+<section id="map">
+<h2>한 장 요약</h2>
+<div id="map-body"><p>네 갈래 조사가 끝나면 채웁니다.</p></div>
+</section>
+</div>
+</body></html>
