@@ -408,20 +408,9 @@ table.yall td{font-size:14.5px;line-height:1.55;vertical-align:top}table.yall td
 .pcx.g{background:#eaf6ee;border-color:#cfe8d8;color:#1d4d33}.pcx.r{background:#fdeeec;border-color:#f3cfca;color:#7a2a22}.pcx.y{background:#fff7dc;border-color:#f1e3a6;color:#5a4500}.pcx.b{background:#e9f0fb;border-color:#c9d8f1;color:#1f3b6e}
 html.dark .pcx.g,:root[data-theme="dark"] .pcx.g{background:#16291f;border-color:#244a33;color:#9fd8b4}
 
-/* 무대 모드 */
+/* 숫자 띠 */
 .nstrip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:4px 0 12px}@media(max-width:900px){.nstrip{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.nstrip{grid-template-columns:repeat(2,1fr)}}
 .nstrip a{display:block;background:var(--card,#fff);border:1px solid var(--line,#e3e7ee);border-radius:12px;padding:10px 12px;text-decoration:none;color:inherit}.nstrip b{display:block;font-size:22px;letter-spacing:-.03em;color:var(--navy,#15264a)}.nstrip span{display:block;font-size:12.5px;color:#6b7482;line-height:1.35;margin-top:2px}
-.stg{min-height:calc(100vh - 70px);display:flex;flex-direction:column;gap:12px;padding:6px 0 20px}
-.stg-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.stg-x{font-weight:700;text-decoration:none;color:var(--mut,#5d6676);padding:6px 10px;border:1px solid var(--line,#e3e7ee);border-radius:999px;background:var(--card,#fff)}
-.stg-tabs{display:flex;gap:6px;flex-wrap:wrap;flex:1}.stg-tabs a{font-size:13px;font-weight:700;padding:6px 11px;border-radius:999px;border:1px solid var(--line,#e3e7ee);background:var(--card,#fff);text-decoration:none;color:var(--ink,#1b2333)}.stg-tabs a.on{background:var(--navy,#15264a);color:#fff;border-color:var(--navy,#15264a)}
-.stg-timer{display:flex;align-items:center;gap:6px}.stg-timer button{font:inherit;font-size:13px;font-weight:700;padding:6px 10px;border-radius:8px;border:1px solid var(--line,#e3e7ee);background:var(--card,#fff);cursor:pointer}.stg-timer b{font-size:26px;font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right;color:var(--navy,#15264a)}.stg-timer b.amb{color:#b36b00}.stg-timer b.red{color:#c0271b;animation:blink 1s step-end infinite}@keyframes blink{50%{opacity:.35}}
-.stg-body{flex:1;background:var(--card,#fff);border:1px solid var(--line,#e3e7ee);border-radius:18px;padding:26px 30px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;user-select:none;min-height:46vh}
-.stg-lab{font-size:14px;font-weight:700;color:#7d8798;margin-bottom:14px}.stg-lab i{color:#b36b00;font-style:normal}
-.stg-t{font-family:var(--serif,"Gowun Batang","Nanum Myeongjo",serif);font-size:clamp(24px,3.4vw,38px);line-height:1.55;margin:0;word-break:keep-all;color:var(--ink,#1b2333)}.stg-t.k{background:#fff7d6;padding:8px 14px;border-radius:12px;box-shadow:inset 4px 0 0 #f2c200}.stg-t.o{color:#7d8798;font-size:clamp(20px,2.6vw,30px)}
-.stg-nav{display:flex;justify-content:space-between;align-items:center;gap:10px}.stg-nav a{font-weight:800;font-size:17px;text-decoration:none;padding:12px 22px;border-radius:12px;background:var(--navy,#15264a);color:#fff}.stg-nav span{font-size:12.5px;color:#8a93a3}
-.stg-nums{display:flex;gap:8px;flex-wrap:wrap}.stg-nums span{font-size:13px;background:var(--bg2,#f4f6f9);border-radius:999px;padding:6px 12px;color:#46505e}.stg-nums b{color:var(--navy,#15264a);margin-right:5px;font-size:15px}
-.stg-chips{display:flex;gap:6px;flex-wrap:wrap}.stg-chips a{font-size:13px;font-weight:700;text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid #f3cfca;background:#fdeeec;color:#7a2a22}
-@media(max-width:700px){.stg-top{display:grid;grid-template-columns:auto 1fr;gap:8px}.stg-tabs{grid-column:1/-1;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.stg-tabs a{white-space:nowrap;flex:0 0 auto}.stg-timer{justify-content:flex-end}.stg-body{padding:18px 16px;min-height:40vh}.stg-nav a{padding:10px 16px;font-size:15px}}
 </style><script>if(location.hash!=="#old")document.documentElement.classList.add("v2");</script><style>html.v2 body>header,html.v2 .kwpanel,html.v2 .botnav,html.v2 .ttsp{display:none!important}html.v2 body{background:#f2f4f8}html.v2 .layout{display:block;max-width:1040px;margin:0 auto;padding:28px 20px 56px}</style></head>
 <body><div id="v2top"><div class="in"><div class="brand"><span>김보미 준비노트</span></div></div></div><header>
  <div class="htop">
@@ -1496,7 +1485,7 @@ function stage(full){
   let h='<section class="stage" aria-label="다음 일정"><div><div class="when">10월 27일 화요일 저녁 7시</div><div class="what">'+E(EVENT.title)+'</div><div class="where">'+E(EVENT.place)+' · '+E(EVENT.arrive)+' · 주최 '+E(EVENT.host)+'</div></div><div class="dd"><b>'+d+'</b><span>'+left+'</span></div>'+
    '<div class="who"><a href="#event/parties/dem"><i style="background:#6f9be0"></i><span><b>김보미</b> <small>더불어민주당</small></span></a><a href="#event/parties/ref"><i style="background:var(--ref)"></i><span><b>김성열</b> <small>전 개혁신당 최고위원</small></span></a><a href="#event/parties/prg"><i style="background:#ff5a62"></i><span><b>박태훈</b> <small>진보당 청년진보당</small></span></a></div>'+
    '<div class="ag"><div><b>의제 1</b>'+E(EVENT.agenda[0])+'</div><div><b>의제 2</b>'+E(EVENT.agenda[1])+'</div></div>';
-  if(full)h+='<div class="steps">'+[['stage','🎤 무대 모드 (큰 글씨 큐카드·타이머)'],['keynote','인사말·원고 소리 내 읽기'],['study','학습 · 의제 순서대로'],['parties','정당별 입장 익히기'],['rival','상대 공격 받아치기'],['qna','학생 질문 대비'],['day','당일 체크']].map((x,i)=>'<a href="'+(x[0]==='study'?'#study':x[0]==='stage'?'#stage':'#event/'+x[0])+'"><em>'+(i+1)+'</em>'+x[1]+'</a>').join('')+'</div>';
+  if(full)h+='<div class="steps">'+[['keynote','인사말·원고 소리 내 읽기'],['study','학습 · 의제 순서대로'],['parties','정당별 입장 익히기'],['rival','상대 공격 받아치기'],['qna','학생 질문 대비'],['day','당일 체크']].map((x,i)=>'<a href="'+(x[0]==='study'?'#study':'#event/'+x[0])+'"><em>'+(i+1)+'</em>'+x[1]+'</a>').join('')+'</div>';
   return h+'</section>';
 }
 function vHome(){
@@ -1828,30 +1817,9 @@ function vStudy(){
 }
 
 
-/* ---------- 🎤 무대 모드: ★ 문장만 큰 글씨 큐카드 + 타이머 ---------- */
 const NUM6=[['5.3억','창천동 8평 원룸 실거래 1건(6월)',3202],['67.8만','연세대 앞 원룸 월세, 1년 +10.4%',3202],['16.8%','서울 대학 기숙사 수용률, 전국 꼴찌',3204],['47개월','청년 취업자 연속 감소',3205],['34.5%','계약직 출발 → 지금도 계약직',3205],['18.4개월','첫 직장 평균 근속(취업 소요 아님)',3273]];
-const STAGE_SET=[[3209,'인사말'],[3201,'기조발언'],[3204,'의제1 주거'],[3205,'의제2 일자리'],[3210,'AI 되묻기'],[3274,'마무리']];
-let stIdx=0,stT=null,stLeft=0,stTotal=0;
-function stageSlides(){const out=[];STAGE_SET.forEach(([no,lab])=>{const c=byNo[no];if(!c)return;(c.script||[]).forEach(p=>{const t=String(p);const must=t.startsWith('★');const opt=/^\(/.test(t);out.push({no,lab,t:t.replace(/^★\s*/,''),must,opt})})});return out}
-function vStage(){
-  const S=stageSlides();if(stIdx>=S.length)stIdx=S.length-1;if(stIdx<0)stIdx=0;const x=S[stIdx];
-  const nums='<div class="stg-nums">'+NUM6.map(n=>'<span><b>'+n[0]+'</b>'+n[1].split(',')[0].split('(')[0]+'</span>').join('')+'</div>';
-  const chips='<div class="stg-chips"><a href="#event/rival">⚔ 김성열 받아치기</a><a href="#event/rival/3221">⚔ 박태훈</a><a href="#event/rival/3231">민주당 지적</a><a href="#search/폐버스">폐버스</a><a href="#study/a1">정부 줄인 것</a></div>';
-  main().innerHTML='<div class="stg"><div class="stg-top"><a href="#event/overview" class="stg-x">✕ 나가기</a><div class="stg-tabs">'+STAGE_SET.map(([no,lab],i)=>'<a href="javascript:void 0" data-sj="'+no+'" class="'+(x&&x.no===no?'on':'')+'">'+lab+'</a>').join('')+'</div><div class="stg-timer" id="stgt"><button data-t="60">1분</button><button data-t="180">3분</button><button data-t="300">5분</button><b id="stgc">--:--</b></div></div>'+
-   '<div class="stg-body"><div class="stg-lab">'+E(x.lab)+' · '+(stIdx+1)+'/'+S.length+(x.opt?' · <i>시간 없으면 생략</i>':'')+'</div><p class="stg-t'+(x.must?' k':'')+(x.opt?' o':'')+'">'+E(x.t)+'</p></div>'+
-   '<div class="stg-nav"><a href="javascript:void 0" data-sd="-1">← 이전</a><span>←/→ 키 · 화면 좌우 터치</span><a href="javascript:void 0" data-sd="1">다음 →</a></div>'+nums+chips+'</div>';
-  const m=main();
-  m.querySelectorAll('[data-sd]').forEach(a=>a.onclick=()=>{stIdx+=+a.dataset.sd;vStage()});
-  m.querySelectorAll('[data-sj]').forEach(a=>a.onclick=()=>{stIdx=S.findIndex(y=>y.no===+a.dataset.sj);vStage()});
-  m.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{stTotal=stLeft=+b.dataset.t;stTick()});
-  const body=m.querySelector('.stg-body');body.onclick=e=>{const r=body.getBoundingClientRect();stIdx+=(e.clientX-r.left<r.width/2?-1:1);vStage()};
-  stPaint();
-}
-function stPaint(){const c=document.getElementById('stgc');if(!c)return;if(!stTotal){c.textContent='--:--';c.className='';return}const mm=Math.floor(stLeft/60),ss=stLeft%60;c.textContent=mm+':'+(ss<10?'0':'')+ss;c.className=stLeft<=20?'red':stLeft<=60?'amb':''}
-function stTick(){clearInterval(stT);stPaint();stT=setInterval(()=>{if(view!=='stage'){clearInterval(stT);return}stLeft--;if(stLeft<=0){stLeft=0;clearInterval(stT);try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}}stPaint()},1000)}
-document.addEventListener('keydown',e=>{if(view!=='stage')return;if(e.key==='ArrowRight'||e.key===' '){stIdx++;vStage();e.preventDefault()}else if(e.key==='ArrowLeft'){stIdx--;vStage();e.preventDefault()}});
 /* ---------- 라우팅 ---------- */
-const NEW={stage:vStage,study:vStudy,issues:vIssues,youth:vYouth,home:vHome,event:vEvent,archive:vArchive,media:vMedia,topics:vTopics,topic:vTopic,search:vSearch,msg:vMsg,one:vOne,gov:vGov};
+const NEW={study:vStudy,issues:vIssues,youth:vYouth,home:vHome,event:vEvent,archive:vArchive,media:vMedia,topics:vTopics,topic:vTopic,search:vSearch,msg:vMsg,one:vOne,gov:vGov};
 const oldRender=window.render;let OLD=false;
 const oldExport=window.exportEdited;window.exportEdited=function(){const t=document.getElementById('v2top'),f=document.getElementById('v2foot');const had=document.body.classList.contains('v2');if(t)t.remove();if(f)f.remove();document.body.classList.remove('v2','tts');try{oldExport()}finally{if(had)document.body.classList.add('v2');top();foot()}};
 window.applyHash=function(){
@@ -1860,7 +1828,6 @@ window.applyHash=function(){
   if(!h){OLD=false;view='home';return true}
   if(NEW[h.split('/')[0]]||/^(yonsei|card)/.test(h))OLD=false;
   let m;
-  if((m=h.match(/^stage(?:\/(\d+))?$/))){view='stage';if(m[1]){const S=stageSlides();const k=S.findIndex(y=>y.no===+m[1]);stIdx=k<0?0:k}return true}
   if((m=h.match(/^card\/(\d+)$/))){view='one';arg=m[1];return true}
   if((m=h.match(/^yonsei(?:\/(\d+))?$/))){view='event';sub=m[1]?secOf(+m[1]):'overview';arg=m[1]||'';return true}
   if((m=h.match(/^event(?:\/([a-z]+))?(?:\/([a-z0-9]+))?$/))){view='event';sub=m[1]||'overview';arg=m[2]||'';return true}
