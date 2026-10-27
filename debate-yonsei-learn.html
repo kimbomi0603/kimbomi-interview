@@ -447,4 +447,124 @@ function render(){
 }
 render();
 </script>
+<style id="gl-css">
+.gl{text-decoration:underline dotted #2b5fd9;text-decoration-thickness:1.5px;text-underline-offset:3px;cursor:help;border-radius:3px}
+.gl:hover,.gl.on{background:rgba(43,95,217,.10)}
+mark .gl,.k .gl{text-decoration-color:#0d2f63}
+#gl-tip{position:fixed;z-index:2147483000;max-width:min(300px,calc(100vw - 24px));padding:10px 13px;border-radius:12px;background:#0d1f45;color:#fff;font-size:14px;line-height:1.55;font-weight:500;letter-spacing:-.01em;box-shadow:0 12px 30px -8px rgba(5,12,32,.55);pointer-events:none;opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;word-break:keep-all}
+#gl-tip.on{opacity:1;transform:none}
+#gl-tip b{display:block;color:#ffd23f;font-size:13px;margin-bottom:3px}
+@media (prefers-color-scheme:dark){#gl-tip{background:#f4f6fb;color:#141b2b}#gl-tip b{color:#1b4fa0}}
+</style>
+<script id="gl-js">
+/* 용어 풀이: 어려운 말에 점선 밑줄 → 마우스를 올리거나(휴대폰은 누르면) 설명이 뜸. 카드 내용은 그대로 두고 화면에서만 감쌈 */
+(function(){
+var G={
+"ICT":"정보통신기술(Information and Communications Technology). 소프트웨어·인터넷·통신·IT 서비스 업계를 묶어 부르는 말.",
+"LH":"한국토지주택공사. 공공임대·공공분양 주택을 짓고 관리하는 국가 공기업.",
+"SH":"서울주택도시공사. 서울시가 세운 주택 공기업.",
+"HUG":"주택도시보증공사. 전세보증금 반환보증 등을 맡는 공기업.",
+"LTV":"주택담보인정비율. 집값의 몇 %까지 대출해 주는지 정한 한도.",
+"DSR":"총부채원리금상환비율. 한 해 소득 중 모든 대출의 원금·이자 갚는 돈이 차지하는 비율. 이 비율로 대출 한도를 묶음.",
+"OECD":"경제협력개발기구. 한국을 포함한 38개 선진국 모임. 나라별 비교 통계에 자주 쓰임.",
+"6·27":"작년(2025년) 6월 27일 발표된 수도권 주택담보대출 규제. 대출 한도를 최대 6억 원으로 묶는 등의 내용.",
+"행복주택":"청년·신혼부부 등에게 주변 시세보다 싸게 빌려주는 공공임대주택(LH·지자체 공급).",
+"공적주택":"공공임대·공공분양·공공지원 민간임대처럼 정부가 짓거나 지원하는 주택을 묶어 부르는 말.",
+"매입임대":"공기업이 이미 지어진 다가구·오피스텔 등을 사들여 싸게 빌려주는 공공임대 방식.",
+"전세임대":"입주자가 고른 집을 공기업이 집주인과 전세 계약한 뒤 입주자에게 싸게 다시 빌려주는 방식.",
+"공공분양":"공기업이 지어 주변 시세보다 싸게 파는 집.",
+"공공임대":"나라나 공기업이 지어 시세보다 싸게, 오래 빌려주는 집.",
+"상용직":"고용 계약 기간이 1년 이상이거나 기간을 정하지 않은 일자리(통계 분류). '정규직'과 같은 말은 아님.",
+"임시·일용직":"임시직은 계약 기간 1개월~1년 미만, 일용직은 1개월 미만이거나 날마다 고용되는 일자리.",
+"비경활":"비경제활동인구. 일도 하지 않고 일자리도 찾지 않는 사람(학생·쉬었음 등). 실업자 통계에 잡히지 않음.",
+"비경제활동":"일도 하지 않고 일자리도 찾지 않는 상태(학생·주부·쉬었음 등). 실업자 통계에 잡히지 않음.",
+"쉬었음":"일할 수 있는데도 특별한 이유 없이 '그냥 쉬었다'고 답한 사람. 구직을 안 해서 실업자로 잡히지 않음.",
+"고용률":"해당 연령 인구 가운데 일하고 있는 사람의 비율.",
+"실업률":"일하려고 구직 중인 사람 가운데 일자리를 못 구한 사람의 비율. 구직을 포기하면 빠져서 실제보다 낮아 보일 수 있음.",
+"경력 입직":"경력자로 회사에 새로 들어가는 것.",
+"입직":"새로 일자리에 들어가는 것.",
+"1차 시장":"임금·안정성이 높은 좋은 일자리 시장. 한국은행 보고서에서는 민간 300인 이상 기업의 상용직.",
+"2차 시장":"1차 시장 밖의 일자리. 작은 기업·임시직 등 임금과 안정성이 낮은 쪽.",
+"잡 허깅":"좋은 일자리에 있는 사람이 옮기지 않고 자리를 꽉 붙드는 현상. 그만큼 새 자리가 안 남.",
+"락인":"한번 2차 시장(낮은 일자리)에 들어가면 위로 못 올라가고 갇히는 현상.",
+"이력 효과":"경력 공백이 길어지면 경기가 좋아져도 회복이 늦어지는 현상. 상처가 오래 남는다는 뜻.",
+"전세사기":"보증금을 돌려줄 능력이나 생각 없이 전세 계약을 맺어 세입자 보증금을 떼먹는 사기.",
+"월세대출":"주택도시기금에서 청년에게 월세를 낮은 이자로 빌려주는 대출.",
+"기숙사 수용률":"재학생 가운데 학교 기숙사에 들어갈 수 있는 사람의 비율.",
+"희망하우징":"서울주택도시공사(SH)가 대학생에게 시세보다 싸게 빌려주는 기숙사형 공공임대주택.",
+"안심귀가스카우트":"밤늦게 귀가하는 시민을 2인 1조 스카우트가 집 근처까지 동행해 주는 서울시 사업.",
+"기후동행카드":"한 달 정액으로 서울 지하철·버스를 무제한 타는 서울시 교통카드. 청년은 할인.",
+"국가청년취업보장제":"김보미가 제안하는 정책. 일정 기간 안에 일자리를 못 구한 청년에게 나라가 첫 경력(일자리·일 경험)을 보장. 유럽연합의 '청년보장'과 같은 방식.",
+"청년취업보장제":"김보미가 제안하는 정책. 일정 기간 안에 일자리를 못 구한 청년에게 나라가 첫 경력(일자리·일 경험)을 보장. 유럽연합의 '청년보장'과 같은 방식.",
+"커리어뱅크":"정부 「청년일자리 회복방안」(2026.8.28)에 들어간 청년 경력 지원 사업.",
+"국정감사":"국회가 해마다 정부 기관이 일을 제대로 했는지 따져 묻는 감사.",
+"국감":"국정감사. 국회가 해마다 정부 기관이 일을 제대로 했는지 따져 묻는 감사.",
+"이슈노트":"한국은행 등이 특정 주제를 짧게 분석해 내는 보고서.",
+"부가조사":"국가데이터처(옛 통계청) 고용 조사에 덧붙여 특정 주제(고령층·청년층 등)를 따로 묻는 조사.",
+"모병제":"징병 대신 직업군인을 모집해 군대를 꾸리는 제도.",
+"노동 유연화":"채용·해고·근무 형태·임금 조정을 쉽게 하는 쪽으로 노동시장을 바꾸는 것.",
+"연공서열":"일한 햇수가 늘수록 임금·직급이 자동으로 오르는 방식.",
+"정년연장":"법정 정년(지금 60세)을 늘리는 것. 65세로 늘리는 방안이 논의 중.",
+"재개발":"낡은 동네를 도로·상하수도 같은 기반시설까지 새로 정비하는 사업.",
+"재건축":"기반시설은 두고 낡은 아파트 등을 허물고 다시 짓는 사업.",
+"일반분양":"재개발·재건축에서 조합원 몫을 빼고 일반인에게 파는 물량.",
+"비정규직":"기간제·시간제·파견·용역 등 정규직이 아닌 일자리.",
+"국가데이터처":"통계청의 바뀐 이름(2025년 정부 조직 개편). 고용·인구 통계를 냄.",
+"예산정책처":"국회예산정책처. 국회 소속으로 정부 예산과 정책을 분석하는 기관.",
+"주거사다리":"월세 → 전세 → 내 집처럼 단계를 밟아 더 나은 집으로 옮겨 가는 길.",
+"주거 사다리":"월세 → 전세 → 내 집처럼 단계를 밟아 더 나은 집으로 옮겨 가는 길.",
+"자가 비율":"자기 소유 집에 사는 가구의 비율.",
+"주거자산계좌":"공공임대에 사는 청년이 저축하면 정부·LH가 돈을 보태 주어, 나중에 집 마련 자금으로 쓰게 하자는 제안(국정감사 질의).",
+"중위소득":"모든 가구를 소득 순으로 줄 세웠을 때 한가운데 가구의 소득. 복지 지원 기준으로 씀.",
+"도약장려금":"청년일자리도약장려금. 중소기업이 취업이 어려운 청년을 정규직으로 뽑으면 나라가 인건비 일부를 지원.",
+"청년월세":"부모와 따로 사는 저소득 청년에게 나라가 월세를 월 최대 20만 원까지 지원하는 사업.",
+"구직급여":"고용보험에 든 사람이 원치 않게 일자리를 잃었을 때 받는 돈(흔히 실업급여).",
+"고노출":"AI가 대신할 수 있는 업무 비중이 높다는 뜻. 'AI 고노출 업종'은 AI 영향을 많이 받는 업종.",
+"AI에 많이 노출된 업종":"AI가 대신할 수 있는 업무 비중이 높은 업종(한국은행 분류). AI 산업 자체를 뜻하는 말이 아님.",
+"평당원":"당직이나 공직을 맡지 않은 일반 당원.",
+"최고위원":"정당의 최고 의사결정 기구인 최고위원회의 위원.",
+"적통":"정통성을 이어받은 계보.",
+"민간임대":"민간 사업자가 지어 일정 기간 빌려주는 임대주택."
+};
+var keys=Object.keys(G).sort(function(a,b){return b.length-a.length});
+var esc=function(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')};
+var RE=new RegExp(keys.map(esc).join('|'),'g'),AZ=/[A-Za-z]/;
+function okb(v,i,k){return !AZ.test(k.charAt(0))||(!AZ.test(v.charAt(i-1)||' ')&&!AZ.test(v.charAt(i+k.length)||' '))}
+var SKIP={SCRIPT:1,STYLE:1,TEXTAREA:1,INPUT:1,SELECT:1,OPTION:1,BUTTON:1,A:1,CODE:1,PRE:1,svg:1,NOSCRIPT:1};
+var BLOCK=/^(P|LI|TD|TH|H1|H2|H3|H4|H5|DD|DT|BLOCKQUOTE|SECTION|ARTICLE)$/;
+var seen=new WeakMap(), busy=false;
+function blockOf(n){var e=n.parentElement;while(e&&!BLOCK.test(e.tagName)&&e!==document.body){if(e.classList&&(e.classList.contains('row')||e.classList.contains('rh')))break;e=e.parentElement}return e||document.body}
+function skip(e){for(;e&&e!==document.body;e=e.parentElement){if(SKIP[e.tagName]||e.id==='gl-tip'||e.isContentEditable||(e.classList&&e.classList.contains('gl'))||e.id==='ys-pop')return true}return false}
+function wrap(root){
+  var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:function(n){return n.nodeValue&&RE.test(n.nodeValue)&&(RE.lastIndex=0,!skip(n.parentElement))?1:2}}),list=[],n;
+  while(n=w.nextNode())list.push(n);
+  list.forEach(function(t){
+    var b=blockOf(t),s=seen.get(b);if(!s){s={};seen.set(b,s)}
+    var v=t.nodeValue,out=document.createDocumentFragment(),last=0,m,hit=false;RE.lastIndex=0;
+    while(m=RE.exec(v)){var k=m[0];if(s[k]||!okb(v,m.index,k))continue;s[k]=1;hit=true;
+      if(m.index>last)out.appendChild(document.createTextNode(v.slice(last,m.index)));
+      var sp=document.createElement('span');sp.className='gl';sp.tabIndex=0;sp.setAttribute('data-gl',k);sp.setAttribute('aria-label',k+': '+G[k]);sp.textContent=k;out.appendChild(sp);last=m.index+k.length}
+    if(!hit)return;
+    if(last<v.length)out.appendChild(document.createTextNode(v.slice(last)));
+    t.parentNode.replaceChild(out,t);
+  });
+}
+var tip=document.createElement('div');tip.id='gl-tip';tip.setAttribute('role','tooltip');
+function show(el){var k=el.getAttribute('data-gl');tip.innerHTML='<b></b><span></span>';tip.firstChild.textContent=k;tip.lastChild.textContent=G[k]||'';
+  if(!tip.parentNode)document.body.appendChild(tip);
+  var r=el.getBoundingClientRect(),tw=tip.offsetWidth,th=tip.offsetHeight,x=Math.min(Math.max(12,r.left+r.width/2-tw/2),innerWidth-tw-12),y=r.top-th-8;if(y<8)y=r.bottom+8;
+  tip.style.left=x+'px';tip.style.top=y+'px';tip.classList.add('on');document.querySelectorAll('.gl.on').forEach(function(e){e.classList.remove('on')});el.classList.add('on')}
+function hide(){tip.classList.remove('on');document.querySelectorAll('.gl.on').forEach(function(e){e.classList.remove('on')})}
+var HOV=matchMedia('(hover:hover)').matches;
+document.addEventListener('mouseover',function(e){if(!HOV)return;var g=e.target.closest&&e.target.closest('.gl');if(g)show(g)});
+document.addEventListener('mouseout',function(e){if(!HOV)return;var g=e.target.closest&&e.target.closest('.gl');if(g&&!g.contains(e.relatedTarget))hide()});
+document.addEventListener('focusin',function(e){if(HOV&&e.target.classList&&e.target.classList.contains('gl'))show(e.target)});
+document.addEventListener('focusout',function(e){if(HOV&&e.target.classList&&e.target.classList.contains('gl'))hide()});
+document.addEventListener('click',function(e){var g=e.target.closest&&e.target.closest('.gl');if(g){e.stopPropagation();e.preventDefault();if(g.classList.contains('on')&&!HOV)hide();else show(g)}else hide()},true);
+addEventListener('scroll',hide,{passive:true});
+function run(){if(busy)return;busy=true;try{wrap(document.body)}catch(e){}busy=false}
+var q=0;new MutationObserver(function(){if(busy||q)return;q=requestAnimationFrame(function(){q=0;run()})}).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
+})();
+</script>
 </body></html>
