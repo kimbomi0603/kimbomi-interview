@@ -457,7 +457,7 @@ html.dark .pcx.g,:root[data-theme="dark"] .pcx.g{background:#16291f;border-color
 @media (min-width:600px) and (max-width:1024px){.v2 .tabs{flex-wrap:wrap;overflow:visible;row-gap:2px}.v2 .tabs a{padding:9px 12px;font-size:14.5px}.v2 .fl-steps{grid-template-columns:repeat(3,1fr)}.v2 .read{padding-left:22px;padding-right:22px}}
 /* 접은 화면(약 410px) — 편집 줄은 고정하지 않음 */
 @media (max-width:599px){.v2 .fl-bar{position:static}.v2 .fl-q{font-size:15px;padding:12px 14px}}
-</style><script>if(location.hash!=="#old")document.documentElement.classList.add("v2");</script><style>html.v2 body>header,html.v2 .kwpanel,html.v2 .botnav,html.v2 .ttsp{display:none!important}html.v2 body{background:#f2f4f8}html.v2 .layout{display:block;max-width:1040px;margin:0 auto;padding:28px 20px 56px}</style></head>
+.v2 .fl-steps.fl-s8{grid-template-columns:repeat(4,1fr)}.v2 .fl-s8 em{width:auto;height:auto;border-radius:8px;padding:2px 8px;justify-self:start;font-size:12.5px}.v2 .sh h3 span{font-variant-numeric:tabular-nums}.v2 [id^=s].sh{scroll-margin-top:120px}@media (max-width:760px){.v2 .fl-steps.fl-s8{grid-template-columns:repeat(2,1fr)}}</style><script>if(location.hash!=="#old")document.documentElement.classList.add("v2");</script><style>html.v2 body>header,html.v2 .kwpanel,html.v2 .botnav,html.v2 .ttsp{display:none!important}html.v2 body{background:#f2f4f8}html.v2 .layout{display:block;max-width:1040px;margin:0 auto;padding:28px 20px 56px}</style></head>
 <body><div id="v2top"><div class="in"><div class="brand"><span>김보미 준비노트</span></div></div></div><header>
  <div class="htop">
    <h1>🥚 김보미 인터뷰 대비 — 발언 총망라</h1>
@@ -491,7 +491,7 @@ const P=JSON.parse(document.getElementById('__payload').textContent);
 const {DATA,ARTICLES,REFS,ISSUES,MEDIAS,VOICE,SLOGANS,PLEDGES,PLEDGES11,SPEECH_PLEDGES,PROFILE,KWGROUPS,TIMELINE,CNT}=P;
 let view='yonsei', activeKw=null, q='', showAllKw=false;
 // ---- 편집 저장/복원 (localStorage) ----
-const BUILD='20261027-1835';try{['kbm_edits_v6','flowEdit1027'].forEach(k=>localStorage.removeItem(k));Object.keys(localStorage).forEach(k=>{if((/^kbm_edits_b|^flowEdit_b/).test(k)&&k.indexOf(BUILD)<0)localStorage.removeItem(k)})}catch(e){}
+const BUILD='20261027-1845';try{['kbm_edits_v6','flowEdit1027'].forEach(k=>localStorage.removeItem(k));Object.keys(localStorage).forEach(k=>{if((/^kbm_edits_b|^flowEdit_b/).test(k)&&k.indexOf(BUILD)<0)localStorage.removeItem(k)})}catch(e){}
 const LSKEY='kbm_edits_b'+BUILD;
 (function(){try{const s=localStorage.getItem(LSKEY);if(s){const ed=JSON.parse(s);ed.forEach(sd=>{const i=DATA.findIndex(d=>d.no===sd.no);if(i>-1)DATA[i]=sd});}}catch(e){}})();
 function persistEdits(){try{localStorage.setItem(LSKEY,JSON.stringify(DATA))}catch(e){}}
@@ -1581,37 +1581,42 @@ function fsteps(no){const d=byNo[no];if(!d)return [];const G=[];(d.script||[]).f
 function vFlow(){
   const ED=flGet();let out='';
   const B=(id,html)=>{if(ED[id]===null)return;out+='<div class="fl-b" data-fb="'+id+'">'+(typeof ED[id]==='string'?ED[id]:html)+'</div>'};
+  const T=(id,time,title,sub)=>B(id,'<div class="sh" id="'+id+'"><h3><span style="color:var(--accent,#2b5fd9);margin-right:.4em">'+time+'</span>'+title+'</h3><span>'+sub+'</span></div>');
+  const G3274=fsteps(3274);const gq=G3274.find(g=>g.lab==='질의 받을 때'),gc=G3274.find(g=>g.lab==='마지막 인사');
   out+='<div class="fl-bar"><button type="button" id="fl-ed">✏️ 편집하기</button><span id="fl-msg">글자를 고치거나 칸을 지울 수 있습니다. 이 브라우저에 저장됩니다.</span><button type="button" id="fl-rs" class="ghost">↩ 원래대로</button><a class="fl-learn" href="debate-yonsei-learn.html#crash">⏱ 30분 속성 코스 →</a></div>';
-  B('steps2','<div class="fl-steps">'+[['2','① 인사말','1분'],['3','② 의제 1 · 주거','첫 발언 → 실거주'],['4','③ 의제 2 · 일자리','첫 발언 → 정년'],['5','④ 학생 질문','있으면'],['6','⑤ 질의 · 마지막 인사','끝'],['0','참석자 · 체크','맨 아래']].map(x=>'<a href="#fl-'+x[0]+'"><b>'+x[1]+'</b><span>'+x[2]+'</span></a>').join('')+'</div>');
-  B('how','<div class="callout r"><b>진행 방식(10.26 황금별 님 통화 확인)</b> 사회자가 의제를 <u>하나씩</u> 설명·발제 → 그 의제로 약 15분 자유토론 → 두 번째 의제도 같은 방식. 발언 순서·시간 배정 없음, 손 들고 말하는 자유토론. 15분을 셋이 나누면 한 사람 5분 남짓 → <b>한 번에 30초~1분</b>. 18:40까지 도착(마이크 점검).</div>');
-  B('h-greet','<div class="sh" id="fl-2"><h3>① 시작 · 인사말 1분</h3><span>사회자가 소개 시간을 주면 맨 처음</span></div>');
+  B('steps3','<div class="fl-steps fl-s8">'+[['s0','19:00','개회 · 소개 · 인사'],['s1','19:05','의제1 발제 → 기조 5분'],['s2','19:25','상호토론 2분씩'],['s3','19:40','질의응답'],['s4','19:50','의제2 발제 → 기조 5분'],['s5','20:10','상호토론 2분씩'],['s6','20:25','질의응답'],['s7','20:40','마무리 발언 3분']].map(x=>'<a role="button" tabindex="0" style="cursor:pointer" onclick="event.preventDefault();event.stopPropagation();var e=document.getElementById(\''+x[0]+'\');if(e)window.scrollTo(0,e.getBoundingClientRect().top+window.pageYOffset-150)"><em>'+x[1]+'</em><b>'+x[2]+'</b></a>').join('')+'</div>');
+  B('how3','<div class="callout r"><b>당일 식순(현장 배포본)</b> 의제마다 <u>발제 5분 → 기조발언 각 5분 → 상호토론 15분(한 번에 2분, 타이머) → 청중 질의응답 10분</u>. 끝에 토론자 마무리 발언 각 3분. 장소 연희관 401호.</div>');
+  T('s0','19:00~19:05','개회 · 토론자 소개','사회자가 소개하면 인사');
   B('greet','<article class="read">'+paras(byNo[3209])+'</article>');
-  B('h-a1','<div class="sh" id="fl-3"><h3>② 의제 1 · 청년 주거</h3></div>');
+  B('greet-note','<div class="fl-lab">시간을 짧게 주면 → 첫 두 문장과 마지막 한 문장만</div>');
+  T('s1','19:05~19:25','의제 1 · 주거 — 발제 → 기조발언 5분','사회자 발제(5분) 뒤 토론자 3명 각 5분');
   B('q1',qbox('[의제 1] 청년 주거 환경, 무엇을 우선적으로 바꿔야 하는가?',QSRC.q1));
-  B('a1-first','<div class="fl-lab">사회자 발제가 끝나면 · 첫 발언 1분(압축)</div><article class="read">'+fpara(cut3285('── 의제 1 · 청년 주거 · 첫 1분','──'))+'</article>');
-  B('a1-sh','<div class="fl-lab">이어서 풀어 말하기 · 공감 → 지금 정책 → 내 입장 → 제안 <a href="#card/3293">카드 3293</a></div>');
-  fsteps(3293).forEach((g,i)=>B('a1b-s'+i,'<article class="read fl-step"><div class="fl-sl">'+E(g.lab)+'</div>'+fpara(g.items)+'</article>'));
+  B('a1-cut','<div class="callout"><b>기조발언 5분</b> 아래 4단계를 그대로 읽으면 약 6~7분. 넘칠 것 같으면 <u>③의 희망하우징 문단</u>과 <u>④ 다섯째 통학</u>을 빼면 5분.</div>');
+  fsteps(3293).forEach((g,i)=>B('a1c-s'+i,'<article class="read fl-step"><div class="fl-sl">'+E(g.lab)+'</div>'+fpara(g.items)+'</article>'));
+  T('s2','19:25~19:40','의제 1 · 상호토론','한 번에 2분 · 사회자 타이머');
   B('a1-live','<div class="fl-lab">실거주 의무를 물으면 · 확정(10.27 18시) <a href="#card/3292">카드 3292</a></div><article class="read">'+paras(byNo[3292])+'</article>');
-  B('a1b-30','<div class="fl-lab">토론 중 골라 쓰는 30초 카드</div><article class="read fl-30">'+fpara(cut3285('── 의제 1 · 30초 카드','──'))+'</article>');
-  B('a1-hit2','<div class="fl-lab">이런 말이 나오면 → 받아치기</div><div class="fl-cs">'+[3297,3211,3234,3295,3222,3223].map(n=>fcard(n)).join('')+'</div>');
-  B('h-a2','<div class="sh" id="fl-4"><h3>③ 의제 2 · 청년 일자리</h3></div>');
+  B('a1c-30','<div class="fl-lab">2분 안에 골라 쓰는 30초 카드</div><article class="read fl-30">'+fpara(cut3285('── 의제 1 · 30초 카드','──'))+'</article>');
+  B('a1c-hit','<div class="fl-lab">상대가 이렇게 나오면 → 받아치기</div><div class="fl-cs">'+[3211,3234,3295,3222,3223,3297].map(n=>fcard(n)).join('')+'</div>');
+  T('s3','19:40~19:50','의제 1 · 질의응답','청중 질문 → 토론자 답변');
+  if(gq)B('q-open','<div class="fl-lab">첫 질문 받기 전에 한마디</div><article class="read">'+fpara(gq.items)+'</article>');
+  B('qna1','<div class="fl-cs">'+[3241,3242,3243,3244,3245,3206,3207].map(n=>fcard(n)).join('')+'</div>');
+  T('s4','19:50~20:10','의제 2 · 일자리 — 발제 → 기조발언 5분','사회자 발제(5분) 뒤 토론자 3명 각 5분');
   B('q2',qbox('[의제 2] 열심히 준비해도 취업이 어려운 사회, 청년 일자리 정책은 어디서부터 바뀌어야 하는가?',QSRC.q2));
-  B('a2b-first','<div class="fl-lab">사회자 발제가 끝나면 · 첫 발언 1분(압축)</div><article class="read">'+fpara(cut3285('── 의제 2 · 청년 일자리 · 첫 1분','──'))+'</article>');
-  B('a2-sh','<div class="fl-lab">이어서 풀어 말하기 · 공감 → 지금 정책 → 내 입장 → 제안 <a href="#card/3294">카드 3294</a></div>');
-  fsteps(3294).forEach((g,i)=>B('a2b-s'+i,'<article class="read fl-step"><div class="fl-sl">'+E(g.lab)+'</div>'+fpara(g.items)+'</article>'));
+  B('a2-cut','<div class="callout"><b>기조발언 5분</b> 아래 4단계를 그대로 읽으면 약 5분.</div>');
+  fsteps(3294).forEach((g,i)=>B('a2c-s'+i,'<article class="read fl-step"><div class="fl-sl">'+E(g.lab)+'</div>'+fpara(g.items)+'</article>'));
+  T('s5','20:10~20:25','의제 2 · 상호토론','한 번에 2분 · 사회자 타이머');
   B('a2-ret','<div class="fl-lab">정년 연장을 물으면 · 확정(10.27 18시) <a href="#card/3217">카드 3217</a></div><article class="read">'+paras(byNo[3217])+'</article>');
-  B('a2b-30','<div class="fl-lab">토론 중 골라 쓰는 30초 카드</div><article class="read fl-30">'+fpara(cut3285('── 의제 2 · 30초 카드','──'))+'</article>');
-  B('a2-hit2','<div class="fl-lab">이런 말이 나오면 → 받아치기</div><div class="fl-cs">'+[3297,3291,3216,3282,3283,3284,3221,3224].map(n=>fcard(n)).join('')+'</div>');
-  B('h-q','<div class="sh" id="fl-5"><h3>④ 학생 질문이 나오면</h3><span>누르면 답변 전문</span></div>');
-  B('qna','<div class="fl-cs">'+[3241,3242,3243,3206,3207,3244,3245].map(n=>fcard(n)).join('')+'</div>');
-  B('h-c2','<div class="sh" id="fl-6"><h3>⑤ 질의 받을 때 · 마지막 인사</h3><span>질의 받을 때 → 마지막 인사 · 시간 없으면 맨 아래 한 줄</span></div>');
-  B('close1','<article class="read">'+paras(byNo[3274])+'</article>');
-  B('close2','<article class="read">'+fpara(cut3285('── 끝날 때 ──',null))+'</article>');
-  B('end','<div class="callout"><b>— 여기까지가 토론 순서 끝 —</b> 아래는 참고(참석자·대주제 배경·체크리스트).</div>');
+  B('a2c-30','<div class="fl-lab">2분 안에 골라 쓰는 30초 카드</div><article class="read fl-30">'+fpara(cut3285('── 의제 2 · 30초 카드','──'))+'</article>');
+  B('a2c-hit','<div class="fl-lab">상대가 이렇게 나오면 → 받아치기</div><div class="fl-cs">'+[3291,3216,3282,3283,3284,3221,3224,3297].map(n=>fcard(n)).join('')+'</div>');
+  T('s6','20:25~20:35','의제 2 · 질의응답','청중 질문 → 토론자 답변');
+  B('qna2','<div class="fl-cs">'+[3241,3242,3243,3244,3245,3206,3207].map(n=>fcard(n)).join('')+'</div>');
+  T('s7','20:40~21:00','토론자 마무리 발언 3분','→ 사회자 마무리');
+  if(gc)B('close3','<article class="read fl-step"><div class="fl-sl">마지막 인사 · 3분</div>'+fpara(gc.items)+'</article>');
+  B('close2','<div class="fl-lab">시간이 없으면 이 한 줄</div><article class="read">'+fpara(cut3285('── 끝날 때 ──',null))+'</article>');
+  B('end','<div class="callout"><b>— 여기까지 식순 끝 —</b> 아래는 참고(참석자·대주제 배경·체크리스트).</div>');
   B('h-ppl','<div class="sh" id="fl-0"><h3>참석자 현황</h3><span>나이는 10.27 기준 만 나이</span></div>');
   out+='<div class="fl-ppl">';PEOPLE.forEach((p,i)=>B('p'+i,'<div class="fl-p" style="--pc:'+p.c+'"><div class="fl-ph"><b>'+E(p.n)+'</b>'+(p.age?'<span class="age">'+E(p.age)+'</span>':'')+'</div><div class="fl-role">'+E(p.role)+'</div>'+(p.ageSrc?'<div class="fl-src">'+E(p.ageSrc)+'</div>':'')+'<ul>'+p.bio.map(b=>'<li>'+E(b)+'</li>').join('')+'</ul>'+(p.say.length?'<div class="fl-say"><b>최근 발언</b>'+p.say.map(s=>'<p><em>'+E(s[0])+'</em>'+E(s[1])+'<small>'+E(s[2])+'</small></p>').join('')+'</div>':'')+(p.how?'<div class="fl-how">'+E(p.how)+'</div>':'')+'</div>'));out+='</div>';
   B('qbg','<div class="fl-q"><div class="fl-ql">학생회가 보낸 대주제 선정 배경(10.25 안내 원문)</div>'+E(QSRC.bg)+'</div>');
-  B('stage',stage(false));
   B('h-k','<div class="sh" id="fl-1"><h3>들어가기 전 체크</h3></div>');
   B('check','<article class="read">'+paras(byNo[3272])+'</article>');
   B('more','<div class="fl-more">더 볼 것: <a href="#event/rival">상대 받아치기 전체</a> · <a href="#event/qna">예상 질문 전체</a> · <a href="#event/parties">정당 비교</a> · <a href="#event/files">첨부자료 요약</a> · <a href="#event/facts">숫자</a> · <a href="debate-yonsei-learn.html">말과 근거 학습</a></div>');
