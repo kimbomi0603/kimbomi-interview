@@ -412,6 +412,28 @@ html.dark .pcx.g,:root[data-theme="dark"] .pcx.g{background:#16291f;border-color
 .nstrip{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:4px 0 12px}@media(max-width:900px){.nstrip{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.nstrip{grid-template-columns:repeat(2,1fr)}}
 .nstrip a{display:block;background:var(--card,#fff);border:1px solid var(--line,#e3e7ee);border-radius:12px;padding:10px 12px;text-decoration:none;color:inherit}.nstrip b{display:block;font-size:22px;letter-spacing:-.03em;color:var(--navy,#15264a)}.nstrip span{display:block;font-size:12.5px;color:#6b7482;line-height:1.35;margin-top:2px}
 .cite{margin:-4px 0 12px;font-size:12px;line-height:1.5;color:#8a93a3;font-family:inherit;letter-spacing:-.01em}
+
+.v2 .fl-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:-14px 0 18px}
+.v2 .fl-steps a{display:flex;flex-direction:column;gap:2px;padding:12px;border:1px solid var(--ln);border-radius:12px;background:#fff;text-decoration:none;color:var(--ink)}
+.v2 .fl-steps em{font-style:normal;width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:800;display:grid;place-items:center}
+.v2 .fl-steps b{font-size:15px;letter-spacing:-.03em}.v2 .fl-steps span{font-size:12.5px;color:var(--mut)}
+.v2 .fl-ppl{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.v2 .fl-p{background:#fff;border:1px solid var(--ln);border-top:5px solid var(--pc);border-radius:14px;padding:16px 18px}
+.v2 .fl-ph{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.v2 .fl-ph b{font-size:22px;letter-spacing:-.04em}
+.v2 .fl-ph .age{font-size:15px;font-weight:800;color:var(--pc);background:color-mix(in srgb,var(--pc) 12%,#fff);padding:2px 9px;border-radius:999px}
+.v2 .fl-role{font-size:14px;font-weight:700;color:var(--ink2,#465163);margin-top:4px}.v2 .fl-src{font-size:12px;color:var(--mut);margin-top:2px}
+.v2 .fl-p ul{margin:10px 0 0;padding-left:18px;font-size:14.5px;line-height:1.6}
+.v2 .fl-say{margin-top:10px;background:#f6f8fc;border-radius:10px;padding:10px 12px;font-size:14px}.v2 .fl-say b{font-size:12.5px;color:var(--mut)}
+.v2 .fl-say p{margin:5px 0 0;line-height:1.55}.v2 .fl-say em{font-style:normal;font-weight:800;color:var(--pc);margin-right:6px}.v2 .fl-say small{display:block;color:var(--mut);font-size:12px}
+.v2 .fl-how{margin-top:10px;font-size:13.5px;color:#7a4b00;background:#fff7e0;border-radius:10px;padding:8px 12px;line-height:1.55}
+.v2 .fl-lab{margin:18px 0 8px;font-size:14px;font-weight:800;color:var(--navy2)}
+.v2 .fl-30 p.sp{font-size:15.5px}
+.v2 .fl-cs{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.v2 .fl-c{display:block;background:#fff;border:1px solid var(--ln);border-radius:12px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.v2 .fl-c b{display:block;font-size:15px;letter-spacing:-.03em;line-height:1.45}.v2 .fl-c span{display:block;font-size:13.5px;color:var(--ink2,#465163);margin-top:5px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.v2 .fl-c em{display:block;font-style:normal;font-size:12px;color:var(--navy2);margin-top:6px;font-weight:700}
+.v2 .fl-more{margin:30px 0 10px;font-size:14px;color:var(--mut)}.v2 .fl-more a{color:var(--navy2);font-weight:700}
+@media (max-width:760px){.v2 .fl-steps{grid-template-columns:repeat(3,1fr)}.v2 .fl-ppl,.v2 .fl-cs{grid-template-columns:1fr}}
 </style><script>if(location.hash!=="#old")document.documentElement.classList.add("v2");</script><style>html.v2 body>header,html.v2 .kwpanel,html.v2 .botnav,html.v2 .ttsp{display:none!important}html.v2 body{background:#f2f4f8}html.v2 .layout{display:block;max-width:1040px;margin:0 auto;padding:28px 20px 56px}</style></head>
 <body><div id="v2top"><div class="in"><div class="brand"><span>김보미 준비노트</span></div></div></div><header>
  <div class="htop">
@@ -1398,19 +1420,21 @@ render();
 const E=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const EVENT={title:'연세대 정치외교학과 여야정책토론회',when:'2026-10-27T19:00:00+09:00',date:'10.27(화) 저녁 7시~9시',place:'연세대 연희관 401호',arrive:'18:40 도착',host:'제62대 정치외교학과 학생회 <이륙>',panel:'김성열(전 개혁신당 최고위원, 10.22 이준석 의원 대신 참석 통보) · 박태훈(진보당 청년진보당 전국대학생위원회 준비위원장) · 김보미',agenda:['청년 주거 환경, 무엇을 우선적으로 바꿔야 하는가','열심히 준비해도 취업이 어려운 사회, 청년 일자리 정책은 어디서부터']};
 const EVT=[
- ['overview','개요',null],
- ['live','실전 운영판',[[ '① 맨 처음 · 인사말 (30초판은 아래 운영판 첫 줄)',[3209]],[ '② 진행 방식 · 의제별 첫 1분 · 30초 카드',[3285]]]],
+ ['flow','① 한눈에 보기(순서대로)',null],
+ ['greet','② 인사말',[[ '인사말 · 1분 전문 (30초판은 한눈에 보기 맨 위)',[3209]]]],
+ ['agenda1','③ 의제 1 · 주거',[[ '답변 원고 · 보충',[3275,3204,3292,3277,3278]]]],
+ ['agenda2','④ 의제 2 · 일자리',[[ '답변 원고 · 보충',[3276,3290,3205,3210,3279]],['이번 국정감사에서 나온 지적',[3280]]]],
+ ['rival','⑤ 상대 받아치기',[[ '개혁신당 — 김성열 전 최고위원(이준석 의원 대신)',[3281,3282,3283,3284,3211,3212,3213,3214,3215,3216,3217,3219,3291,3218]],['박태훈 위원장',[3221,3222,3223,3224,3225]],['민주당 지적 — 틀린 건 틀렸다',[3231,3232,3233,3234,3235,3236,3237,3238,3239]]]],
+ ['qna','⑥ 학생 질문',[[ '학생회가 묻고 싶다고 한 것',[3206,3207]],[ '학생 질문',[3241,3242,3243,3244,3245,3246,3247,3248]],['정외과 질문 — 정당·정부형태·청년 정치',[3251,3252,3253,3254,3255]]]],
+ ['close','⑦ 마무리 · 당일',[[ '마무리',[3274]],['행사 개요 · 당일 체크 · 숫자 정정',[3271,3272,3273]]]],
+ ['live','실전 운영판 전체',[[ '진행 방식 · 인사말 30초 · 의제별 첫 1분 · 30초 카드',[3285]]]],
  ['files','📎 첨부자료',[[ '김보미가 보낸 의제 자료 — 줄을 누르면 핵심 요약',[3286,3287,3288,3289]]]],
  ['parties','정당 비교',null],
- ['keynote','기조발언',[[ '원고',[3209,3201,3203,3202,3208]]]],
- ['agenda','의제 답변',[[ '의제 1 · 주거',[3275,3204,3292,3277,3278]],['의제 2 · 일자리',[3276,3290,3205,3210,3279]],['이번 국정감사에서 나온 지적',[3280]],['학생회가 묻고 싶다고 한 것',[3206,3207]]]],
- ['rival','상대 대비',[[ '개혁신당 — 김성열 전 최고위원(이준석 의원 대신)',[3281,3282,3283,3284,3211,3212,3213,3214,3215,3216,3217,3219,3291,3218]],['박태훈 위원장',[3221,3222,3223,3224,3225]],['민주당 지적 — 틀린 건 틀렸다',[3231,3232,3233,3234,3235,3236,3237,3238,3239]]]],
- ['qna','예상 질문',[[ '학생 질문',[3241,3242,3243,3244,3245,3246,3247,3248]],['정외과 질문 — 정당·정부형태·청년 정치',[3251,3252,3253,3254,3255]]]],
  ['facts','숫자·정책·사례',[[ '바로 꺼내 쓰는 것',[3261,3262,3263,3264]]]],
- ['day','당일 체크',[[ '행사·당일',[3271,3272,3273,3274]]]]
+ ['keynote','기조발언 원고(3분)',[[ '원고',[3201,3203,3202,3208]]]]
 ];
 const byNo={};DATA.forEach(d=>byNo[d.no]=d);
-let sub='overview',arg='';
+let sub='flow',arg='';
 const mtype=m=>/토론회/.test(m)?['토론회','r']:/현안|교차점검/.test(m)?['준비·점검','y']:/인사말|기자회견|성명/.test(m)?['연설·회견','p']:/서면|통화|조선일보|한겨레21|한겨레$|이데일리|문화일보|머니투데이|신동아|경향/.test(m)?['신문·서면','g']:['방송·영상',''];
 const label=q=>{const m=String(q||'').match(/^【([^】]+)】\s*(.*)$/);return m?[m[1],m[2]||m[1]]:['',q||'']};
 const gist=d=>{const s=(d.script||[]);const k=s.find(p=>p.startsWith('★'))||s[0]||((d.quotes||[])[0]||[])[1]||'';return k.replace(/^★\s*/,'')};
@@ -1490,7 +1514,7 @@ function stage(full){
   let h='<section class="stage" aria-label="다음 일정"><div><div class="when">10월 27일 화요일 저녁 7시</div><div class="what">'+E(EVENT.title)+'</div><div class="where">'+E(EVENT.place)+' · '+E(EVENT.arrive)+' · 주최 '+E(EVENT.host)+'</div></div><div class="dd"><b>'+d+'</b><span>'+left+'</span></div>'+
    '<div class="who"><a href="#event/parties/dem"><i style="background:#6f9be0"></i><span><b>김보미</b> <small>더불어민주당</small></span></a><a href="#event/parties/ref"><i style="background:var(--ref)"></i><span><b>김성열</b> <small>전 개혁신당 최고위원</small></span></a><a href="#event/parties/prg"><i style="background:#ff5a62"></i><span><b>박태훈</b> <small>진보당 청년진보당</small></span></a></div>'+
    '<div class="ag"><div><b>의제 1</b>'+E(EVENT.agenda[0])+'</div><div><b>의제 2</b>'+E(EVENT.agenda[1])+'</div></div>';
-  if(full)h+='<div class="steps">'+[['live/3285','실전 운영판: 첫 1분·30초 카드'],['keynote','인사말·원고 소리 내 읽기'],['learn','말과 근거 학습(새로 정리)'],['parties','정당별 입장 익히기'],['rival','상대 공격 받아치기'],['qna','학생 질문 대비'],['day','당일 체크']].map((x,i)=>'<a href="'+(x[0]==='learn'?'debate-yonsei-learn.html':x[0]==='study'?'#study':'#event/'+x[0])+'"><em>'+(i+1)+'</em>'+x[1]+'</a>').join('')+'</div>';
+  if(full)h+='<div class="steps">'+[['flow','한눈에 보기: 토론 순서대로 한 화면'],['live/3285','실전 운영판: 첫 1분·30초 카드'],['learn','말과 근거 학습(새로 정리)'],['parties','정당별 입장 익히기'],['rival','상대 공격 받아치기'],['qna','학생 질문 대비'],['day','당일 체크']].map((x,i)=>'<a href="'+(x[0]==='learn'?'debate-yonsei-learn.html':x[0]==='study'?'#study':'#event/'+x[0])+'"><em>'+(i+1)+'</em>'+x[1]+'</a>').join('')+'</div>';
   return h+'</section>';
 }
 function vHome(){
@@ -1509,13 +1533,50 @@ function vHome(){
   h+='<div class="sh"><h3>최근 인터뷰</h3><a href="#archive">전체 '+medias.length+'곳</a></div><div class="grid g4">'+MEDIAS.slice(0,4).map(md=>{const n=DATA.filter(d=>d.media===md).length;const t=mtype(md);return '<a class="tile" href="#media/'+encodeURIComponent(md)+'"><span class="badge '+t[1]+'">'+t[0]+'</span><h4>'+E(md)+'</h4><span class="n">'+n+'건</span></a>'}).join('')+'</div>';
   main().innerHTML=h;bindSearch();
 }
+/* ---------- 한눈에 보기: 토론회 순서대로 한 화면 (10.27 낮) ---------- */
+const PEOPLE=[
+ {n:'김보미',c:'#2b5fd9',role:'더불어민주당 평당원 (본인)',age:'',bio:['전 제9대 강진군의회 의장(전국 최연소 기초의회 의장)','전 제8·9대 강진군의원(8년)','전 더불어민주당 당대표 예비후보(2026 전당대회)','현 재정주권시민행동 공동대표 · 브레인파크 연구위원'],say:[],how:''},
+ {n:'김성열',c:'#e8762d',role:'전 개혁신당 최고위원 · 이준석 의원 대신 참석(10.22 통보)',age:'만 44세 (1982.7.18생)',ageSrc:'생년월일은 인물 프로필 정리 글 기준(2차 출처)',bio:['연세대 경영학과 졸업 — 토론장이 모교','민주당 쪽 국회 보좌진 출신(2023년 노웅래 의원 보좌진, 경향신문 보도)','2024년 개혁신당 합류: 수석대변인 · 수석최고위원 · 지명직 최고위원','2026.6.3 하남갑 국회의원 보궐선거 개혁신당 후보'],
+  say:[['10.19','추미애 지사를 두고 "공천을 준 민주당이 책임을 져야 한다"','뉴스핌 2026.10.19'],['5.19','하남갑 출마하며 "경제정책 전문가를 선택해 달라"','머니투데이 2026.5.19'],['4.9','추경을 두고 "불난 집에 기름을 붓는 격", 선심성 지출부터 줄여야','개혁신당 최고위원회의 2026.4.9']],
+  how:'호칭 "김성열 전 최고위원님". 모교 선배로 가볍게 인사. 민주당을 안에서 겪은 사람이라 민주당 비판이 날카로움 → 인정하고 대안으로.'},
+ {n:'박태훈',c:'#e5484d',role:'진보당 전국대학생준비위원장(학생회 안내 기준)',age:'1992년생 · 만 33세 또는 34세',ageSrc:'생일은 공개 자료에서 확인되지 않음',bio:['숭실대 정치외교학과(학생회장)','진보당 부대변인 · 정책국장, 청년진보당 집행위원장','2025년 일베 폐쇄 서명 11만 명을 모아 대통령실에 전달','2026.9 이재명 대통령이 그의 지지 글에 직접 화답'],
+  say:[['6.21','"진보가 집권해도 청년 삶은 안 바뀐다", 민주진보 진영이 기득권이 됐다','경향신문 2026.6.21'],['지선 공약','지역별 장기공공임대 20% 의무화','참여연대 2026 지선 주거공약 평가']],
+  how:'호칭 "박태훈 위원장님". 공공임대·세입자 보호 방향이 겹침 → 개혁신당과 1대2가 되면 같은 편. 민주당 비판은 방어하지 말고 인정.'},
+ {n:'주최 · 사회',c:'#6b7280',role:'제62대 정치외교학과 학생회 <이륙> 미래진로국',age:'',bio:['학생회장 김민수(정외 24) · 부학생회장 전시은(정외 25)','미래진로국 황금별(9월부터 연락 담당)','사회자 이름은 당일 확인','청중: 정외과 학부생 약 50명'],say:[],how:'여야정책토론회는 <이륙>의 미이행 공약이었음 → 학생회에 꼭 성공시켜야 하는 행사.'}
+];
+function cut3285(from,to){const L=(byNo[3285]||{}).script||[],C=(byNo[3285]||{}).cite||[];const a=L.findIndex(x=>x.indexOf(from)>=0);if(a<0)return [];let b=to?L.findIndex((x,i)=>i>a&&x.indexOf(to)>=0):L.length;if(b<0)b=L.length;return L.slice(a+1,b).map((p,i)=>[p,C[a+1+i]||''])}
+function fpara(arr){return arr.map(([p,c])=>para(p)+citeP(c)).join('')}
+function fcard(no,why){const d=byNo[no];if(!d)return '';const [lb,tt]=label(d.q);return '<a class="fl-c" href="#card/'+no+'"><b>'+E(tt||lb)+'</b><span>'+E(why||gist(d))+'</span><em>#'+no+' →</em></a>'}
+function vFlow(){
+  let h=stage(false);
+  h+='<div class="fl-steps">'+[['1','도착 18:40','마이크 점검'],['2','시작 · 인사말','30초'],['3','의제 1 · 주거','사회자 발제 → 15분 자유토론'],['4','의제 2 · 일자리','사회자 발제 → 15분 자유토론'],['5','학생 질문','있으면'],['6','마무리','한 줄 또는 1분']].map(x=>'<a href="#fl-'+x[0]+'"><em>'+x[0]+'</em><b>'+x[1]+'</b><span>'+x[2]+'</span></a>').join('')+'</div>';
+  h+='<div class="callout r"><b>진행 방식(10.26 황금별 님 통화 확인)</b> 사회자가 의제를 <u>하나씩</u> 설명·발제 → 그 의제로 약 15분 자유토론 → 두 번째 의제도 같은 방식. 발언 순서·시간 배정 없음, 손 들고 말하는 자유토론. 15분을 셋이 나누면 한 사람 5분 남짓 → <b>한 번에 30초~1분</b>.</div>';
+  h+='<div class="sh" id="fl-0"><h3>참석자 현황</h3><span>나이는 10.27 기준 만 나이</span></div><div class="fl-ppl">'+PEOPLE.map(p=>'<div class="fl-p" style="--pc:'+p.c+'"><div class="fl-ph"><b>'+E(p.n)+'</b>'+(p.age?'<span class="age">'+E(p.age)+'</span>':'')+'</div><div class="fl-role">'+E(p.role)+'</div>'+(p.ageSrc?'<div class="fl-src">'+E(p.ageSrc)+'</div>':'')+'<ul>'+p.bio.map(b=>'<li>'+E(b)+'</li>').join('')+'</ul>'+(p.say.length?'<div class="fl-say"><b>최근 발언</b>'+p.say.map(s=>'<p><em>'+E(s[0])+'</em>'+E(s[1])+'<small>'+E(s[2])+'</small></p>').join('')+'</div>':'')+(p.how?'<div class="fl-how">'+E(p.how)+'</div>':'')+'</div>').join('')+'</div>';
+  h+='<div class="sh" id="fl-2"><h3>② 시작 · 인사말</h3><span>사회자가 소개 시간을 주면 · 30초</span><a href="#card/3209">1분 전문 →</a></div><article class="read">'+fpara(cut3285('── 인사말','──'))+'</article>';
+  h+='<div class="sh" id="fl-3"><h3>③ 의제 1 · 청년 주거</h3><span>"무엇을 우선적으로 바꿔야 하는가"</span></div>';
+  h+='<div class="fl-lab">사회자 발제가 끝나면 · 내 첫 1분</div><article class="read">'+fpara(cut3285('── 의제 1 · 청년 주거 · 첫 1분','──'))+'</article>';
+  h+='<div class="fl-lab">토론 중 골라 쓰는 30초 카드</div><article class="read fl-30">'+fpara(cut3285('── 의제 1 · 30초 카드','──'))+'</article>';
+  h+='<div class="fl-lab">이런 말이 나오면 → 받아치기</div><div class="fl-cs">'+[[3211,''],[3234,''],[3292,''],[3222,''],[3223,'']].map(x=>fcard(x[0],x[1])).join('')+'</div>';
+  h+='<div class="sh" id="fl-4"><h3>④ 의제 2 · 청년 일자리</h3><span>"어디서부터 바뀌어야 하는가"</span></div>';
+  h+='<div class="fl-lab">사회자 발제가 끝나면 · 내 첫 1분</div><article class="read">'+fpara(cut3285('── 의제 2 · 청년 일자리 · 첫 1분','──'))+'</article>';
+  h+='<div class="fl-lab">토론 중 골라 쓰는 30초 카드</div><article class="read fl-30">'+fpara(cut3285('── 의제 2 · 30초 카드','──'))+'</article>';
+  h+='<div class="fl-lab">이런 말이 나오면 → 받아치기</div><div class="fl-cs">'+[3291,3282,3283,3284,3221,3224].map(n=>fcard(n)).join('')+'</div>';
+  h+='<div class="sh" id="fl-5"><h3>⑤ 학생 질문이 나오면</h3><span>줄을 누르면 답변 전문</span></div><div class="fl-cs">'+[3241,3242,3243,3206,3207,3244,3245].map(n=>fcard(n)).join('')+'</div>';
+  h+='<div class="sh" id="fl-6"><h3>⑥ 마무리</h3><span>1분이 주어지면 · 안 주어지면 맨 아래 한 줄</span></div><article class="read">'+paras(byNo[3274])+'</article><article class="read">'+fpara(cut3285('── 끝날 때 ──',null))+'</article>';
+  h+='<div class="sh" id="fl-1"><h3>들어가기 전 체크</h3></div><article class="read">'+paras(byNo[3272])+(byNo[3272].warn?'<div class="wr">⚠️ '+E(byNo[3272].warn)+'</div>':'')+'</article>';
+  h+='<div class="fl-more">더 볼 것: <a href="#event/rival">상대 받아치기 전체</a> · <a href="#event/qna">예상 질문 전체</a> · <a href="#event/parties">정당 비교</a> · <a href="#event/files">첨부자료 요약</a> · <a href="#event/facts">숫자</a> · <a href="debate-yonsei-learn.html">말과 근거 학습</a></div>';
+  return h;
+}
+
 /* ---------- 이번 토론회 ---------- */
 function vEvent(){
-  if(!EVT.some(x=>x[0]===sub))sub='overview';
+  if(!EVT.some(x=>x[0]===sub))sub='flow';
   let h='<div class="crumb"><a href="#home">홈</a> › 10.27 토론회</div><h1 class="pt">연세대 정치외교학과 여야정책토론회</h1><p class="lead">줄을 누르면 답변 전문과 근거가 펼쳐집니다. 노란 형광펜이 꼭 할 말, 흐린 괄호 문장은 시간이 모자라면 뺄 말입니다.</p>';
   h+='<nav class="tabs" aria-label="토론 준비">'+EVT.map(x=>{const n=x[2]?x[2].reduce((a,g)=>a+g[1].length,0):0;return '<a href="#event/'+x[0]+'" class="'+(sub===x[0]?'on':'')+'">'+x[1]+(n?'<span>'+n+'</span>':'')+'</a>'}).join('')+'</nav>';
   const T=EVT.find(x=>x[0]===sub);
-  if(sub==='overview'){
+  if(sub==='flow'){
+    h+=vFlow();
+  }else if(sub==='overview'){
     h+=stage(true);
     h+='<div class="sh"><h3>세 문장만 기억하기</h3></div><div class="msg">청년은 방을 얻을 때도, 첫 일자리를 얻을 때도 보증금을 냅니다. 경력이라는 보증금입니다.<small>기조발언의 중심 비유</small></div><div class="msg">정답은 정당에 있지 않습니다. 국민에게 있습니다. 틀린 건 우리 당이어도 틀렸다고 하겠습니다.<small>민주당 지적이 나올 때의 원칙</small></div><div class="msg">공공이 가진 방부터, 첫 일자리 보증금은 나라가, 청년 예산은 청년이 직접.<small>세 가지 제안</small></div>';
     h+='<div class="sh"><h3>숫자 여섯 개</h3><span>헷갈릴 때 여기만</span></div><div class="nstrip">'+NUM6.map(n=>'<a href="#card/'+n[2]+'"><b>'+n[0]+'</b><span>'+n[1]+'</span></a>').join('')+'</div>';
