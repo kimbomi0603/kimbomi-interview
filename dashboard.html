@@ -491,7 +491,7 @@ const P=JSON.parse(document.getElementById('__payload').textContent);
 const {DATA,ARTICLES,REFS,ISSUES,MEDIAS,VOICE,SLOGANS,PLEDGES,PLEDGES11,SPEECH_PLEDGES,PROFILE,KWGROUPS,TIMELINE,CNT}=P;
 let view='yonsei', activeKw=null, q='', showAllKw=false;
 // ---- 편집 저장/복원 (localStorage) ----
-const BUILD='20261027-1855';try{['kbm_edits_v6','flowEdit1027'].forEach(k=>localStorage.removeItem(k));Object.keys(localStorage).forEach(k=>{if((/^kbm_edits_b|^flowEdit_b/).test(k)&&k.indexOf(BUILD)<0)localStorage.removeItem(k)})}catch(e){}
+const BUILD='20261027-1900';try{['kbm_edits_v6','flowEdit1027'].forEach(k=>localStorage.removeItem(k));Object.keys(localStorage).forEach(k=>{if((/^kbm_edits_b|^flowEdit_b/).test(k)&&k.indexOf(BUILD)<0)localStorage.removeItem(k)})}catch(e){}
 const LSKEY='kbm_edits_b'+BUILD;
 (function(){try{const s=localStorage.getItem(LSKEY);if(s){const ed=JSON.parse(s);ed.forEach(sd=>{const i=DATA.findIndex(d=>d.no===sd.no);if(i>-1)DATA[i]=sd});}}catch(e){}})();
 function persistEdits(){try{localStorage.setItem(LSKEY,JSON.stringify(DATA))}catch(e){}}
@@ -1560,12 +1560,12 @@ function vHome(){
 /* ---------- 한눈에 보기: 토론회 순서대로 한 화면 (10.27 낮) ---------- */
 const PEOPLE=[
  {n:'김보미',c:'#2b5fd9',role:'더불어민주당 평당원 (본인)',age:'만 36세 (1989.12.4생)',bio:['전 제9대 강진군의회 의장(전국 최연소 기초의회 의장)','전 제8·9대 강진군의원(8년)','전 더불어민주당 당대표 예비후보(2026 전당대회)','현 재정주권시민행동 공동대표 · 브레인파크 연구위원'],say:[],how:''},
- {n:'김성열',c:'#e8762d',role:'전 개혁신당 최고위원 · 이준석 의원 대신 참석(10.22 통보)',age:'만 44세 (1982.7.18생)',ageSrc:'생년월일은 인물 프로필 정리 글 기준(2차 출처)',bio:['연세대 경영학과 졸업 — 토론장이 모교','민주당 쪽 국회 보좌진 출신(2023년 노웅래 의원 보좌진, 경향신문 보도)','2024년 개혁신당 합류: 수석대변인 · 수석최고위원 · 지명직 최고위원','2026.6.3 하남갑 국회의원 보궐선거 개혁신당 후보'],
+ {n:'김성열',c:'#e8762d',role:'개혁신당 수석최고위원(명함 기준) · 이준석 의원 대신 참석',age:'만 44세 (1982.7.18생)',ageSrc:'생년월일은 인물 프로필 정리 글 기준(2차 출처)',bio:['연세대 경영학과 졸업 — 토론장이 모교','민주당 쪽 국회 보좌진 출신(2023년 노웅래 의원 보좌진, 경향신문 보도)','2024년 개혁신당 합류: 수석대변인 · 수석최고위원 · 지명직 최고위원','2026.6.3 하남갑 국회의원 보궐선거 개혁신당 후보'],
   say:[['10.19','추미애 지사를 두고 "공천을 준 민주당이 책임을 져야 한다"','뉴스핌 2026.10.19'],['5.19','하남갑 출마하며 "경제정책 전문가를 선택해 달라"','머니투데이 2026.5.19'],['4.9','추경을 두고 "불난 집에 기름을 붓는 격", 선심성 지출부터 줄여야','개혁신당 최고위원회의 2026.4.9']],
-  how:'호칭 "김성열 전 최고위원님". 모교 선배로 가볍게 인사. 민주당을 안에서 겪은 사람이라 민주당 비판이 날카로움 → 인정하고 대안으로.'},
- {n:'박태훈',c:'#e5484d',role:'진보당 전국대학생준비위원장(학생회 안내 기준)',age:'1992년생 · 만 33세 또는 34세',ageSrc:'생일은 공개 자료에서 확인되지 않음',bio:['숭실대 정치외교학과(학생회장)','진보당 부대변인 · 정책국장, 청년진보당 집행위원장','2025년 일베 폐쇄 서명 11만 명을 모아 대통령실에 전달','2026.9 이재명 대통령이 그의 지지 글에 직접 화답'],
+  how:'호칭 "김성열 수석최고위원님"(명함에 수석최고위원). 모교 선배로 가볍게 인사. 민주당을 안에서 겪은 사람이라 민주당 비판이 날카로움 → 인정하고 대안으로.'},
+ {n:'박태훈',c:'#e5484d',role:'청년오늘연구소 소장(명함 기준) · 진보당 전국대학생준비위원장(학생회 안내)',age:'1992년생 · 만 33세 또는 34세',ageSrc:'생일은 공개 자료에서 확인되지 않음',bio:['숭실대 정치외교학과(학생회장)','진보당 부대변인 · 정책국장, 청년진보당 집행위원장','2025년 일베 폐쇄 서명 11만 명을 모아 대통령실에 전달','2026.9 이재명 대통령이 그의 지지 글에 직접 화답'],
   say:[['6.21','"진보가 집권해도 청년 삶은 안 바뀐다", 민주진보 진영이 기득권이 됐다','경향신문 2026.6.21'],['지선 공약','지역별 장기공공임대 20% 의무화','참여연대 2026 지선 주거공약 평가']],
-  how:'호칭 "박태훈 위원장님". 공공임대·세입자 보호 방향이 겹침 → 개혁신당과 1대2가 되면 같은 편. 민주당 비판은 방어하지 말고 인정.'},
+  how:'호칭 "박태훈 소장님"(명함: 청년오늘연구소 소장). 공공임대·세입자 보호 방향이 겹침 → 개혁신당과 1대2가 되면 같은 편. 민주당 비판은 방어하지 말고 인정.'},
  {n:'주최 · 사회',c:'#6b7280',role:'제62대 정치외교학과 학생회 <이륙> 미래진로국',age:'',bio:['학생회장 김민수(정외 24) · 부학생회장 전시은(정외 25)','미래진로국 황금별(9월부터 연락 담당)','사회자 이름은 당일 확인','청중: 정외과 학부생 약 50명'],say:[],how:'<이륙> 공약 이행률 78.3% → 인사말에서 칭찬. 여야정책토론회는 그 공약 가운데 하나라 학생회에 꼭 성공시켜야 하는 행사.'}
 ];
 function cut3285(from,to){const L=(byNo[3285]||{}).script||[],C=(byNo[3285]||{}).cite||[];const a=L.findIndex(x=>x.indexOf(from)>=0);if(a<0)return [];let b=to?L.findIndex((x,i)=>i>a&&x.indexOf(to)>=0):L.length;if(b<0)b=L.length;return L.slice(a+1,b).map((p,i)=>[p,C[a+1+i]||''])}
