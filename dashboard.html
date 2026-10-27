@@ -1490,7 +1490,7 @@ function stage(full){
   let h='<section class="stage" aria-label="다음 일정"><div><div class="when">10월 27일 화요일 저녁 7시</div><div class="what">'+E(EVENT.title)+'</div><div class="where">'+E(EVENT.place)+' · '+E(EVENT.arrive)+' · 주최 '+E(EVENT.host)+'</div></div><div class="dd"><b>'+d+'</b><span>'+left+'</span></div>'+
    '<div class="who"><a href="#event/parties/dem"><i style="background:#6f9be0"></i><span><b>김보미</b> <small>더불어민주당</small></span></a><a href="#event/parties/ref"><i style="background:var(--ref)"></i><span><b>김성열</b> <small>전 개혁신당 최고위원</small></span></a><a href="#event/parties/prg"><i style="background:#ff5a62"></i><span><b>박태훈</b> <small>진보당 청년진보당</small></span></a></div>'+
    '<div class="ag"><div><b>의제 1</b>'+E(EVENT.agenda[0])+'</div><div><b>의제 2</b>'+E(EVENT.agenda[1])+'</div></div>';
-  if(full)h+='<div class="steps">'+[['live/3285','실전 운영판: 첫 1분·30초 카드'],['keynote','인사말·원고 소리 내 읽기'],['study','학습 · 의제 순서대로'],['parties','정당별 입장 익히기'],['rival','상대 공격 받아치기'],['qna','학생 질문 대비'],['day','당일 체크']].map((x,i)=>'<a href="'+(x[0]==='study'?'#study':'#event/'+x[0])+'"><em>'+(i+1)+'</em>'+x[1]+'</a>').join('')+'</div>';
+  if(full)h+='<div class="steps">'+[['live/3285','실전 운영판: 첫 1분·30초 카드'],['keynote','인사말·원고 소리 내 읽기'],['learn','말과 근거 학습(새로 정리)'],['parties','정당별 입장 익히기'],['rival','상대 공격 받아치기'],['qna','학생 질문 대비'],['day','당일 체크']].map((x,i)=>'<a href="'+(x[0]==='learn'?'debate-yonsei-learn.html':x[0]==='study'?'#study':'#event/'+x[0])+'"><em>'+(i+1)+'</em>'+x[1]+'</a>').join('')+'</div>';
   return h+'</section>';
 }
 function vHome(){
@@ -1519,7 +1519,7 @@ function vEvent(){
     h+=stage(true);
     h+='<div class="sh"><h3>세 문장만 기억하기</h3></div><div class="msg">청년은 방을 얻을 때도, 첫 일자리를 얻을 때도 보증금을 냅니다. 경력이라는 보증금입니다.<small>기조발언의 중심 비유</small></div><div class="msg">정답은 정당에 있지 않습니다. 국민에게 있습니다. 틀린 건 우리 당이어도 틀렸다고 하겠습니다.<small>민주당 지적이 나올 때의 원칙</small></div><div class="msg">공공이 가진 방부터, 첫 일자리 보증금은 나라가, 청년 예산은 청년이 직접.<small>세 가지 제안</small></div>';
     h+='<div class="sh"><h3>숫자 여섯 개</h3><span>헷갈릴 때 여기만</span></div><div class="nstrip">'+NUM6.map(n=>'<a href="#card/'+n[2]+'"><b>'+n[0]+'</b><span>'+n[1]+'</span></a>').join('')+'</div>';
-    h+='<div class="callout r"><b>진행 방식 확정(10.26 통화)</b> 사회자가 의제 설명·발제 → 의제별 약 15분 자유토론 × 2. 발언 순서·시간 배정 없음 → 한 번에 30초~1분. <a href="#event/live/3285">실전 운영판 보기 →</a><br><b>첨부자료 4건 요약(10.27)</b> 한국은행 청년고용 보고서(10.26)·LH 국감 질의서 2건·주거사다리 질의서. <a href="#event/files">첨부자료 탭 →</a><br><b>김보미가 정할 것</b> 정년 연장 입장(지금은 조건부 안).</div>';
+    h+='<div class="callout r"><b>진행 방식 확정(10.26 통화)</b> 사회자가 의제 설명·발제 → 의제별 약 15분 자유토론 × 2. 발언 순서·시간 배정 없음 → 한 번에 30초~1분. <a href="#event/live/3285">실전 운영판 보기 →</a><br><b>말과 근거 학습(10.27 새로 정리)</b> 말할 문장과 그 말을 받치는 숫자를 한 장에. 쉬운 설명·비유·주의·받아치기·확인 질문까지. <a href="debate-yonsei-learn.html">학습 페이지 열기 →</a><br><b>첨부자료 4건 요약(10.27)</b> 한국은행 청년고용 보고서(10.26)·LH 국감 질의서 2건·주거사다리 질의서. <a href="#event/files">첨부자료 탭 →</a><br><b>김보미가 정할 것</b> 정년 연장 입장(지금은 조건부 안).</div>';
     h+='<div class="sh"><h3>함께 보면 좋은 것</h3></div><div class="golist">'+[['debate-yonsei-study.html','📚','공부방','정부 청년·대학생 정책 최근순, 지방정부·해외 우수사례, 정당·대통령제 비교.'],['report-nec-2026.html','📑','선관위 보고서 읽기','학생회가 의제 근거로 든 1,711쪽 보고서 — 발췌 PDF, 건별 요약, 인용 숫자 대조.'],['debate-yonsei-20261027.html','🗂️','토론 준비실','현안 다섯 단계 설명, 연세대 정외과 동문 정치인, 학생회 현황.'],['#gov','📡','정책 실시간','오늘 국회·청년정책 발표 자동 정리.'],['#youth','🗣️','청년 발언 모음','그동안 방송·인터뷰에서 한 청년 관련 말을 원문 그대로. 일자리·주거·모병제·청년 정치별로.']].map(x=>'<a href="'+x[0]+'"><span class="ic">'+x[1]+'</span><span><b>'+x[2]+'</b><span>'+x[3]+'</span></span></a>').join('')+'</div>';
   }else if(sub==='parties'){
     h+=vParties();
@@ -1778,7 +1778,7 @@ function vStudy(){
   const ag=AG.find(x=>x.id===stId),cur=L.find(x=>x.id===stId);
   let h='<div class="crumb"><a href="#home">홈</a> › 학습'+(ag?' › '+E(ag.title):cur?' › '+E(cur.unit):'')+'</div>';
   if(!ag&&!cur){
-    h+='<h1 class="pt">학습 — 학생회 발제 의제 순서대로</h1><p class="lead">'+E(STUDY.intro)+'</p>';
+    h+='<h1 class="pt">학습 — 학생회 발제 의제 순서대로</h1><p class="lead">'+E(STUDY.intro)+'</p>';h+='<div class="callout r"><b>새로 정리한 학습 페이지</b> 말할 문장 + 근거 숫자 + 쉬운 설명 + 받아치기를 한 장씩 붙였습니다. 오늘은 여기부터 보십시오. <a href="debate-yonsei-learn.html">말과 근거 학습 열기 →</a></div>';
     h+='<div class="sh"><h3>토론 의제 — 우선순위</h3><span>학생회 발제문 기준</span></div>';
     AG.forEach(a=>{h+='<a class="agcard'+(done[a.id]?' done':'')+'" href="#study/'+a.id+'"><span class="agn">'+(done[a.id]?'✓':a.rank)+'</span><span class="sttx"><b>'+E(a.title)+'</b><span class="agq">'+E(a.q)+'</span><span>'+E(a.why)+'</span><em>할 말 '+a.topics.length+'묶음 · 받아치기 '+a.ask.length+' · 정당 '+a.parties.length+' · 숙제 '+a.hw.length+'</em></span></a>'});
     h+='<div class="sh"><h3>더 알아 둘 것</h3><span>정당·여론·지방·청년 정치</span></div>';

@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>말과 근거 학습 · 10.27 연세대 토론</title>
+<link rel="icon" href="favicon.svg">
+<style>
+:root{--ink:#17202e;--ink2:#465163;--mut:#7d8798;--bg:#f2f4f8;--paper:#fff;--ln:#e2e6ee;--navy:#0d2f63;--navy2:#1b4fa0;--yolk:#ffd23f;--say:#fff6cc;--sayln:#f0c419;--ev:#eaf2ff;--evln:#b9cff5;--ok:#11744a;--bad:#b42318;--warnbg:#fff1f0;--easy:#eef8f1}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:64px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Pretendard Variable',Pretendard,'Apple SD Gothic Neo','Malgun Gothic',sans-serif;font-size:17px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--navy2)}
+.top{position:sticky;top:0;z-index:10;background:var(--navy);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.top .in{max-width:980px;margin:0 auto;padding:8px 16px;display:flex;gap:8px;align-items:center;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.top .in::-webkit-scrollbar{display:none}
+.top b{font-size:15px;margin-right:6px}
+.top a{color:#fff;text-decoration:none;font-size:14px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.12);flex:none}
+.top a:hover{background:rgba(255,255,255,.25)}
+.wrap{max-width:980px;margin:0 auto;padding:20px 16px 80px}
+.back{font-size:14px;color:var(--mut)}
+h1{font-size:28px;line-height:1.35;margin:10px 0 6px}
+.lead{color:var(--ink2);margin:0 0 14px}
+.prog{font-size:14px;color:var(--mut);margin:6px 0 18px}
+.prog b{color:var(--ok)}
+section{margin:34px 0}
+h2{font-size:23px;margin:0 0 4px}
+.agq{color:var(--ink2);font-size:15px;margin-bottom:14px}
+.big{background:var(--paper);border:1px solid var(--ln);border-radius:16px;padding:20px}
+.one{font-size:20px;font-weight:700;line-height:1.55;border-left:6px solid var(--yolk);padding:4px 0 4px 14px;margin:0 0 16px}
+.chain{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.chain .st{flex:1 1 200px;background:#f7f9fc;border:1px solid var(--ln);border-radius:12px;padding:12px 14px;position:relative}
+.chain .st small{display:block;color:var(--mut);font-weight:700;font-size:13px}
+.chain .st b{display:block;font-size:17px;margin:2px 0}
+.chain .st span{font-size:14px;color:var(--ink2)}
+.chain .ar{align-self:center;font-size:22px;color:var(--mut)}
+.three{margin:14px 0 0;padding-left:22px}
+.how{margin-top:14px;font-size:15px;color:var(--ink2);background:#f7f9fc;border-radius:10px;padding:10px 14px}
+.learn{background:var(--paper);border:1px solid var(--ln);border-radius:16px;padding:18px 20px;margin-bottom:16px}
+.learn h3{font-size:15px;color:var(--navy2);margin:14px 0 4px}
+.learn h3:first-child{margin-top:0}
+.learn ol{margin:0;padding-left:22px}
+.learn .an{background:var(--easy);border-radius:10px;padding:10px 14px}
+.learn .my{background:var(--warnbg);border-radius:10px;padding:10px 14px}
+.card{background:var(--paper);border:1px solid var(--ln);border-radius:16px;margin:16px 0;overflow:hidden}
+.card.done{border-color:#9bd3b4}
+.ch{display:flex;align-items:flex-start;gap:10px;padding:16px 18px 6px}
+.ch .n{flex:none;background:var(--navy);color:#fff;font-weight:800;border-radius:8px;padding:2px 9px;font-size:14px;margin-top:3px}
+.ch .t{flex:1;font-size:19px;font-weight:800;line-height:1.45}
+.ch .t .st{color:#c47f00;margin-left:4px}
+.mk{flex:none;font-size:13px;border:1px solid var(--ln);background:#fff;border-radius:999px;padding:4px 10px;cursor:pointer;color:var(--ink2)}
+.card.done .mk{background:var(--ok);color:#fff;border-color:var(--ok)}
+.cb{padding:4px 18px 18px}
+.lbl{font-size:13px;font-weight:800;letter-spacing:.02em;margin:12px 0 6px}
+.say{background:var(--say);border:1px solid var(--sayln);border-radius:12px;padding:12px 16px}
+.say p{margin:0 0 8px;font-size:18px;line-height:1.75}
+.say p:last-child{margin:0}
+.lbl.s{color:#9a6b00}.lbl.e{color:var(--navy2)}.lbl.z{color:var(--ok)}.lbl.x{color:var(--bad)}.lbl.h{color:#6b3fa0}
+.ev{background:var(--ev);border:1px solid var(--evln);border-radius:12px;padding:12px 16px}
+.ev .num{font-size:26px;font-weight:900;color:var(--navy);line-height:1.2}
+.ev .cap{font-size:14px;color:var(--ink2);margin:2px 0 10px}
+.ev ul{margin:8px 0 0;padding-left:18px;font-size:14.5px;color:var(--ink2)}
+.ev .sp{margin-top:8px;font-size:14.5px}
+.ev .sp b{color:var(--navy2)}
+.ev .src{margin-top:8px;font-size:13px;display:flex;flex-wrap:wrap;gap:6px}
+.ev .src a{background:#fff;border:1px solid var(--evln);border-radius:999px;padding:2px 10px;text-decoration:none}
+.viz{margin:6px 0 4px}
+.vrow{display:grid;grid-template-columns:minmax(110px,34%) 1fr;gap:8px;align-items:center;margin:6px 0;font-size:14px}
+.vbar{background:#fff;border-radius:6px;height:24px;position:relative;overflow:hidden;border:1px solid var(--evln)}
+.vbar i{position:absolute;left:0;top:0;bottom:0;background:var(--navy2);border-radius:5px}
+.vbar i.o{background:#9fb6dc}
+.vbar em{position:absolute;right:6px;top:1px;font-style:normal;font-weight:800;font-size:13px;color:var(--ink)}
+.pair .vbar{height:18px;margin:2px 0}
+.leg{font-size:12.5px;color:var(--mut);display:flex;gap:12px;margin-top:2px}
+.leg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.stack{display:flex;height:30px;border-radius:6px;overflow:hidden;border:1px solid var(--evln)}
+.stack span{display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden}
+.stack .s0{background:#1b4fa0}.stack .s1{background:#7f9fd1}.stack .s2{background:#d14b3f}
+.stk{margin:8px 0}.stk>div:first-child{font-size:14px;margin-bottom:3px}
+.easy{background:var(--easy);border-radius:10px;padding:10px 14px;font-size:16px}
+.exact{background:var(--warnbg);border-radius:10px;padding:10px 14px;font-size:15.5px}
+.hit{border:1px dashed #b9a3d9;border-radius:10px;padding:10px 14px;font-size:16px;margin-top:6px}
+.hit .a{color:#6b3fa0;font-weight:700}
+details.q{margin-top:10px;border-top:1px solid var(--ln);padding-top:8px}
+details.q summary{cursor:pointer;font-weight:700;font-size:15px;color:var(--navy2)}
+details.q p{margin:6px 0 0;font-size:15.5px}
+.hits .hc{background:var(--paper);border:1px solid var(--ln);border-radius:14px;padding:14px 18px;margin:12px 0}
+.hits .who{font-size:13px;color:var(--mut);font-weight:700}
+.hits .atk{font-weight:800;font-size:17px;margin:2px 0 8px}
+.hits .ans{background:var(--say);border:1px solid var(--sayln);border-radius:10px;padding:10px 14px;font-size:17px}
+.hits .nt{font-size:14px;color:var(--ink2);margin-top:8px}
+.quiz details{background:var(--paper);border:1px solid var(--ln);border-radius:12px;padding:12px 16px;margin:10px 0}
+.quiz summary{cursor:pointer;font-weight:700}
+.quiz details p{margin:8px 0 0;color:var(--ok);font-weight:700}
+.dont{background:var(--paper);border:1px solid var(--ln);border-radius:14px;overflow:hidden}
+.dont .r{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--ln)}
+.dont .r:first-child{border-top:0;font-weight:800;font-size:14px;background:#f7f9fc}
+.dont .r div{padding:10px 14px;font-size:15px}
+.dont .r div:first-child{color:var(--bad);border-right:1px solid var(--ln)}
+.dont .r div:last-child{color:var(--ok)}
+.foot{font-size:13px;color:var(--mut);margin-top:40px}
+@media (max-width:600px){body{font-size:16px}h1{font-size:23px}.ch .t{font-size:17.5px}.say p{font-size:17px}.chain .ar{display:none}.dont .r{grid-template-columns:1fr}.dont .r div:first-child{border-right:0;border-bottom:1px dashed var(--ln)}.vrow{grid-template-columns:1fr}}
+@media print{.top,.mk{display:none}body{background:#fff}.card,.learn,.big{break-inside:avoid;border-color:#ccc}details{display:block}details>*{display:block}}
+</style></head><body>
+<nav class="top"><div class="in"><b>말과 근거</b><a href="#big">큰 그림</a><a href="#job">의제2 일자리</a><a href="#home">의제1 주거</a><a href="#hits">받아치기</a><a href="#quiz">자가 점검</a><a href="#dont">틀리면 안 되는 말</a><a href="dashboard.html#event/overview">← 준비노트</a></div></nav>
+<main class="wrap" id="app"></main>
+<script>
+// 말+근거 학습 데이터 (2026.10.27 연세대 토론)
+// 모든 숫자는 10.27 사실 대조를 거친 것만 씀. 출처는 src에.
+const BOK='한국은행 BOK 이슈노트 제2026-27호 「청년고용 부진 및 정책 과제」(2026.10.26, 집필 황수빈·정강희·정성엽)';
+const BOK_SRC=[["한은 청년고용 보고서 — 뉴스핌 2026.10.26","https://www.newspim.com/news/view/20261026000380"],["청년 취업자 3명 중 1명 임시·일용직 — 메트로신문 2026.10.26","https://www.metroseoul.co.kr/article/20261026500147"],["대기업 희망 접고 눈 낮춰 취업 — 서울신문 2026.10.27","https://www.seoul.co.kr/news/economy/2026/10/27/20261027002002"]];
+
+const BIG={
+  one:"청년은 방을 얻을 때도, 첫 일자리를 얻을 때도 보증금을 냅니다. 경력이라는 보증금입니다. 그 첫 보증금을 나라가 대신 내 주자는 것이 오늘 김보미의 답입니다.",
+  chain:[
+    {h:"문제",t:"방도 일자리도 '보증금'을 요구한다",s:"월세·보증금 / 신입에게도 경력 요구"},
+    {h:"왜 안 풀리나",t:"시장이 첫 칸을 안 깔아 준다",s:"신입 자리 감소, 공공임대는 엉뚱한 곳에, 부모 돈이 출발선"},
+    {h:"김보미 해법",t:"첫 칸은 나라가",s:"첫 경력 보장(청년취업보장제) / 공공의 방 + 주거자산계좌"}
+  ],
+  three:["공공이 가진 방부터 채우기 (기숙사·빈 공공임대·낡은 청사 위 청년주택)","첫 일자리의 보증금은 나라가 (국가청년취업보장제)","청년 정책은 청년이 짜기"],
+  how:"카드마다 순서가 같습니다. ① 노란 칸 = 그대로 소리 내 읽을 말 ② 파란 칸 = 그 말을 받치는 숫자와 출처, 말할 때 붙일 표현 ③ 쉽게 이해 = 비유 ④ 정확히는 = 틀리지 않으려면 지킬 선 ⑤ 상대가 치면 = 받아치기 ⑥ 확인 질문 = 눌러서 답 확인. 다 외운 카드는 오른쪽 위 '외웠음'을 누르면 표시가 남습니다."
+};
+
+const AGENDA=[
+{ id:"job", no:"의제 2", title:"청년 일자리 — 첫 경력을 나라가 보장해야 하는 이유",
+  q:"열심히 준비해도 취업이 어려운 사회, 청년 일자리 정책은 어디서부터?",
+  learn:{
+    one:"청년이 부족해서가 아니라, 첫 경력을 쌓을 문이 닫혀 있어서 시간이 갈수록 더 밀려난다. 그래서 첫 경력은 나라가 보장해야 한다.",
+    core:["신입 자리는 줄고 경력 자리만 늘었다 (한국은행 10.26)","취업 경험이 없는 청년은 1년이 지나도 못 들어간다. 경력이 없어서 못 뽑히고, 못 뽑혀서 경력이 없다","경기가 좋아지기만 기다려서는 안 풀린다 (반도체는 돈을 벌어도 사람은 적게 뽑음, AI가 신입 업무를 가져감)","정부도 돈을 썼지만 상담·교육·수당에서 끝나고 첫 직장까지 닿지 않았다","그래서 해법은 '첫 경력 보장'"],
+    analogy:"운전 경력 3년 이상만 뽑는 회사만 있는 나라를 떠올려 보십시오. 연수 자리가 없으면 아무리 연습해도 경력은 영원히 0년입니다. 청년취업보장제는 그 '첫 연수 1년'을 나라가 깔아 주자는 것입니다.",
+    myth:"\"요즘 청년은 눈이 높아서 취업을 안 한다\" → 한국은행 분석은 반대입니다. 청년들은 이미 눈높이를 낮췄습니다. 대기업·공공기관을 원하는 비율은 58.6%에서 53.6%로 줄고, 중소기업은 39.7%에서 43.4%로 늘었습니다. 그렇게 임시·일용직으로 들어간 청년이 32.6%인데, 거기서 위로 올라가는 길이 좁아진 게 문제입니다.",
+    check:["한국은행 보고서에서 '첫 직장 상용직 입직'과 '경력 입직'은 각각 몇 명에서 몇 명으로 바뀌었나?","'셋 중 둘'은 정확히 어떤 청년의 숫자인가?","정부 K-유스개런티와 김보미의 청년취업보장제는 무엇이 다른가?"]
+  },
+  cards:[
+  { id:"j1", title:"신입 자리는 줄고, 경력 자리만 늘었다",
+    say:["요즘은 일자리도 보증금을 받습니다. 경력이라는 보증금입니다.","어제 한국은행 조사국 보고서를 보면, 학교를 떠난 20대 후반 청년 천 명 가운데 첫 직장으로 상용직에 들어간 사람은 45명, 경력으로 들어간 사람은 121명입니다. 몇 년 전에는 48명과 102명이었습니다. 신입 자리는 줄고 경력 자리만 늘었습니다.","ICT 업계만 봐도 신입 채용은 3년 새 반토막 났고, 경력 채용은 28% 늘었습니다."],
+    ev:{num:"45명 vs 121명",cap:"20대 후반 청년 1,000명당 · 첫 직장 상용직 입직 vs 경력 입직 (2023~26년)",
+      viz:{type:"pairs",max:130,unit:"명",rows:[["첫 직장으로 입직",48,45],["경력으로 입직",102,121]],legend:["2014~19년","2023~26년"]},
+      lines:["한국은행 이슈노트(10.26) 그림 26: 25~29세 졸업·중퇴 청년 1,000명당, 상용직 근속 0~11개월 기준, 성별·학력 등을 보정한 추정치","ICT 신입 9만 5,116명(2022) → 4만 8,669명(2025), 경력 3만 8,521명 → 4만 9,322명(+28%) — 과기정통부 자료, 이훈기 의원(민주당)"],
+      speak:"\"어제 한국은행 조사국 보고서를 보면\" / \"이번 국감에서 과기부 자료를 보면\"",
+      src:BOK_SRC.slice(0,1).concat([["ICT 신입 3년 새 48% 감소 — 주간한국 2026.10.2","https://weekly.hankooki.com/news/articleView.html?idxno=7187161"]])},
+    easy:"회사가 '가르쳐서 쓰는 신입' 대신 '바로 쓰는 경력'을 뽑고 있다는 뜻입니다. 신입을 키우는 비용을 아무도 지지 않으려 합니다.",
+    exact:"'정규직'이 아니라 '상용직'입니다(1년 이상 계약 포함). 무대에서는 \"상용직\" 또는 \"좋은 첫 일자리\"라고 말하십시오. ICT는 '4년'이 아니라 '3년'(2022→2025).",
+    hit:null,
+    quiz:[["천 명당 첫 직장 상용직 입직은?","48명(2014~19) → 45명(2023~26). 경력 입직은 102명 → 121명."]]},
+
+  { id:"j2", title:"경험 없는 청년은 1년이 지나도 못 들어간다 — 그래서 계속 밀려난다", star:true,
+    say:["더 아픈 숫자가 있습니다. 대기업에 가고 싶다고 했던 청년들을 1년 뒤에 다시 봤습니다. 그중 한 번도 일해 본 적이 없는 청년은 셋 중 둘이 여전히 일을 못 구했거나 쉬고 있었습니다. 원하던 자리에 들어간 건 열 명 중 한 명이었습니다.","경력을 쌓을 첫 자리를 못 얻으니, 시간이 갈수록 더 밀려납니다. 1년을 쉬면 다음 해에는 더 불리해집니다. 이건 청년이 게을러서가 아니라 구조입니다.","그래서 저는 첫 경력만큼은 나라가 보장해야 한다고 말합니다."],
+    ev:{num:"셋 중 둘 (66.7%)",cap:"대기업 취업을 바란 미취업 청년 중 '취업 경험이 없던 청년'의 1년 뒤 상태",
+      viz:{type:"stack",rows:[["취업 경험 없던 청년",[[11.1,"대기업급 일자리 진입"],[22.2,"중소·임시직 취업"],[66.7,"여전히 실업·쉬는 중"]]],["대기업 희망 청년 전체",[[12.1,"대기업급 일자리 진입"],[27.8,"중소·임시직 취업"],[60.0,"여전히 실업·쉬는 중"]]]]},
+      lines:["한국은행 이슈노트(10.26) 그림 27: 한국고용정보원 청년패널(2021~23년 조사), 23~28세 학생 아닌 청년 중 대기업 취업을 희망한 미취업자의 다음 해 상태","'대기업급 일자리' = 민간 300인 이상 기업 상용직(보고서의 1차 노동시장)","보고서 본문: \"특히 취업 경험이 없는 최초 진입자의 경우 실업이나 비경제활동인구로 남을 확률이 더욱 높다\""],
+      speak:"\"한국은행 보고서를 보면, 대기업에 가고 싶다던 청년 가운데 일해 본 적 없는 청년은…\"",
+      src:BOK_SRC},
+    easy:"'경력이 없어서 못 뽑히고, 못 뽑혀서 경력이 없다'는 닭과 달걀입니다. 첫 칸에 못 올라선 청년은 다음 해에도 같은 자리에 서 있고, 그 사이 경력 있는 사람이 자리를 가져갑니다.",
+    exact:"'청년 전체의 셋 중 둘'이 아닙니다. '대기업을 바랐던 청년 가운데 취업 경험이 없던 청년'의 숫자입니다. 이 앞부분을 빼고 말하면 틀린 말이 됩니다.",
+    hit:{atk:"\"눈 낮춰서 중소기업 가면 되잖아요.\"",ans:"\"청년들은 이미 눈을 낮췄습니다. 한국은행 분석을 보면 대기업·공공기관을 원하는 청년은 줄고 중소기업을 원하는 청년이 늘었습니다. 청년 취업자 셋 중 한 명이 임시·일용직입니다. 문제는 거기서 위로 올라가는 사다리가 코로나 전보다 크게 줄었다는 겁니다.\""},
+    quiz:[["'셋 중 둘'은 누구의 숫자인가?","대기업 취업을 바란 미취업 청년 중 취업 경험이 없던 청년. 1년 뒤 66.7%가 실업·쉬는 중."],["그중 대기업급 일자리에 들어간 비율은?","11.1%(열 명 중 한 명)."]]},
+
+  { id:"j3", title:"경기가 좋아지기만 기다리면 안 풀린다",
+    say:["경기가 좋아지면 해결된다고들 합니다. 한국은행은 그렇지 않다고 봤습니다.","지금 성장은 반도체가 끌고 갑니다. 그런데 사람을 많이 뽑는 서비스업과 일반 제조업은 정체돼 있습니다. 그래서 성장이 청년 채용으로 이어지지 않습니다.","그러니 기다릴 게 아니라, 첫 일자리를 만드는 쪽에 나라가 손을 써야 합니다."],
+    ev:{num:"연 0.6%p",cap:"경기 여건으로 예측한 청년고용률보다 실제가 2023년 이후 해마다 평균 0.6%p 낮음",
+      lines:["한국은행 이슈노트(10.26) 11·12·25항: 성장은 IT제조업이 주도하지만 상용직 채용은 비IT제조업·서비스업 비중이 높아 성장이 1차 노동시장 수요로 이어지지 못함. 경기 회복만으로는 단기간에 해소되기 어렵다고 판단","같은 보고서: 핵심연령층 대비 청년의 상용직 입직 규모 약 15~20% 축소"],
+      speak:"\"한국은행 조사국 보고서도 경기 회복만으로는 안 풀린다고 봤습니다\"",
+      src:BOK_SRC.slice(0,1).concat([["상용직 진입 15~20% 위축 — 아주경제 2026.10.26","https://www.ajunews.com/view/20261026155851603"]])},
+    easy:"반도체 공장은 돈은 많이 벌지만 사람은 적게 씁니다. 동네 식당·서비스업이 살아야 청년이 많이 뽑히는데 거기가 멈춰 있습니다.",
+    exact:"보고서는 집필자 개인 견해로 한은 공식 견해가 아닙니다. \"한국은행이 공식 발표했다\"가 아니라 \"한국은행 조사국 보고서\"로.",
+    hit:null,
+    quiz:[["성장이 청년 채용으로 안 이어지는 이유(한은)?","성장은 반도체·IT제조업이 이끄는데, 사람을 많이 뽑는 서비스업·일반 제조업은 정체."]]},
+
+  { id:"j4", title:"AI가 신입 자리부터 지운다",
+    say:["여기에 AI가 옵니다. 신입이 하던 자료 찾기, 기초 분석을 이제 AI가 합니다. 그러니 기업은 신입을 키우기보다 바로 일할 경력직을 찾습니다.","한국은행 분석으로 최근 4년 동안 줄어든 청년 일자리 28만 5천 개 가운데 94%가 AI에 많이 노출된 업종에서 나왔습니다.","저도 AI로 예산 공개 사이트를 혼자 만듭니다. 예전 같으면 신입 서너 명이 붙어서 배우던 일입니다. 경력 쌓을 첫 자리가 사라지고 있습니다."],
+    ev:{num:"94%",cap:"2022.6~2026.6 줄어든 청년 일자리 28만 5천 개 중 26만 8천 개가 AI 고노출 업종",
+      lines:["한국은행 조사국 보고서(2026.8.18) — 박정 의원이 10.13 국감에서 인용","한국은행 이슈노트(10.26) 16항: AI가 초급·기초 업무를 대신하면서 기업이 즉시 투입 가능한 경력직을 선호"],
+      speak:"\"한국은행 분석을 보면\"",
+      src:[["청년 일자리 94% AI 고노출 업종 — 헤럴드경제 2026.8.17","https://www.heraldk.com/article/2026081720250446523"],["박정 의원 국감 인용 — 아주경제 2026.10.13","https://www.ajunews.com/view/20261013153817871"]]},
+    easy:"AI는 '신입이 일을 배우던 연습 문제'부터 대신 풉니다. 연습 문제가 없어지면 신입은 배울 기회 자체를 잃습니다.",
+    exact:"'AI 업종'이 아니라 'AI에 많이 노출된 업종'입니다. 'AI 업종'이라고 하면 AI 산업처럼 들려 바로 반박당합니다.",
+    hit:{atk:"\"AI는 청년에게 기회 아닌가요?\"",ans:"\"기회 맞습니다. 한국은행도 청년의 AI 적응력은 경쟁력이 될 수 있다고 했습니다. 다만 AI와 일하며 숙련을 쌓을 첫 자리가 있어야 기회가 됩니다. 그 첫 자리를 나라가 보장하자는 겁니다.\""},
+    quiz:[["94%를 말할 때 꼭 붙일 표현은?","\"AI에 많이 노출된 업종\" + \"한국은행 분석\"."]]},
+
+  { id:"j5", title:"정부도 돈을 썼다. 그런데 첫 직장까지 닿지 않았다",
+    say:["정부가 손 놓고 있었던 건 아닙니다. 청년 일자리에 3년 동안 7조 4,500억 원 넘게 썼습니다.","그런데 같은 기간 청년 고용률은 46.1%에서 44.1%로 떨어졌습니다. 상담하고, 가르치고, 수당 주는 데서 끝나고 첫 직장까지 닿지 않았기 때문입니다.","청년을 뽑는 기업에 주는 장려금은 작년에 726억 원을 쓰지도 못했습니다. 돈의 끝이 첫 직장이 되도록 바꿔야 합니다."],
+    ev:{num:"7조 4,571억 원",cap:"청년 일자리 예산 3년(2024~2026.8) · 같은 기간 청년 고용률 46.1% → 44.1%",
+      lines:["박정 의원(민주당) 고용노동부 국정감사 2026.10.13","청년일자리도약장려금 726억 원 불용 — 국회예산정책처 2025 결산 분석"],
+      speak:"\"이번 국정감사에서 우리 당 박정 의원이 짚었듯이\"",
+      src:[["청년일자리 3년 7조4600억…고용률 46.1→44.1% — 스트레이트뉴스 2026.10.13","https://www.straightnews.co.kr/news/articleView.html?idxno=313000"]]},
+    easy:"수도꼭지를 틀었는데 물이 컵(첫 직장)까지 안 오고 중간 배관(상담·교육)에서 새는 셈입니다.",
+    exact:"청년 고용률 46.1→44.1%는 박정 의원 기준 기간(2024~26)입니다. 한국은행의 46.6→43.7%(2022~26)와 기간이 다르니 한자리에서 섞지 마십시오.",
+    hit:{atk:"\"7조 넘게 쓰고 고용률은 떨어졌다. 민주당 정부의 실패다.\"",ans:"\"숫자는 맞습니다. 우리 당 박정 의원이 국감에서 직접 낸 숫자입니다. 그래서 정책의 끝을 바꾸자는 겁니다. 상담이 아니라 첫 직장까지.\""},
+    quiz:[["3년 청년 일자리 예산과 고용률 변화?","7조 4,571억 원, 46.1% → 44.1% (박정 의원 국감)."]]},
+
+  { id:"j6", title:"첫 단추가 그다음을 정한다",
+    say:["첫 단추가 중요합니다. 국회예산정책처 분석을 보면 계약직으로 사회생활을 시작한 청년 셋 중 하나는 지금도 계약직입니다. 정규직으로 시작한 청년이 지금 계약직인 경우는 열에 둘이 안 됩니다.","첫 일자리를 그만두는 청년도 열에 일곱이고, 평균 1년 반을 버팁니다. 들어가기도 어렵고 버티기도 어렵습니다. 그래서 일자리 숫자만큼 첫 일자리의 질이 중요합니다."],
+    ev:{num:"34.5% vs 18.7%",cap:"지금 계약직인 비율 — 계약직으로 시작한 청년 vs 정규직으로 시작한 청년",
+      viz:{type:"bars",max:40,unit:"%",rows:[["계약직으로 시작",34.5],["정규직으로 시작",18.7]]},
+      lines:["국회예산정책처 「청년층 첫 직장 현황」(2026.5 보도)","첫 직장 그만둔 청년 70.7%, 평균 근속 18.4개월 — 국회예산정책처"],
+      speak:"\"국회예산정책처 분석을 보면\"",
+      src:[["첫 직장 퇴사 70.7%·근속 18.4개월 — 헤럴드경제 2026.5.4","https://www.heraldk.com/article/2026050404000057847"]]},
+    easy:"첫 직장은 '출발 칸'입니다. 어디서 출발하느냐가 몇 년 뒤 자리를 정합니다.",
+    exact:"18.7%는 '정규직 출발자 비율'이 아니라 '정규직으로 시작했는데 지금 계약직인 비율'입니다.",
+    hit:null,
+    quiz:[["계약직으로 시작한 청년 중 지금도 계약직은?","34.5%(셋 중 하나)."]]},
+
+  { id:"j7", title:"해법 — 국가청년취업보장제: 첫 경력은 나라가", star:true,
+    say:["그래서 저는 국가청년취업보장제를 말합니다. 시장이 첫 경력을 안 주면, 첫 경력은 나라가 보장하자는 겁니다. 상담에서 끝내지 말고 실제 첫 일자리까지 책임지자는 겁니다.","근거도 있습니다. 한국은행 분석을 보면 공공 취업지원이나 훈련을 받아 본 청년이 이듬해 좋은 일자리에 들어간 비율이 더 높았습니다. 나라가 손을 잡아 주면 된다는 뜻입니다.","오스트리아는 25세까지 견습 자리를 나라가 보장합니다. 2024년에 1만 1,713명이 그렇게 일을 시작했습니다.","청년 정책의 성적표는 몇 명한테 얼마 줬느냐가 아니라, 3년 뒤 그 청년이 어디서 무엇을 하고 있느냐여야 합니다."],
+    ev:{num:"정책 경험자 진입률 ↑",cap:"공공 취업지원·훈련 이용 경험이 있는 청년의 이듬해 1차 노동시장 진입률이 미경험자보다 높음",
+      lines:["한국은행 이슈노트(10.26) 23항·그림 31 (보고서는 '정책효과의 가능성을 시사'로 표현, 표본이 작다는 단서 있음)","오스트리아 청년 견습 보장(Ausbildungsgarantie), 2024년 1만 1,713명","정부 K-유스개런티: 첫 취업 못 한 청년에게 상담·일경험·수당 → 김보미는 '실제 첫 고용'까지"],
+      speak:"\"한국은행 분석을 보면 나라가 도와준 청년이 더 많이 들어갔습니다\"",
+      src:BOK_SRC.slice(0,1)},
+    easy:"운전 연수처럼 '첫 경력 1년'을 나라가 깔아 주는 것. 그다음부터는 청년이 경력으로 경쟁할 수 있습니다.",
+    exact:"제도의 세부 방식(나라가 직접 일자리를 주는지, 기업 임금을 보조하는지)은 아직 정하지 않았습니다(자문단 쟁점 4). 무대에서는 '첫 경력을 나라가 보장한다'는 원칙까지만 말하고, 방식을 물으면 \"흩어진 사업을 하나로 묶는 데서 시작하겠다\"로 답하십시오.",
+    hit:{atk:"\"재원은 얼마고 어떻게 합니까? 숫자로 말씀하세요.\"",ans:"\"새 돈부터 달라는 게 아닙니다. 내년 청년 예산이 정부안으로 43조 3천억 원입니다. 국회예산정책처는 청년 자산형성 사업만 해도 6개 부처 10개가 겹친다고 했습니다. 흩어진 장려금·인턴 사업을 첫 고용 보장 하나로 묶는 데서 시작하겠습니다.\""},
+    hit2:{atk:"\"한국은행도 정규직 보호가 청년 진입장벽이라고 했습니다. 해고 규제부터 풀어야죠.\"",ans:"\"노동시장 경직성 대목은 보고서에 있습니다. 연공서열 임금은 손볼 수 있고 여야가 같이 앉을 대목입니다. 그런데 한은이 첫째로 꼽은 원인은 반도체 쏠림과 AI입니다. 해고를 쉽게 한다고 반도체 공장이 신입을 더 뽑지는 않습니다. 순서는 청년이 사다리 첫 칸에 올라서게 하는 것부터입니다.\""},
+    quiz:[["K-유스개런티와 청년취업보장제의 차이?","정부는 상담·일경험·수당까지, 김보미는 실제 첫 고용(첫 경력)까지 보장."],["재원 질문에 대한 한 줄?","새 돈보다 흩어진 사업 통합. 자산형성 사업만 6개 부처 10개 중복(국회예산정책처)."]]}
+  ]
+},
+{ id:"home", no:"의제 1", title:"청년 주거 — 공공의 방을 채우고, 다음 집으로 가는 길을 놓자",
+  q:"청년 주거 환경, 무엇을 우선적으로 바꿔야 하는가?",
+  learn:{
+    one:"청년 주거 문제의 뿌리는 월세다. 공공이 가진 방을 청년이 살고 싶은 곳·크기로 채우고, 그 방이 다음 집으로 가는 출발역이 되게 해야 한다.",
+    core:["월세가 소득에 비해 너무 비싸다. 정부 월세 지원 20만 원은 학교 앞 월세의 3분의 1이 안 된다","공공임대는 있는데 비어 있다. 수요가 없어서가 아니라 위치·크기가 안 맞아서","서울 대학 기숙사 수용률은 전국 꼴찌","사다리가 끊겼다: 자가 비율 하락, 월급만 모으면 서울 아파트까지 41년, 집 얻는 돈의 61.7%가 부모 돈","해법: 공공의 방부터 + 사는 동안 보증금을 모으는 주거자산계좌"],
+    analogy:"사다리의 첫 칸(공공임대·월세 지원)은 있는데 두 번째 칸(보증금)이 빠져 있습니다. 첫 칸에 올라선 청년이 다음 칸으로 못 가니 거기서 멈추거나, 부모가 사다리를 들어 줘야 올라갑니다.",
+    myth:"\"공공임대가 비어 있으니 청년 수요가 없다\" → LH가 직접 조사해 보니 청년이 집 고를 때 1순위는 주거비, 2순위는 직장과 가까운지였습니다. 비어 있는 이유는 외곽에, 좁게 지어서입니다.",
+    check:["행복주택 공가율은 얼마이고, 비어 있는 진짜 이유는?","41년은 어떤 가정으로 나온 숫자인가?","주거자산계좌를 한 문장으로 설명하면?"]
+  },
+  cards:[
+  { id:"h1", title:"뿌리는 월세 — 지원금은 그대로, 월세는 올랐다",
+    say:["안전도 통학도 중요합니다. 그런데 돈이 없으니까 어두운 골목, 먼 동네로 밀려나는 겁니다. 뿌리는 월세입니다.","연세대 근처 원룸 평균 월세가 67만 8천 원입니다. 1년 새 10% 넘게 올랐습니다. 정부 청년 월세 지원은 20만 원, 2022년 그대로입니다. 학교 앞 월세의 3분의 1이 안 됩니다.","서울 아파트 평균 월세는 166만 원, 월급의 43%입니다. 이건 국민의힘 의원이 국감에서 낸 숫자입니다. 여야가 같이 보는 문제라는 뜻입니다."],
+    ev:{num:"67.8만 원 vs 20만 원",cap:"연세대 인근 원룸 평균 월세(2026.7) vs 정부 청년 월세 지원(월 최대, 24개월)",
+      viz:{type:"bars",max:70,unit:"만 원",rows:[["연세대 인근 원룸 월세",67.8],["정부 청년 월세 지원",20]]},
+      lines:["연세대 인근 원룸 평균 월세 67.8만 원(1년 새 +10.4%) — 다방, SBS Biz 2026.8.11","청년 월세 지원 월 20만 원×최대 24개월, 2026.3 상시 사업화 — 뉴시스 2026.3.18","서울 아파트 평균 월세 166만 1천 원, 근로자 월평균 임금 383만 원의 43~44% — 신성범 의원(국민의힘) 10.23 국토위 종합감사"],
+      speak:"\"다방 자료를 보면\" / \"국민의힘 신성범 의원이 국감에서 낸 숫자를 보면\"",
+      src:[["연세대 인근 67.8만 — SBS Biz 2026.8.11","https://biz.sbs.co.kr/amp/article/20000327969"],["청년 월세 지원 상시화 — 뉴시스 2026.3.18","https://mobile.newsis.com/view/NISX20260318_0003552925"],["서울 아파트 월세 166만 원 — 뉴스핌 2026.10.23","https://www.newspim.com/news/view/20261023000834"]]},
+    easy:"월세 70만 원 내는 학생에게 20만 원은 반의반 정도입니다. 지원이 물가를 못 따라가고 있습니다.",
+    exact:"정부 월세 지원 소득 기준을 중위소득 100%로 넓히는 건 2027 정부 예산안(국회 통과 전)입니다. \"넓어졌다\"가 아니라 \"넓히려 한다\".",
+    hit:{atk:"\"월세 20만 원 적다면서, 민주당 정부잖아요.\"",ans:"\"맞습니다. 2022년 그대로인 건 우리 당 정부도 고쳐야 합니다. 틀린 건 틀렸다고 하겠습니다.\" (월 30만 원 인상 여부는 자문단 쟁점 3)"},
+    quiz:[["연세대 인근 원룸 평균 월세와 정부 지원금?","67.8만 원(2026.7, 다방) vs 월 20만 원(최대 24개월)."]]},
+
+  { id:"h2", title:"공공임대는 비어 있다 — 수요가 없어서가 아니라 위치·크기가 안 맞아서", star:true,
+    say:["공공임대가 없는 것도 아닙니다. LH 행복주택 15만 3천 호 가운데 1만 5천 호가 6개월 넘게 비어 있습니다. 열 채 중 한 채입니다.","청년이 원하지 않아서가 아닙니다. LH가 직접 조사해 보니 청년이 집 고를 때 첫째가 주거비, 둘째가 직장과 가까운지였습니다. 청년은 학교 앞, 회사 앞에 살고 싶은데 집은 외곽에, 너무 좁게 지었습니다.","그래서 공공임대의 성적표를 바꾸자는 겁니다. 몇 호를 지었느냐가 아니라, 몇 명을 고시원과 반지하에서 꺼냈느냐로."],
+    ev:{num:"10.1%",cap:"행복주택 15만 3,680호 중 1만 5,496호가 6개월 이상 빈집 (2026.8)",
+      viz:{type:"bars",max:100,unit:"%",rows:[["집 고를 때 1순위: 주거비",59.0],["2순위: 직장과 가까움",36.4]]},
+      lines:["LH 국정감사 제출자료(2026.8) — 강득구 의원실 질의자료, SBS Biz 10.6 보도로 교차 확인","LH 「청년 생애주기 단계별 주거수요 조사」: 주택 선택 1순위 주거비 59.0%, 직주근접 36.4%. 혼자 살던 집이 결혼을 가정하면 면적이 적정하다는 응답 13.8%","LH 연구: 청년 수요는 수도권 도심, 건설형 임대는 외곽 공급 → 지역 미스매치"],
+      speak:"\"이번 국정감사 자료를 보면\" / \"LH가 직접 조사한 걸 보면\"",
+      src:[["행복주택 공가율 10.1% — SBS Biz 2026.10.6","https://biz.sbs.co.kr/amp/article/20000338322"]]},
+    easy:"손님은 역 앞 가게를 원하는데 산 밑에 가게를 지어 놓고 '손님이 없다'고 하는 것과 같습니다.",
+    exact:"공가는 '6개월 이상' 빈 집 기준입니다. 의원 이름은 말하지 말고 '국감 자료'로(자료를 낸 의원 중 폐버스 제안자가 있음).",
+    hit:null,
+    quiz:[["행복주택 공가율과 기준?","10.1%, 6개월 이상 빈 집(2026.8, LH 국감 제출자료)."]]},
+
+  { id:"h3", title:"공공이 가진 방부터 — 서울 기숙사는 전국 꼴찌",
+    say:["그래서 순서를 바꾸자는 겁니다. 첫째, 공공이 가진 방부터 채우자.","서울 대학 기숙사 수용률은 16.8%로 전국 17개 시도 가운데 가장 낮습니다. 수도권 대학은 5년 동안 재학생이 2만 7천 명 늘었는데 기숙사 자리는 2천 개 늘었습니다.","대학 부지와 국공유지에 기숙사를 짓고, 몇 실을 언제까지 지을지 해마다 숫자로 약속하고 공개하게 해야 합니다."],
+    ev:{num:"16.8%",cap:"서울 대학 기숙사 수용률 — 17개 시도 중 최저",
+      lines:["이투데이 2026.10.15(대학알리미 분석): 서울 16.8%, 수도권 재학생 +2만 7,107명 vs 기숙사 +2,042실"],
+      speak:"\"이투데이가 대학알리미로 분석한 걸 보면\"",
+      src:[["수도권 대학 기숙사 수용률 — 이투데이 2026.10.15","https://etoday.co.kr/news/view/2635271"]]},
+    easy:"학생은 늘었는데 기숙사는 거의 그대로이니, 남는 학생은 학교 앞 원룸 시장으로 밀려나 월세를 올립니다.",
+    exact:"\"독일은 기숙사가 많다\"는 틀린 말이니 쓰지 마십시오(당일 금지어).",
+    hit:null,
+    quiz:[["서울 대학 기숙사 수용률은?","16.8%, 전국 최저(이투데이 10.15)."]]},
+
+  { id:"h4", title:"사다리가 끊겼다 — 41년, 그리고 부모 지갑",
+    say:["청년 가구가 자기 집에 사는 비율은 2017년 19.2%에서 2024년 12.2%로 떨어졌습니다. 수도권은 8.6%입니다.","이번 국감에서 의원실이 계산해 보니, 중소기업 다니는 청년이 월급 225만 원에서 생활비를 빼고 남는 돈을 다 모아도 서울 평균 아파트까지 41년이 걸립니다.","그래서 청년이 집 얻는 돈의 61.7%는 부모·친지 돈입니다. 본인 돈은 24.2%입니다. 주거의 출발선이 부모 지갑에서 갈립니다."],
+    ev:{num:"41년",cap:"월 225만 원 − 생활비 148만 원, 남는 돈 전부 저축 → 서울 평균 9억 7천만 원까지",
+      viz:{type:"bars",max:70,unit:"%",rows:[["집 얻는 돈: 부모·친지",61.7],["본인 돈",24.2],["정부·지자체",6.8]]},
+      lines:["강득구 의원실 국토부 국감 질의자료 「청년 주거 사다리, 자산형성과 연결해야」: 임금 연 3%·생활비 연 2% 상승 가정, 이자·세금·집값 상승 미반영 단순 계산(수도권 6억 2천만 원은 32년). 산출식으로 다시 계산해 32년·41년 확인","자가점유율 19.2%→12.2%, 수도권 8.6% — 국토부 2024 주거실태조사 특성가구 보고서","주거비 재원 61.7·24.2·6.8% — 2024 청년의 삶 실태조사"],
+      speak:"\"이번 국감에서 의원실이 계산해 보니\"",
+      src:[]},
+    easy:"월급만으로는 평생 모아도 서울에 내 집이 어렵고, 결국 부모가 보증금을 대 주는 청년과 그렇지 못한 청년으로 출발선이 갈립니다.",
+    exact:"41년은 정부 통계가 아니라 의원실 단순 계산입니다. '한 푼도 안 쓰고'가 아니라 '생활비 빼고 남는 걸 다 모아도'.",
+    hit:null,
+    quiz:[["41년의 가정은?","월 225만 원, 생활비 148만 원, 임금 연 3%·생활비 연 2% 상승, 남는 돈 전부 저축, 이자·집값 상승 미반영."]]},
+
+  { id:"h5", title:"해법 ① 주거자산계좌 — 사는 동안 보증금을 모으게", star:true,
+    say:["그래서 제안합니다. 공공임대나 월세 지원을 받는 동안 아낀 돈을 저축하면 나라가 얹어 주고, 소득이 낮을수록 더 얹어 주자는 겁니다.","그 돈은 다음 집 전세보증금이나 공공분양 계약금으로 쓰게 합니다. 방을 주는 데서 끝내지 말고 보증금을 만들 기회까지 주자는 겁니다.","공공임대는 종착역이 아니라 출발역이어야 합니다."],
+    ev:{num:"6.2% vs 21.1%",cap:"청년 주거정책 이용 경험 — 소득 하위 20% vs 상위 20%",
+      viz:{type:"bars",max:25,unit:"%",rows:[["소득 하위 20%",6.2],["소득 상위 20%",21.1]]},
+      lines:["국회미래연구원 분석(2026.8), 강득구 의원실 질의자료 인용: 정책이 더 필요한 청년이 오히려 덜 씀","질의서 대안: ① 공공임대 연계 주거자산계좌(정부·LH 매칭, 저소득 차등) ② 청년미래적금 주거 목적 중도 인출 허용 ③ 실직 때 납입 유예 ④ 성실 저축 청년 공공분양 가점"],
+      speak:"\"이번 국감에서 나온 제안이기도 합니다\"",
+      src:[]},
+    easy:"월세 지원으로 아낀 돈이 그냥 사라지지 않고 '다음 집 보증금 통장'에 쌓이게 하는 것입니다.",
+    exact:"\"모든 청년을 집주인으로\"로 들리지 않게. 공공임대에 오래 살고 싶은 청년의 선택도 보장하자는 게 원래 취지입니다. 정부 매칭률 숫자는 정해진 게 없으니 말하지 마십시오.",
+    hit:{atk:"\"청년미래적금이 이미 있지 않나요?\"",ans:"\"있습니다. 그런데 그 돈을 전세보증금이나 공공분양 계약금으로 바로 잇는 길이 없습니다. 집 보증금으로 쓸 때는 중간에 찾을 수 있게 하자는 겁니다.\""},
+    quiz:[["주거자산계좌 한 문장?","공공임대·월세 지원 받는 동안 저축하면 나라가 얹어 주고, 그 돈은 다음 집 보증금·계약금으로."]]},
+
+  { id:"h6", title:"해법 ② 낡은 관공서 위에 청년주택",
+    say:["방법도 있습니다. 낡은 관공서를 다시 지을 때 아래층은 관공서, 위층은 청년주택으로 짓는 겁니다.","안양 서안양우체국 자리에 우체국과 청년 공공임대 200호를 함께 짓고 있습니다. 이걸 쉽게 하라고 특별법도 만들어져 내년 3월부터 시행됩니다.","돈 계산만 하면 이 사업은 탈락입니다. 그래도 그 지역 청년 공공임대 수요는 공급보다 8천 호 가까이 많습니다. 청년 주거는 수익률이 아니라 정책으로 판단해야 합니다."],
+    ev:{num:"200호",cap:"서안양우체국 복합개발(GH·우정사업본부) — 우체국 + 청년특화 통합공공임대",
+      lines:["강득구 의원실 LH 국감 질의자료(10.7): 2030년 수요 8,749호 vs 공급추정 780호 → 순수요 7,961호, 경제성 B/C 0.50·재무성 PI 0.61로 미달, 정책성으로 추진","「노후 공공청사 등 복합개발 특별법」 2026.8.20 국회 통과, 2027.3.9 시행"],
+      speak:"\"이번 국감 자료를 보면\"",
+      src:[["노후 청사도 주택으로…9·7 후속법안 국회 통과 — 노컷뉴스 2026.8.21","https://nocutnews.co.kr/news/6565911"]]},
+    easy:"새 땅을 찾는 대신 이미 가진 공공 땅을 2층, 3층으로 쓰는 것입니다.",
+    exact:"신촌 일대 특정 청사를 지목하지 마십시오(대상 청사 확인 안 됨). '대학가 낡은 청사부터 해 보자'는 방향까지만.",
+    hit:null,
+    quiz:[["특별법 시행일은?","2027년 3월 9일."]]}
+  ]
+}];
+
+const HITS=[
+ {who:"개혁신당 김성열",atk:"\"대출 규제가 청년만 골라 잡았다. 사다리를 걷어찼다.\"",ans:"\"그건 맞습니다. 대출 규제가 시작된 뒤 2030의 대출 낀 집 구입이 크게 줄었습니다. 청년 실수요자가 같이 맞았습니다. 그런데 대출을 다 풀면 집값이 먼저 오릅니다. 청년에게 필요한 건 빚낼 권리보다 빚 안 내고 들어갈 공공의 방입니다.\"",note:"숫자를 쓰면: 작년 6·27 대출규제 직후 두 달 동안 서울 2030 주담대 매수 42.5% 감소(헤럴드경제 2025.10.15). '10·15 대책 때문에'라고 하면 틀림. 생애최초 구입자 LTV는 규제지역에서도 70% 유지. 청년 예외를 요구할지는 자문단 쟁점 2."},
+ {who:"개혁신당",atk:"\"최저임금을 지역마다 다르게 하면 지방 일자리가 늘어납니다.\"",ans:"\"강진 청년이 서울 청년과 같은 일을 하고 30% 덜 받으면 강진에 남겠습니까, 떠나겠습니까? 지방을 살리려면 임금을 깎을 게 아니라 일자리와 사다리를 놓아야 합니다.\"",note:"하한 숫자를 쓰면: 올해 최저임금 기준 7,224원(작년 기준 7,020원). 근거로 든 해외 사례는 노컷뉴스 팩트체크(2025.5.28)에서 '사실 아님'."},
+ {who:"개혁신당",atk:"\"정년 연장하면 청년 일자리가 어떻게 늘어납니까?\"",ans:"\"현실에서는 가장 오래 다닌 직장을 평균 53세에 나옵니다. 청년 일자리를 막는 건 아버지 세대가 아니라 신입 자리를 없애는 구조입니다. 세대끼리 싸움 붙이는 구도는 틀렸습니다.\"",note:"평균 53세는 국가데이터처 고령층 부가조사(2026.5). 찬반 입장은 자문단 쟁점 1 답을 받고 정함."},
+ {who:"박태훈(진보당)",atk:"\"민주당이 집권해도 청년 삶은 안 바뀌었습니다.\"",ans:"\"맞는 지적입니다. 저도 그렇게 말해 왔습니다. 그래서 정책의 끝을 바꾸자는 겁니다. 공공임대와 세입자 보호는 위원장님과 같은 방향입니다. 같이 갈 수 있습니다.\"",note:"박태훈은 같은 편이 될 수 있는 사람. 방어하지 말고 인정 → 대안. 호칭 '박태훈 위원장님'."},
+ {who:"학생·민주당 지적",atk:"\"20대가 민주당을 떠났습니다.\"",ans:"\"갤럽 조사에서 20대 절반 가까이(45%)가 지지 정당이 없습니다. 어느 당도 청년의 마음을 얻지 못했다는 뜻입니다. 분노보다 무서운 게 무관심입니다. 그래서 청년이 결정하는 자리에 앉게 하자는 겁니다.\"",note:"\"청년이 국민의힘으로 간 것도 아니다\"는 말하지 말 것. 갤럽 10월 4주 18~29세: 국민의힘 28%, 민주 21%, 무당층 45%."},
+ {who:"학생",atk:"\"청년 눈이 높은 거 아닌가요?\"",ans:"\"한국은행 분석은 반대입니다. 청년들은 이미 눈을 낮췄습니다. 대기업·공공기관을 원하는 청년은 줄고 중소기업을 원하는 청년은 늘었습니다. 그렇게 들어간 임시·일용직에서 위로 올라갈 길이 좁아진 게 문제입니다.\"",note:"대기업·공공 희망 58.6%→53.6%, 중소기업 39.7%→43.4%(한국고용정보원 청년패널, 한은 보고서 인용, 서울신문 10.27)."}
+];
+
+const QUIZ=[
+ ["한국은행 보고서는 언제, 누가 냈나? 말할 때는?","2026.10.26, 한국은행 조사국(집필자 개인 견해). \"어제 한국은행 조사국 보고서를 보면\"."],
+ ["천 명당 첫 직장 상용직 입직 vs 경력 입직(2023~26)?","45명 vs 121명 (2014~19년 48명 vs 102명)."],
+ ["'셋 중 둘'은 누구의 숫자? 정확한 비율은?","대기업 취업을 바란 미취업 청년 중 취업 경험이 없던 청년, 1년 뒤 66.7%가 실업·쉬는 중."],
+ ["청년 취업자 중 임시·일용직 비율?","32.6%(2026.1~9, 셋 중 하나)."],
+ ["94%를 말할 때 정확한 표현?","최근 4년 줄어든 청년 일자리 28만 5천 개 중 94%가 'AI에 많이 노출된 업종'(한국은행 2026.8)."],
+ ["청년 일자리 3년 예산과 고용률?","7조 4,571억 원, 46.1% → 44.1%(박정 의원 국감)."],
+ ["ICT 신입 채용은 몇 년 새 반토막?","3년(2022 9만 5천 명 → 2025 4만 9천 명), 경력 +28%."],
+ ["연세대 인근 원룸 평균 월세?","67.8만 원(2026.7, 다방), 1년 새 +10.4%."],
+ ["행복주택 공가율?","10.1%(6개월 이상 빈 집, 2026.8)."],
+ ["서울 대학 기숙사 수용률?","16.8%, 전국 최저."],
+ ["41년의 정체는?","의원실 단순 계산. 월 225만 원 − 생활비 148만 원, 남는 돈 전부 저축 → 서울 평균 9억 7천만 원."],
+ ["집 얻는 돈 중 부모·친지 비율?","61.7%(본인 24.2%, 정부 6.8%)."],
+ ["갤럽 10월 4주 18~29세 지지율?","국민의힘 28%, 민주 21%, 무당층 45%."],
+ ["노후 청사 복합개발 특별법 시행일?","2027년 3월 9일."]
+];
+
+const DONT=[
+ ["\"청년 정규직이 안 늘었다\"(한은)","\"좋은 일자리(상용직)가 안 늘었다\""],
+ ["\"청년 셋 중 둘이 1년 뒤에도 못 구했다\"","\"대기업을 바란 청년 중 일해 본 적 없는 청년은 셋 중 둘이…\""],
+ ["\"2차에서 1차로 가는 비율이 절반 / 8%대→5%대\"","\"위로 올라가는 비율이 크게 줄었다\"(숫자 없이)"],
+ ["\"94%가 AI 업종\"","\"94%가 AI에 많이 노출된 업종\""],
+ ["\"ICT 신입 4년 새 반토막\"","\"3년 새 반토막\""],
+ ["\"10·15 대책으로 2030 매수 42.5% 감소\"","\"작년 6·27 대출규제 직후 두 달 동안 42.5% 감소\""],
+ ["\"서울 청년월세 1만 2천 명 추첨\"","\"올해 1만 5천 명(1인 가구 1만 2천 명)\""],
+ ["\"안심귀가스카우트 올해 12억, 내년 6억\"","\"지난해 12억, 올해 예산안 6억\""],
+ ["\"월세대출 2만 8,836명 신청에 565명\"","\"2만 8,836건 신청에 565건\""],
+ ["\"41년\"을 정부 통계처럼","\"의원실이 계산해 보니\""],
+ ["\"청년이 국민의힘으로 간 것도 아니다\"","\"20대 절반 가까이(45%)가 지지 정당이 없다\""],
+ ["\"독일은 기숙사가 많다\" / \"29.9조 청년예산\"","쓰지 않음(청년예산은 정부안 43.3조)"],
+ ["김성열 개인사(참고인 조사·탈당·보궐 득표)","먼저 꺼내지 않음. \"정책 얘기 하시죠\""]
+];
+
+</script>
+<script>
+const E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let DONE={};try{DONE=JSON.parse(localStorage.getItem('learn1027')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('learn1027',JSON.stringify(DONE))}catch(e){}}
+function viz(v){
+  if(!v)return'';
+  if(v.type==='bars'){return '<div class="viz">'+v.rows.map(r=>'<div class="vrow"><span>'+E(r[0])+'</span><div class="vbar"><i style="width:'+Math.min(100,r[1]/v.max*100)+'%"></i><em>'+r[1]+v.unit+'</em></div></div>').join('')+'</div>'}
+  if(v.type==='pairs'){return '<div class="viz">'+v.rows.map(r=>'<div class="vrow pair"><span>'+E(r[0])+'</span><div><div class="vbar"><i class="o" style="width:'+(r[1]/v.max*100)+'%"></i><em>'+r[1]+v.unit+'</em></div><div class="vbar"><i style="width:'+(r[2]/v.max*100)+'%"></i><em>'+r[2]+v.unit+'</em></div></div></div>').join('')+'<div class="leg"><span><i style="background:#9fb6dc"></i>'+E(v.legend[0])+'</span><span><i style="background:#1b4fa0"></i>'+E(v.legend[1])+'</span></div></div>'}
+  if(v.type==='stack'){return '<div class="viz">'+v.rows.map(r=>'<div class="stk"><div>'+E(r[0])+'</div><div class="stack">'+r[1].map((s,i)=>'<span class="s'+i+'" style="width:'+s[0]+'%" title="'+E(s[1])+' '+s[0]+'%">'+s[0]+'%</span>').join('')+'</div></div>').join('')+'<div class="leg"><span><i style="background:#1b4fa0"></i>대기업급 일자리 진입</span><span><i style="background:#7f9fd1"></i>중소·임시직 취업</span><span><i style="background:#d14b3f"></i>여전히 실업·쉬는 중</span></div></div>'}
+  return'';
+}
+function hitHTML(h){return h?'<div class="hit">상대: '+E(h.atk)+'<br><span class="a">→ '+E(h.ans)+'</span></div>':''}
+function card(c,i,ag){
+  const ev=c.ev;
+  return '<article class="card'+(DONE[c.id]?' done':'')+'" id="'+c.id+'"><div class="ch"><span class="n">'+(ag==='job'?'일':'주')+(i+1)+'</span><div class="t">'+E(c.title)+(c.star?'<span class="st">★ 꼭</span>':'')+'</div><button class="mk" data-id="'+c.id+'">'+(DONE[c.id]?'✓ 외웠음':'외웠음')+'</button></div><div class="cb">'+
+  '<div class="lbl s">① 이렇게 말한다</div><div class="say">'+c.say.map(p=>'<p>'+E(p)+'</p>').join('')+'</div>'+
+  '<div class="lbl e">② 근거 — 이 숫자가 받친다</div><div class="ev"><div class="num">'+E(ev.num)+'</div><div class="cap">'+E(ev.cap)+'</div>'+viz(ev.viz)+'<ul>'+ev.lines.map(l=>'<li>'+E(l)+'</li>').join('')+'</ul><div class="sp"><b>말할 때 붙일 표현</b> '+E(ev.speak)+'</div>'+(ev.src&&ev.src.length?'<div class="src">'+ev.src.map(s=>'<a href="'+E(s[1])+'" target="_blank" rel="noopener">'+E(s[0])+'</a>').join('')+'</div>':'')+'</div>'+
+  '<div class="lbl z">③ 쉽게 이해</div><div class="easy">'+E(c.easy)+'</div>'+
+  '<div class="lbl x">④ 정확히는 — 이 선을 넘으면 틀린 말</div><div class="exact">'+E(c.exact)+'</div>'+
+  ((c.hit||c.hit2)?'<div class="lbl h">⑤ 상대가 이렇게 치면</div>'+hitHTML(c.hit)+hitHTML(c.hit2):'')+
+  (c.quiz||[]).map(q=>'<details class="q"><summary>확인 질문 · '+E(q[0])+'</summary><p>'+E(q[1])+'</p></details>').join('')+
+  '</div></article>';
+}
+function render(){
+  const total=AGENDA.reduce((a,g)=>a+g.cards.length,0),done=AGENDA.reduce((a,g)=>a+g.cards.filter(c=>DONE[c.id]).length,0);
+  let h='<div class="back"><a href="dashboard.html#event/overview">준비노트</a> › 말과 근거 학습</div><h1>말과 근거 — 10.27 연세대 토론 학습</h1><p class="lead">말할 문장과 그 말을 받치는 숫자를 한 장에 붙였습니다. 위에서 아래로 한 번 읽고, 노란 칸을 소리 내 읽은 뒤, 확인 질문으로 점검하십시오.</p><div class="prog">외운 카드 <b>'+done+'</b> / '+total+'</div>';
+  h+='<section id="big"><h2>큰 그림 — 오늘 김보미의 한 문장</h2><div class="big"><p class="one">'+E(BIG.one)+'</p><div class="chain">'+BIG.chain.map((s,i)=>(i?'<span class="ar">→</span>':'')+'<div class="st"><small>'+E(s.h)+'</small><b>'+E(s.t)+'</b><span>'+E(s.s)+'</span></div>').join('')+'</div><ol class="three">'+BIG.three.map(t=>'<li>'+E(t)+'</li>').join('')+'</ol><div class="how">'+E(BIG.how)+'</div></div></section>';
+  AGENDA.forEach(g=>{
+    const L=g.learn;
+    h+='<section id="'+g.id+'"><h2>'+E(g.no)+' · '+E(g.title)+'</h2><div class="agq">학생회 질문: '+E(g.q)+'</div>';
+    h+='<div class="learn"><h3>한 문장 요약</h3><div>'+E(L.one)+'</div><h3>핵심 다섯 가지 (이것만 알면 80%)</h3><ol>'+L.core.map(c=>'<li>'+E(c)+'</li>').join('')+'</ol><h3>현실 비유</h3><div class="an">'+E(L.analogy)+'</div><h3>가장 흔한 오해</h3><div class="my">'+E(L.myth)+'</div><h3>이해 확인 질문 (답은 아래 카드에)</h3><ol>'+L.check.map(c=>'<li>'+E(c)+'</li>').join('')+'</ol></div>';
+    h+=g.cards.map((c,i)=>card(c,i,g.id)).join('')+'</section>';
+  });
+  h+='<section id="hits" class="hits"><h2>받아치기 — 상대가 칠 말과 한 줄 답</h2>'+HITS.map(x=>'<div class="hc"><div class="who">'+E(x.who)+'</div><div class="atk">'+E(x.atk)+'</div><div class="ans">'+E(x.ans)+'</div><div class="nt">'+E(x.note)+'</div></div>').join('')+'</section>';
+  h+='<section id="quiz" class="quiz"><h2>자가 점검 — 눌러서 답 확인</h2>'+QUIZ.map((q,i)=>'<details><summary>'+(i+1)+'. '+E(q[0])+'</summary><p>'+E(q[1])+'</p></details>').join('')+'</section>';
+  h+='<section id="dont"><h2>틀리면 안 되는 말</h2><div class="dont"><div class="r"><div>이렇게 말하면 틀림</div><div>이렇게 말함</div></div>'+DONT.map(d=>'<div class="r"><div>'+E(d[0])+'</div><div>'+E(d[1])+'</div></div>').join('')+'</div></section>';
+  h+='<p class="foot">숫자는 2026. 10. 27. 출처 원문과 다시 대조한 것만 실었습니다. 더 자세한 근거와 다른 카드는 준비노트 「10.27 토론회」 탭에 있습니다.</p>';
+  document.getElementById('app').innerHTML=h;
+  document.querySelectorAll('.mk').forEach(b=>b.onclick=()=>{const id=b.dataset.id;DONE[id]=!DONE[id];save();const y=scrollY;render();scrollTo(0,y)});
+}
+render();
+</script>
+</body></html>
