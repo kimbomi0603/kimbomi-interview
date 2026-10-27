@@ -491,7 +491,8 @@ const P=JSON.parse(document.getElementById('__payload').textContent);
 const {DATA,ARTICLES,REFS,ISSUES,MEDIAS,VOICE,SLOGANS,PLEDGES,PLEDGES11,SPEECH_PLEDGES,PROFILE,KWGROUPS,TIMELINE,CNT}=P;
 let view='yonsei', activeKw=null, q='', showAllKw=false;
 // ---- 편집 저장/복원 (localStorage) ----
-const LSKEY='kbm_edits_v6';
+const BUILD='20261027-1835';try{['kbm_edits_v6','flowEdit1027'].forEach(k=>localStorage.removeItem(k));Object.keys(localStorage).forEach(k=>{if((/^kbm_edits_b|^flowEdit_b/).test(k)&&k.indexOf(BUILD)<0)localStorage.removeItem(k)})}catch(e){}
+const LSKEY='kbm_edits_b'+BUILD;
 (function(){try{const s=localStorage.getItem(LSKEY);if(s){const ed=JSON.parse(s);ed.forEach(sd=>{const i=DATA.findIndex(d=>d.no===sd.no);if(i>-1)DATA[i]=sd});}}catch(e){}})();
 function persistEdits(){try{localStorage.setItem(LSKEY,JSON.stringify(DATA))}catch(e){}}
 const esc=s=>(s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
@@ -1571,7 +1572,7 @@ function cut3285(from,to){const L=(byNo[3285]||{}).script||[],C=(byNo[3285]||{})
 function fpara(arr){return arr.map(([p,c])=>para(p)+citeP(c)).join('')}
 function fcard(no,why){const d=byNo[no];if(!d)return '';const [lb,tt]=label(d.q);return '<a class="fl-c" href="#card/'+no+'"><b>'+E(tt||lb)+'</b><span>'+E(why||gist(d))+'</span><em>#'+no+' →</em></a>'}
 /* 편집: 칸마다 고치기·지우기, 이 브라우저에 저장 */
-const FLK='flowEdit1027';
+const FLK='flowEdit_b'+(typeof BUILD!=='undefined'?BUILD:'x');
 function flGet(){try{return JSON.parse(localStorage.getItem(FLK)||'{}')}catch(e){return {}}}
 function flSet(o){try{localStorage.setItem(FLK,JSON.stringify(o))}catch(e){}}
 const QSRC={"bg": "올해 지방선거를 앞두고 주요 정책 이슈를 조사한 보고서가 발간되었습니다. 해당 보고서는 언론 기사, 지방의회 회의록, 국민신문고 민원 등을 바탕으로 주요 정책 이슈를 도출했다는 점에서 유권자들의 관심 분야를 파악하는 데 의미 있는 기초자료가 됩니다. 보고서의 정책영역 중요도 조사 결과(2026년 3월 9일~3월 16일, 서울특별시)에 따르면, 20대 응답자들은 주거·도시 분야를 가장 중요하게 꼽았으며, 경제·일자리 분야가 그 뒤를 이었습니다. 이에 해당 두 분야를 중심으로 토론 의제를 구성하고자 합니다.", "q1": "대학생에게 주거는 단순히 잠을 자는 공간의 문제가 아닙니다. 매달 지출하는 월세와 관리비부터 늦은 시간에도 안심하고 다닐 수 있는 주거환경, 학교와 집 사이의 이동 편의까지 주거 문제는 대학 생활 전반과 밀접하게 연결되어 있습니다. 서울시는 대학생의 주거비 부담을 줄이기 위해 저렴한 임대료로 주택을 공급하는 희망하우징과 같은 주거지원 정책을 운영하고 있습니다. 그러나 주거지원 제도가 존재한다는 사실만으로 모든 대학생의 주거비 부담과 주거환경 문제가 해결되는 것은 아닙니다.", "q2": "우리나라 청년들은 높은 수준의 교육을 받고 있습니다. 경제협력개발기구(OECD)에 따르면, 우리나라 25~34세 청년의 고등교육 이수율은 OECD 38개국 중 가장 높습니다. 그러나 고등교육을 이수한 청년의 고용률은 우리나라가 80%로, OECD 평균인 87%에 미치지 못합니다. 또한 한국고용정보원의 분석에 따르면, 학교 졸업 후 첫 일자리에 취업하기까지 걸리는 기간은 평균 18.4개월에 달합니다. 이는 청년들이 교육을 마친 뒤 실제 일자리에 진입하기까지 상당한 시간이 소요되고 있음을 보여줍니다."};
