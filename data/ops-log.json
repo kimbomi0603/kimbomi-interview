@@ -1,5 +1,12 @@
 [
  {
+  "kind": "sitecheck",
+  "status": "bad",
+  "text": "10개 사이트 · 문제 59건 — 김보미.com (대한민국 재정 365)(30), 김보미365.com (강진군 군민재정)(8), jibang-db (강진365 보조 도메인)(1), 전국 지방의원·단체장 인물 DB(1), 이슈현안 자료실 + 발언 대시보드(15), 선관위 투표용지 부족 사태 아카이브(1), 법무 통합 관리 포털(1), 2022가단7014 강제집행 대응 마스터(1)\n🚨 재정분석 API 장애: 김보미.com (대한민국 재정 365) /api/lofin?selfcheck=1, 김보미.com (대한민국 재정 365) /api/lofin?hub=JFIED&fyr=2024&pSize=3, 김보미.com (대한민국 재정 365) /api/lofin?snap=1, 김보미.com (대한민국 재정 365) /api/lofin?snap=1&laf_cd=4680000, 김보미.com (대한민국 재정 365) /api/budget?selfcheck=1",
+  "at": "2026-11-13 09:41 KST",
+  "link": "https://github.com/kimbomi0603/bomi-ops/actions/runs/43338848273"
+ },
+ {
   "kind": "morning",
   "status": "ok",
   "text": "아침 자동화 브리핑폴백=success 심층=success 팟캐스트=success",
